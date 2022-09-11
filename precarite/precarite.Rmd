@@ -1,0 +1,55 @@
+---
+title: "Precarité"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(ggcpesrthemes)
+theme_cpesr_setup(authors = "Julien Gossa")
+theme_set(theme_cpesr())
+```
+
+
+```{r load}
+hc <- read.csv("heures_complémentaires.csv", dec = ",") %>%
+  mutate(HS.Total = H.Total-HC.Total) 
+
+hcs <- hc %>% filter(Etablissement == "Strasbourg") 
+```
+
+```{r h.hc}
+hcs2 <- hcs %>%
+  filter(Rentrée > 2009) %>% 
+  select(Rentrée, HS.Total, HC.Titulaires, HC.Vacataires) %>%
+  pivot_longer(
+    c(HS.Total, HC.Titulaires, HC.Vacataires),
+    names_to = "Heures", values_to = "Nombre"
+  ) %>%
+  mutate(Heures = factor(Heures,
+                       levels=c("HC.Vacataires", "HC.Titulaires", "HS.Total"),
+                       labels=c("Vacation", "Complémentaires","Service"))) %>%
+  group_by(Heures) %>%
+  mutate(val100 = Nombre / first(Nombre) * 100)
+
+hcs2 %>%
+  filter(Heures != "Total") %>%
+  ggplot(aes(x=Rentrée,y=Nombre,fill=Heures, group=Heures)) +
+  geom_area(color="white",alpha=0.6) +
+  scale_y_continuous(labels = ~ .x/10e3, name = "Heures (milliers)") +
+  #scale_fill_discrete(name="Type d'heure") +
+  ggtitle("Heures d'enseignement dans service et hors-service","A l'Université de Strasbourg")
+```
+
+
+```{r h.hc.val100}
+hcs2 %>%
+  ggplot(aes(x=Rentrée,y=val100,color=Heures, group=Heures)) +
+  geom_line(size=1) +
+  ylab("Heures (valeur 100 en 2010)") +
+  scale_x_continuous(breaks=scales::breaks_pretty()) +
+  ggtitle("Heures d'enseignement dans service et hors-service","A l'Université de Strasbourg")
+```
+
+
