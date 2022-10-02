@@ -283,12 +283,13 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 2, out.width="100%")
 ```
 
 
-```{r series, results='asis'}
+```{r series, results='asis', fig.width = 6, fig.height = 2, out.width="100%"}
 make_kpi_page("étudiants", kpiESR::kpiesr_lfc$ETU, plots$etu.abs, plots$etu.evol,plots$etu.norm)
 make_kpi_page("enseignants", kpiESR::kpiesr_lfc$ENS, plots$ens.abs, plots$ens.evol,plots$ens.norm)
 make_kpi_page("BIATSS", kpiESR::kpiesr_lfc$BIA, plots$bia.abs, plots$bia.evol,plots$bia.norm)
 make_kpi_page("finance", kpiESR::kpiesr_lfc$FIN, plots$fin.abs, plots$fin.evol,plots$fin.norm)
 ```
+
 
 ```{r kpis.evol}
 
