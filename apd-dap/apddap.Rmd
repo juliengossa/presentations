@@ -8,7 +8,7 @@ output:
     includes:
       in_header: header.tex
     latex_engine: xelatex
-    keep_tex: true
+    keep_tex: false
 lang: "fr-FR"
 geometry: margin=1.5cm
 ---
@@ -24,6 +24,8 @@ library(ggcpesrthemes)
 
 load("carto_dataESR.RData")
 wdesr_load_cache()
+
+theme_set(theme_cpesr())
 ```
 
 # #dataESR : les données ouvertes de l'ESR
