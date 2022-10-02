@@ -1,0 +1,125 @@
+\usepackage{tikz}
+\usetikzlibrary{calc,fit,positioning}
+\usepackage[explicit]{titlesec}
+\usepackage{afterpage}
+\usepackage{adjustbox}
+
+\definecolor{royalblue(traditional)}{rgb}{0.0, 0.14, 0.4}
+\definecolor{royalblue(web)}{rgb}{0.25, 0.41, 0.88}
+\definecolor{bandcol}{rgb}{0.25, 0.41, 0.88}
+\definecolor{textcol}{rgb}{0.25, 0.41, 0.88}
+
+
+\newlength{\partbandheight}\setlength{\partbandheight}{0.40\paperheight}
+\newlength{\chapbandheight}\setlength{\chapbandheight}{0.15\paperheight}
+\newlength{\secbandheight}\setlength{\secbandheight}{0.06\paperheight}
+\newlength{\numxshift}\setlength{\numxshift}{-3cm}
+\newlength{\titxshift}\setlength{\titxshift}{0.25\paperwidth}
+\def\numscale{8}
+\def\titscale{3}
+\newlength{\verticalinfowidth}\setlength{\verticalinfowidth}{0.20\paperwidth}
+\newlength{\lineswidth}\setlength{\lineswidth}{0.1cm}
+
+\newcommand*\partlabel{}
+\titleformat{\part}
+  {\Huge\bfseries\centering}
+  {\gdef\partlabel{\Roman{part}}}
+  {0pt}
+  {\begin{tikzpicture}[remember picture,overlay]
+      \node (bandeauTop) at (current page.north)
+        [draw, anchor=north, 
+        minimum width=\paperwidth, minimum height=\partbandheight, 
+        color=bandcol, fill=bandcol] {};
+      \node (num) at ($ (bandeauTop.south east) + (\numxshift,-0.1cm) $)
+        [anchor=south east, color=white, scale=\numscale, inner sep=0] {\partlabel};
+      \node (tit) at ($ (bandeauTop.south west)!0.5!(current page.south west) + (\titxshift,0) $)
+        [anchor=west, scale=\titscale,
+        text width=10cm, align=flush left, color=textcol] {#1};
+     \end{tikzpicture}
+  }
+
+
+\newcommand*\chapterlabel{}
+\titleformat{\chapter}
+  {\Large\bfseries}
+  {\gdef\chapterlabel{\thechapter\ }}
+  {0pt}
+  {\begin{tikzpicture}[remember picture,overlay]
+    % \node (bandeauTop) at (current page.north)
+    %   [draw, anchor=north,
+    %   minimum width=\paperwidth, minimum height=0pt, %yshift=-\chapbandheight,
+    %   color=bandcol, fill=bandcol] {};
+    \draw ([yshift=-\chapbandheight]current page.north east) -- ([yshift=-\chapbandheight]current page.north west)
+      [color=bandcol, fill=bandcol, line width=\lineswidth] {};
+    \node (num) at ($ (current page.north east) + (\numxshift,-\chapbandheight-0.1cm) $)
+      [anchor=south east, color=royalblue(web), scale=\numscale, inner sep=0] {\chapterlabel};
+    \node (tit) at ($ (current page.north west) + (\titxshift,-0.5\chapbandheight) $)
+      [anchor=west, scale=\titscale, color=royalblue(web), inner sep=0] 
+      {\maxsizebox{0.18\paperwidth}{\secbandheight}{#1}};
+   \end{tikzpicture}
+  }
+\titlespacing*\chapter{0cm}{1cm}{0cm}
+
+\newcommand*\sectionlabel{}
+%\newcommand\sbh{2\secbandheight}
+\titleformat{\section}
+  {\small\bfseries}
+  {\gdef\sectionlabel{\thesection\ }}
+  {0pt}
+  {
+  %\renewcommand\sbh{\ifthenelse{\numchars{#1} > 40}{2\secbandheight}{\secbanheight}}
+  %\pgfmathsetmacro\revscale{1/\titscale}
+  %\pgfmathsetmacro\tscale{\titscale/2}
+  \begin{tikzpicture}[remember picture,overlay]
+    \node (bandeauTop) at (current page.north)
+      [anchor=north, 
+      minimum width=\paperwidth, minimum height=\secbandheight, 
+      color=white, fill=bandcol] {};
+    \node (num) at ($ (bandeauTop.east) + (\numxshift,0cm) $)
+      [anchor=east, color=white, scale=\titscale, inner sep=0] {\sectionlabel};
+    \node (tit) at ($ (bandeauTop.west) + (\titxshift,0) $)
+      [anchor=west, scale=\titscale, color=white] {
+        \maxsizebox{0.18\paperwidth}{\secbandheight}{#1} 
+      };
+   \end{tikzpicture}
+  }
+\titlespacing*\section{0cm}{0cm}{0cm}
+
+
+\newcommand\verticalinfo[3]{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node (combandeau) at (current page.north west) 
+      [draw, anchor=north west, 
+      minimum width=\verticalinfowidth, minimum height=\paperheight, 
+      color=bandcol, fill=bandcol] {};
+    \node (titre) at ($ (combandeau.north) + (0,-\secbandheight) $)
+      [anchor=east, rotate=90, scale=1.5, 
+      color=white, text width=0.4\paperheight, align=flush right] 
+      {\bf #2 \\ \Huge #1};
+    \node (infos) at (combandeau.south) 
+      [anchor=south, yshift=+1.5cm]
+      {\begin{minipage}[t]{0.8\verticalinfowidth}
+        \footnotesize\centering\color{white}
+        \hypersetup{colorlinks=white, urlbordercolor=white, pdfborderstyle={/S/U/W 1}}
+        #3
+      \end{minipage}};
+  \end{tikzpicture}
+}
+
+
+
+\newcommand\autoviBig{}
+\newcommand\autoviSmall{}
+\newcommand\setautovi[2]{
+  \renewcommand\autoviBig{#1}
+  \renewcommand\autoviSmall{#2}
+}
+\newif\ifautovirun
+
+\newcommand\startautovi[2]{\setautovi{#1}{#2} \autoviruntrue \autovi}
+\newcommand\stopautovi{\autovirunfalse}
+
+\newcommand\autovi{%
+  \verticalinfo{\autoviBig}{\autoviSmall}{}
+  \ifautovirun \afterpage{\autovi} \fi
+}

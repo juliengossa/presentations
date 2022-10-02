@@ -1,0 +1,140 @@
+---
+title: 'Présentation de la plateforme #dataESR'
+date: "9/30/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r preparation_donnees, echo = FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(questionr)
+scrapping_data_esr <- read.csv("scrappingdataesr_20220928.csv")
+carto_dataESR <- scrapping_data_esr %>% select (datasetid, metas.modified, metas.title, metas.keyword, metas.records_count, metas.temporal_coverage_from, metas.temporal_coverage_to, interop_metas.dcat.created,interop_metas.dcat.issued, interop_metas.dcat.accrualperiodicity, interop_metas.dcat.creator, interop_metas.dcat.granularity, extra_metas.explore.popularity_score, extra_metas.explore.reuse_count, extra_metas.explore.download_count, extra_metas.explore.attachment_download_count, metas.publisher,  metas.references, interop_metas.dcat.spatial, interop_metas.dcat.temporal,interop_metas.dcat.contributor)
+
+# Mise au format des dates
+carto_dataESR <- carto_dataESR %>% 
+  mutate( 
+    metas.modified = sub("T.*","", metas.modified),
+    interop_metas.dcat.created = sub("T.*","", interop_metas.dcat.created),
+    interop_metas.dcat.issued = sub("T.*","", interop_metas.dcat.issued),
+    metas.temporal_coverage_from = sub("T.*","", metas.temporal_coverage_from),
+    metas.temporal_coverage_to = sub("T.*","", metas.temporal_coverage_to)) %>%
+  mutate(
+    metas.modified = as.Date(metas.modified, "%Y-%m-%d"),
+    interop_metas.dcat.created = as.Date(interop_metas.dcat.created, "%Y-%m-%d"), 
+    interop_metas.dcat.issued = as.Date(interop_metas.dcat.issued, "%Y-%m-%d"), 
+    metas.temporal_coverage_from = as.Date(metas.temporal_coverage_from, "%Y-%m-%d"), 
+    metas.temporal_coverage_to = as.Date(metas.temporal_coverage_to, "%Y-%m-%d")) 
+
+# Classement des jdd par thématique
+carto_dataESR$datasetid <- str_replace_all(carto_dataESR$datasetid,"-|_"," ")
+carto_dataESR <- carto_dataESR %>%
+  mutate(
+    theme_jdd = case_when(
+      str_detect(datasetid," effectif| diplome| parcoursup| apb| reussite| parcours| insertion") & !str_detect(datasetid, " h2020| iuf| laureat| horizon| aap| anr| pcrdt| financement| etoile| moyen| budget| financier| publication| access| agenda| programme| fete| initiative| journee| personnel| titulaire| recrutement| chercheur| enseignant| poste| remuneration| pedr| implantation| repertoire| cartographie| portail| annuaire| geographique| liste| regroupement| mention| rectorat| bibliotheque| principaux etablissements| principales institutions|principales institutions| ecoles doctorales| structure| feuille de route| institutions partenaires| crous| concours vises| cir | brevet| nomenclature| etablissements publics prives| referent") ~ "Etudiants : effectifs, parcours, insertion",
+      str_detect(datasetid, " h2020| iuf| laureat| horizon| aap| anr| pcrdt| financement| etoile") & !str_detect(datasetid, " effectif| diplome| parcoursup| apb| reussite| parcours| insertion| moyen| budget| financier| publication| access| agenda| programme| fete| initiative| journee| personnel| titulaire| recrutement| chercheur| enseignant| poste| remuneration| pedr| implantation| repertoire| cartographie| portail| annuaire| geographique| liste| regroupement| mention| rectorat| bibliotheque| principaux etablissements| principales institutions|principales institutions| ecoles doctorales| structure| feuille de route| institutions partenaires| crous| concours vises| cir | brevet| nomenclature| etablissements publics prives| referent") ~ "AAPs et trophées nationaux et européens",                                   
+      str_detect(datasetid," moyen| budget| financier") & !str_detect(datasetid, " effectif| diplome| parcoursup| apb| reussite| parcours| insertion| h2020| iuf| laureat| horizon| aap| anr| pcrdt| financement| etoile| publication| access| agenda| programme| fete| initiative| journee| personnel| titulaire| recrutement| chercheur| enseignant| poste| remuneration| pedr| implantation| repertoire| cartographie| portail| annuaire| geographique| liste| regroupement| mention| rectorat| bibliotheque| principaux etablissements| principales institutions|principales institutions| ecoles doctorales| structure| feuille de route| institutions partenaires| crous| concours vises| cir | brevet| nomenclature| etablissements publics prives| referent") ~ "Finance et valorisation",                                       
+      str_detect(datasetid," publication| access") & !str_detect(datasetid, " effectif| diplome| parcoursup| apb| reussite| parcours| insertion| h2020| iuf| laureat| horizon| aap| anr| pcrdt| financement| etoile| moyen| budget| financier| agenda| programme| fete| initiative| journee| personnel| titulaire| recrutement| chercheur| enseignant| poste| remuneration| pedr| implantation| repertoire| cartographie| portail| annuaire| geographique| liste| regroupement| mention| rectorat| bibliotheque| principaux etablissements| principales institutions|principales institutions| ecoles doctorales| structure| feuille de route| institutions partenaires| crous| concours vises| cir | brevet| nomenclature| etablissements publics prives| referent") ~ "Publications",     
+      str_detect(datasetid," agenda| programme| fete| initiative| journee") & !str_detect(datasetid, " effectif| diplome| parcoursup| apb| reussite| parcours| insertion| h2020| iuf| laureat| horizon| aap| anr| pcrdt| financement| etoile| moyen| budget| financier| publication| access| personnel| titulaire| recrutement| chercheur| enseignant| poste| remuneration| pedr| implantation| repertoire| cartographie| portail| annuaire| geographique| liste| regroupement| mention| rectorat| bibliotheque| principaux etablissements| principales institutions|principales institutions| ecoles doctorales| structure| feuille de route| institutions partenaires| crous| concours vises| cir | brevet| nomenclature| etablissements publics prives| referent") ~ "Programmes d'événements",
+      str_detect(datasetid," personnel| titulaire| recrutement| chercheur| enseignant| poste| remuneration| pedr") & !str_detect(datasetid, " effectif| diplome| parcoursup| apb| reussite| parcours| insertion| h2020| iuf| laureat| horizon| aap| anr| pcrdt| financement| etoile| moyen| budget| financier| publication| access| agenda| programme| fete| initiative| journee| implantation| repertoire| cartographie| portail| annuaire| geographique| liste| regroupement| mention| rectorat| bibliotheque| principaux etablissements| principales institutions|principales institutions| ecoles doctorales| structure| feuille de route| institutions partenaires| crous| concours vises| cir | brevet| nomenclature| etablissements publics prives| referent") ~ "Ressources humaines",                                    
+      str_detect(datasetid," implantation| repertoire| cartographie| portail| annuaire| geographique| liste| regroupement| mention| rectorat| bibliotheque| principaux etablissements| principales institutions|principales institutions| ecoles doctorales| structure| feuille de route| institutions partenaires| crous| concours vises| cir | brevet| nomenclature| etablissements publics prives| referent") & !str_detect(datasetid, " effectif| diplome| apb| reussite| insertion| h2020| iuf| laureat| horizon| aap| anr| pcrdt| financement| etoile| moyen| budget| financier| publication| access| agenda| programme| fete| initiative| journee| personnel| titulaire| recrutement| chercheur| enseignant| poste| remuneration| pedr") ~ "Cartographies, nomenclatures et référents"))   
+                                                                   
+carto_dataESR$theme_jdd <- fct_explicit_na(carto_dataESR$theme_jdd, na_level = "Autres")
+```
+
+Lancée en 2014, #dataESR est la première plateforme ministérielle de données ouvertes. Alimentée régulièrement par le département des outils d'aide à la décision (SIES) du Ministère de l'enseignement supérieur et de la recherche, elle rassemble aujourd'hui 152 jeux de données sur plusieurs thématiques au coeur de l'ESR (ressources humaines, finances, étudiants et diplômes, valorisation, ...). Ces données sont, pour la plupart d'entre elles, collectées directement auprès des établissements par le Ministère, au cours de campagnes de collecte cycliques, gage de leur fiabilité et de leur comparabilité. 
+Cette plateforme se distingue par un vrai travail de mise en qualité des données (utilisation de référentiels officiels pour croiser et enrichir les données, élaboration de métadonnées) et par des outils d'exploration et de visualisation, ce que n'offre pas la plateforme interministérielle data.gouv.fr gérée par la mission Etalab. Tous les jeux de données sont exportables dans différents formats (CSV, JSON, EXCEL) et peuvent être utilisés via les APIs de la plateforme. 
+
+## Une plateforme alimentée régulièrement depuis 2014
+
+```{r visu_rythme_ouv_jdd, echo = FALSE, warning=FALSE, message=FALSE}
+evol_jdd_dispos <- carto_dataESR %>% arrange(interop_metas.dcat.created) %>%
+  group_by(interop_metas.dcat.created) %>%
+  summarise(nb = n()) %>% 
+  mutate(nbre_jdd_dispos = cumsum(nb))
+
+ggplot(evol_jdd_dispos, aes(x = interop_metas.dcat.created , y = nbre_jdd_dispos)) + 
+  geom_line(color="blue") +
+  geom_point(color="blue", size=0.5) +
+  xlab("") +
+  ylab("Nombre de jeux de données disponibles") +
+  ggtitle("Rythme d'ouverture des jeux de données #dataESR") +
+  scale_y_continuous(breaks = seq(0, 160, by = 10)) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+date_creation <- carto_dataESR %>% 
+  separate(interop_metas.dcat.created, c("annee", "mois", "jour"), sep = "-")
+date_creation$jour = NULL
+
+date_creation <- date_creation %>% group_by(annee) %>%
+  filter(!is.na(annee)) %>%
+  summarise(nb = n())
+
+ggplot(date_creation, aes(x=annee, y= nb, fill=annee)) + 
+  geom_col() +
+  ylab("Nombre de jeux de données ouverts au cours de l'année") +
+  xlab("") +
+  ggtitle("Ouverture des données sur l'ESR") +
+  theme(axis.text.x = element_text(angle=90), plot.title = element_text(hjust = 0.5), legend.position = "none") +
+  scale_fill_brewer(palette="Set1")
+
+```
+
+## Des jeux de données portant sur des thématiques variées
+```{r visu_typolo_them, echo = FALSE, warning=FALSE, message=FALSE}
+ggplot(carto_dataESR) + geom_bar(aes(x=theme_jdd, fill = theme_jdd)) +
+  scale_x_discrete("Thématiques des jeux de données") +
+  ylab("Nombre de jeux de données") +
+  theme(legend.position = c(0.8, 0.9), 
+        legend.title = element_blank(),
+        axis.text.x = element_blank(),
+        legend.key.size = unit(0.3, 'cm')) +
+  scale_fill_brewer(palette="Set1") +
+  guides(fill=guide_legend(nrow=9))
+
+```
+
+
+## Des jeux de données historisés, aux couvertures temporelles variables
+
+```{r visu_couv_tempo_facet_theme, echo = FALSE, warning=FALSE, message=FALSE, fig.height=30, fig.width=12}
+carto_dataESR %>% filter(!is.na(metas.temporal_coverage_from) & !is.na(metas.temporal_coverage_to)) %>%
+  ggplot() + 
+  geom_segment(aes(x= metas.temporal_coverage_from, xend=metas.temporal_coverage_to, y=datasetid, yend=datasetid), color="darkgrey") +
+  geom_point(aes(y=datasetid, x=metas.temporal_coverage_from), col="deeppink") +
+  geom_point(aes(y=datasetid, x=metas.temporal_coverage_to), col="darkviolet") +
+  xlab("") +
+  ylab("")+
+  xlim(as.Date(c('1990-01-01','2030-12-31'))) +
+  theme(axis.text.y = element_text(size=10))+
+  facet_grid(rows = vars(theme_jdd), scales = "free", space='free')
+```
+
+```{r creation_var_couv_tempo_gp, echo = FALSE, warning=FALSE, message=FALSE}
+carto_dataESR <- carto_dataESR %>%
+  mutate(couv_tempo_sem = difftime(metas.temporal_coverage_to, metas.temporal_coverage_from, units="weeks"))
+carto_dataESR$couv_tempo_sem <- abs(carto_dataESR$couv_tempo_sem)
+carto_dataESR$couv_tempo_sem <- as.numeric(carto_dataESR$couv_tempo_sem)
+
+carto_dataESR$couv_tempo_gp <- case_when(
+  carto_dataESR$couv_tempo_sem > 0 & carto_dataESR$couv_tempo_sem <= 62 ~ "Inférieure ou égale à 1 an",
+  carto_dataESR$couv_tempo_sem > 62 & carto_dataESR$couv_tempo_sem <= 265 ~ "2-5 ans",
+  carto_dataESR$couv_tempo_sem > 265 & carto_dataESR$couv_tempo_sem <= 530 ~ "6-10 ans",
+  carto_dataESR$couv_tempo_sem > 530 ~ "Supérieure à 10 ans",
+  TRUE ~ "Autre")
+```
+
+```{r visu_couv_tempo_gp, echo = FALSE, warning=FALSE, message=FALSE}
+ggplot(carto_dataESR) + geom_bar(aes(x=couv_tempo_gp, fill = theme_jdd)) +
+  scale_x_discrete("Couverture temporelle des jeux de données", limits = c("Inférieure ou égale à 1 an", "2-5 ans", "6-10 ans", "Supérieure à 10 ans", "Autre")) +
+  ylab("") +
+  theme(legend.position = c(0.8, 0.85), legend.key.width=unit(0.3,"cm"),legend.key.height=unit(0.3,"cm")) +
+  labs(fill = "Thème") +
+  scale_fill_brewer(palette="Set1")
+```
+
+

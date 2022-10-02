@@ -1,0 +1,361 @@
+---
+title: "apddap"
+author: "Julien Gossa"
+date: "2022-10-01"
+output: 
+  pdf_document:
+    dev: cairo_pdf
+    includes:
+      in_header: header.tex
+    latex_engine: xelatex
+    keep_tex: true
+lang: "fr-FR"
+geometry: margin=1.5cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(out.width = "100%", fig.align = "center")
+
+library(tidyverse)
+library(kpiESR)
+library(wikidataESR)
+library(ggcpesrthemes)
+
+load("carto_dataESR.RData")
+wdesr_load_cache()
+```
+
+# #dataESR : les données ouvertes de l'ESR
+
+Lancée en 2014, #dataESR est la première plateforme ministérielle de données ouvertes. Alimentée régulièrement par le département des outils d'aide à la décision (SIES) du Ministère de l'enseignement supérieur et de la recherche, elle rassemble aujourd'hui 152 jeux de données sur plusieurs thématiques au coeur de l'ESR (ressources humaines, finances, étudiants et diplômes, valorisation, ...). 
+
+Ces données sont, pour la plupart d'entre elles, collectées directement auprès des établissements par le Ministère, au cours de campagnes de collecte cycliques, gage de leur fiabilité et de leur comparabilité.
+
+Cette plateforme se distingue par un vrai travail de mise en qualité des données (utilisation de
+référentiels officiels pour croiser et enrichir les données, élaboration de métadonnées) et par des outils d'exploration et de visualisation, ce que n'offre pas la plateforme interministérielle data.gouv.fr gérée par la mission Etalab. Tous les jeux de données sont exportables dans différents formats (CSV, JSON, EXCEL) et peuvent être utilisés via les APIs de la plateforme. 
+
+site : https://data.enseignementsup-recherche.gouv.fr
+
+## Une plateforme alimentée régulièrement depuis 2014
+
+```{r visu_rythme_ouv_jdd, fig.asp=9/16}
+evol_jdd_dispos <- carto_dataESR %>% arrange(interop_metas.dcat.created) %>%
+  mutate(Année = as.character(carto_dataESR$interop_metas.dcat.created)) %>%
+  mutate(Année = ifelse(is.na(Année),"2022",Année)) %>%
+  group_by(Année = str_sub(Année,1,4)) %>%
+  summarise(nb = n()) %>% 
+  mutate(nbre_jdd_dispos = cumsum(nb))
+
+ggplot(evol_jdd_dispos, aes(x = Année, y = nbre_jdd_dispos, group=1)) + 
+  geom_line(color="blue", size=1) +
+  geom_point(color="blue", fill="white", size=3, stroke=1, shape = 21) +
+  xlab("") +
+  ylab("Nombre de jeux de données disponibles") +
+  ggtitle("Rythme d'ouverture des jeux de données #dataESR") +
+  expand_limits(y=0) +
+  #scale_y_continuous(breaks = seq(0, 160, by = 10)) +
+  #scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+## Des jeux de données portant sur des thématiques variées...
+
+```{r visu_typolo_them, fig.asp = 3/4.5}
+carto_dataESR %>% 
+  group_by(theme_jdd) %>%
+  summarise(nb = n()) %>%
+ggplot(aes(y=reorder(theme_jdd,nb), x = nb, fill = theme_jdd)) + 
+  geom_col() +
+  ylab("Thématiques des jeux de données") +
+  xlab("Nombre de jeux de données") +
+  theme(legend.position = "None", panel.grid.major.y = element_blank()) +
+  scale_fill_brewer(palette="Dark2") +
+  guides(fill=guide_legend(nrow=9)) +
+  ggtitle("Nombre de jeux de donénes #dataESr par thème")
+
+```
+
+
+## ... avec des couvertures temporelles variables.
+
+
+```{r creation_var_couv_tempo_gp, fig.asp = 3/4.5}
+carto_dataESR %>%
+  mutate(couv_tempo_sem = difftime(metas.temporal_coverage_to, metas.temporal_coverage_from, units="weeks")) %>%
+  mutate(couv_tempo_sem = abs(as.numeric(couv_tempo_sem))) %>%
+  mutate(couv_tempo_gp = cut(couv_tempo_sem, 
+                             breaks = c(-Inf,62,265,530,Inf),
+                             labels = c("Inférieure ou égale à 1 an",
+                                        "2-5 ans",
+                                        "6-10 ans",
+                                        "Supérieure à 10 ans"))) %>%
+  mutate(couv_tempo_gp = factor(couv_tempo_gp, levels = c("Inférieure ou égale à 1 an", "2-5 ans", "6-10 ans", "Supérieure à 10 ans"))) %>%
+  group_by(couv_tempo_gp) %>%
+  summarise(nb = n()) %>%
+  na.omit() %>%
+
+  ggplot(aes(x=couv_tempo_gp, y=nb, fill = couv_tempo_gp)) + 
+  geom_col() +
+  xlab("Couverture temporelle") +
+  ylab("Nombre de jeux de données") +
+  theme(legend.position = "None", panel.grid.major.x = element_blank()) + 
+  scale_fill_brewer(palette="Spectral") 
+```
+
+
+# WikidataESR : les _soft-data_ de l'ESR
+
+Les réformes successives touchant l’organisation de l’enseignement
+supérieur et de la recherche depuis une quinzaine d’années ont
+profondément modifié le paysage universitaire français. Aujourd’hui, les
+transformations institutionnelles sont si nombreuses et si rapides, et les 
+établissements sont si composites, qu’il est devenu très difficile 
+de connaitre leur structure.
+
+Le projet wikidataESR vise à utiliser les informations contenues dans la base 
+de données communautaire Wikidata pour retrouver et représenter l'histoire et 
+les structures des établissements.
+
+Le projet est double : d'une part un guide permettant l’harmonisation des
+informations mises en ligne, d'autre part une libraire R facilitant l'exploitation
+des données. 
+
+
+Site : https://github.com/cpesr/WikidataESR
+
+Interface en ligne : https://data.cpesr.fr/wikidataesr/
+
+
+## L'histoire de l'Université d'Aix-Marseille Université
+
+```{r wd.history, fig.width=9, fig.asp=3/5}
+# Q2302586
+# Q209842
+# Q61716176
+wdesr_load_and_plot("Q2302586", c('prédécesseur', 'successeur', 'séparé_de'), depth=3,
+                    node_size = c(15,39), label_size = c(2,3),
+                    node_label="alias_date", margin_y=0.1)
+```
+
+## Les associations de l'Université de Strasbourg
+
+```{r wd.association, fig.width=10, fig.height=5}
+wdesr_load_and_plot("Q157575", c('composante_de', 'associé_de', 'membre_de', 'affilié_à'), depth=2)
+```
+
+## La composition de l'Université Paris-Saclay
+
+```{r wd.composition, fig.width=25, fig.height=13}
+wdesr_load_and_plot("Q109409389", c('composante','associé'), depth = 2)
+```
+
+```{r cache}
+wdesr_save_cache()
+```
+
+
+```{r setup.manual, include = FALSE}
+source("tdbesr-plots.R")
+
+k_style <- kpiesr_style(
+  point_size = 16,
+  line_size = 1,
+  text_size = 4,
+  yaxis_position = "left",
+  evol_y_breaker = scale_100_breaker)
+
+o_style <- kpiesr_style(
+  point_size = 12,
+  line_size = 0.7,
+  text_size = 3,
+  primaire_margin = 1.25,
+  strip_labeller = lfc_dont_labeller,
+  yaxis_position = "left",
+  evol_y_breaker = scale_100_breaker)
+
+lfc_pc_labeller_custom <- function(labels) {
+  return(
+    stringr::str_replace(lfc_pc_labeller(labels),"\\(","\n (")
+  )
+}
+onorm_style <- kpiesr_style(
+  point_size = 12,
+  line_size = 0.7,
+  text_size = 3,
+  primaire_margin = 1.25,
+  strip_labeller = lfc_pc_labeller_custom,
+  label_wrap = 12,
+  evol_y_breaker = scale_100_breaker
+)
+
+
+theme_set(ggcpesrthemes::theme_cpesr() + 
+            theme(plot.title = element_text(hjust=0.5),
+                  panel.spacing = unit(2,"lines"), 
+                  plot.margin = margin(0,0,0,0),
+                  axis.title.x = element_blank(),
+                  axis.title.y = element_blank(),
+                  strip.text = element_text(size=rel(0.7), 
+                                            margin=margin(c(2,0,2,0)))))
+
+
+print_lfc <-function(lfc) {
+  for(i in seq(1,length(lfc$labels)))
+    cat("  - __",lfc$labels[i],"__ : ",lfc$desc[i],"\n",sep = '')
+}
+
+grp <- "Ensemble"
+pid <- "Universités et assimilés"
+pid <- "Ensemble"
+
+
+plots <- kpiesr_plot_all(rentrée, pid, grp, style.k=k_style, style.o=o_style, style.o.norm = onorm_style)
+
+make_kpi_page <- function(title,desc,abs,evol,norm) {
+  cat("\\newpage\n")
+  cat("## Kpi ",title,"dans les données ouvertes\n")
+  cat("\\small\n\n")
+  print_lfc(desc)
+  
+  cat("\n---\n")
+  
+  #cat("\nValeurs absolues\n")
+  print(abs + rm_xytext + rm_ymingrid + rm_xgrid + rm_facetmargins + 
+          ggtitle("Valeurs absolues") + theme(plot.title = element_text(hjust = 0.5)))
+  
+  cat("\n---\n")
+
+  #cat("Evolutions normalisées\n")
+  print(evol + sats + rm_ygrid + rm_label + shrink_xtext + rle_margin + rm_ytextmargin + small_facetmargins + 
+          ggtitle("Evolutions normalisées") + theme(plot.title = element_text(hjust = 0.5)))
+  
+  cat("\n---\n")
+  
+  #cat("Valeurs normalisées et distribution des établissements\n")
+  print(norm  + rm_lt  + rm_ymingrid + 
+          ggtitle("Valeurs normalisées et distribution des établissements") + theme(plot.title = element_text(hjust = 0.5)))
+}
+```
+
+
+# kpiESR : les indicateurs clés de l'ESR
+
+kpiESR est un projet visant à apparier différents jeux de données #dataESR, pour 
+calculer plusieurs indicateurs clés de performance, 
+agrégés à différents périmètres (MESRi, groupes d'établissements, établissements), 
+et sur toute la période temporelle permise par les données sources.
+
+Site : https://github.com/cpesr/kpiESR
+
+<!-- - [fr-esr-principaux-etablissements-enseignement-superieur](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-principaux-etablissements-enseignement-superieur/information/?disjunctive.type_d_etablissement) -->
+<!-- - [fr-esr-statistiques-sur-les-effectifs-d-etudiants-inscrits-par-etablissement](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-statistiques-sur-les-effectifs-d-etudiants-inscrits-par-etablissement) -->
+<!-- - [fr-esr-personnels-biatss-etablissements-publics](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-personnels-biatss-etablissements-publics) -->
+<!-- - [fr-esr-enseignants-titulaires-esr-public](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-enseignants-titulaires-esr-public/) -->
+<!-- - [fr-esr-enseignants-nonpermanents-esr-public](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-enseignants-nonpermanents-esr-public/information/) -->
+<!-- - [fr-esr-operateurs-indicateurs-financiers](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-operateurs-indicateurs-financiers/information/) -->
+
+Les indicateurs clés de performance (kpi) sont :
+
+```{r dico.kpi, echo = FALSE, results='asis'}
+print_lfc(kpiESR::kpiesr_lfc$K)
+```
+
+
+Le projet propose également différentes représentations de ces données :
+
+- __Valeurs absolues__\ : permettant de connaitre les valeurs à la dernière année ;
+- __Evolutions normalisées__\ : permettant de percevoir l'évolution dans le temps,
+en valeur 100 pour une année de référence ;
+- __Valeurs normalisées__\ : permettant connaitre un rapport et de le comparer aux
+autres établissements.
+
+```{=latex}
+\newpage
+```
+
+
+```{r kpi.config, results='asis'}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 2, out.width="100%")
+```
+
+
+```{r series, results='asis'}
+make_kpi_page("étudiants", kpiESR::kpiesr_lfc$ETU, plots$etu.abs, plots$etu.evol,plots$etu.norm)
+make_kpi_page("enseignants", kpiESR::kpiesr_lfc$ENS, plots$ens.abs, plots$ens.evol,plots$ens.norm)
+make_kpi_page("BIATSS", kpiESR::kpiesr_lfc$BIA, plots$bia.abs, plots$bia.evol,plots$bia.norm)
+make_kpi_page("finance", kpiESR::kpiesr_lfc$FIN, plots$fin.abs, plots$fin.evol,plots$fin.norm)
+```
+
+```{r kpis.evol}
+
+kpi_evol_plot <- function(ikpi) {
+  kpiESR::esr.pnl %>%
+    filter(kpi == kpiESR::kpiesr_lfc$K$factors[ikpi], !is.na(valeur), 
+           Groupe %in% c("Ensemble","Groupe"), pid != "Regroupements") %>% 
+    filter(!(kpi == "kpi.K.recPect" & Rentrée == 2017 & pid == "Autres établissements")) %>%
+    mutate(pid = factor(pid, levels = c("Ensemble","Universités et assimilés","Ecoles d'ingénieurs","Autres établissements"))) %>%
+    mutate(main = (pid == "Ensemble")) %>%
+    ggplot(aes(x=Rentrée,y=valeur, color=pid, group=pid, size = main)) +
+    geom_line() + geom_point(shape=21, fill = "white", stroke=1, size=3) +
+    scale_size_manual(values = c(1,2), guide = "none") +
+    scale_color_brewer(palette = "Paired", direction = -1, name="") +
+    scale_y_continuous(labels = kpiESR::hack_label, name=kpiESR::kpiesr_lfc$K$labels[ikpi])+
+    ggtitle(paste0("Evolution des ",kpiESR::kpiesr_lfc$K$labels[ikpi]))
+}
+
+#kpi_evol_plot(5)
+```
+
+
+```{r kpis.distrib}  
+kpi_distrib_plot <- function(ikpi) {
+  kpiESR::esr.pnl %>%
+    filter(kpi == kpiESR::kpiesr_lfc$K$factors[ikpi], Rentrée == 2020, !is.na(valeur), 
+           ! Groupe %in% c("Ensemble","Groupe"), Comparable) %>%
+    #mutate(pid = factor(pid, levels = c("Ensemble","Universités et assimilés","Ecoles d'ingénieurs","Autres établissements"))) %>%
+    
+    ggplot(aes(x=Groupe, y=valeur, color=Groupe, fill=Groupe)) +
+    geom_violin(alpha=0.5) + geom_point() +
+    #scale_size_manual(values = c(1,2), guide = "none") +
+    #scale_color_brewer(palette = "Paired", direction = -1, name="") +
+    scale_y_continuous(labels = kpiESR::hack_label, name=kpiESR::kpiesr_lfc$K$labels[ikpi]) +
+    theme(legend.position = "None") +
+    ggtitle(paste0("Distribution des ",kpiESR::kpiesr_lfc$K$labels[ikpi]," en 2020"))
+}
+
+#kpi_distrib_plot(1)
+```
+
+
+```{r kpis.batch, results='asis', fig.width = 6, fig.height = 4, out.width="100%"}
+for(ikpi in 1:7) {
+  cat("\\newpage\n")
+  cat("## ",kpiESR::kpiesr_lfc$K$labels[ikpi],"\n")
+  cat("Définition : ", kpiESR::kpiesr_lfc$K$desc[ikpi],"\n")
+  print(kpi_evol_plot(ikpi))
+  print(kpi_distrib_plot(ikpi))
+}
+```
+
+
+```{=latex}
+\newpage
+```
+
+# tdbESR : des tableaux de bord de l'ESR
+
+Le projet tdbESR compile les données et représentations des projets wikidataESR
+et kpiESR dans un document unique présentant les tableaux de bord d'une majorité 
+des établissements du MESRI, ainsi que  des classements des universités.
+
+Site : https://github.com/cpesr/tdbESR-rapport/
+
+
+```{r tdbesr, out.width="80%"}
+knitr::include_graphics("ensemble-kpi.pdf")
+knitr::include_graphics("ensemble-series.pdf")
+```
+
+

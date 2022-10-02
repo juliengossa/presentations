@@ -1,0 +1,69 @@
+%\usepackage[utf8x]{inputenc}
+\usepackage{eurosym}
+%\usepackage{draftwatermark}
+\usepackage[default]{raleway}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage[strict]{changepage}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{hyphenat}
+\usepackage[absolute,overlay]{textpos}
+  \setlength{\TPHorizModule}{1mm}
+  \setlength{\TPVertModule}{1mm}
+\usepackage{tikz}
+\usetikzlibrary{
+  calc,
+  positioning
+}
+\usepackage{ifthen}
+\usepackage{pdfcomment}
+\usepackage{hyperref}
+
+\def\arraystretch{1.5}
+
+
+
+% \usepackage{fancyhdr}
+% \makeatletter
+% \renewcommand{\@chapapp}{Partie}
+% \makeatother
+
+
+
+%\DeclareUnicodeCharacter{22C5}{\textperiodcentered}
+
+\def\arraystretch{1.5}
+
+\usepackage{fancyhdr}
+\makeatletter
+\renewcommand\tableofcontents{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \section*{\contentsname
+        \@mkboth{%
+           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+      {%\footnotesize
+      \@starttoc{toc}}%
+    \if@restonecol\twocolumn\fi
+    }
+\makeatother
+
+
+\makeatletter
+\newcommand{\verbatimfont}[1]{\def\verbatim@font{#1}}%
+\makeatother
+
+\usepackage{opensans}
+\usepackage{inconsolata}
+\usepackage{fontspec}
+\setmonofont{Ubuntu Mono}%
+
+
+\input{cpesrstyle.tex}
+
+
+\AtBeginDocument{\let\maketitle\relax}
+

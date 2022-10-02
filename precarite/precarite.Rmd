@@ -6,11 +6,83 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
+library(kpiESR)
 library(ggcpesrthemes)
 theme_cpesr_setup(authors = "Julien Gossa")
 theme_set(theme_cpesr())
 ```
 
+
+## ONE
+
+```{r onr}
+onr <- read.csv2("fr-esr-tbes-personnels-epst-epic-fondation-par-type-contrat-emploi.csv", dec='.') %>%
+  group_by(Année, Personnels = Statut.regroupé) %>%
+  summarise(ETPT = sum(Effectif.au.31.12..en.ETPT.)) %>%
+  group_by(Personnels) %>%
+  mutate(val100 = ETPT / first(ETPT) * 100)
+
+onr %>%
+  ggplot(aes(x=Année, y = ETPT, fill = Personnels, group = Personnels)) +
+  geom_area(color = "white", alpha = 0.6) +
+  scale_y_continuous(labels = ~ .x/1e3, name = "ETPT (milliers)")
+```
+
+```{r onr.val100}
+onr %>% ggplot(aes(x=Année, y = val100, color = Personnels, group = Personnels)) +
+  geom_line(size=1)
+```
+
+## Personnels biatss
+
+```{r bia}
+ens <- kpiESR::esr %>%
+  filter(Etablissement == "Ensemble", Rentrée > 2014) %>%
+  transmute(
+    Rentrée,
+    Titulaires = kpi.BIA.S.titulaires,
+    `Non titulaires` = kpi.BIA.P.effectif - kpi.BIA.S.titulaires 
+  ) %>%
+  pivot_longer(c(Titulaires, `Non titulaires`), names_to = "BIATSS", values_to = "Effectif") %>%
+  group_by(BIATSS) %>%
+  mutate(val100 = Effectif / first(Effectif) * 100)
+  
+ens %>% ggplot(aes(x=Rentrée, y = Effectif, f<ill = BIATSS, group = BIATSS)) +
+  geom_area(color = "white", alpha = 0.6)
+```
+
+```{r bia.val100}
+ens %>% ggplot(aes(x=Rentrée, y = val100, color = BIATSS, group = BIATSS)) +
+  geom_line(size=1)
+```
+
+
+
+## Personnels enseignants
+
+```{r ens}
+ens <- kpiESR::esr %>%
+  filter(Etablissement == "Ensemble", Rentrée > 2011) %>%
+  transmute(
+    Rentrée,
+    Titulaires = kpi.ENS.S.titulaires,
+    `Non titulaires` = kpi.ENS.P.effectif - kpi.ENS.S.titulaires 
+  ) %>%
+  pivot_longer(c(Titulaires, `Non titulaires`), names_to = "Enseignants", values_to = "Effectif") %>%
+  group_by(Enseignants) %>%
+  mutate(val100 = Effectif / first(Effectif) * 100)
+  
+ens %>% ggplot(aes(x=Rentrée, y = Effectif, fill = Enseignants, group = Enseignants)) +
+  geom_area(color = "white", alpha = 0.6)
+```
+
+```{r ens.val100}
+ens %>% ggplot(aes(x=Rentrée, y = val100, color = Enseignants, group = Enseignants)) +
+  geom_line(size=1)
+```
+
+
+## Heures complémentaires
 
 ```{r load}
 hc <- read.csv("heures_complémentaires.csv", dec = ",") %>%
@@ -50,6 +122,63 @@ hcs2 %>%
   ylab("Heures (valeur 100 en 2010)") +
   scale_x_continuous(breaks=scales::breaks_pretty()) +
   ggtitle("Heures d'enseignement dans service et hors-service","A l'Université de Strasbourg")
+```
+
+
+## Fongibilité asymétrique
+
+
+```{r fin}
+fin <- kpiESR::esr %>%
+  filter(Etablissement == "Ensemble", Rentrée > 2013) %>%
+  transmute(
+    Rentrée,
+    SCSP = kpi.FIN.S.SCSP,
+    `Ressources Propres` = kpi.FIN.P.ressources - kpi.FIN.S.SCSP 
+  ) %>%
+  pivot_longer(c(SCSP, `Ressources Propres`), names_to = "Financement", values_to = "Montant") %>%
+  group_by(Financement) %>%
+  mutate(val100 = Montant / first(Montant) * 100)
+  
+fin %>% ggplot(aes(x=Rentrée, y = Montant, fill = Financement, group = Financement)) +
+  geom_area(color = "white", alpha = 0.6) +
+  scale_y_continuous(labels = ~ .x / 1e9, name="Budget (Md€)")
+```
+
+```{r ens.val100}
+fin %>% ggplot(aes(x=Rentrée, y = val100, color = Financement, group = Financement)) +
+  geom_line(size=1)
+```
+
+
+
+## Investissement vs. Productivité
+
+```{r invest}
+kpiESR::esr %>%
+  filter(Etablissement %in% c("Université de Strasbourg","Avignon Université"), Rentrée > 2009) %>%
+  transmute(
+    Etablissement, Rentrée,
+    valeur =  kpi.FIN.S.SCSP / kpi.ETU.P.effectif ,
+  ) %>%
+  mutate(val100 = valeur / first(valeur) * 100) %>%
+  ggplot(aes(x=Rentrée, y = valeur, group=Etablissement, color=Etablissement)) +
+  geom_line(size=1) 
+
+```
+
+
+```{r product}
+kpiESR::esr %>%
+  filter(Etablissement == "Université de Strasbourg", Rentrée > 2009) %>%
+  transmute(
+    Rentrée,
+    valeur = kpi.ETU.P.effectif / kpi.FIN.S.SCSP * 1e6,
+  ) %>%
+  mutate(val100 = valeur / first(valeur) * 100) %>%
+  ggplot(aes(x=Rentrée, y = valeur, group=1)) +
+  geom_line(size=1) 
+
 ```
 
 
