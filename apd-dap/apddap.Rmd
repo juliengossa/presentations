@@ -54,7 +54,7 @@ ggplot(evol_jdd_dispos, aes(x = Année, y = nbre_jdd_dispos, group=1)) +
   geom_point(color="blue", fill="white", size=3, stroke=1, shape = 21) +
   xlab("") +
   ylab("Nombre de jeux de données disponibles") +
-  ggtitle("Rythme d'ouverture des jeux de données #dataESR") +
+  #ggtitle("Rythme d'ouverture des jeux de données #dataESR") +
   expand_limits(y=0) +
   #scale_y_continuous(breaks = seq(0, 160, by = 10)) +
   #scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
@@ -73,9 +73,10 @@ ggplot(aes(y=reorder(theme_jdd,nb), x = nb, fill = theme_jdd)) +
   ylab("Thématiques des jeux de données") +
   xlab("Nombre de jeux de données") +
   theme(legend.position = "None", panel.grid.major.y = element_blank()) +
+  #ggtitle("Nombre de jeux de données #dataESr par thème")
   scale_fill_brewer(palette="Dark2") +
-  guides(fill=guide_legend(nrow=9)) +
-  ggtitle("Nombre de jeux de donénes #dataESr par thème")
+  guides(fill=guide_legend(nrow=9)) 
+  
 
 ```
 
@@ -114,7 +115,7 @@ supérieur et de la recherche depuis une quinzaine d’années ont
 profondément modifié le paysage universitaire français. Aujourd’hui, les
 transformations institutionnelles sont si nombreuses et si rapides, et les 
 établissements sont si composites, qu’il est devenu très difficile 
-de connaitre leur structure.
+de connaître leur structure.
 
 Le projet wikidataESR vise à utiliser les informations contenues dans la base 
 de données communautaire Wikidata pour retrouver et représenter l'histoire et 
@@ -143,7 +144,7 @@ wdesr_load_and_plot("Q2302586", c('prédécesseur', 'successeur', 'séparé_de')
 
 ## Les associations de l'Université de Strasbourg
 
-```{r wd.association, fig.width=10, fig.height=5}
+```{r wd.association, fig.width=10, fig.height=4}
 wdesr_load_and_plot("Q157575", c('composante_de', 'associé_de', 'membre_de', 'affilié_à'), depth=2)
 ```
 
@@ -267,10 +268,10 @@ print_lfc(kpiESR::kpiesr_lfc$K)
 
 Le projet propose également différentes représentations de ces données :
 
-- __Valeurs absolues__\ : permettant de connaitre les valeurs à la dernière année ;
+- __Valeurs absolues__\ : permettant de connaître les valeurs à la dernière année ;
 - __Evolutions normalisées__\ : permettant de percevoir l'évolution dans le temps,
 en valeur 100 pour une année de référence ;
-- __Valeurs normalisées__\ : permettant connaitre un rapport et de le comparer aux
+- __Valeurs normalisées__\ : permettant de connaître un rapport et de le comparer aux
 autres établissements.
 
 ```{=latex}
