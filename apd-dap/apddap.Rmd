@@ -28,6 +28,11 @@ wdesr_load_cache()
 theme_set(theme_cpesr())
 ```
 
+```{=latex}
+\setcounter{page}{2} 
+```
+
+
 # #dataESR : les données ouvertes de l'ESR
 
 Lancée en 2014, #dataESR est la première plateforme ministérielle de données ouvertes. Alimentée régulièrement par le département des outils d'aide à la décision (SIES) du Ministère de l'enseignement supérieur et de la recherche, elle rassemble aujourd'hui 152 jeux de données sur plusieurs thématiques au coeur de l'ESR (ressources humaines, finances, étudiants et diplômes, valorisation, ...). 
@@ -144,14 +149,14 @@ wdesr_load_and_plot("Q2302586", c('prédécesseur', 'successeur', 'séparé_de')
 
 ## Les associations de l'Université de Strasbourg
 
-```{r wd.association, fig.width=10, fig.height=4}
+```{r wd.association, fig.width=11, fig.height=5}
 wdesr_load_and_plot("Q157575", c('composante_de', 'associé_de', 'membre_de', 'affilié_à'), depth=2)
 ```
 
 ## La composition de l'Université Paris-Saclay
 
-```{r wd.composition, fig.width=25, fig.height=13}
-wdesr_load_and_plot("Q109409389", c('composante','associé'), depth = 2)
+```{r wd.composition, fig.width=12, fig.height=7}
+wdesr_load_and_plot("Q109409389", c('composante','associé'), depth = 2, node_size=c(3,15), node_type="none")
 ```
 
 ```{r cache}
@@ -357,9 +362,33 @@ des établissements du MESRI, ainsi que  des classements des universités.
 Site : https://github.com/cpesr/tdbESR-rapport/
 
 
-```{r tdbesr, out.width="80%"}
+```{r tdbesr.kpi, out.extra='angle=90', out.width="20cm"}
 knitr::include_graphics("ensemble-kpi.pdf")
+```
+
+```{=latex}
+\newpage
+```
+
+```{r tdbesr.series,  out.extra='angle=90', out.width="23cm"}
 knitr::include_graphics("ensemble-series.pdf")
 ```
 
+```{=latex}
+\newpage
+```
 
+## Un exemple : l'Université de Strasbourg
+
+```{r unistra.kpi, out.extra='angle=90', out.width="23cm", fig.asp=NULL}
+knitr::include_graphics("4k25D-kpi.pdf")
+```
+
+
+```{=latex}
+\newpage
+```
+
+```{r unistra.series, out.extra='angle=90', out.width="23cm", fig.asp=NULL}
+knitr::include_graphics("4k25D-series.pdf")
+```

@@ -1,0 +1,148 @@
+---
+title: "apddap-extra"
+author: "Julien Gossa"
+date: "2022-10-03"
+output: 
+  pdf_document:
+    dev: cairo_pdf
+    includes:
+      in_header: header.tex
+    latex_engine: xelatex
+    keep_tex: false
+lang: "fr-FR"
+geometry: margin=1.5cm
+classoption: landscape
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(kpiESR)
+library(tidyverse)
+library(kableExtra)
+
+rentrée <- 2020
+rentrée.deb <- 2013
+```
+
+```{=latex}
+\setcounter{page}{22} 
+\newgeometry{left=1.5cm,right=1.5cm,top=1.5cm,bottom=1.8cm}
+\normalsize
+\def\arraystretch{1.2}
+\scriptsize
+```
+
+
+
+```{r classement.functions, echo = FALSE, warning = FALSE, eval=TRUE}
+#knitr::knit_exit()
+
+table_classement <- function(groupe,kpis,labels, rentrée.ref=rentrée.deb) {
+  kpiend <- length(kpis)+2
+  kpiesr_classement(rentrée, rentrée.ref, groupe, kpis) %>%
+    kable("latex", longtable = T, booktabs = T, align = c("r","l",rep("r",length(kpis)),"r","r"),
+          col.names=NULL) %>%
+    add_header_above(c("Rang","Etablissement",labels, paste("Rang\n",rentrée.ref), "+/-" ),
+                     align = c("r","l",rep("r",length(kpis)),"r","r")) %>%
+    kable_styling(latex_options = c("striped", "repeat_header"), repeat_header_text = "\\textit{(suite)}") %>% 
+    column_spec(c(1,3), monospace = TRUE) %>%
+    column_spec(4, monospace = TRUE, width="3cm", italic = TRUE) %>%
+    column_spec(c(5:kpiend), monospace = TRUE, italic = TRUE) %>%
+    column_spec(kpiend+1, monospace = TRUE, width = "2cm") %>%
+    column_spec(kpiend+2, monospace = TRUE) 
+    # add_header_above(c("Rang et écart à la moyenne" = 3, "Détails" = length(kpis), "Historique"=length(hist)))
+}
+
+ 
+
+table_classement_slice <- function(rentrée,type,kpis,labels,rows)
+  kpiesr_classement(rentrée, type, kpis, labels) %>%
+    slice(rows) %>%
+    mutate(Libellé = str_replace(Libellé,"Université","UN.")) %>%
+    kable("latex", longtable = T, booktabs = T, 
+          align = c("r","r","l",rep("r",4)),
+          col.names = c("","Ecart","Libellé",labels)) %>%
+    kable_styling(latex_options = c("striped"), full_width = F, font_size = 7) 
+
+table_classement_sbs <- function(rentrée,type,kpis,labels,row) {
+  cat("\\begin{minipage}{0.50\\textwidth}   \n")
+  print(table_classement_slice(rentrée,type,kpis,labels, 1:34))
+  cat("\\end{minipage}  \\begin{minipage}{0.50\\textwidth}  \n")
+  print(table_classement_slice(rentrée,type,kpis,labels, 35:70))
+  cat("\\end{minipage}")
+}
+
+```
+
+
+## Taux de titularité
+
+```{r classement.TpE, echo = FALSE, warning = FALSE, eval=TRUE}
+table_classement("Universités et assimilés",
+                  c("kpi.K.titPper", "kpi.ENS.P.effectif", "kpi.ENS.S.titulaires", "kpi.BIA.P.effectif", "kpi.BIA.S.titulaires"),
+                  c("Taux de\ntitularité","E-EC\ntotal","E-EC\ntitulaires", "BIATSS\ntotal", "BIATSS\ntitulaires"),
+                 rentrée.ref = 2015)
+```
+
+
+\newpage
+## Taux de SCSP (dotations publiques)
+
+```{r classement.dotPres, echo = FALSE, warning = FALSE, eval=TRUE}
+table_classement("Universités et assimilés",
+                 c("kpi.K.dotPres", "kpi.FIN.P.ressources","kpi.FIN.S.SCSP"),
+                 c("Taux de SCSP","Ressources totales","SCSP")) 
+```
+
+
+
+\newpage
+## Taux d'encadrement pédagogique
+
+```{r classement.EpE, echo = FALSE, warning = FALSE, eval=TRUE}
+table_classement("Universités et assimilés",
+                  c("kpi.K.ensPetu", "kpi.ENS.S.titulaires", "kpi.ENS.S.contractuels", "kpi.ETU.S.cycle1_L","kpi.ETU.S.cycle2_M"),
+                  c("Taux d'encadrement\npédagogique","Enseignants\ntitulaires","Enseignants\ncontractuels","Etudiants\nCycle 1 (L)","Etudiants\nCycle 2 (M)"))
+```
+
+
+\newpage
+## Taux d'encadrement administratif
+
+```{r classement.BpP, echo = FALSE, warning = FALSE, eval=TRUE}
+table_classement("Universités et assimilés",
+                  c("kpi.K.biaPper", "kpi.BIA.P.effectif", "kpi.ENS.P.effectif"),
+                  c("Taux d'encadrement\nadministratif","BIATSS","Enseignants"),
+                  rentrée.ref = 2015)
+```
+
+
+\newpage
+## Ressources par étudiant
+
+```{r classement.RpE, echo = FALSE, warning = FALSE, eval=TRUE}
+table_classement("Universités et assimilés",
+                  c("kpi.K.resPetu", "kpi.FIN.P.ressources","kpi.ETU.S.cycle1_L","kpi.ETU.S.cycle2_M"),
+                  c("Ressources\npar étudiant","Ressources","Etudiants\nCycle 1 (L)","Etudiants\nCycle 2 (M)"))
+```
+
+
+
+\newpage
+## Recettes formation par étudiant
+
+```{r classement.fPe, echo = FALSE, warning = FALSE, eval=TRUE}
+table_classement("Universités et assimilés",
+                  c("kpi.K.forPetu","kpi.FIN.S.recettesFormation","kpi.ETU.P.effectif"),
+                  c("Recettes formation\npar étudiant","Recettes\nformation","Effectifs\nétudiants"))
+```
+
+\newpage
+## Recettes recherche par EC
+
+
+```{r classement.rPe, echo = FALSE, warning = FALSE, eval=TRUE}
+table_classement("Universités et assimilés",
+                  c("kpi.K.recPect","kpi.FIN.S.recettesRecherche","kpi.ENS.S.EC"),
+                  c("Recettes recherche\npar EC","Recettes\nrecherche","Effectifs\nE-C"))
+```
