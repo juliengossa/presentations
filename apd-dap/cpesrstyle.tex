@@ -12,7 +12,7 @@
 
 \newlength{\partbandheight}\setlength{\partbandheight}{0.40\paperheight}
 \newlength{\chapbandheight}\setlength{\chapbandheight}{0.15\paperheight}
-\newlength{\secbandheight}\setlength{\secbandheight}{0.06\paperheight}
+\newlength{\secbandheight}\setlength{\secbandheight}{0.08\paperheight}
 \newlength{\numxshift}\setlength{\numxshift}{-3cm}
 \newlength{\titxshift}\setlength{\titxshift}{0.25\paperwidth}
 \def\numscale{8}
@@ -77,13 +77,13 @@
       color=white, fill=bandcol] {};
     \node (num) at ($ (bandeauTop.east) + (\numxshift,0cm) $)
       [anchor=east, color=white, scale=\titscale, inner sep=0] {\sectionlabel};
-    \node (tit) at ($ (bandeauTop.west) + (\titxshift,0) $)
+    \node (tit) at ($ (bandeauTop.west) + (\titxshift,-0.5cm) $)
       [anchor=west, scale=\titscale, color=white] {
         \maxsizebox{0.18\paperwidth}{\secbandheight}{#1} 
       };
    \end{tikzpicture}
   }
-\titlespacing*\section{0cm}{0cm}{0cm}
+\titlespacing*\section{0cm}{0cm}{1cm}
 
 
 \newcommand\verticalinfo[3]{

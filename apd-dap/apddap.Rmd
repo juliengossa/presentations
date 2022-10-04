@@ -11,6 +11,7 @@ output:
     keep_tex: false
 lang: "fr-FR"
 geometry: margin=1.5cm
+papersize: a4
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +30,10 @@ theme_set(theme_cpesr())
 ```
 
 ```{=latex}
+\newgeometry{left=1.5cm,right=1.5cm,top=2cm,bottom=1.5cm}
 \setcounter{page}{2} 
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}.
 ```
 
 
@@ -67,9 +71,11 @@ ggplot(evol_jdd_dispos, aes(x = Année, y = nbre_jdd_dispos, group=1)) +
 
 ```
 
-## Des jeux de données portant sur des thématiques variées...
+# 
 
-```{r visu_typolo_them, fig.asp = 3/4.5}
+## Des jeux de données sur des thématiques variées...
+
+```{r visu_typolo_them, fig.asp = 2.5/4}
 carto_dataESR %>% 
   group_by(theme_jdd) %>%
   summarise(nb = n()) %>%
@@ -89,7 +95,7 @@ ggplot(aes(y=reorder(theme_jdd,nb), x = nb, fill = theme_jdd)) +
 ## ... avec des couvertures temporelles variables.
 
 
-```{r creation_var_couv_tempo_gp, fig.asp = 3/4.5}
+```{r creation_var_couv_tempo_gp, fig.asp = 2.5/4}
 carto_dataESR %>%
   mutate(couv_tempo_sem = difftime(metas.temporal_coverage_to, metas.temporal_coverage_from, units="weeks")) %>%
   mutate(couv_tempo_sem = abs(as.numeric(couv_tempo_sem))) %>%
@@ -99,19 +105,36 @@ carto_dataESR %>%
                                         "2-5 ans",
                                         "6-10 ans",
                                         "Supérieure à 10 ans"))) %>%
-  mutate(couv_tempo_gp = factor(couv_tempo_gp, levels = c("Inférieure ou égale à 1 an", "2-5 ans", "6-10 ans", "Supérieure à 10 ans"))) %>%
-  group_by(couv_tempo_gp) %>%
+  mutate(couv_tempo_gp = factor(couv_tempo_gp, 
+                                levels = c("Inférieure ou égale à 1 an", "2-5 ans", "6-10 ans", "Supérieure à 10 ans"),
+                                labels = c("1 an", "2-5 ans", "6-10 ans", "> 10 ans"))) %>%
+  mutate(theme = factor(case_when(
+    theme_jdd == "Ressources humaines" ~ "RH",
+    theme_jdd == "Etudiants : effectifs, parcours, insertion" ~ "Etudiants",
+    theme_jdd == "Finance et valorisation" ~ "Finance",
+    TRUE ~ "Autres"),
+    levels= c("Etudiants","RH","Finance","Autres"))) %>%
+  
+  group_by(couv_tempo_gp, theme) %>%
   summarise(nb = n()) %>%
+  group_by(theme) %>%
+  mutate(part = nb / sum(nb)) %>%
   na.omit() %>%
 
-  ggplot(aes(x=couv_tempo_gp, y=nb, fill = couv_tempo_gp)) + 
+  ggplot(aes(x=couv_tempo_gp, y=part, fill = couv_tempo_gp)) + 
   geom_col() +
   xlab("Couverture temporelle") +
-  ylab("Nombre de jeux de données") +
+  ylab("Part des jeux de données par thèmatique")  +
+  scale_y_continuous(labels = scales::percent) +
+  facet_wrap(.~theme) +
   theme(legend.position = "None", panel.grid.major.x = element_blank()) + 
   scale_fill_brewer(palette="Spectral") 
 ```
 
+
+```{=latex}
+\newpage
+```
 
 # WikidataESR : les _soft-data_ de l'ESR
 
@@ -130,15 +153,16 @@ Le projet est double : d'une part un guide permettant l’harmonisation des
 informations mises en ligne, d'autre part une libraire R facilitant l'exploitation
 des données. 
 
+__Site__ : https://github.com/cpesr/WikidataESR
 
-Site : https://github.com/cpesr/WikidataESR
+__Interface en ligne__ : https://data.cpesr.fr/wikidataesr/
 
-Interface en ligne : https://data.cpesr.fr/wikidataesr/
-
+__Attention__ : étant collectées de façon communautaires, les données sont systématiquement
+imparfaites et en particulier incomplètes.
 
 ## L'histoire de l'Université d'Aix-Marseille Université
 
-```{r wd.history, fig.width=9, fig.asp=3/5}
+```{r wd.history, fig.width=9, fig.asp=2.5/5}
 # Q2302586
 # Q209842
 # Q61716176
@@ -146,6 +170,8 @@ wdesr_load_and_plot("Q2302586", c('prédécesseur', 'successeur', 'séparé_de')
                     node_size = c(15,39), label_size = c(2,3),
                     node_label="alias_date", margin_y=0.1)
 ```
+
+# 
 
 ## Les associations de l'Université de Strasbourg
 
@@ -200,7 +226,7 @@ onorm_style <- kpiesr_style(
 
 
 theme_set(ggcpesrthemes::theme_cpesr() + 
-            theme(plot.title = element_text(hjust=0.5),
+            theme(plot.title = element_text(hjust=0.5, size=rel(0.9)),
                   panel.spacing = unit(2,"lines"), 
                   plot.margin = margin(0,0,0,0),
                   axis.title.x = element_blank(),
@@ -222,31 +248,34 @@ pid <- "Ensemble"
 plots <- kpiesr_plot_all(rentrée, pid, grp, style.k=k_style, style.o=o_style, style.o.norm = onorm_style)
 
 make_kpi_page <- function(title,desc,abs,evol,norm) {
-  cat("\\newpage\n")
   cat("## Kpi ",title,"dans les données ouvertes\n")
   cat("\\small\n\n")
   print_lfc(desc)
-  
-  cat("\n---\n")
-  
+
   #cat("\nValeurs absolues\n")
   print(abs + rm_xytext + rm_ymingrid + rm_xgrid + rm_facetmargins + 
           ggtitle("Valeurs absolues") + theme(plot.title = element_text(hjust = 0.5)))
   
-  cat("\n---\n")
+  #cat("\n---\n")
 
   #cat("Evolutions normalisées\n")
   print(evol + sats + rm_ygrid + rm_label + shrink_xtext + rle_margin + rm_ytextmargin + small_facetmargins + 
           ggtitle("Evolutions normalisées") + theme(plot.title = element_text(hjust = 0.5)))
   
-  cat("\n---\n")
+  #cat("\n---\n")
   
   #cat("Valeurs normalisées et distribution des établissements\n")
   print(norm  + rm_lt  + rm_ymingrid + 
           ggtitle("Valeurs normalisées et distribution des établissements") + theme(plot.title = element_text(hjust = 0.5)))
+  
+  cat("\\newpage\n")
 }
 ```
 
+
+```{=latex}
+\newpage
+```
 
 # kpiESR : les indicateurs clés de l'ESR
 
@@ -255,7 +284,11 @@ calculer plusieurs indicateurs clés de performance,
 agrégés à différents périmètres (MESRi, groupes d'établissements, établissements), 
 et sur toute la période temporelle permise par les données sources.
 
-Site : https://github.com/cpesr/kpiESR
+__Site__ : https://github.com/cpesr/kpiESR
+
+__Attention__ : les représentations qui suivent sont expérimentales et peuvent comporter 
+des erreurs, dûes soit aux données, soit aux traitements.
+
 
 <!-- - [fr-esr-principaux-etablissements-enseignement-superieur](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-principaux-etablissements-enseignement-superieur/information/?disjunctive.type_d_etablissement) -->
 <!-- - [fr-esr-statistiques-sur-les-effectifs-d-etudiants-inscrits-par-etablissement](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-statistiques-sur-les-effectifs-d-etudiants-inscrits-par-etablissement) -->
@@ -279,17 +312,22 @@ en valeur 100 pour une année de référence ;
 - __Valeurs normalisées__\ : permettant de connaître un rapport et de le comparer aux
 autres établissements.
 
+
+
 ```{=latex}
 \newpage
 ```
 
+# 
+
+
 
 ```{r kpi.config, results='asis'}
-knitr::opts_chunk$set(fig.width = 6, fig.height = 2, out.width="100%")
+knitr::opts_chunk$set(fig.width = 5, fig.height = 1.7, out.width="100%", out.height = "100%")
 ```
 
 
-```{r series, results='asis', fig.width = 6, fig.height = 2, out.width="100%"}
+```{r series, results='asis', fig.width = 5.5, fig.height = 1.8, out.width="100%"}
 make_kpi_page("étudiants", kpiESR::kpiesr_lfc$ETU, plots$etu.abs, plots$etu.evol,plots$etu.norm)
 make_kpi_page("enseignants", kpiESR::kpiesr_lfc$ENS, plots$ens.abs, plots$ens.evol,plots$ens.norm)
 make_kpi_page("BIATSS", kpiESR::kpiesr_lfc$BIA, plots$bia.abs, plots$bia.evol,plots$bia.norm)
@@ -338,12 +376,18 @@ kpi_distrib_plot <- function(ikpi) {
 ```
 
 
-```{r kpis.batch, results='asis', fig.width = 6, fig.height = 4, out.width="100%"}
+```{r kpis.batch, results='asis', fig.width = 5, fig.height = 3, out.width="100%"}
 for(ikpi in 1:7) {
   cat("\\newpage\n")
   cat("## ",kpiESR::kpiesr_lfc$K$labels[ikpi],"\n")
-  cat("Définition : ", kpiESR::kpiesr_lfc$K$desc[ikpi],"\n")
+  cat("_Définition_ : ", kpiESR::kpiesr_lfc$K$desc[ikpi],"\n")
+  
+  #cat("\n---\n")
+  
   print(kpi_evol_plot(ikpi))
+  
+  #cat("\n---\n")
+
   print(kpi_distrib_plot(ikpi))
 }
 ```
@@ -359,7 +403,7 @@ Le projet tdbESR compile les données et représentations des projets wikidataES
 et kpiESR dans un document unique présentant les tableaux de bord d'une majorité 
 des établissements du MESRI, ainsi que  des classements des universités.
 
-Site : https://github.com/cpesr/tdbESR-rapport/
+__Site__ : https://github.com/cpesr/tdbESR-rapport/
 
 
 ```{r tdbesr.kpi, out.extra='angle=90', out.width="20cm"}
@@ -369,6 +413,8 @@ knitr::include_graphics("ensemble-kpi.pdf")
 ```{=latex}
 \newpage
 ```
+
+# 
 
 ```{r tdbesr.series,  out.extra='angle=90', out.width="23cm"}
 knitr::include_graphics("ensemble-series.pdf")
@@ -384,9 +430,11 @@ knitr::include_graphics("ensemble-series.pdf")
 knitr::include_graphics("4k25D-kpi.pdf")
 ```
 
-
 ```{=latex}
 \newpage
+
+\vspace*{0.5cm}
+
 ```
 
 ```{r unistra.series, out.extra='angle=90', out.width="23cm", fig.asp=NULL}

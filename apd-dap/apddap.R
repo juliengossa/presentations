@@ -1,5 +1,6 @@
 
 rmarkdown::render("apddap.Rmd")
+rmarkdown::render("apddap-extra.Rmd")
 
 staplr::split_pdf(input_filepath = "programme.pdf", output_directory = ".", prefix = "programme_p")
 
