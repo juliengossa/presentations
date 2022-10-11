@@ -2,7 +2,7 @@
 title: "Etat des lieux ESR"
 author: 
 - Julien Gossa \newline 
-- Université de Strasbourg  \newline 
+- Université de Strasbourg et CPESR  \newline \hspace{3cm} \newline
 - '[@JulienGossa](https://twitter.com/JulienGossa) gossa@unistra.fr'
 date: "12-10-2022"
 output: 
@@ -45,7 +45,7 @@ load("emploi.RData")
 - Politique
 - Economique
 - Citoyen / Etudiant
-
+- Universités
 
 ## Tournant civilisationnel 
 - De la compétition guerrière à la compétition économique
@@ -58,11 +58,22 @@ load("emploi.RData")
   - Agriculture et industrie
   
 ### Nécessite une montée en qualification de la population
-- Des ingénieurs et ouvrier qualifiés plutôt que des généraux et des soldats
-- Moins d'agriculteurs et plus d'ouvriers
+- Des ingénieurs et ouvriers qualifiés plutôt que des généraux et des soldats
+- Moins d'agriculteurs et plus de manufacteurs
 
 
 # Massification (XIXe-1960, 1960-2000)
+
+## Investissements massifs dans l'éducation : « Age d'or »
+
+### XXe siècle : Cercle vertueux
+
+1. Investissement dans l'éducation
+1. Montée en qualification de la main d'œuvre
+1. Augmentation de la productivité
+1. Croissance économique
+1. Investissement dans l'éducation
+
 
 ## Investissements massifs dans l'éducation : « Age d'or »
 
@@ -109,7 +120,7 @@ plot_activite(agemin = 15, agemax = 30)  +
   cpesr_cap(authors = "Camille Schumacher et Julien Gossa", source = "Enquête emploi INSEE")
 ```
 
-## Les objectifs sont atteints, et même dépassés
+## Aujourd'hui : Les objectifs sont atteints, et même dépassés
 
 - 80% d'une classe d'âge au Bac
 - 50% d'une classe d'âge diplômée du supérieur
@@ -130,7 +141,7 @@ Source : Bleus budgétaires https://www.budget.gouv.fr/documentation/documents-b
 
 # Post-massification (XXIe)
 
-## Passer du siècle de la quantité au siècle de la qualité.
+## XXIe siècle : Passer du siècle de la quantité au siècle de la qualité.
 
 « _Passer du siècle de la quantité au siècle de la qualité. Passer de la massification à la démocratisation et du même mouvement rendre à notre société les conditions d'une adhésion à l'école sans laquelle il n'y a pas de succès possible_ » - François Bayrou, 1994
 
@@ -139,7 +150,7 @@ Source : Bleus budgétaires https://www.budget.gouv.fr/documentation/documents-b
 
 ### Qualité
 - Réussite étudiante
-- Autonomie
+- Autonomie des universités
 - Politiques d'Excellence
 - Budget et statuts
 
@@ -188,7 +199,7 @@ kpiESR::esr.pnl %>%
 
 - Loi LRU (2007) et RCE (Responsabilités et compétences élargies)
 - Transfer de la masse salariale aux universités
-  - Déresponsabilisation de l'Etat face à la démographie
+  - Déresponsabilisation de l'Etat face à la démographie et l'inflation
   
 ```{r tda, fig.asp=5.5/16, fig.align='center'}
 kpiESR::esr.pnl %>%
@@ -213,9 +224,11 @@ PIA : Le Programme Investissements d'Avenir (4 éditions, ~ 50Md€ pour l'ESR)
 ::: {.col data-latex="{0.7\textwidth}"}
 
 - __ANR (Agence Nationale de la Recherche)__
-  - Financement par projet, mais trop faible 
+  - Formidable outil de pilotage, par le financement par projet
+  - Mais trop faible 
   - Chronophage, injuste et __sans preuve d'efficacité__
-- __AERES / Hcéres : Évaluation__
+- __AERES / Hcéres__ : 
+  - Formidable outil d'évaluation
   - Chronophage, juste, mais toujours __sans preuve d'efficacité__
 - __IDEX (Initiative d'Excellence)__
   - « 10 pôles pluridisciplinaires d’excellence de rang mondial »
@@ -250,6 +263,8 @@ kpiESR::esr.pnl %>%
   
 ```
 
+# Perspectives politiques (2020-)
+
 ## Perspectives politiques : Recherche
 
 ### Loi de programmation de la recherche (2020)
@@ -278,10 +293,29 @@ kpiESR::esr.pnl %>%
 - Pas assez d'accès = des « jeunes sur le carreau »
 - Pas de solution
 
-### Apprentissage / alternance (2019)
-- Développement sans précédent, probablement incontrôlé, inefficace pour l'emploi
+### Apprentissage / alternance / formation continue (2019)
+- Développement sans précédent, probablement incontrôlé, « sans impact sur l'emploi »
 - Réel risque de casser le dispositif
 
+# Conclusion générale
+
+## Conclusion générale
+
+__Quel est le rôle de l'ESR, et particulièrement de l'université ?__
+
+### Recherche
+- Rayonnement culturel des « grandes découvertes » ?
+- Visibilité internationale pour attirer les « talents » ?
+- Préparer l'avenir et résoudre les grands problèmes ?
+- Innovation pour soutenir la productivité des entreprises ?
+
+### Enseignement
+- Produire la meilleure main d'œuvre pour la productivité des entreprises ?
+- Former pour le rayonnement international ?
+- Former des citoyens éclairés pour faire face aux crises ?
+- Faire tampon entre la jeunesse et l'emploi (ou le chômage) ?
+
+### Pas de réponse jusqu'à présent...
 
 # Saint-Etienne
 
@@ -306,4 +340,13 @@ kpiesr_plot_map(2020,"tIJ02","Université","kpi.K.resPetu","kpi.K.ensPetu", xlab
 ```{r rprf, cache = TRUE}
 kpiesr_plot_map(2019,"tIJ02","Université","kpi.K.recPect","kpi.K.forPetu", xlabel = 20000, ylabel = 600) +
   xlab("Ressources propres recherche") + ylab("Ressources propres formation")
+```
+
+
+## Université Jean-Monnet : Taux de titularité
+
+```{r rtit, cache = TRUE}
+kpiesr_plot_map(2019,"tIJ02","Université","kpi.ENS.S.titulaires/kpi.ENS.P.effectif","kpi.BIA.S.titulaires/kpi.BIA.P.effectif", xlabel = 0.56, ylabel = 0.8) +
+  scale_x_continuous(labels=scales::percent, name="Taux de titularité enseignants") + 
+  scale_y_continuous(labels=scales::percent, name="Taux de titularité BIATSS")
 ```

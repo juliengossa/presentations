@@ -1,22 +1,72 @@
 ---
-title: "Precarité"
-output: github_document
+title: "Mesurer la precarité de l'ESR par les données ouvertes"
+author: 
+- Julien Gossa \newline 
+- Université de Strasbourg  \newline 
+- '[@JulienGossa](https://twitter.com/JulienGossa) \ \ \ \ gossa@unistra.fr'
+date: "12-10-2022"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    dev: cairo_pdf
+    includes:
+      in_header: columns.tex
+    keep_tex: True
+  github_document:
+    default
+classoption: "aspectratio=169"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, cache = FALSE)
+options(dplyr.summarise.inform = FALSE)
+
+knitr::opts_chunk$set(fig.asp=8/16, fig.width = 7, out.width = "100%")
+
 library(tidyverse)
-library(kpiESR)
 library(ggcpesrthemes)
-theme_cpesr_setup(authors = "Julien Gossa")
-theme_set(theme_cpesr())
+library(kpiESR)
+
+theme_set(theme_cpesr() + theme(legend.position = "right"))
 ```
 
+## Mesurer la precarité de l'ESR par les données ouvertes
 
-## ONE
+__Avertissement général sur le travail par les données__
+
+- Source principale : SIES https://data.enseignementsup-recherche.gouv.fr
+- Possibilités d'erreur techniques ou matérielles dans les données et traitements
+- Même sans erreur, vision partielle et partialle
+
+__Grandes difficultés à mesurer la précarité__
+
+- Définition de la précarité (ex: vacataires et contractuels)
+- A la frontière des connaissances de l'administration (ex: vacataires et filliales)
+- Très instable : date, périmètre et type de mesures (ex: doctorants)
+
+### Grande limite
+
+- Contrats et statuts : grande distance aux réalités de vie
+- Simples indices : évolutions et comparaisons
+
+# Quelques représentations sur les personnels
+
+## ONR : Permanents vs. Non permanents
+
+```{r onr.load}
+onr.raw <- read.csv2("fr-esr-tbes-personnels-epst-epic-fondation-par-type-contrat-emploi.csv", dec='.') %>%
+  mutate(Statut = fct_recode(Statut.Nature.de.contrat, 
+                             "Titulaires, contrats PACTE" = "Titulaires de l'organisme, y compris ceux mis à disposition, yc fonctionnaires stagiaires (non encore titularisés), contrats PACTE",
+                             "Titulaires d'autres organismes" = "Fonctionnaires, titulaires d'autres organismes accueillis sur emploi",
+                             "Titulaires d'autres organismes" = "Fonctionnaires, titulaires d'autres organismes accueillis sur contrat",
+                             "CUI-CAE" = "Contrat unique d'insertion - contrat d'accompagnement dans l'emploi (CUI-CAE)",
+                             "Contrat Pro, DRI" = "Contrats de professionnalisation, diplômes de recherche et d’innovation"
+                             )) %>%
+  mutate(Année = as.character(Année))
+```
 
 ```{r onr}
-onr <- read.csv2("fr-esr-tbes-personnels-epst-epic-fondation-par-type-contrat-emploi.csv", dec='.') %>%
+onr <- onr.raw %>%
   group_by(Année, Personnels = Statut.regroupé) %>%
   summarise(ETPT = sum(Effectif.au.31.12..en.ETPT.)) %>%
   group_by(Personnels) %>%
@@ -25,19 +75,68 @@ onr <- read.csv2("fr-esr-tbes-personnels-epst-epic-fondation-par-type-contrat-em
 onr %>%
   ggplot(aes(x=Année, y = ETPT, fill = Personnels, group = Personnels)) +
   geom_area(color = "white", alpha = 0.6) +
-  scale_y_continuous(labels = ~ .x/1e3, name = "ETPT (milliers)")
+  scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "ETPT (milliers)") 
 ```
+
+## ONR : Permanents vs. Non permanents, valeur 100
 
 ```{r onr.val100}
 onr %>% ggplot(aes(x=Année, y = val100, color = Personnels, group = Personnels)) +
-  geom_line(size=1)
+  geom_line(size=1) + geom_point(size=3, stroke=1, shape=21,fill="white") +
+  scale_y_continuous(name = "ETPT (valeur 100 en 2014)", limits = c(95,115)) 
+
 ```
 
-## Personnels biatss
+## ONR : Taux de permanence par organisation
+
+```{r onr.orga}
+onr.raw %>%
+  group_by(Année, Personnels = Statut.regroupé, Organisme) %>%
+  summarise(ETPT = sum(Effectif.au.31.12..en.ETPT.)) %>%
+  pivot_wider(names_from = Personnels, values_from = ETPT) %>%
+  mutate(
+    ETPT = Permanents + `Non permanents`,
+    TauxTitularité = Permanents / (Permanents + `Non permanents`)
+  ) %>%
+
+  ggplot(aes(y=reorder(Organisme, TauxTitularité), x = TauxTitularité, color = Année, size = Année)) +
+  geom_point() +
+  expand_limits(x=c(0,1)) +
+  scale_y_discrete(name="Organisme") +
+  scale_x_continuous(name="Taux de permanence", labels = scales::percent) +
+  scale_color_brewer(palette="Purples", name = "Année") +
+  scale_size_discrete(range=c(1,3), name="Année") +
+  theme(legend.position = "right") 
+```
+
+
+## ONR : Effectifs par statut/contrat
+
+```{r onr.statuts}
+df <- onr.raw %>%
+  group_by(Année, Personnels = Statut.regroupé, Statut) %>%
+  summarise(ETPT = sum(Effectif.au.31.12..en.ETPT.)) %>%
+  ungroup() 
+
+df.last <- df %>% filter(Année == max(Année)) 
+df.first <- df %>% filter(Année %in% min(Année))
+
+df.last %>%
+  ggplot(aes(y=reorder(Statut, ETPT), x = ETPT, fill=Personnels)) +
+  geom_col() +
+  geom_point(data=df.first, aes(shape=Année)) +
+  scale_y_discrete(name="Organisme") +
+  scale_x_continuous(name="ETPT", labels = ~ paste(.x / 1e3,"k")) +
+  #scale_color_brewer(palette="Purples") +
+  theme(legend.position = "right")
+```
+
+
+## BIATSS : Titulaires vs. Contractuels
 
 ```{r bia}
-ens <- kpiESR::esr %>%
-  filter(Etablissement == "Ensemble", Rentrée > 2014) %>%
+bia <- kpiESR::esr %>%
+  filter(Etablissement == "Ensemble", Rentrée > 2014, Rentrée < 2021) %>%
   transmute(
     Rentrée,
     Titulaires = kpi.BIA.S.titulaires,
@@ -47,22 +146,48 @@ ens <- kpiESR::esr %>%
   group_by(BIATSS) %>%
   mutate(val100 = Effectif / first(Effectif) * 100)
   
-ens %>% ggplot(aes(x=Rentrée, y = Effectif, f<ill = BIATSS, group = BIATSS)) +
-  geom_area(color = "white", alpha = 0.6)
+bia %>% ggplot(aes(x=Rentrée, y = Effectif, fill = BIATSS, group = BIATSS)) +
+  geom_area(color = "white", alpha = 0.6) +
+  scale_y_continuous(labels=~ paste0(.x/1e3,"k"))
 ```
+
+## BIATSS : Titulaires vs. Contractuels, valeur 100
 
 ```{r bia.val100}
-ens %>% ggplot(aes(x=Rentrée, y = val100, color = BIATSS, group = BIATSS)) +
-  geom_line(size=1)
+bia %>% 
+  ggplot(aes(x=Rentrée, y = val100, color = BIATSS, group = BIATSS)) +
+  geom_line(size=1) + geom_point(size=3, stroke=1, shape=21,fill="white") +
+  scale_y_continuous(name = "Effectif (valeur 100 en 2015)", limits = c(95,115)) 
+```
+
+## BIATSS : Taux de titularité par groupe d'établissement
+
+```{r bia.etab}
+kpiESR::esr.pnl %>%
+  left_join(kpiESR::esr.etab) %>%
+  mutate(Type = paste(Groupe,PerimEx)) %>%
+  filter(Groupe != "Groupe", Groupe != "Ensemble", Rentrée == 2020) %>%
+  filter(kpi == "kpi.BIA.S.titulaires") %>%
+  transmute(
+    Rentrée,
+    Etablissement,
+    Groupe = Type,
+    TauxTitularité = norm
+  ) %>%
+  ggplot(aes(x=TauxTitularité, y = Groupe, fill = Groupe)) +
+  geom_violin() + geom_point() +
+  scale_x_continuous(labels = scales::percent, name= "Taux de titularité BIATSS") +
+  theme(legend.position = "None")
 ```
 
 
 
-## Personnels enseignants
+
+## E-EC : Titulaires vs. Non permanents
 
 ```{r ens}
 ens <- kpiESR::esr %>%
-  filter(Etablissement == "Ensemble", Rentrée > 2011) %>%
+  filter(Etablissement == "Ensemble", Rentrée > 2012 , Rentrée < 2021) %>%
   transmute(
     Rentrée,
     Titulaires = kpi.ENS.S.titulaires,
@@ -73,20 +198,47 @@ ens <- kpiESR::esr %>%
   mutate(val100 = Effectif / first(Effectif) * 100)
   
 ens %>% ggplot(aes(x=Rentrée, y = Effectif, fill = Enseignants, group = Enseignants)) +
-  geom_area(color = "white", alpha = 0.6)
+  geom_area(color = "white", alpha = 0.6) +
+  scale_y_continuous(labels= ~ paste0(.x/1e3,"k"))
 ```
+
+## E-EC : Titulaires vs. Non permanents, valeur 100
 
 ```{r ens.val100}
 ens %>% ggplot(aes(x=Rentrée, y = val100, color = Enseignants, group = Enseignants)) +
-  geom_line(size=1)
+  geom_line(size=1) + geom_point(size=3, stroke=1, shape=21,fill="white") +
+  scale_y_continuous(name = "Effectif (valeur 100 en 2012)", limits = c(95,116)) +
+  scale_x_continuous(breaks = scales::pretty_breaks())
 ```
 
+## E-EC : Taux de titularité par groupe d'établissement
 
-## Heures complémentaires
+```{r ens.etab}
+kpiESR::esr.pnl %>%
+  left_join(kpiESR::esr.etab) %>%
+  mutate(Type = paste(Groupe,PerimEx)) %>%
+  filter(Groupe != "Groupe", Groupe != "Ensemble", Groupe != "Regroupements", Rentrée == 2020) %>%
+  filter(kpi == "kpi.ENS.S.titulaires") %>%
+  transmute(
+    Rentrée,
+    Etablissement,
+    Groupe = Type,
+    TauxTitularité = norm
+  ) %>%
+  ggplot(aes(x=TauxTitularité, y = Groupe, fill = Groupe)) +
+  geom_violin() + geom_point() +
+  scale_x_continuous(labels = scales::percent, name= "Taux de titularité E-EC") +
+  theme(legend.position = "None")
+```
+
+# Quelques représentations sur les heures d'enseignement \newline Précarité des missions
+
+## Heures d'enseignement (Université de Strasbourg)
 
 ```{r load}
 hc <- read.csv("heures_complémentaires.csv", dec = ",") %>%
-  mutate(HS.Total = H.Total-HC.Total) 
+  mutate(HS.Total = H.Total-HC.Total) %>%
+  mutate(Rentrée = as.character(Rentrée))
 
 hcs <- hc %>% filter(Etablissement == "Strasbourg") 
 ```
@@ -95,6 +247,7 @@ hcs <- hc %>% filter(Etablissement == "Strasbourg")
 hcs2 <- hcs %>%
   filter(Rentrée > 2009) %>% 
   select(Rentrée, HS.Total, HC.Titulaires, HC.Vacataires) %>%
+  mutate(Rentré = as.character(Rentrée)) %>%
   pivot_longer(
     c(HS.Total, HC.Titulaires, HC.Vacataires),
     names_to = "Heures", values_to = "Nombre"
@@ -103,29 +256,32 @@ hcs2 <- hcs %>%
                        levels=c("HC.Vacataires", "HC.Titulaires", "HS.Total"),
                        labels=c("Vacation", "Complémentaires","Service"))) %>%
   group_by(Heures) %>%
-  mutate(val100 = Nombre / first(Nombre) * 100)
+  mutate(val100 = Nombre / first(Nombre) * 100) 
 
 hcs2 %>%
   filter(Heures != "Total") %>%
   ggplot(aes(x=Rentrée,y=Nombre,fill=Heures, group=Heures)) +
   geom_area(color="white",alpha=0.6) +
-  scale_y_continuous(labels = ~ .x/10e3, name = "Heures (milliers)") +
-  #scale_fill_discrete(name="Type d'heure") +
-  ggtitle("Heures d'enseignement dans service et hors-service","A l'Université de Strasbourg")
+  scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "Heures (milliers)") +
+  scale_fill_brewer(palette = "Paired")
 ```
 
+## Heures d'enseignement (Université de Strasbourg), valeur 100
 
 ```{r h.hc.val100}
 hcs2 %>%
   ggplot(aes(x=Rentrée,y=val100,color=Heures, group=Heures)) +
-  geom_line(size=1) +
+  geom_line(size=1) + geom_point(size=3, stroke=1, shape=21,fill="white") +
   ylab("Heures (valeur 100 en 2010)") +
-  scale_x_continuous(breaks=scales::breaks_pretty()) +
-  ggtitle("Heures d'enseignement dans service et hors-service","A l'Université de Strasbourg")
+  #scale_x_continuous(breaks=scales::breaks_pretty()) +
+  scale_color_brewer(palette="Paired") 
 ```
 
 
-## Fongibilité asymétrique
+
+# Quelques considérations budgétaires / managériales
+
+## Budget des établissements : « fongibilité asymétrique »
 
 
 ```{r fin}
@@ -145,14 +301,30 @@ fin %>% ggplot(aes(x=Rentrée, y = Montant, fill = Financement, group = Financem
   scale_y_continuous(labels = ~ .x / 1e9, name="Budget (Md€)")
 ```
 
-```{r ens.val100}
+## Budget des établissements : « fongibilité asymétrique », valeur 100
+
+```{r fin.val100}
 fin %>% ggplot(aes(x=Rentrée, y = val100, color = Financement, group = Financement)) +
-  geom_line(size=1)
+  geom_line(size=1) + geom_point(size=3, stroke=1, shape=21,fill="white")
 ```
 
+## Budget des établissements : SCSP vs. Titularité
 
+```{r fin.vs}
+kpiesr_plot_line(id="Ensemble", vars=c("kpi.K.titPper","kpi.K.dotPres"), val = "evolution") +
+  scale_color_brewer(labels=c("Taux de SCSP","Taux de titularité"), name = "Indicateur", palette = "Set2")
+```
 
-## Investissement vs. Productivité
+## Budget des établissements : SCSP vs. Titularité
+
+```{r fin.map, fig.width=10}
+kpiesr_plot_map(rentrée = 2020, id="nukk", groupe=".", xvar = "kpi.K.dotPres", yvar="kpi.K.titPper") +
+  geom_smooth(color="grey", method = "lm",show_guide=FALSE) +
+  scale_x_continuous(labels = scales::percent, name = "Taux de SCSP") +
+  scale_y_continuous(labels = scales::percent, name = "Taux de titularité")
+```
+
+## Investissement vs. Productivité : SCSP par étudiant
 
 ```{r invest}
 kpiESR::esr %>%
@@ -163,22 +335,123 @@ kpiESR::esr %>%
   ) %>%
   mutate(val100 = valeur / first(valeur) * 100) %>%
   ggplot(aes(x=Rentrée, y = valeur, group=Etablissement, color=Etablissement)) +
-  geom_line(size=1) 
+  geom_line(size=1) + geom_point(size=3, stroke=1, shape=21,fill="white") +
+  facet_grid(.~Etablissement) +
+  scale_y_continuous(labels = ~ paste0(.x,"€"), name = "SCSP par étudiant", limits = c(6000,8000)) +
+  scale_color_brewer(palette = "Dark2") +
+  theme(legend.position = "None")
 
 ```
 
 
-```{r product}
+## Investissement vs. Productivité : étudiants par SCSP
+
+```{r invest2}
 kpiESR::esr %>%
-  filter(Etablissement == "Université de Strasbourg", Rentrée > 2009) %>%
+  filter(Etablissement %in% c("Université de Strasbourg","Avignon Université"), Rentrée > 2009) %>%
   transmute(
-    Rentrée,
-    valeur = kpi.ETU.P.effectif / kpi.FIN.S.SCSP * 1e6,
+    Etablissement, Rentrée,
+    valeur =  kpi.ETU.P.effectif / kpi.FIN.S.SCSP * 1e6,
   ) %>%
   mutate(val100 = valeur / first(valeur) * 100) %>%
-  ggplot(aes(x=Rentrée, y = valeur, group=1)) +
-  geom_line(size=1) 
+  ggplot(aes(x=Rentrée, y = valeur, group=Etablissement, color=Etablissement)) +
+  geom_line(size=1) + geom_point(size=3, stroke=1, shape=21,fill="white") +
+  facet_grid(.~Etablissement) +
+  scale_y_continuous(name = "Etudiants par M€ SCSP", limits = c(125,166)) +
+  scale_color_brewer(palette = "Dark2") +
+  theme(legend.position = "None")
 
 ```
 
 
+## Investissement vs. Productivité : indicateurs de pilotage officiels
+
+- Taux de rémunération des permanents
+  - _« Interprétation : Un ratio élevé est un indicateur de rigidité. Plus l'indicateur se rapproche de 100% et moins l'établissement dispose de marges de manœuvre. »_
+- Ressources Propres / Produits encaissables
+  - _« Interprétation : Degré de dépendance de l'établissement aux subventions de charge de service public versées par l'Etat »_
+- Charges de personnel / Produits encaissables
+  - _« Interprétation : Le poids relatif des charges de personnel dans les ressources encaissables, ainsi que son évolution, est significatif. Plus le ratio augmente, moins l'établissement dispose de marge de manœuvre. »_
+
+```{r invest.ind, out.width="49%", fig.align='center', fig.show='hold'}
+knitr::include_graphics(c("dotpres_avignon.png","dotpres_unistra.png"))
+```
+
+\footnotesize
+Source : https://data.esr.gouv.fr/FR/E810/P844/tableau_de_bord_financier_-_universite
+
+
+## Conclusion
+
+- Qualifier la précarité dans les données ouvertes est difficile
+  - Titulaires vs. contractuels vs. permanents vs. non permanents
+- Une très grande diversités selon les
+  - statuts, corps, organismes, établissements...
+- Mais quand même trois profils différents 
+  - ONR, BIATSS, E-EC
+
+### Point de vue managérial
+Pas de précarité, mais de la « souplesse » et des « marges de manœuvre »
+- _Dégat collatéral malheureux_ 
+- Indirectement encouragé par des outils techno-bureaucratiques
+
+### Point de vue politique / stratégique
+\centering
+« _La précarité est bonne pour la recherche_ » - un DG
+
+
+# Annexes
+
+```{r annexe, results='asis'}
+bia <- read.csv2("biatss.csv")
+ens <- read.csv2("enseignants.csv")
+
+plot_prec <- function(df, var) {
+  df %>% 
+    group_by(Rentrée = as.character(Rentrée), Personnel, !!sym(var)) %>%
+    summarise(Effectif = sum(Effectif,na.rm = TRUE)) %>%
+    mutate(Personnel = ifelse(Personnel=="titulaires","titulaires","non_titulaires")) %>%
+    pivot_wider(names_from = Personnel, values_from = Effectif) %>% 
+    mutate(Taux = titulaires / (titulaires+non_titulaires)) %>%
+    ggplot(aes(y=reorder(!!sym(var),Taux),x=Taux,color = Rentrée, size=Rentrée)) +
+    geom_point() +
+    scale_color_brewer(palette="Purples") +
+    scale_x_continuous(labels=scales::percent, name="Taux de titularité") +
+    scale_y_discrete(name=var) +
+    scale_size_discrete(range = c(1,4))
+}
+
+for(v in colnames(bia)[-c(1,2,length(bia))]) {
+  cat("## BIATSS : ",v,"\n")
+  print(plot_prec(bia,v))
+  cat("\n\n")
+}
+
+for(v in colnames(ens)[-c(1,2,length(ens))]) {
+  cat("## Enseignants : ",v,"\n")
+  print(plot_prec(ens,v))
+  cat("\n\n")
+}
+```
+
+## Enseignants : statuts
+```{r annexe.ens}
+df <- ens %>% 
+  group_by(Rentrée, Personnel, Catégorie) %>%
+  summarise(Effectif = sum(Effectif)) %>%
+  mutate(Rentrée = as.character(Rentrée)) %>%
+  ungroup()
+
+  
+df.last <- df %>% filter(Rentrée == max(Rentrée)) 
+df.first <- df %>% filter(Rentrée %in% min(Rentrée))
+
+df.last %>%
+  ggplot(aes(y=reorder(Catégorie, Effectif), x = Effectif, fill=Personnel)) +
+  geom_col() +
+  geom_point(data=df.first, aes(shape=Rentrée)) +
+  scale_y_discrete(name="Statut") +
+  scale_x_continuous(name="Effectif", labels = ~ paste(.x / 1e3,"k")) +
+  #scale_color_brewer(palette="Purples") +
+  theme(legend.position = "right")
+```
