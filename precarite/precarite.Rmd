@@ -6,14 +6,14 @@ author:
 - '[@JulienGossa](https://twitter.com/JulienGossa) \ \ \ \ gossa@unistra.fr'
 date: "12-10-2022"
 output: 
+  github_document:
+    default
   beamer_presentation:
     theme: "Madrid"
     dev: cairo_pdf
     includes:
       in_header: columns.tex
     keep_tex: True
-  github_document:
-    default
 classoption: "aspectratio=169"
 ---
 
@@ -28,15 +28,21 @@ library(ggcpesrthemes)
 library(kpiESR)
 
 theme_set(theme_cpesr() + theme(legend.position = "right"))
+
+biatss <- read.csv2("biatss.csv")
+enseignants <- read.csv2("enseignants.csv")
 ```
 
 ## Mesurer la precarité de l'ESR par les données ouvertes
 
 __Avertissement général sur le travail par les données__
 
-- Source principale : SIES https://data.enseignementsup-recherche.gouv.fr
+- Source principale : SIES 
+  - https://data.enseignementsup-recherche.gouv.fr
+  - [https://github.com/juliengossa/presentations > precarite](https://github.com/juliengossa/presentations/blob/main/precarite/precarite.md) 
 - Possibilités d'erreur techniques ou matérielles dans les données et traitements
-- Même sans erreur, vision partielle et partialle
+- Même sans erreur, vision partielle et partiale
+
 
 __Grandes difficultés à mesurer la précarité__
 
@@ -44,10 +50,10 @@ __Grandes difficultés à mesurer la précarité__
 - A la frontière des connaissances de l'administration (ex: vacataires et filliales)
 - Très instable : date, périmètre et type de mesures (ex: doctorants)
 
-### Grande limite
+### Pas la réalité, mais __la réalité perçue par une techno-bureaucratie__
 
 - Contrats et statuts : grande distance aux réalités de vie
-- Simples indices : évolutions et comparaisons
+- Nombreux angles morts (et aveuglements)
 
 # Quelques représentations sur les personnels
 
@@ -72,10 +78,20 @@ onr <- onr.raw %>%
   group_by(Personnels) %>%
   mutate(val100 = ETPT / first(ETPT) * 100)
 
+stat <- onr %>%
+  group_by(Personnels) %>%
+  summarise(
+    Année = as.character(mean(as.numeric(Année))),
+    ETPT = mean(ETPT)) %>%
+  ungroup() %>%
+  mutate(Part = scales::percent(ETPT / sum(ETPT)))
+
 onr %>%
   ggplot(aes(x=Année, y = ETPT, fill = Personnels, group = Personnels)) +
   geom_area(color = "white", alpha = 0.6) +
-  scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "ETPT (milliers)") 
+  scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "ETPT (milliers)") +
+  geom_text(data=stat, aes(label=Part), position = position_stack(vjust = .5),
+            color = "white", size=8)
 ```
 
 ## ONR : Permanents vs. Non permanents, valeur 100
@@ -145,10 +161,21 @@ bia <- kpiESR::esr %>%
   pivot_longer(c(Titulaires, `Non titulaires`), names_to = "BIATSS", values_to = "Effectif") %>%
   group_by(BIATSS) %>%
   mutate(val100 = Effectif / first(Effectif) * 100)
+
+stat <- bia %>%
+  group_by(BIATSS) %>%
+  summarise(
+    Rentrée = mean(Rentrée),
+    Effectif = mean(Effectif)) %>%
+  ungroup() %>%
+  mutate(Part = scales::percent(Effectif / sum(Effectif)))
+
   
 bia %>% ggplot(aes(x=Rentrée, y = Effectif, fill = BIATSS, group = BIATSS)) +
   geom_area(color = "white", alpha = 0.6) +
-  scale_y_continuous(labels=~ paste0(.x/1e3,"k"))
+  scale_y_continuous(labels=~ paste0(.x/1e3,"k"))  +
+  geom_text(data=stat, aes(label=Part), position = position_stack(vjust = .5),
+            color = "white", size=8)
 ```
 
 ## BIATSS : Titulaires vs. Contractuels, valeur 100
@@ -197,9 +224,19 @@ ens <- kpiESR::esr %>%
   group_by(Enseignants) %>%
   mutate(val100 = Effectif / first(Effectif) * 100)
   
+stat <- ens %>%
+  group_by(Enseignants) %>%
+  summarise(
+    Rentrée = mean(Rentrée),
+    Effectif = mean(Effectif)) %>%
+  ungroup() %>%
+  mutate(Part = scales::percent(Effectif / sum(Effectif)))
+
 ens %>% ggplot(aes(x=Rentrée, y = Effectif, fill = Enseignants, group = Enseignants)) +
   geom_area(color = "white", alpha = 0.6) +
-  scale_y_continuous(labels= ~ paste0(.x/1e3,"k"))
+  scale_y_continuous(labels= ~ paste0(.x/1e3,"k")) +
+  geom_text(data=stat, aes(label=Part), position = position_stack(vjust = .5),
+            color = "white", size=8)
 ```
 
 ## E-EC : Titulaires vs. Non permanents, valeur 100
@@ -231,6 +268,15 @@ kpiESR::esr.pnl %>%
   theme(legend.position = "None")
 ```
 
+## BIATSS et E-EC : Taux de titularité
+
+```{r ens.bia.map}
+kpiesr_plot_map(rentrée = 2020, id="nukk", groupe=".", 
+                xvar = "kpi.ENS.S.titulaires/kpi.ENS.P.effectif", yvar="kpi.BIA.S.titulaires/kpi.BIA.P.effectif") +
+  scale_x_continuous(labels = scales::percent, name = "Taux de titularité ENS") +
+  scale_y_continuous(labels = scales::percent, name = "Taux de titularité BIATSS")
+```
+
 # Quelques représentations sur les heures d'enseignement \newline Précarité des missions
 
 ## Heures d'enseignement (Université de Strasbourg)
@@ -247,7 +293,7 @@ hcs <- hc %>% filter(Etablissement == "Strasbourg")
 hcs2 <- hcs %>%
   filter(Rentrée > 2009) %>% 
   select(Rentrée, HS.Total, HC.Titulaires, HC.Vacataires) %>%
-  mutate(Rentré = as.character(Rentrée)) %>%
+  mutate(Rentrée = as.character(Rentrée)) %>%
   pivot_longer(
     c(HS.Total, HC.Titulaires, HC.Vacataires),
     names_to = "Heures", values_to = "Nombre"
@@ -258,12 +304,23 @@ hcs2 <- hcs %>%
   group_by(Heures) %>%
   mutate(val100 = Nombre / first(Nombre) * 100) 
 
+stat <- hcs2 %>%
+  filter(Heures != "Total") %>%
+  group_by(Heures) %>%
+  summarise(
+    Rentrée = as.character(mean(as.numeric(Rentrée))),
+    Nombre = mean(Nombre)) %>%
+  ungroup() %>%
+  mutate(Part = scales::percent(Nombre / sum(Nombre)))
+
 hcs2 %>%
   filter(Heures != "Total") %>%
   ggplot(aes(x=Rentrée,y=Nombre,fill=Heures, group=Heures)) +
   geom_area(color="white",alpha=0.6) +
   scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "Heures (milliers)") +
-  scale_fill_brewer(palette = "Paired")
+  scale_fill_brewer(palette = "Paired")  +
+  geom_text(data=stat, aes(label=Part), position = position_stack(vjust = .5),
+            color = "white", size=8)
 ```
 
 ## Heures d'enseignement (Université de Strasbourg), valeur 100
@@ -296,9 +353,20 @@ fin <- kpiESR::esr %>%
   group_by(Financement) %>%
   mutate(val100 = Montant / first(Montant) * 100)
   
+stat <- fin %>%
+  group_by(Financement) %>%
+  summarise(
+    Rentrée = mean(as.numeric(Rentrée, na.rm=TRUE)),
+    Montant = mean(Montant, na.rm=TRUE)) %>%
+  ungroup() %>%
+  mutate(Part = scales::percent(Montant / sum(Montant)))
+
+
 fin %>% ggplot(aes(x=Rentrée, y = Montant, fill = Financement, group = Financement)) +
   geom_area(color = "white", alpha = 0.6) +
-  scale_y_continuous(labels = ~ .x / 1e9, name="Budget (Md€)")
+  scale_y_continuous(labels = ~ .x / 1e9, name="Budget (Md€)") +
+  geom_text(data=stat, aes(label=Part), position = position_stack(vjust = .5),
+            color = "white", size=8)
 ```
 
 ## Budget des établissements : « fongibilité asymétrique », valeur 100
@@ -392,6 +460,7 @@ Source : https://data.esr.gouv.fr/FR/E810/P844/tableau_de_bord_financier_-_unive
 
 ### Point de vue managérial
 Pas de précarité, mais de la « souplesse » et des « marges de manœuvre »
+
 - _Dégat collatéral malheureux_ 
 - Indirectement encouragé par des outils techno-bureaucratiques
 
@@ -403,9 +472,6 @@ Pas de précarité, mais de la « souplesse » et des « marges de manœuvre »
 # Annexes
 
 ```{r annexe, results='asis'}
-bia <- read.csv2("biatss.csv")
-ens <- read.csv2("enseignants.csv")
-
 plot_prec <- function(df, var) {
   df %>% 
     group_by(Rentrée = as.character(Rentrée), Personnel, !!sym(var)) %>%
@@ -421,22 +487,22 @@ plot_prec <- function(df, var) {
     scale_size_discrete(range = c(1,4))
 }
 
-for(v in colnames(bia)[-c(1,2,length(bia))]) {
+for(v in colnames(biatss)[-c(1,2,length(biatss))]) {
   cat("## BIATSS : ",v,"\n")
-  print(plot_prec(bia,v))
+  print(plot_prec(biatss,v))
   cat("\n\n")
 }
 
-for(v in colnames(ens)[-c(1,2,length(ens))]) {
+for(v in colnames(enseignants)[-c(1,2,length(enseignants))]) {
   cat("## Enseignants : ",v,"\n")
-  print(plot_prec(ens,v))
+  print(plot_prec(enseignants,v))
   cat("\n\n")
 }
 ```
 
 ## Enseignants : statuts
 ```{r annexe.ens}
-df <- ens %>% 
+df <- enseignants %>% 
   group_by(Rentrée, Personnel, Catégorie) %>%
   summarise(Effectif = sum(Effectif)) %>%
   mutate(Rentrée = as.character(Rentrée)) %>%
