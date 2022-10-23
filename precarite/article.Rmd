@@ -123,7 +123,7 @@ personnels %>%
   scale_y_continuous(labels = scales::percent, limits=c(0,1), name = "Taux de titularité") +
   scale_x_discrete(name="Catégorie de personnel") +
   theme(legend.position = "None") +
-  labs(title = "Taux de titularité des personnels", subtitle = "E-EC et BIATSS du MESRI, et Opérteurs nationnaux de recherche (ONR)", caption = "Source : SIES https://data.enseignementsup-recherche.gouv.fr")
+  labs(title = "Taux de titularité des personnels", subtitle = "E-EC et BIATSS du MESRI, et Opérteurs nationaux de recherche (ONR)", caption = "Source : SIES https://data.enseignementsup-recherche.gouv.fr")
 ```
 _Le taux de titularité qu'on peut percevoir au travers des données ouvertes 
 (donc à l'exclusion notable des vacataires et doctorants non financés) montre 
@@ -148,7 +148,7 @@ personnels %>%
   geom_line(size=1) + geom_point(size=3,shape=21,stroke=1,fill="white") +
   scale_y_continuous(name = "Taux de titularité (valeur 100)") +
   scale_color_discrete(name="Corps") +
-  labs(title = "Taux de titularité des personnels (valeur 100 en 2015)", subtitle = "E-EC et BIATSS du MESRI, et Opérateurs nationnaux de recherche (ONR)", caption = "Source : SIES https://data.enseignementsup-recherche.gouv.fr")
+  labs(title = "Taux de titularité des personnels (valeur 100 en 2015)", subtitle = "E-EC et BIATSS du MESRI, et Opérateurs nationaux de recherche (ONR)", caption = "Source : SIES https://data.enseignementsup-recherche.gouv.fr")
 ```
 _L'évolution des taux de titularité montre une baisse dans tous les grands corps 
 de personnel sur 5 ans : -1 point pour les BIATSS, -1,7 points pour les ONR, et -2,7 points pour les E-EC._
