@@ -4,16 +4,16 @@ author:
 - Julien Gossa \newline 
 - Université de Strasbourg  \newline 
 - '[@JulienGossa](https://twitter.com/JulienGossa) \ \ \ \ gossa@unistra.fr'
-date: "12-10-2022"
+date: "14-10-2022"
 output: 
-  github_document:
-    default
   beamer_presentation:
     theme: "Madrid"
     dev: cairo_pdf
     includes:
       in_header: columns.tex
     keep_tex: True
+  github_document:
+    default
 classoption: "aspectratio=169"
 ---
 
@@ -88,10 +88,10 @@ stat <- onr %>%
 
 onr %>%
   ggplot(aes(x=Année, y = ETPT, fill = Personnels, group = Personnels)) +
-  geom_area(color = "white", alpha = 0.6) +
+  geom_area(color = "white", alpha = 1) +
   scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "ETPT (milliers)") +
   geom_text(data=stat, aes(label=Part), position = position_stack(vjust = .5),
-            color = "white", size=8)
+            color = "white", size=8) 
 ```
 
 ## ONR : Permanents vs. Non permanents, valeur 100
@@ -172,7 +172,7 @@ stat <- bia %>%
 
   
 bia %>% ggplot(aes(x=Rentrée, y = Effectif, fill = BIATSS, group = BIATSS)) +
-  geom_area(color = "white", alpha = 0.6) +
+  geom_area(color = "white", alpha = 1) +
   scale_y_continuous(labels=~ paste0(.x/1e3,"k"))  +
   geom_text(data=stat, aes(label=Part), position = position_stack(vjust = .5),
             color = "white", size=8)
@@ -233,7 +233,7 @@ stat <- ens %>%
   mutate(Part = scales::percent(Effectif / sum(Effectif)))
 
 ens %>% ggplot(aes(x=Rentrée, y = Effectif, fill = Enseignants, group = Enseignants)) +
-  geom_area(color = "white", alpha = 0.6) +
+  geom_area(color = "white", alpha = 1) +
   scale_y_continuous(labels= ~ paste0(.x/1e3,"k")) +
   geom_text(data=stat, aes(label=Part), position = position_stack(vjust = .5),
             color = "white", size=8)
@@ -274,7 +274,8 @@ kpiESR::esr.pnl %>%
 kpiesr_plot_map(rentrée = 2020, id="nukk", groupe=".", 
                 xvar = "kpi.ENS.S.titulaires/kpi.ENS.P.effectif", yvar="kpi.BIA.S.titulaires/kpi.BIA.P.effectif") +
   scale_x_continuous(labels = scales::percent, name = "Taux de titularité ENS") +
-  scale_y_continuous(labels = scales::percent, name = "Taux de titularité BIATSS")
+  scale_y_continuous(labels = scales::percent, name = "Taux de titularité BIATSS") +
+  scale_color_manual(values=c("red","blue","black"))
 ```
 
 # Quelques représentations sur les heures d'enseignement \newline Précarité des missions
@@ -363,7 +364,7 @@ stat <- fin %>%
 
 
 fin %>% ggplot(aes(x=Rentrée, y = Montant, fill = Financement, group = Financement)) +
-  geom_area(color = "white", alpha = 0.6) +
+  geom_area(color = "white", alpha = 1) +
   scale_y_continuous(labels = ~ .x / 1e9, name="Budget (Md€)") +
   geom_text(data=stat, aes(label=Part), position = position_stack(vjust = .5),
             color = "white", size=8)
@@ -384,12 +385,12 @@ kpiesr_plot_line(id="Ensemble", vars=c("kpi.K.titPper","kpi.K.dotPres"), val = "
 ```
 
 ## Budget des établissements : SCSP vs. Titularité
-
 ```{r fin.map, fig.width=10}
 kpiesr_plot_map(rentrée = 2020, id="nukk", groupe=".", xvar = "kpi.K.dotPres", yvar="kpi.K.titPper") +
   geom_smooth(color="grey", method = "lm",show_guide=FALSE) +
   scale_x_continuous(labels = scales::percent, name = "Taux de SCSP") +
-  scale_y_continuous(labels = scales::percent, name = "Taux de titularité")
+  scale_y_continuous(labels = scales::percent, name = "Taux de titularité")+
+  scale_color_manual(values=c("red","blue","black"))
 ```
 
 ## Investissement vs. Productivité : SCSP par étudiant

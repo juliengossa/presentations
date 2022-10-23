@@ -1,0 +1,222 @@
+---
+title: "Mesurer la précarité dans l'ESR par les données ouvertes"
+output:
+  github_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, cache = FALSE)
+options(dplyr.summarise.inform = FALSE)
+#knitr::opts_chunk$set(dev = "cairo_pdf")
+
+knitr::opts_chunk$set(fig.asp=9/16, fig.width = 7, out.width = "100%", fig.retina = 4)
+
+library(tidyverse)
+library(ggcpesrthemes)
+library(kpiESR)
+
+theme_set(theme_cpesr() + theme(legend.position = "right"))
+```
+
+```{r load}
+biatss <- read.csv2("biatss.csv")
+enseignants <- read.csv2("enseignants.csv")
+onr <- read.csv2("fr-esr-tbes-personnels-epst-epic-fondation-par-type-contrat-emploi.csv", dec='.')
+
+personnels <- bind_rows(
+  biatss %>%
+    group_by(
+      Corps = "BIATSS",
+      Catégorie = Catégorie,
+      Rentrée,
+      Personnel
+    ) %>%
+    summarise(Effectif = sum(Effectif)),
+  
+  enseignants %>%
+    group_by(
+      Corps = "E-EC",
+      Catégorie = Grandes.disciplines,
+      Rentrée,
+      Personnel = recode(Personnel, "non permanents" = "contractuels")
+    ) %>%
+    summarise(Effectif = sum(Effectif)),
+  
+  onr %>%
+      group_by(
+      Corps = "ONR",
+      Catégorie = Organisme,
+      Rentrée = Année,
+      Personnel = case_when(
+        startsWith(Statut.Nature.de.contrat,"Titulaires") ~ "titulaires",
+        startsWith(Statut.Nature.de.contrat,"Fonctionnaire") ~ "titulaires",
+        TRUE ~ "contractuels")
+    ) %>%
+    summarise(Effectif = sum(Effectif.au.31.12..en.ETPT.))
+) %>%
+  bind_rows(.,
+    group_by(.,Corps,Catégorie="Total",Rentrée,Personnel) %>%
+      summarise(Effectif = sum(Effectif))
+  )
+```
+
+```{r wordcount}
+wordcountaddin::text_stats()
+```
+
+Depuis plusieurs années, l'Enseignement supérieur et la recherche (ESR) voient 
+leurs professions se précariser. Les personnels eux-mêmes sont contraints de recourir
+à des collègues contractuels ou vacataires pour faire fonctionner leurs enseignements,
+recherches et services. Mais comment peut-on mesurer cette précariser ?
+
+## Des efforts de transparence considérables, une mesure difficile
+
+Malgré des efforts remarquables, sans doute de niveau international, pour consolider
+et publier les données de l'ESR, la précarité reste dans une zone d'ombre.
+En raison, deux difficultés majeures. 
+
+La première est que la précarité se situe
+à la frontière de ce que connait l'administration, en particulier centrale : 
+alors que chaque fonctionnaire titulaire est compté et catégorisé avec diligence, 
+les contractuels s'éparpillent entre les contrats et structures. 
+Compter les vacataires est difficile, puisque leur gestion est au niveau le plus 
+local. Compter les contractuels est en partie impossible, lorsque leur gestion 
+relève d'une structure de droit privé, comme les filiales des universités.
+
+La seconde difficulté tient à la diversité des situations des personnels contractuels,
+dans lesquels on peut trouver les collègues les plus précaires, comme les collègues
+les mieux payés. 
+
+Les mesures présentées ici doivent donc être prise avec la plus grande des prudences.
+
+## Des situations contrastées
+
+Si on s'en tient aux données ouvertes (donc à l'exclusion notable des vacataires et 
+doctorants non finances),
+nous pouvons obtenir une mesure basse du taux de titularité, pour différentes 
+catégorie de personnel, BIATSS, E-EC et dans les ONR. On observe ainsi que, dans 
+la majorité des cas, entre 50% et 25% des personnels références sont contractuels :
+plus de 50% dans les ONR, environ 40% des BIATSS et 30% des E-EC.
+
+
+
+```{r tauxtit}
+personnels %>% 
+  filter(Rentrée == 2020) %>%
+  mutate(Catégorie = recode(Catégorie,
+                            "Lettres et sciences humaines" = "LLA-SHS", 
+                            "Sciences" = "ST", 
+                            "Droit, économie et gestion" = "DEG")) %>%
+  filter(Catégorie %in% c(
+    "Total",
+    "A","B","C",
+    "LLA-SHS", "ST", "DEG",
+    "INSERM","CNRS","INRIA"
+  )) %>%
+  pivot_wider(names_from = Personnel, values_from = Effectif) %>%
+  mutate(TauxTit = titulaires / (titulaires + contractuels)) %>%
+  ggplot(aes(x=Catégorie,y=TauxTit,fill=(Catégorie=="Total"),group=Corps)) + 
+  geom_col(alpha=0.8) +
+  facet_grid(.~Corps,scales = "free_x") +
+  scale_y_continuous(labels = scales::percent, limits=c(0,1), name = "Taux de titularité") +
+  scale_x_discrete(name="Catégorie de personnel") +
+  theme(legend.position = "None") +
+  labs(title = "Taux de titularité des personnels", subtitle = "E-EC et BIATSS du MESRI, et Opérteurs nationnaux de recherche (ONR)", caption = "Source : SIES https://data.enseignementsup-recherche.gouv.fr")
+```
+_Le taux de titularité qu'on peut percevoir au travers des données ouvertes 
+(donc à l'exclusion notable des vacataires et doctorants non financés) montre 
+un nombre de contractuels allant généralement de 50% à 25% de tous les personnels._
+
+## Des évolutions également contrastées
+
+Les données ouvertes permettent également d'observer l'évolution dans le temps
+des taux de titularité. On constate ainsi que, sur 5 ans, la titularité dans les 
+ONR a baissé d'un point et demi, celle des BIATSS d'un point et celle des E-EC de 
+près de 3 points. On constate également des trajectoire assez différentes, même
+si toutes rejoignent la même pente dans cette période.
+
+```{r tauxtit.evol}
+personnels %>% 
+  filter(Rentrée > 2014, Catégorie == "Total") %>% 
+  pivot_wider(names_from = Personnel, values_from = Effectif) %>%
+  mutate(TauxTit = titulaires / (titulaires + contractuels)) %>%
+  group_by(Corps) %>%
+  mutate(Evolution = TauxTit / first(TauxTit) * 100) %>%
+  ggplot(aes(x=Rentrée,y=Evolution,color=reorder(Corps,-Evolution,FUN=last),group=Corps)) + 
+  geom_line(size=1) + geom_point(size=3,shape=21,stroke=1,fill="white") +
+  scale_y_continuous(name = "Taux de titularité (valeur 100)") +
+  scale_color_discrete(name="Corps") +
+  labs(title = "Taux de titularité des personnels (valeur 100 en 2015)", subtitle = "E-EC et BIATSS du MESRI, et Opérateurs nationnaux de recherche (ONR)", caption = "Source : SIES https://data.enseignementsup-recherche.gouv.fr")
+```
+_L'évolution des taux de titularité montre une baisse dans tous les grands corps 
+de personnel sur 5 ans : -1 point pour les BIATSS, -1,7 points pour les ONR, et -2,7 points pour les E-EC._
+
+
+## Une mesure plus fine : la précarité de la mission d'enseignement
+
+Une autre façon de mesurer la précarité est de ne pas s'intéresser aux personnels
+mais à leurs missions. C'est notamment possible avec les heures d'enseignement,
+répertoriées dans les rapports sociaux uniques (ex bilans sociaux) des établissements.
+
+Si l'on prend l'exemple de l'Université de Strasbourg, entre 2013 et 2020, nous 
+pouvons observer une relative stagnation des heures en service (-4%), une hausse
+notable des heures de vacations (+10%) et une explosion des heures complémentaires
+(+40%). On peut y voir une politique de bonne gestion budgétaire, les heures 
+complémentaires étant les moins chères disponibles. On peut également y lire la 
+mise en œuvre d'une politique de modulation des services volontaire.
+
+
+```{r h.hc}
+hc <- read.csv("heures_complémentaires.csv", dec = ",") %>%
+  mutate(HS.Total = H.Total-HC.Total) %>%
+  mutate(Rentrée = as.character(Rentrée))
+
+hcs <- hc %>% filter(Etablissement == "Strasbourg") 
+
+hcs2 <- hcs %>%
+  filter(Rentrée > 2012) %>% 
+  select(Rentrée, HS.Total, HC.Titulaires, HC.Vacataires) %>%
+  mutate(Rentrée = as.character(Rentrée)) %>%
+  pivot_longer(
+    c(HS.Total, HC.Titulaires, HC.Vacataires),
+    names_to = "Heures", values_to = "Nombre"
+  ) %>%
+  mutate(Heures = factor(Heures,
+                       levels=c("HC.Vacataires", "HC.Titulaires", "HS.Total"),
+                       labels=c("Vacation", "Complémentaires","Service"))) %>%
+  group_by(Heures) %>%
+  mutate(val100 = Nombre / first(Nombre) * 100) 
+
+hcs2 %>%
+  ggplot(aes(x=Rentrée,y=val100,color=reorder(Heures,-val100,FUN=last), group=Heures)) +
+  geom_line(size=1) + geom_point(size=3, stroke=1, shape=21,fill="white") +
+  ylab("Heures (valeur 100 en 2013)") +
+  #scale_x_continuous(breaks=scales::breaks_pretty()) +
+  scale_color_manual(values = RColorBrewer::brewer.pal(3,"Paired")[c(1,3,2)], name="HeTD") +
+  labs(title = "Heures d'enseignement (HeTD valeur 100 en 2013)", subtitle = "Université de Strasbourg", caption = "Source : Bilans sociaux et rapports sociaux uniques de l'Université de Strasbourg")
+```
+_Depuis 2013, les heures d'enseignement à l'Université de Strasbourg ont suivi 
+trois trajectoire différentes : baisse des heures de service (-4%), hausse
+des heures de vacations (+10%) et explosion des heures complémentaires
+(+40%)._
+
+## conclusion
+
+Si la précarité dans l'ESR est difficile à mesurer par les données ouvertes, un 
+calcul imparfait des taux de titularité indique tout de même une baisse 
+différenciée mais généralisée. 
+Des mesures de politiques locales sont également possible en s'intéressant aux missions.
+
+Ces mesures nécessitent un travail de fourmis pour collecter les données. 
+Pourtant, la loi de 2016 pour une république numérique
+oblige les établissement à « publier en ligne » ces données « dans un standard 
+ouvert, aisément réutilisable et exploitable par un système de traitement automatisé ».
+Il est peut-être temps que nos élus dans les Conseils fassent respecter cette obligation.
+
+
+
+
+
+
