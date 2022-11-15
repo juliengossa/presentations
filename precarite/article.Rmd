@@ -216,7 +216,18 @@ ouvert, aisément réutilisable et exploitable par un système de traitement aut
 Il est peut-être temps que nos élus dans les Conseils fassent respecter cette obligation.
 
 
-
+```{r cdi}
+onr %>% 
+  filter (Statut.regroupé == "Permanents", Année == 2020) %>% 
+group_by(Organisme,
+         Statut=case_when(
+           startsWith(Statut.Nature.de.contrat,"CDI") ~ "CDI",
+           startsWith(Statut.Nature.de.contrat,"Fonctionnaires") ~ "Tit. autres organismes", 
+           TRUE ~ "Titulaires") ) %>%
+  summarise(ETPT = sum(Effectif.au.31.12..en.ETPT.)) %>% 
+  ggplot(aes(y=Organisme,x=ETPT,fill=Statut)) + geom_col(position="fill") +
+  scale_x_continuous(labels=scales::percent)
+```
 
 
 
