@@ -4,14 +4,16 @@ author:
 - Julien Gossa \newline 
 - Université de Strasbourg et CPESR  \newline \hspace{3cm} \newline
 - '[@JulienGossa](https://twitter.com/JulienGossa) gossa@unistra.fr'
-date: "12-04-2023"
+date: "02-05-2023"
 output: 
   beamer_presentation:
     theme: "Madrid"
     dev: cairo_pdf
     includes:
       in_header: columns.tex
-    keep_tex: True
+    keep_tex: False
+    #toc: true
+    slide_level: 2
 classoption: "aspectratio=169"
 ---
 
@@ -32,7 +34,6 @@ load("emploi.RData")
 source("tdbesr-plots.R")
 ```
 
-
 ## Le mystère de l'investissement dans l'éducation
 
 Un rendement entre x2 et x4, et pourtant :
@@ -40,62 +41,6 @@ Un rendement entre x2 et x4, et pourtant :
 ```{r budgetparetu, out.width="60%", fig.align="center"}
 knitr::include_graphics("budgetparetu.jpeg")
 ```
-
-
-
-# Pré-massification (XII^e^ - XIX^e^) \newline Massification (XIX^e^ - 2000) \newline Post-massification (2000 - )
-
-## Pré-massification : aux racines des universités
-
-- Apparition des universités aux XII^e^ siècle
-- En charge de la création des savoirs et de la formation des élites
-  - Professionnalisante : Santé, Droit et Théologie
-  - Non-professionnalisante : les « Arts » (tout le reste)
-
-### Question de l'autonomie des universitaires aux pouvoirs (et financeurs)
-
-- Religieux
-- Municipal
-- Politique
-- Economique
-- Citoyen / Etudiant
-
-### Enjeux de régulation des corporations / professions
-
-Outil de structurations économique et sociale.
-
-## Pré-massification : tournant civilisationnel (XVIII^e^ - XIX^e^)
-- De la compétition guerrière à la compétition économique
-- Mondialisation du commerce et de la production
-- Avec de grandes évolutions technologiques et industrielles :
-  - Transports
-  - Télécommunication
-  - Energie
-  - Motorisation
-  - Agriculture et industrie
-  
-### Nécessite une montée en qualification de la population
-- Des ingénieurs et ouvriers qualifiés plutôt que des prêtres et des soldats
-- Moins d'agriculteurs et plus de manufacteurs
-
-
-
-## Massification (XIX^e^-1960) : début d'un « Age d'or »
-
-### Après-guerre : de grands débats (Colloques de Caen)
-« Massification » (droite) vs. « Démocratisation » (gauche)
-
-### XX^e^ siècle : Cercle vertueux
-
-1. Investissement dans l'éducation
-1. Montée en qualification de la main d'œuvre
-1. Augmentation de la productivité
-1. Croissance économique
-1. Investissement dans l'éducation
-
-### Fin XX^e^
-Fin de la croyance en ce cercle vertueux
-
 
 ## Massification (1960-2000) : Investissements massifs dans l'éducation
 
@@ -170,6 +115,7 @@ plot_categorie_ponctuel <- function(categorie="Activite", agemin = 15, agemax = 
     mutate(Population = ifelse(Sexe == "H",-Population,Population)) %>%
     ggplot(aes(y=Categorie,x=Population,fill=Sexe, group=Sexe)) +
     geom_col(alpha=0.8, color="white",width = 1) + 
+    expand_limits(x=c(-0.28,0.28)) +
     facet_grid(.~Annee) +
     scale_x_continuous(labels = label_scale) +
     scale_fill_brewer(palette = "Set2") +
@@ -202,54 +148,6 @@ knitr::include_graphics("bleus2022-1.1.jpg")
 \tiny
 
 Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
-
-# Post-massification (XXI^e^) \newline Du siècle de la quantité au siècle de la qualité
-
-## XXI^e^ siècle : « Passer du siècle de la quantité au siècle de la qualité »
-
-« _Passer du siècle de la quantité au siècle de la qualité. Passer de la massification à la démocratisation et du même mouvement rendre à notre société les conditions d'une adhésion à l'école sans laquelle il n'y a pas de succès possible_ » - François Bayrou, 1994
-\tiny \newline
-Source : https://www.vie-publique.fr/discours/137031-declaration-de-m-francois-bayrou-ministre-de-leducation-nationale-su
-\normalsize
-
-- Enjeu international / occidental, sans réponse claire jusqu'à présent
-- Quantité vs. Qualité
-
-
-### LOLF : LOI organique n° 2001-692 du 1er août 2001 relative aux lois de finances
-
-- Instaure la « performance » dans l'action publique
-- « Nouveau Management Public » (assez faible dans l'ESR)
-
-
-##  XXI^e^ siècle : « Passer du siècle de la quantité au siècle de la qualité »
-
-:::::: {.cols data-latex=""}
-::: {.col data-latex="{0.45\textwidth}"}
-
-Documentation de la performance :
-
-- Rapports sociaux uniques / \newline Bilans sociaux 
-- Repères et références statistiques
-- Rapports annuels de performances / Bleus budgétaires 
-
-:::
-::: {.col data-latex="{0.55\textwidth}"}
-
-```{r bleus, out.height="45%", fig.align="center", fig.show='hold'}
-  knitr::include_graphics(c("rsu.png","rers.png","bleus.png"))
-```
-
-:::
-
-::::::
-
-### Qualité : trois grands axes, quelques exemples
-- Réussite étudiante
-- Excellence scientifique
-- Grands enjeux : climat, démocratie, émancipation
-
-
 
 
 ## Réussite étudiante : Taux de passage durant le Collège
@@ -359,39 +257,6 @@ Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/
 Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
 
 
-## Quelle « qualité » pour l'action publique dans l'ESR (selon la LOLF) ?
-
-- Réussite : passer le moins de temps possible dans le système éducatif
-- Excellence scientifique : pas trop s'effondrer (ou moins vite que les autres)
-- Grands enjeux : rien
-
-### Peu d'ambition : qualité du XX^e^, des indicateurs adaptés à la massification
-
-- Vision optimiste : décision consciente de stagner
-- Vision pessimiste : incapacité à adapter la performance à l'époque
-
-### Angles morts / perspectives d'amélioration 
-
-- Aspects qualitatifs : QVT, bonheur, qualité de l'enseignement ou de la recherche, etc.
-  - très compliqués à évaluer (presque autant que l'insertion pro.)
-- Libertés académiques et conditions d'étude
-  - Sans doute des choses à faire
-
-# Conclusion : le mystère est-il éclairci ?
-
-## Le mystère de l'investissement dans l'éducation
-
-Deux éléments de réponse et une inquiétude :
-
-- La formation, bouclier contre le chômage ou amortisseur de flux ?
-- La formation, investissement ou productivité ?
-- La fin de la fuite en avant ?
-
-```{r budgetparetu2, out.width="50%", fig.align="center"}
-knitr::include_graphics("budgetparetu.jpeg")
-```
-
-
 ## La formation « bouclier contre le chômage » ou « amortisseur » ? Une fuite en avant.
 
 ```{r activite, cache = TRUE}
@@ -476,3 +341,35 @@ sise %>%
 ```
 
 Situation tout à fait unique dans l'histoire de l'humanité... Nous sommes dans l'inconnu.
+
+
+## IPS / Réussite - Académie de Strasbourg 
+
+```{r college.btb.stras, fig.asp=8/16}
+college.ips <- read.csv2("college_ips.csv")
+
+college.ips %>%
+  filter(Session == 2021, Libellé.académie == "STRASBOURG") %>%
+  mutate(taux.BTB = (Admis.Mention.très.bien+Admis.Mention.bien) / Inscrits) %>%
+  mutate(Ville = ifelse(Libellé.commune == "STRASBOURG","Strasbourg","Autre")) %>%
+  mutate(Collège = ifelse(Libellé.commune == "STRASBOURG",Patronyme,NA)) %>%
+  ggplot(aes(x=IPS,y=taux.BTB,color=Ville, size=Ville)) + 
+  geom_point() +
+  ggrepel::geom_text_repel(aes(label=Collège), size=2, color = "blue", force = 50) +
+  scale_y_continuous(labels = scales::percent, name = "Taux de mention B ou TB au DNB") +
+  scale_size_manual(values=(c(1,2))) +
+  scale_color_manual(values=(c("grey","blue"))) +
+  xlab("Indice de position sociale (IPS)") +
+  ggtitle("Collèges de l'académie de Strasbourg", subtitle ="selon leur taux de mention bien ou très bien au DNB et leur indice de position sociale") + 
+  cpesr_cap()
+```
+
+## IPS - Académie de Strasbourg 
+
+```{r college.ips.stras, out.height="75%", }
+knitr::include_graphics("ips-college-strasbourg.png")
+```
+
+\footnotesize
+
+https://www.arcgis.com/apps/instant/sidebar/index.html?appid=85b232289e4840fe9e771b79f38cc2b7
