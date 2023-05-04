@@ -1,7 +1,8 @@
 kpiESR : des indicateurs clés de performance pour les établissements de
 l’ESR, des données ouvertes aux représentations graphiques
 ================
-Pauline Boyer et Julien Gossa
+Pauline Boyer et Julien Gossa Laboratoire SAGE, Université de
+Strasbourg, CPESR
 2023-05-04
 
 De profonds changements sont en cours dans l’enseignement supérieur et
@@ -101,7 +102,7 @@ pour l’ensemble du MESRI :
 ### Séries temporelles
 
 Les séries temporelles permettent de percevoir des évolutions,
-lesquelles peuvent sous-tendre certains risques. Par exemple, voilà la
+lesquelles peuvent être utiles au pilotage. Par exemple, voilà la
 représentation, en valeur 100 pour 2013 et dans le périmètre MESRI, des
 effectifs enseignants et étudiants, ainsi que du taux d’encadrement.
 Cette représentation peut être facilement déclinée par établissement.

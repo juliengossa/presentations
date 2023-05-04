@@ -1,14 +1,28 @@
 ---
 title: "kpiESR : des indicateurs clés de performance pour les établissements de l'ESR, des données ouvertes aux représentations graphiques"
-author: "Pauline Boyer et Julien Gossa"
+author: "Pauline Boyer et Julien Gossa\nLaboratoire SAGE, Université de Strasbourg, CPESR"
 date: "`r Sys.Date()`"
-output: github_document
+output: 
+  pdf_document: 
+    latex_engine: xelatex
+  github_document: default
+# header-includes:
+urlcolor: blue
+linkcolor: blue
+fontsize: 11pt
+lang: "fr-FR"
+geometry: margin=1.5cm
+#documentclass: report
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 options(dplyr.summarise.inform = FALSE)
-knitr::opts_chunk$set(fig.asp = 9/16, fig.retina = 2)
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.align = "center", out.width="100%")
+
+knitr::opts_chunk$set(pdf.options(encoding = "CP1250"))
+knitr::opts_chunk$set(dev = "cairo_pdf")
+
 
 library(tidyverse)
 library(ggcpesrthemes)
@@ -123,18 +137,19 @@ Par exemple, voici les tableaux de bord pour l'ensemble du MESRI :
 combine_plots_groupe(plots)
 ```
 
-```{r tdb.series, fig.width = 12, fig.asp = 9/16, out.width="100%", out.height=NULL}
+```{r tdb.series, fig.width = 12, fig.asp = 11/16, out.width="100%", out.height=NULL}
 combine_plots_series(plots)
 ```
 
 ### Séries temporelles
 
-Les séries temporelles permettent de percevoir des évolutions, lesquelles peuvent sous-tendre certains risques. Par exemple, voilà la représentation, en valeur 100 pour 2013 et dans le périmètre MESRI, des effectifs enseignants et étudiants, ainsi que du taux d'encadrement. Cette représentation peut être facilement déclinée par établissement.
+Les séries temporelles permettent de percevoir des évolutions, lesquelles peuvent être utiles au pilotage. Par exemple, voilà la représentation, en valeur 100 pour 2013 et dans le périmètre MESRI, des effectifs enseignants et étudiants, ainsi que du taux d'encadrement. Cette représentation peut être facilement déclinée par établissement.
 
-```{r serie}
+```{r serie, fig.asp=9/16}
 kpiesr_plot_line("Ensemble", c("kpi.ETU.P.effectif","kpi.ENS.P.effectif","kpi.K.ensPetu"), val = "evolution") 
 ```
 
+\newpage
 
 ### Représentations spatiales
 
