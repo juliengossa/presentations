@@ -32,6 +32,7 @@ library(cowplot)
 
 load("emploi.RData")
 source("tdbesr-plots.R")
+source("BL/BLViz-map.R",chdir = TRUE)
 ```
 
 ## Le mystère de l'investissement dans l'éducation
@@ -317,6 +318,21 @@ kpiESR::esr %>%
 
 ```
 
+
+## Le mystère de l'investissement dans l'éducation : investissement
+
+```{r budgetparetu.1, out.width="60%", fig.align="center"}
+knitr::include_graphics("budgetparetu.jpeg")
+```
+
+## Le mystère de l'investissement dans l'éducation : productivité
+
+```{r budgetparetu.2, out.width="60%", fig.align="center"}
+knitr::include_graphics("budgetparetu-flip.jpeg")
+```
+
+
+
 ## La fin d'une fuite en avant ?
 
 La politique publique pour la création de places de formation est contradictoire :
@@ -341,6 +357,25 @@ sise %>%
 ```
 
 Situation tout à fait unique dans l'histoire de l'humanité... Nous sommes dans l'inconnu.
+
+
+## Taux d'engagement dans l'enseignement supérieur (1950)
+
+```{r bl.1950}
+bl.map.plot(1950)
+```
+
+## Taux d'engagement dans l'enseignement supérieur (2015)
+
+```{r bl.2015}
+bl.map.plot(2015)
+```
+
+## Nombre de citoyens engagés dans l'enseignement supérieur (2015)
+
+```{r bl.2015.abs}
+bl.map.plot(2015, abs = TRUE)
+```
 
 
 ## IPS / Réussite - Académie de Strasbourg 
@@ -373,3 +408,6 @@ knitr::include_graphics("ips-college-strasbourg.png")
 \footnotesize
 
 https://www.arcgis.com/apps/instant/sidebar/index.html?appid=85b232289e4840fe9e771b79f38cc2b7
+
+
+
