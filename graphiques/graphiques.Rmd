@@ -1,5 +1,5 @@
 ---
-title: "50 ans de massifcation, et après ?"
+title: "50 ans de massification, et après ?"
 author: 
 - Julien Gossa \newline 
 - Université de Strasbourg et CPESR  \newline \hspace{3cm} \newline
@@ -13,7 +13,8 @@ output:
       in_header: columns.tex
     keep_tex: False
     #toc: true
-    slide_level: 2
+    slide_level: 3
+  github_document: default
 classoption: "aspectratio=169"
 ---
 
@@ -35,7 +36,9 @@ source("tdbesr-plots.R")
 source("BL/BLViz-map.R",chdir = TRUE)
 ```
 
-## Le mystère de l'investissement dans l'éducation
+## Massification - Démocratisation - Banalisation
+
+### Le mystère de l'investissement dans l'éducation
 
 Un rendement entre x2 et x4, et pourtant :
 
@@ -43,7 +46,7 @@ Un rendement entre x2 et x4, et pourtant :
 knitr::include_graphics("budgetparetu.jpeg")
 ```
 
-## Massification (1960-2000) : Investissements massifs dans l'éducation
+### Massification (1960-2000) : Investissements massifs dans l'éducation
 
 ```{r diplome, cache = TRUE}
 #Graphique pour connaître le niveau de diplome des jeunes selon l'année civile 
@@ -78,7 +81,7 @@ plot_diplome(agemin = 25, agemax = 30) +
 ```
 
 
-## Massification (1960-2000) : Investissements massifs dans l'éducation
+### Massification (1960-2000) : Investissements massifs dans l'éducation
 
 
 ```{r diplome.2, cache = TRUE}
@@ -129,14 +132,15 @@ plot_categorie_ponctuel(categorie="Diplome", agemin = 25, agemax = 30) +
   cpesr_cap(authors = "Camille Schumacher et Julien Gossa", source = "Enquête emploi INSEE")
 ```
 
+## Tournant vers la « qualité »
 
-## Aujourd'hui : Les objectifs sont atteints, et même dépassés
+### Aujourd'hui : Les objectifs sont atteints, et même dépassés
 
 - 80% d'une classe d'âge au Bac
 - 50% d'une classe d'âge diplômée du supérieur
 
 
-### Aucun autre objectif n'est fixé : fin de la massification et crise d'utilité
+#### Aucun autre objectif n'est fixé : fin de la massification et crise d'utilité
 
 ```{r bleus.bac, out.width="75%", fig.align="center"}
 knitr::include_graphics("bleus-bac.png")
@@ -151,7 +155,7 @@ knitr::include_graphics("bleus2022-1.1.jpg")
 Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
 
 
-## Réussite étudiante : Taux de passage durant le Collège
+### Réussite étudiante : Taux de passage durant le Collège
 
 ```{r reu.1, out.height="75%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("red-college.jpeg")
@@ -160,7 +164,7 @@ Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/
 \tiny
 Source : RERS 2022 https://www.education.gouv.fr/reperes-et-references-statistiques-2022-326939
 
-## Réussite étudiante : Taux de passage durant le Lycée
+### Réussite étudiante : Taux de passage durant le Lycée
 
 ```{r reu.2, out.height="75%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("red-lycee.jpeg")
@@ -169,7 +173,7 @@ Source : RERS 2022 https://www.education.gouv.fr/reperes-et-references-statistiq
 \tiny
 Source : RERS 2022 https://www.education.gouv.fr/reperes-et-references-statistiques-2022-326939
 
-## Réussite étudiante : Taux de réussite au Brevet
+### Réussite étudiante : Taux de réussite au Brevet
 
 ```{r reu.3, out.height="75%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("reu-brevet.jpeg")
@@ -178,7 +182,7 @@ Source : RERS 2022 https://www.education.gouv.fr/reperes-et-references-statistiq
 \tiny
 Source : RERS 2022 https://www.education.gouv.fr/reperes-et-references-statistiques-2022-326939
 
-## Réussite étudiante : Taux de réussite au Baccalauréat
+### Réussite étudiante : Taux de réussite au Baccalauréat
 
 ```{r reu.4, out.height="75%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("reu-bac.jpeg")
@@ -188,7 +192,7 @@ Source : RERS 2022 https://www.education.gouv.fr/reperes-et-references-statistiq
 Source : RERS 2022 https://www.education.gouv.fr/reperes-et-references-statistiques-2022-326939
 
 
-## Réussite étudiante : départs des enseignants
+### Réussite étudiante : départs des enseignants
 
 ```{r dem, out.height="75%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("bs-dem.png")
@@ -204,7 +208,7 @@ Source : BS 2020 https://archives-statistiques-depp.education.gouv.fr/Default/do
 ```
 
 
-## Réussite étudiante : Ouverture sociale 
+### Réussite étudiante : Ouverture sociale 
 
 ```{r os, out.height="50%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("bleus-ouverture.png")
@@ -213,7 +217,7 @@ Source : BS 2020 https://archives-statistiques-depp.education.gouv.fr/Default/do
 \tiny
 Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
 
-## Réussite étudiante : Insertion professionnelle
+### Réussite étudiante : Insertion professionnelle
 
 ```{r ip, out.height="75%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("bleus-ip.png")
@@ -224,11 +228,7 @@ Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/
 
 
 
-
-
-
-
-## Excellence scientifique : Recherche universitaire
+### Excellence scientifique : Recherche universitaire
 
 ```{r rech.150, out.height="75%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("bleus-rech-150.png")
@@ -238,7 +238,7 @@ Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/
 Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
 
 
-## Excellence scientifique : Recherche ONR
+### Excellence scientifique : Recherche ONR
 
 ```{r rech.172, out.height="75%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("bleus-rech-172.png")
@@ -248,7 +248,7 @@ Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/
 Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
 
 
-## Grands enjeux : Climat 
+### Grands enjeux : Climat 
 
 ```{r climat, out.height="75%", fig.align="center", fig.show='hold'}
   knitr::include_graphics("bleus-climat.png")
@@ -258,7 +258,9 @@ Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/
 Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
 
 
-## La formation « bouclier contre le chômage » ou « amortisseur » ? Une fuite en avant.
+## Investissement vs. Productivité
+
+### La formation « bouclier contre le chômage » ou « amortisseur » ? Une fuite en avant.
 
 ```{r activite, cache = TRUE}
 plot_activite <- function(agemin = 15, agemax = 30, anneemin = 1971, anneemax = 2020, pourcent = Population / sum(Population)*100, Pop = Population) {
@@ -279,7 +281,7 @@ plot_activite(agemin = 15, agemax = 30)  +
 ```
 
 
-## Investissement vs. Productivité : SCSP par étudiant
+### Investissement vs. Productivité : SCSP par étudiant
 
 ```{r invest}
 kpiESR::esr %>%
@@ -299,7 +301,7 @@ kpiESR::esr %>%
 ```
 
 
-## Investissement vs. Productivité : étudiants par SCSP
+### Investissement vs. Productivité : étudiants par SCSP
 
 ```{r invest2}
 kpiESR::esr %>%
@@ -319,28 +321,29 @@ kpiESR::esr %>%
 ```
 
 
-## Le mystère de l'investissement dans l'éducation : investissement
+### Le mystère de l'investissement dans l'éducation : investissement
 
 ```{r budgetparetu.1, out.width="60%", fig.align="center"}
 knitr::include_graphics("budgetparetu.jpeg")
 ```
 
-## Le mystère de l'investissement dans l'éducation : productivité
+### Le mystère de l'investissement dans l'éducation : productivité
 
 ```{r budgetparetu.2, out.width="60%", fig.align="center"}
 knitr::include_graphics("budgetparetu-flip.jpeg")
 ```
 
 
+## Situation actuelle
 
-## La fin d'une fuite en avant ?
+### La fin d'une fuite en avant ?
 
 La politique publique pour la création de places de formation est contradictoire :
 
 - Politique de facilité d'accès à l'enseignement supérieur et de réussite en Licence
 - Politique de préservation de la « valeur des diplômes » en Master
 
-```{r LM, fig.asp=5/16}
+```{r LM, fig.asp=9/16, fig.width=7, out.height="55%", fig.align='center'}
 load(file="sise.RData")
 
 sise %>%
@@ -359,26 +362,115 @@ sise %>%
 Situation tout à fait unique dans l'histoire de l'humanité... Nous sommes dans l'inconnu.
 
 
-## Taux d'engagement dans l'enseignement supérieur (1950)
+### RCE et diversification des financements
+
+```{r fin}
+kpiESR::kpiesr_plot_line(id = "Universités et assimilés", 
+                         vars = c("kpi.FIN.P.ressources", "kpi.FIN.S.SCSP", "kpi.FIN.S.recettesFormation", "kpi.FIN.S.recettesRecherche"), 
+                         val = "valeur") +
+  #xlim(2013,2021) +
+  ylab("Evolution en valeur 100 pour 2013") +
+  ggtitle("Effectifs enseignants et étudiants") +
+  guides(color = guide_legend(ncol = 1), linetype = FALSE, alpha = FALSE, size = FALSE) +
+  theme(legend.position = "right")
+```
+
+### « Investissement sans précédent »
+
+```{r fin.sp2}
+read.csv2("data/fr-esr-operateurs-indicateurs-financiers.csv", dec='.') %>%
+  group_by(Année = exercice) %>%
+  summarize(
+    Ressources = sum(Produits.de.fonctionnement.encaissables,na.rm=TRUE),
+    SCSP = sum(Produits.de.fonctionnement.encaissables,na.rm=TRUE) - sum(Ressources.propres.encaissables,na.rm=TRUE)
+    ) %>%
+  pivot_longer(-Année, names_to = "Série", values_to = "Valeur") %>%
+  filter(Année > 2013) %>%
+  ggplot(aes(x=Année,y=Valeur,color=Série)) + 
+  geom_smooth(method="lm",se=FALSE, size=0.5) +
+  geom_line(linewidth = 1.5) + 
+  geom_point(shape=21,size=3,stroke=2, fill="white") +
+  scale_y_continuous(labels=~paste(.x/1e9,"Md€")) +
+  ggtitle("Resources financières et SCSP des établissements de MESR")
+```
+
+```{r fin.sp}
+kpiESR::kpiesr_plot_line(id = "Universités et assimilés", 
+                         vars = c("kpi.FIN.P.ressources"), 
+                         val = "valeur") +
+  xlim(2016,2023) + ylim(12e9,16e9) +
+  geom_smooth(method = "lm", se=FALSE) +
+  ylab("Evolution en valeur 100 pour 2013") +
+  ggtitle("Effectifs enseignants et étudiants") +
+  guides(color = guide_legend(ncol = 1), linetype = FALSE, alpha = FALSE, size = FALSE) +
+  theme(legend.position = "right")
+```
+
+### Taux d'encadrement pédagogique des universités
+
+```{r tep}
+kpiESR::kpiesr_plot_line(id = "Universités et assimilés", 
+                         vars = c("kpi.ENS.P.effectif", "kpi.ENS.S.titulaires", "kpi.ETU.P.effectif", "kpi.K.ensPetu"), 
+                         val = "evolution",
+                         style = kpiesr_style(legend_wordwrap = 20)) +
+  xlim(2013,2020) +
+  ylab("Evolution en valeur 100 pour 2013") +
+  ggtitle("Effectifs enseignants et étudiants") +
+  guides(color = guide_legend(ncol = 1), linetype = FALSE, alpha = FALSE, size = FALSE) +
+  theme(legend.position = "right")
+```
+
+
+### Taux d'encadrement administratif des universités
+
+```{r tea}
+kpiESR::kpiesr_plot_line(id = "Universités et assimilés", 
+                         vars = c("kpi.ENS.P.effectif", "kpi.BIA.P.effectif", "kpi.K.biaPper"), 
+                         val = "evolution",
+                         style = kpiesr_style(legend_wordwrap = 20)) +
+  xlim(2013,2020) +
+  ylab("Evolution en valeur 100 pour 2013") +
+  ggtitle("Effectifs enseignants et administratifs") +
+  guides(color = guide_legend(ncol = 1), linetype = FALSE, alpha = FALSE, size = FALSE) +
+  theme(legend.position = "right")
+```
+
+### Non poursuites d'études post-bac
+
+```{r nonpoursuites}
+read.csv("data/non_poursuites.csv") %>%
+  pivot_longer(-Session, names_to = "Filière", values_to = "Non_poursuites") %>%
+  mutate(Baccalauréat = factor(Filière, 
+                          levels = c("Bac.professionnel","Bac.technologique","Bac.général"),
+                          label = c("Professionnel","Technologique","Général"))) %>%
+  ggplot(aes(x=Session, y=Non_poursuites, fill = Baccalauréat)) +
+  geom_area(color="white", alpha = 0.6) +
+  scale_y_continuous(labels = ~ paste(.x/1e3,"k"), name = "Non poursuites post-bac") +
+  ggtitle("Nombre de non poursuites d'étude post-bac")
+```
+
+
+
+### Taux d'engagement dans l'enseignement supérieur (1950)
 
 ```{r bl.1950}
 bl.map.plot(1950)
 ```
 
-## Taux d'engagement dans l'enseignement supérieur (2015)
+### Taux d'engagement dans l'enseignement supérieur (2015)
 
 ```{r bl.2015}
 bl.map.plot(2015)
 ```
 
-## Nombre de citoyens engagés dans l'enseignement supérieur (2015)
+### Population engagée dans l'enseignement supérieur (2015)
 
 ```{r bl.2015.abs}
 bl.map.plot(2015, abs = TRUE)
 ```
 
 
-## IPS / Réussite - Académie de Strasbourg 
+### IPS / Réussite - Académie de Strasbourg 
 
 ```{r college.btb.stras, fig.asp=8/16}
 college.ips <- read.csv2("college_ips.csv")
@@ -399,10 +491,28 @@ college.ips %>%
   cpesr_cap()
 ```
 
-## IPS - Académie de Strasbourg 
+### IPS - Académie de Strasbourg 
 
 ```{r college.ips.stras, out.height="75%", }
 knitr::include_graphics("ips-college-strasbourg.png")
+```
+
+### ONR et CNRS
+
+```{r onr.load}
+onr <- read.csv2("data/fr-esr-tbes-personnels-epst-epic-fondation-par-type-contrat-emploi.csv", dec = ".")
+```
+
+```{r onr.cnrs}
+onr %>%
+  group_by(Année, Statut=Statut.regroupé, ONR = ifelse(Organisme=="CNRS","CNRS","Autre")) %>%
+  summarise(ETPT = sum(Effectif.au.31.12..en.ETPT.)) %>%
+  group_by(Statut,ONR) %>%
+  mutate(val100 = ETPT / first(ETPT) * 100) %>%
+  ggplot(aes(x=Année,y=val100,linetype=ONR,color=Statut)) +
+  geom_line(linewidth=1.1) + geom_point(shape=21,size=2,stroke=2,fill="white") +
+  scale_y_continuous(name="ETPT (valeur 100)") +
+  ggtitle("ETPT des ONR en fonction du statut")
 ```
 
 \footnotesize
