@@ -58,10 +58,19 @@ wikidataESR::wdesr_load_cache()
 Complexe et travail d'historien
 
 ### Les relations entre établissements
-Multiforme et changeante
+Polymorphes et éphémères
 
 ### La composition interne des établissements
 Granularité fine
+
+
+## L'histoire des établissements : Université de Grenoble
+
+```{r hist.uga}
+wdesr_load_and_plot("Q945876",props = c('séparé_de', 'absorbé_par', 'successeur', 'prédécesseur'), depth=10,
+               node_label = "alias_date", node_size = 35, label_wrap = 10, label_size = 4,
+               edge_label = TRUE)
+```
   
 
 ## L'histoire des établissements : Unistra
@@ -73,13 +82,6 @@ wdesr_load_and_plot("Q20808141",props = c('séparé_de', 'absorbé_par', 'succes
 ```
 
 
-## L'histoire des établissements : Université de Grenoble
-
-```{r hist.uga}
-wdesr_load_and_plot("Q945876",props = c('séparé_de', 'absorbé_par', 'successeur', 'prédécesseur'), depth=10,
-               node_label = "alias_date", node_size = 35, label_wrap = 10, label_size = 4,
-               edge_label = TRUE)
-```
 
 
 ## L'histoire des établissements : Université de Paris
