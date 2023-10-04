@@ -1,0 +1,137 @@
+---
+title: "50 ans de massification, et après ?"
+author: 
+- Julien Gossa \newline 
+- Laboratoire SAGE, Université de Strasbourg/CNRS et CPESR  \newline \hspace{3cm} \newline
+- '[@JulienGossa](https://twitter.com/JulienGossa) gossa@unistra.fr'
+date: "11-10-2023"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    dev: cairo_pdf
+    includes:
+      in_header: columns.tex
+    keep_tex: False
+    #toc: true
+    slide_level: 3
+  github_document: default
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+options(dplyr.summarise.inform = FALSE)
+
+knitr::opts_chunk$set(fig.asp=7.5/16, fig.width = 8)
+
+library(tidyverse)
+library(ggcpesrthemes)
+library(kpiESR)
+library(cowplot)
+library(geomtextpath)
+
+#theme_set(theme_cpesr() + theme(legend.position = "right", plot.title = element_text(hjust = 0.5)))
+
+load("emploi.RData")
+source("tdbesr-plots.R")
+source("BL/BLViz-map.R",chdir = TRUE)
+```
+
+
+### Le mystère de l'investissement dans l'éducation
+
+Un rendement entre x2 et x4, et pourtant :
+
+```{r budgetparetu, out.width="60%", fig.align="center"}
+knitr::include_graphics("budgetparetu.jpeg")
+```
+
+```{r diplome, cache = TRUE, results='asis'}
+#Graphique pour connaître le niveau de diplome des jeunes selon l'année civile 
+plot_diplome <- function(annee, agemin = 15, agemax = 30, anneemin = 1971, anneemax = 2020) {
+  emploi %>%
+    filter(Age > agemin, Age < agemax, Annee >= anneemin, Annee <= annee) %>%
+    mutate(Diplome = factor(Diplome,
+                            levels=c("Bac+5","Bac+3","Bac+2","Bac","CAP-BEP","DNB","Aucun"))) %>%
+    mutate(Diplome = fct_recode(Diplome,
+                                Tertiaire = "Bac+5",
+                                Tertiaire = "Bac+3",
+                                Tertiaire = "Bac+2",
+                                Secondaire = "Bac",
+                                Secondaire = "CAP-BEP",
+                                Secondaire = "DNB",
+                                Primaire = "Aucun") ) %>% 
+    group_by(Annee,Diplome) %>%
+    summarise(Population = sum(Population)/1e6) %>%
+    ungroup() %>%
+    na.omit() %>%
+    filter(Annee != 1973) %>%
+    complete(Annee,Diplome,fill=list(Population = 0)) %>%
+    ggplot(aes(x=Annee,y=Population,fill=Diplome,group=Diplome)) +
+    geom_area(color="white", alpha=0.8, position = "fill") + 
+    scale_x_continuous(limits=c(anneemin,anneemax), name="Année") +
+    scale_y_continuous(labels = scales::percent, name = paste("Part des jeunes de",agemin,"à",agemax,"ans") ) +
+    scale_fill_brewer(palette = "Set2", direction=-1) 
+}
+
+# plot_diplome(1975, agemin = 25, agemax = 30) +
+#   cpesr_cap(authors = "Camille Schumacher et Julien Gossa", source = "Enquête emploi INSEE")
+
+#Graphique pour connaître le niveau de diplome des jeunes selon l'année civile 
+plot_categorie_ponctuel <- function(categorie="Activite", agemin = 15, agemax = 30, annee = 1971, fill=TRUE, keep_na=FALSE) {
+  if(fill) {
+    position_geom <- "fill"
+    label_scale <- ~ scales::percent(abs(.x))
+    title_y <- "Part des jeunes"
+  } else {
+    position_geom <- "stack"
+    label_scale <- function(x) x/1e6
+    title_y <- "Effectif (millions)"
+  }
+  
+  emploi %>%
+    filter(Age >= agemin, Age <= agemax, Annee == annee) %>%
+        mutate(Diplome = factor(Diplome,
+                            levels=c("Bac+5","Bac+3","Bac+2","Bac","CAP-BEP","DNB","Aucun"))) %>%
+    mutate(Diplome = fct_recode(Diplome,
+                                Tertiaire = "Bac+5",
+                                Tertiaire = "Bac+3",
+                                Tertiaire = "Bac+2",
+                                Secondaire = "Bac",
+                                Secondaire = "CAP-BEP",
+                                Secondaire = "DNB",
+                                Primaire = "Aucun") ) %>% 
+    mutate(Diplome = fct_rev(Diplome)) %>%
+    group_by(Annee, Categorie=!!as.name(categorie)) %>% 
+    summarise(Population = sum(Population, na.rm=TRUE)) %>% 
+    { if (!keep_na) na.omit(.) else . } %>%
+    { if (fill) group_by(.,Annee) %>% mutate(Population = Population / sum(Population)) else . } %>%
+    ungroup() %>% 
+    complete(Annee, Categorie, fill = list(Population = 0)) %>% 
+    ggplot(aes(y=Categorie,x=Population, fill=Categorie)) +
+    geom_col(alpha=0.8, color="white",width = 1) +
+    scale_x_continuous(labels = label_scale, limits=c(0,0.6)) +
+    scale_fill_brewer(palette = "Set2", guide = guide_legend(reverse = TRUE)) +
+    labs (y = "Diplôme", x = title_y)
+}
+
+# plot_categorie_ponctuel(categorie="Diplome", agemin = 25, agemax = 30, annee = 1986)
+
+# plot_categorie_ponctuel(categorie="Diplome", agemin = 25, agemax = 30) +
+#   #scale_y_continuous(labels = scales::percent, name = "Part des jeunes de 25 à 30 ans") +
+#   cpesr_cap(authors = "Camille Schumacher et Julien Gossa", source = "Enquête emploi INSEE")
+
+plot_animation <- function(annee) {
+  cowplot::plot_grid(nrow = 1, rel_widths = c(3,1),
+                     plot_diplome(annee, agemin = 25, agemax = 30) + theme(legend.position = "None"),
+                     plot_categorie_ponctuel(categorie="Diplome", agemin = 25, agemax = 30, annee = annee) + 
+                       theme(legend.position = "bottom", legend.direction = "vertical", axis.text.y = element_blank()) 
+  )
+}
+
+
+for(annee in c(1972,seq(1975,2020,5))) {
+  cat("\n\n### Stratification éducation des jeunes de 25 à 30 ans en ",annee,"\n\n")
+  print(plot_animation(annee))
+}
+```
