@@ -20,6 +20,10 @@ Un rendement entre x2 et x4, et pourtant :
 
 ![](graphiques_files/figure-gfm/diplome.2-1.png)<!-- -->
 
+### Massification : transformation de la « valeur des diplômes »
+
+<img src="cereq-salaires.png" width="60%" style="display: block; margin: auto;" />
+
 ### Massification (1960-2000) : Investissements massifs dans l’éducation
 
 ![](graphiques_files/figure-gfm/ens.long-1.png)<!-- -->
