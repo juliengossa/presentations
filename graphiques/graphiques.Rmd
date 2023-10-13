@@ -6,6 +6,7 @@ author:
 - '[@JulienGossa](https://twitter.com/JulienGossa) gossa@unistra.fr'
 date: "02-05-2023"
 output: 
+  github_document: default
   beamer_presentation:
     theme: "Madrid"
     dev: cairo_pdf
@@ -14,7 +15,6 @@ output:
     keep_tex: False
     #toc: true
     slide_level: 3
-  github_document: default
 classoption: "aspectratio=169"
 ---
 
@@ -388,7 +388,7 @@ La politique publique pour la création de places de formation est contradictoir
 - Politique de facilité d'accès à l'enseignement supérieur et de réussite en Licence
 - Politique de préservation de la « valeur des diplômes » en Master
 
-```{r LM, fig.asp=9/16, fig.width=7, out.height="55%", fig.align='center'}
+```{r LM, fig.asp=9/16, fig.width=7, out.height="65%", fig.align='center'}
 load(file="sise.RData")
 
 sise %>%
@@ -396,7 +396,7 @@ sise %>%
   summarise(Etudiants = sum(Etudiants)) %>%
   filter(Niveau %in% c("L3","M1")) %>%
   mutate(Rentrée = ifelse(Niveau == "L3", Rentrée+1,Rentrée)) %>%
-  filter(Rentrée != 2012, Rentrée != 2022) %>%
+  filter(Rentrée != 2012, Rentrée != 2023) %>%
   ggplot(aes(x=Rentrée, y= Etudiants, color=Niveau)) +
   geom_line(linewidth = 1.5) + geom_point(shape = 21, stroke = 2, size = 2, fill="white") + 
   scale_x_continuous(labels = ~ paste0("L3 ", .x-1,"\nM1 ",.x), breaks = seq(2011,2030,2), name="Cohorte") +

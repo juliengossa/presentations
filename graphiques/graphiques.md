@@ -22,7 +22,9 @@ Un rendement entre x2 et x4, et pourtant :
 
 ### Massification : transformation de la « valeur des diplômes »
 
-<img src="cereq-salaires.png" width="60%" style="display: block; margin: auto;" />
+<img src="cereq-salaires.png" width="75%" style="display: block; margin: auto;" />
+
+<https://www.cereq.fr/que-gagne-t-se-former-zoom-sur-20-ans-devolution-des-salaires-en-debut-de-vie-active>
 
 ### Massification (1960-2000) : Investissements massifs dans l’éducation
 
@@ -151,7 +153,7 @@ contradictoire :
   réussite en Licence
 - Politique de préservation de la « valeur des diplômes » en Master
 
-<img src="graphiques_files/figure-gfm/LM-1.png" height="55%" style="display: block; margin: auto;" />
+<img src="graphiques_files/figure-gfm/LM-1.png" height="65%" style="display: block; margin: auto;" />
 
 Situation tout à fait unique dans l’histoire de l’humanité… Nous sommes
 dans l’inconnu.
