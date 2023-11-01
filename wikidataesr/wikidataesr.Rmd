@@ -1,6 +1,8 @@
 ---
 title: "WikidataESR : les soft-data de l'ESR"
-author: "Julien Gossa"
+author: 
+  - Julien Gossa\newline
+  - CPESR - Université de Strasbourg/CNRS - Laboratoire SAGE
 date: "`r Sys.Date()`"
 
 header-includes:
@@ -71,7 +73,14 @@ wdesr_load_and_plot("Q945876",props = c('séparé_de', 'absorbé_par', 'successe
                node_label = "alias_date", node_size = 35, label_wrap = 10, label_size = 4,
                edge_label = TRUE)
 ```
-  
+
+## Wikidata : une base de donnée semi-structurée libre et ouverte
+
+```{r wd, fig.asp=NULL, out.width="70%", fig.align='center'}
+knitr::include_graphics("wd-uga.png")
+```
+
+https://www.wikidata.org/wiki/Q945876
 
 ## L'histoire des établissements : Unistra
 
