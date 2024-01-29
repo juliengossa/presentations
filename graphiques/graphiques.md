@@ -43,12 +43,12 @@ Un rendement entre x2 et x4, et pourtant :
 
 #### Aucun autre objectif n’est fixé : fin de la massification et crise d’utilité
 
-<img src="bleus-bac.png" width="75%" style="display: block; margin: auto;" />
+<img src="bleus24-bac.png" width="75%" style="display: block; margin: auto;" />
 
-<img src="bleus2022-1.1.jpg" width="75%" style="display: block; margin: auto;" />
+<img src="bleus24-sup.png" width="75%" style="display: block; margin: auto;" />
 
 Source : Projet annuel de performances
-<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/>
+<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/>
 
 ### Réussite étudiante : Taux de passage durant le Collège
 
@@ -87,38 +87,38 @@ Source : BS 2020
 
 ### Réussite étudiante : Ouverture sociale
 
-<img src="bleus-ouverture.png" height="50%" style="display: block; margin: auto;" />
+<img src="bleus24-ouverture_sociale.png" height="50%" style="display: block; margin: auto;" />
 
 Source : Projet annuel de performances
-<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/>
+<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/>
 
 ### Réussite étudiante : Insertion professionnelle
 
-<img src="bleus-ip.png" height="75%" style="display: block; margin: auto;" />
+<img src="bleus24-ip.png" height="75%" style="display: block; margin: auto;" />
 
 Source : Projet annuel de performances
-<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/>
+<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/>
 
 ### Excellence scientifique : Recherche universitaire
 
-<img src="bleus-rech-150.png" height="75%" style="display: block; margin: auto;" />
+<img src="bleus24-rech-150.png" height="75%" style="display: block; margin: auto;" />
 
 Source : Projet annuel de performances
-<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/>
+<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/>
 
 ### Excellence scientifique : Recherche ONR
 
-<img src="bleus-rech-172.png" height="75%" style="display: block; margin: auto;" />
+<img src="bleus24-rech-172.png" height="75%" style="display: block; margin: auto;" />
 
 Source : Projet annuel de performances
-<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/>
+<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/>
 
 ### Grands enjeux : Climat
 
-<img src="bleus-climat.png" height="75%" style="display: block; margin: auto;" />
+<img src="bleus24-climat.png" height="75%" style="display: block; margin: auto;" />
 
 Source : Projet annuel de performances
-<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/>
+<https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/>
 
 ## Investissement vs. Productivité
 

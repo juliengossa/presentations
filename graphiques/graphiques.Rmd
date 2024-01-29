@@ -6,7 +6,6 @@ author:
 - '[@JulienGossa](https://twitter.com/JulienGossa) gossa@unistra.fr'
 date: "02-05-2023"
 output: 
-  github_document: default
   beamer_presentation:
     theme: "Madrid"
     dev: cairo_pdf
@@ -15,6 +14,7 @@ output:
     keep_tex: False
     #toc: true
     slide_level: 3
+  github_document: default
 classoption: "aspectratio=169"
 ---
 
@@ -36,6 +36,168 @@ load("emploi.RData")
 source("tdbesr-plots.R")
 source("BL/BLViz-map.R",chdir = TRUE)
 ```
+
+
+## Grands enjeux du moment
+
+### Réformes
+
+```{r, out.width = "100%"}
+knitr::include_graphics("waffles-bac-1.pdf")
+``` 
+
+### Réformes
+
+```{r, out.width = "100%"}
+knitr::include_graphics("waffles-bac-2.pdf")
+``` 
+
+### Réformes
+
+```{r, out.width = "100%"}
+knitr::include_graphics("waffles-bac-3.pdf")
+``` 
+
+### Réformes
+
+```{r, out.width = "100%"}
+knitr::include_graphics("waffles-bac-4.pdf")
+``` 
+
+### Réformes
+
+```{r, out.width = "100%"}
+knitr::include_graphics("waffles-bac-5.pdf")
+``` 
+
+### Réussite vs. Exigence : Le discours
+
+```{r, out.width = "100%"}
+knitr::include_graphics("AEF-LM.png")
+``` 
+
+- Anne-Sophie Barthez, DGESIP en 2019.
+
+Dépêche AEF « La distinction entre undergraduate et graduate doit conduire à réinterroger tout le système de formation »
+
+https://www.aefinfo.fr/depeche/616359
+
+### Réussite vs. Exigence : Les données
+
+```{r LM.univB, fig.asp=7/16, fig.width=7, out.width="100%", fig.align='center'}
+load(file="sise.RData")
+
+sise %>%
+  group_by(Rentrée,Niveau = paste(LMD, substr(NIVEAU,2,2), sep="")) %>%
+  summarise(Etudiants = sum(Etudiants)) %>%
+  filter(Niveau %in% c("L3","M1")) %>%
+  mutate(Rentrée = ifelse(Niveau == "L3", Rentrée+1,Rentrée)) %>%
+  filter(Rentrée != 2012, Rentrée != 2023) %>%
+  ggplot(aes(x=Rentrée, y= Etudiants, color=Niveau)) +
+  geom_line(linewidth = 1.5) + geom_point(shape = 21, stroke = 2, size = 2, fill="white") + 
+  scale_x_continuous(labels = ~ paste0("L3 ", .x-1,"\nM1 ",.x), breaks = seq(2011,2030,2), name="Cohorte") +
+  scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "Inscriptions étudiantes") +
+  ggtitle("Etudiant⋅e⋅s  inscrit⋅e⋅s en L3 à l'année N et M1 à l'année N+1" )
+```
+
+
+### Rémunérations vs. dotation : Le discours
+
+```{r, out.width = "60%", fig.align='center'}
+knitr::include_graphics("SR-SCSPMS.png")
+``` 
+
+- Sylvie Retailleau, Ministre ESR en 2023
+
+Question orale n°0915S « Situation budgétaire des universités et particulièrement de Le Mans Université »
+
+https://www.senat.fr/questions/base/2023/qSEQ23110915S.html
+
+
+### Rémunérations vs. dotation : Les données
+
+```{r scsp.vs.ms3, fig.asp=7.5/16, out.width="100%"}
+
+kpiESR::esr %>%
+  filter(Etablissement == "Universités et assimilés", Rentrée > 2008) %>%
+  mutate(diff = kpi.FIN.S.SCSP-kpi.FIN.S.masseSalariale) %>% 
+  ggplot(aes(x=Rentrée,y=diff, color=diff)) +
+  geom_hline(yintercept = 1) +
+  geom_line(size=1) + geom_point(shape = 21, stroke=2,size=2,fill="white") +
+  scale_x_continuous(breaks = scales::pretty_breaks()) +
+  scale_y_continuous(labels = ~ paste(.x/1e6,"M€"), name = "SCSP-MS") +
+  scale_color_distiller(palette="Reds") +
+  ggtitle("Différence entre SCSP et masse salariale des universités") +
+  theme(legend.position = "None", panel.grid.minor.x = element_blank())
+```
+
+### Dotations vs. Insertion pro : Le discours
+
+```{r, out.width = "80%", fig.align='center'}
+knitr::include_graphics("AEF-EM-IP.png")
+``` 
+
+- Emmanuel Macron, Président de la république en 2023
+
+Face à HugoDécrypte, via AEF
+
+https://www.youtube.com/watch?v=3Z6HnUJ3hcw
+
+
+### Dotations vs. Insertion pro : Les données
+
+```{r, fig.asp=8/16}
+ipmn <- read.csv2("data/fr-esr-insertion_professionnelle-master_donnees_nationales.csv", dec='.', na.strings = c("","nd","ns","fe",".")) %>%
+  mutate(
+    Code.du.domaine = recode(Code.du.domaine, "ALL" = "Ensemble"),
+    Domaine = recode(Domaine,"Ensemble Masters LMD (hors Masters enseignement)" = "Ensemble Masters"),
+    Discipline = recode(Discipline,"Ensemble Masters LMD (hors Masters enseignement et hors Dauphine et Antilles-Guyane)" = "Ensemble Masters"),
+    Secteur.disciplinaire = recode(Secteur.disciplinaire,"Ensemble Masters LMD (hors Masters enseignement)" = "Ensemble Masters")
+  ) %>%
+  mutate(
+    Discipline = ifelse(Secteur.disciplinaire == "Ensemble Lettres, langues, arts", "Ensemble Lettres, langues, arts", Discipline),
+    Code.de.la.discipline = ifelse(Secteur.disciplinaire == "Ensemble Lettres, langues, arts", "disc06e", Code.de.la.discipline)
+  ) %>%
+  filter(Diplôme == "MASTER LMD", situation == "30 mois après le diplôme", Genre == "femmes et hommes", Année == 2020) 
+
+pivot_taux <- function(x) {
+  x %>%
+    mutate(diff=Taux.d.emploi.salarié.en.France-Taux.d.insertion) %>%
+    pivot_longer(c(Taux.d.emploi.salarié.en.France,Taux.d.emploi,Taux.d.insertion), names_to ="Indicateur", values_to="Valeur") %>%
+    mutate(Indicateur = factor(Indicateur,
+                               levels=c("Taux.d.insertion","Taux.d.emploi","Taux.d.emploi.salarié.en.France"),
+                               labels = c("Taux d'insertion","Taux d'emploi","Taux d'emploi salarié en France")))
+}
+
+
+levels.domaine <- ipmn %>%
+  filter(str_detect(Discipline,"Ensemble")) %>%
+  arrange(-Taux.d.insertion) %>%
+  select(Code=Code.du.domaine,Domaine) %>%
+  add_row(Code="Ensemble", Domaine="Ensemble Masters", .before = 0) %>%
+  unique()
+ipmn <- ipmn %>% mutate(
+    Code.du.domaine = factor(Code.du.domaine,levels=levels.domaine$Code),
+    Domaine = factor(Domaine,levels=levels.domaine$Domaine))
+
+
+ipmn %>%
+  filter(str_detect(Secteur.disciplinaire,"Ensemble")) %>% 
+  mutate(Ensemble=str_detect(Domaine,"Ensemble")) %>%
+  mutate(diff=Taux.d.emploi.salarié.en.France-Taux.d.insertion) %>%
+  pivot_taux() %>%
+  ggplot(aes(x=Code.du.domaine,y=Valeur,fill=Domaine, color=Ensemble)) +
+  geom_col(alpha=0.8) +
+  scale_x_discrete(name="") +
+  scale_y_continuous(labels = ~ scales::percent(.x/100), name="Taux") +
+  scale_color_manual(values=c("white","black")) +
+  facet_grid(.~Indicateur) +
+  expand_limits(y=100) +
+  theme(legend.position = "None") +
+  ggtitle("Comparaison des trois taux des diplômés de Master","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+```
+
+
 
 ## Massification - Démocratisation - Banalisation
 
@@ -188,16 +350,16 @@ read.csv("data/kh-sl_eleves_sup.csv") %>%
 #### Aucun autre objectif n'est fixé : fin de la massification et crise d'utilité
 
 ```{r bleus.bac, out.width="75%", fig.align="center"}
-knitr::include_graphics("bleus-bac.png")
+knitr::include_graphics("bleus24-bac.png")
 ```
 
 ```{r bleus.sup, out.width="75%", fig.align="center"}
-knitr::include_graphics("bleus2022-1.1.jpg")
+knitr::include_graphics("bleus24-sup.png")
 ```
 
 \tiny
 
-Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
+Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/
 
 
 ### Réussite étudiante : Taux de passage durant le Collège
@@ -256,51 +418,51 @@ Source : BS 2020 https://archives-statistiques-depp.education.gouv.fr/Default/do
 ### Réussite étudiante : Ouverture sociale 
 
 ```{r os, out.height="50%", fig.align="center", fig.show='hold'}
-  knitr::include_graphics("bleus-ouverture.png")
+  knitr::include_graphics("bleus24-ouverture_sociale.png")
 ```
 
 \tiny
-Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
+Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/
 
 ### Réussite étudiante : Insertion professionnelle
 
 ```{r ip, out.height="75%", fig.align="center", fig.show='hold'}
-  knitr::include_graphics("bleus-ip.png")
+  knitr::include_graphics("bleus24-ip.png")
 ```
 
 \tiny
-Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
+Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/
 
 
 
 ### Excellence scientifique : Recherche universitaire
 
 ```{r rech.150, out.height="75%", fig.align="center", fig.show='hold'}
-  knitr::include_graphics("bleus-rech-150.png")
+  knitr::include_graphics("bleus24-rech-150.png")
 ```
 
 \tiny
-Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
+Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/
 
 
 ### Excellence scientifique : Recherche ONR
 
 ```{r rech.172, out.height="75%", fig.align="center", fig.show='hold'}
-  knitr::include_graphics("bleus-rech-172.png")
+  knitr::include_graphics("bleus24-rech-172.png")
 ```
 
 \tiny
-Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
+Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/
 
 
 ### Grands enjeux : Climat 
 
 ```{r climat, out.height="75%", fig.align="center", fig.show='hold'}
-  knitr::include_graphics("bleus-climat.png")
+  knitr::include_graphics("bleus24-climat.png")
 ```
 
 \tiny
-Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2022/projet-de-loi-de-finances/budget-general/
+Source : Projet annuel de performances https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024/projet-de-loi-de-finances/budget-general/
 
 
 ## Investissement vs. Productivité
@@ -381,32 +543,6 @@ knitr::include_graphics("budgetparetu-flip.jpeg")
 
 ## Situation actuelle
 
-### La fin d'une fuite en avant ?
-
-La politique publique pour la création de places de formation est contradictoire :
-
-- Politique de facilité d'accès à l'enseignement supérieur et de réussite en Licence
-- Politique de préservation de la « valeur des diplômes » en Master
-
-```{r LM, fig.asp=9/16, fig.width=7, out.height="65%", fig.align='center'}
-load(file="sise.RData")
-
-sise %>%
-  group_by(Rentrée,Niveau = paste(LMD, substr(NIVEAU,2,2), sep="")) %>%
-  summarise(Etudiants = sum(Etudiants)) %>%
-  filter(Niveau %in% c("L3","M1")) %>%
-  mutate(Rentrée = ifelse(Niveau == "L3", Rentrée+1,Rentrée)) %>%
-  filter(Rentrée != 2012, Rentrée != 2023) %>%
-  ggplot(aes(x=Rentrée, y= Etudiants, color=Niveau)) +
-  geom_line(linewidth = 1.5) + geom_point(shape = 21, stroke = 2, size = 2, fill="white") + 
-  scale_x_continuous(labels = ~ paste0("L3 ", .x-1,"\nM1 ",.x), breaks = seq(2011,2030,2), name="Cohorte") +
-  scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "Inscriptions étudiantes") +
-  ggtitle("Etudiant⋅e⋅s  inscrit⋅e⋅s en L3 à l'année N et M1 à l'année N+1" )
-```
-
-Situation tout à fait unique dans l'histoire de l'humanité... Nous sommes dans l'inconnu.
-
-
 ### RCE et diversification des financements
 
 ```{r fin}
@@ -414,8 +550,9 @@ kpiESR::kpiesr_plot_line(id = "Universités et assimilés",
                          vars = c("kpi.FIN.P.ressources", "kpi.FIN.S.SCSP", "kpi.FIN.S.recettesFormation", "kpi.FIN.S.recettesRecherche"), 
                          val = "valeur") +
   #xlim(2013,2021) +
+  scale_y_continuous(labels=~paste(.x/1e9,"Md€")) +
   ylab("Evolution en valeur 100 pour 2013") +
-  ggtitle("Effectifs enseignants et étudiants") +
+  ggtitle("Ressources des universités") +
   guides(color = guide_legend(ncol = 1), linetype = FALSE, alpha = FALSE, size = FALSE) +
   theme(legend.position = "right")
 ```
@@ -439,18 +576,6 @@ read.csv2("data/fr-esr-operateurs-indicateurs-financiers.csv", dec='.') %>%
   ggtitle("Resources financières et SCSP des établissements de MESR")
 ```
 
-```{r fin.sp}
-kpiESR::kpiesr_plot_line(id = "Universités et assimilés", 
-                         vars = c("kpi.FIN.P.ressources"), 
-                         val = "valeur") +
-  xlim(2016,2023) + ylim(12e9,16e9) +
-  geom_smooth(method = "lm", se=FALSE) +
-  ylab("Evolution en valeur 100 pour 2013") +
-  ggtitle("Effectifs enseignants et étudiants") +
-  guides(color = guide_legend(ncol = 1), linetype = FALSE, alpha = FALSE, size = FALSE) +
-  theme(legend.position = "right")
-```
-
 ### Taux d'encadrement pédagogique des universités
 
 ```{r tep}
@@ -465,7 +590,6 @@ kpiESR::kpiesr_plot_line(id = "Universités et assimilés",
   theme(legend.position = "right")
 ```
 
-
 ### Taux d'encadrement administratif des universités
 
 ```{r tea}
@@ -479,6 +603,9 @@ kpiESR::kpiesr_plot_line(id = "Universités et assimilés",
   guides(color = guide_legend(ncol = 1), linetype = FALSE, alpha = FALSE, size = FALSE) +
   theme(legend.position = "right")
 ```
+
+
+## Autres choses
 
 ### Non poursuites d'études post-bac
 

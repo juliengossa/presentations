@@ -21,9 +21,9 @@ theme_set(theme_cpesr() + theme(legend.position = "right"))
 ```
 
 ```{r load}
-biatss <- read.csv2("biatss.csv")
-enseignants <- read.csv2("enseignants.csv")
-onr <- read.csv2("fr-esr-tbes-personnels-epst-epic-fondation-par-type-contrat-emploi.csv", dec='.')
+biatss <- read.csv2("data/biatss.csv")
+enseignants <- read.csv2("data/enseignants.csv")
+onr <- read.csv2("data/fr-esr-tbes-personnels-epst-epic-fondation-par-type-contrat-emploi.csv", dec='.')
 
 personnels <- bind_rows(
   biatss %>%
@@ -169,7 +169,7 @@ mise en œuvre d'une politique de modulation des services volontaire.
 
 
 ```{r h.hc}
-hc <- read.csv("heures_complémentaires.csv", dec = ",") %>%
+hc <- read.csv("data/heures_complémentaires.csv", dec = ",") %>%
   mutate(HS.Total = H.Total-HC.Total) %>%
   mutate(Rentrée = as.character(Rentrée))
 

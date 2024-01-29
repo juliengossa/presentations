@@ -4,7 +4,7 @@ Mesurer la précarité dans l’ESR par les données ouvertes
 | Method          | koRpus      | stringi       |
 |:----------------|:------------|:--------------|
 | Word count      | 686         | 664           |
-| Character count | 4334        | 4333          |
+| Character count | 4334        | 4334          |
 | Sentence count  | 33          | Not available |
 | Reading time    | 3.4 minutes | 3.3 minutes   |
 
@@ -99,3 +99,5 @@ les établissement à « publier en ligne » ces données « dans un standard
 ouvert, aisément réutilisable et exploitable par un système de
 traitement automatisé ». Il est peut-être temps que nos élus dans les
 Conseils fassent respecter cette obligation.
+
+<img src="article_files/figure-gfm/cdi-1.png" width="100%" />
