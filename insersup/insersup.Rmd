@@ -25,7 +25,8 @@ knitr::opts_chunk$set(fig.asp=9/16, fig.width = 7, fig.align = "center", out.hei
   
 library(tidyverse)
 library(ggcpesrthemes)
-theme_set(theme_cpesr() + theme(plot.title = element_text(hjust=1),plot.subtitle = element_text(hjust=1)))
+theme_set(theme_cpesr() + theme(plot.title = element_text(hjust=1),plot.subtitle = element_text(hjust=1),
+                                legend.title = element_blank(), legend.text = element_text(size=6)))
 theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/RFC/")
 
 
@@ -175,7 +176,7 @@ ipm %>%
   ylab("") +
   scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
   scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
-  ggtitle("Comparaison des trois taux des diplômés de Master à l'Université de Besançon - Franche-Comté","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement")
+  ggtitle("Taux des diplômés de Master à l'Université de Besançon - Franche-Comté","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement")
 ```
 
 
@@ -206,8 +207,8 @@ Que les biais soient contrôlés et les indicateurs parfaits.
 load("ipmn_taux.RData")
 ipmn.taux %>%
   ggplot(aes(x=Taux.Féminité,y=Taux.d.emploi.salarié.en.France)) + 
-  geom_smooth(method = "lm", size=0.1) + geom_point(size=2) +
-  ggrepel::geom_text_repel(aes(label=Secteur.disciplinaire), size=2) +
+  geom_smooth(method = "lm", size=0.1) + geom_point(aes(color=Code.du.domaine),size=2) +
+  ggrepel::geom_text_repel(aes(label=Secteur.disciplinaire), size=2, segment.size=0.1) +
   scale_x_continuous(labels = scales::percent, name = "Taux de féminité") +
   scale_y_continuous(labels = ~ scales::percent(.x,scale=1), name= "Taux d'emploi salarié en France")
 ```
@@ -219,11 +220,51 @@ ipmn.taux %>%
 ipmn.taux %>%
   mutate(Taux.NonBacGénéral = 1 - Taux.BacGénéral) %>%
   ggplot(aes(x=Taux.NonBacGénéral,y=Taux.d.emploi.salarié.en.France)) + 
-  geom_smooth(method = "lm", size=0.1) + geom_point(size=2) +
-  ggrepel::geom_text_repel(aes(label=Secteur.disciplinaire), size=2) +
+  geom_smooth(method = "lm", size=0.1) + geom_point(aes(color=Code.du.domaine),size=2) +
+  ggrepel::geom_text_repel(aes(label=Secteur.disciplinaire), size=2, segment.size=0.1) +
   scale_x_continuous(labels = scales::percent, name = "Taux de bacheliers non généraux") +
   scale_y_continuous(labels = ~ scales::percent(.x,scale=1), name= "Taux d'emploi salarié en France")
 ```
+
+## Concrètement : Etablissements parisiens
+
+```{r}
+ipm %>%
+  filter(!is.na(Taux.de.chômage.régional), !is.na(Taux.d.insertion)) %>%
+  filter(str_detect(Discipline,"Ensemble")) %>%
+  filter(Académie %in% c("Paris","Créteil","Versailles")) %>%
+  group_by(Établissement) %>%
+  summarise_taux() %>%
+  ggplot(aes(x=Valeur,y=reorder(Établissement,Valeur,FUN = median),color=Indicateur)) +
+  geom_line(color="grey",size=2) + geom_point(aes(shape=Indicateur),size=4) +
+  scale_x_continuous(name="Taux",label=~scales::percent(.x/100)) +
+  ylab("") +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
+  ggtitle("Taux des diplômés de Master des établissements Paris-Créteil-Versailles","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+```
+
+## Concrètement Taux d'emploi salarié en France Vs. Budget par étudiant
+
+```{r}
+ipm %>%
+  filter(!is.na(Taux.de.chômage.régional), !is.na(Taux.d.insertion)) %>%
+  filter(str_detect(Discipline,"Ensemble")) %>%
+  group_by(Établissement, pid=Id_Paysage) %>%
+  summarise_taux() %>%
+  left_join(kpiESR::esr %>% filter(Rentrée == 2021)) %>%
+  left_join(kpiESR::esr.etab) %>% mutate(PerimEx = ifelse(PerimEx %in% c("ISITE","IDEx"), PerimEx, "NINI")) %>%
+  filter(Indicateur == "Taux d'emploi salarié en France") %>%
+  ggplot(aes(y=Valeur,x=kpi.K.resPetu)) +
+  geom_smooth(method = "lm", size=0.1) + 
+  ggrepel::geom_text_repel(aes(label=Établissement), size=2, segment.size=0.1) +
+  geom_point(aes(color=PerimEx),size=4) +
+  scale_x_continuous(name="Budget par étudiant", labels = ~ paste(.x/1e3,"k€")) +
+  scale_y_continuous(name="Taux d'emploi salarié en France", labels= ~ scales::percent(.x, scale = 1)) +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE))  
+```
+
 
 ## Conclusion : Loi de Goodhart
 
