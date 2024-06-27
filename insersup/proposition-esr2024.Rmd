@@ -1,0 +1,245 @@
+---
+title: "Mesures et démesure de l'insertion professionnelle pour le pilotage de l'offre de formation"
+author: "Julien Gossa"
+date: "`r Sys.Date()`"
+output: 
+ pdf_document:
+   dev: cairo_pdf
+ github_document: default
+bibliography: 20240628-ESR.bib
+csl: iso690-author-date-fr-no-abstract.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(pdf.options(encoding = "CP1250"))
+options(dplyr.summarise.inform = FALSE)
+knitr::opts_chunk$set(fig.asp=9/16, fig.width = 9, fig.align = "center")
+
+
+library(tidyverse)
+library(ggcpesrthemes)
+theme_set(theme_cpesr())
+theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/RFC/")
+```
+
+
+```{r wc}
+wordcountaddin::text_stats()
+```
+
+
+# Enjeu et problématique de recherche
+
+Cette proposition de communication prend pour problématique la mesure de l'insertion professionnelle des diplômés de l'enseignement supérieur, en l'inscrivant dans la question du pilotage de l'offre de formation.
+
+L'articulation entre formation et emploi est étudiée depuis longtemps (@lucietanguyIntrouvableRelationFormation1986;@blanchardmarianneSelectionsSystemeEducatif2020;@glaymannProfessionnalisationFormationsScolaires2021) et se confronte à des enjeux de quantification et de gouvernance (@eyraudEnjeuxQuantificationDans2011;@vinokurGouvernanceUniversitesPar2017) et des enjeux économiques (@leclairEnjeuxEconomiquesOrientation2024)
+
+Le « pilotage de l'offre de formation » désigne la gestion et l'ajustement des formations proposées par les établissements en fonction des différents besoins, qui sont généralement économiques, sociaux ou professionnels. Il implique la planification, la régulation et l'évaluation des formations pour aligner les savoirs et compétences des diplômés avec les attentes du marché du travail et les priorités nationales, tout en tenant compte des capacités des institutions éducatives et des aspirations des étudiants. C'est, en quelque sorte, la facette étatique de l'orientation, par opposition à la facette qui s'intéresse à la trajectoire de chaque jeune.
+
+Ce pilotage a pris une ampleur inédite ces dernières années, avec un intérêt accru des gouvernements pour les flux d'étudiants dans le supérieur, qui se matérialise par :
+
+- des modifications fréquentes de la partie « Objectifs et missions de l'enseignement supérieur » du code de l'éducation^[ https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071191/LEGISCTA000006166563/#LEGISCTA000006166563] : en 2004, 2005, 2006, 2007 (ajout de la mission d'insertion professionnelle), 2008, 2013 (ajout de la mission de réussite), 2014, 2019, 2020 et 2022 ;
+- des réformes donnant plus de contrôle et de visibilité à l'Etat : ORE/Parcoursup (2018) transfère le contrôle des capacités d'accueil et des quotas aux rectorats, à l'articulation -3/+3, MonMaster (2017-2023) donne de la visibilité à l'articulation +3/+5 ;
+- des discours clairement orientés vers la seule insertion professionnelle, à tous les niveaux : par exemple, à propos du Lycée Professionnel « _L’objectif est de transformer le quart de ces formations dont ces taux sont les plus faibles pour qu’elles ne soient plus proposées aux élèves à la rentrée 2026_ »^[https://www.liberation.fr/societe/education/reforme-du-lycee-professionnel-carole-grandjean-detaille-lannee-de-terminale-20231122_ATPXLTUVJJCUBKDBS66IKTI7GQ/], et à propos de l'université « _Il faut avoir le courage de revoir nos formations à l’université_ », « _on doit réallouer les choses_ »^[https://www.youtube.com/watch?v=3Z6HnUJ3hcw].
+
+
+Ainsi, depuis la loi LRU, « _Le pilotage ministériel de l’insertion professionnelle s’est traduit par une intense action normative_ » (@ericpiozinMissionInsertionProfessionnelle2020). Récemment, le premier des quatre « _objectifs de politique publique_ » des contrats d'objectifs, de moyens et de performances (COMP), dont l'ambition est de moduler les dotations des établissements, est « _la mobilisation de l'enseignement supérieur et de la recherche en faveur de formations préparant les étudiants à exercer des____métiers d'avenir, en tension ou en évolution____, et prenant en compte les nécessités de leur territoire_ »(gras d'origine) (@dgesipLancementContratsObjectifs2023).
+
+L'ajout de l'insertion professionnelle comme mission de l'enseignement supérieur est donc en réalité très récente, et s'inscrit à une période très particulière de ciseau entre les effectifs de Licence et de Master, qui s'explique notamment car « _L’enjeu est de préserver le taux d’insertion professionnelle_ »^[https://www.lefigaro.fr/actualite-france/frederique-vidal-l-enjeu-est-de-preserver-le-taux-d-insertion-professionnelle-20210921].
+
+
+```{r l3m1.decal, out.height="60%"}
+load("sise.RData")
+sise %>%
+  group_by(Rentrée,Niveau = paste(LMD, substr(NIVEAU,2,2), sep="")) %>%
+  summarise(Etudiants = sum(Etudiants)) %>%
+  filter(Niveau %in% c("L3","M1")) %>%
+  mutate(Rentrée = ifelse(Niveau == "L3", Rentrée+1,Rentrée)) %>%
+  filter(Rentrée != 2012, Rentrée != 2023) %>%
+  ggplot(aes(x=Rentrée, y= Etudiants, color=Niveau)) +
+  geom_line(linewidth = 1.5) + geom_point(shape = 21, stroke = 2, size = 2, fill="white") + 
+  scale_x_continuous(labels = ~ paste0("L3 ", .x-1,"\nM1 ",.x), breaks = seq(2011,2030,2), name="Cohorte") +
+  scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "Inscriptions étudiantes") +
+  ggtitle("Etudiant⋅e⋅s  inscrit⋅e⋅s en L3 à l'année N et M1 à l'année N+1" )
+```
+
+
+### Du « GPEC de la nation » à InserSup, sans oublier l'enquête IP
+
+L'Etat cherche donc à développer une politique de « gestion prévisionnelle des emplois et des compétences (GPEC) de la nation »^[https://education.newstank.fr/article/view/306378/rencontre-emmanuel-macron-etablissements-themes-discutes-elysee-14-11-2023.html], et pour cela développe plusieurs outils de pilotage, sans forcément en faire la publicité, tels que FRESQ (Formations Reconnues de l’Enseignement Supérieur de Qualité)^[https://choisirleservicepublic.gouv.fr/offre-emploi/c-esr-a2-3---cheffe-de-projet-informatique---domaine--formations--hf-reference-2024-1477164/] et Quadrant (positionnement des mentions en fonction du taux de réussite et du taux d'insertion professionnelle). 
+
+Pour fonctionner, ces outils ont besoin d'être alimentés en données précises et exhaustives sur l'insertion professionnelle des diplômés. C'est l'objet du dispositif InserSup (@siesInserSupNoteMethodologique2023) porté par le MESR et développé par le SIES. Ce projet à vocation à remplacer, au niveau central, les enquêtes d'insertion professionnelle (IP), traditionnellement menées dans les établissements par les observations de la vie étudiante (OVE).
+
+Cette communication propose de décrire comment sont produites ces données, et d'identifier les différences entre les deux dispositifs de production et leurs résultats. Cette analyse permet d'étudier la mise en place du pilotage de l'offre de formation, qui _in fine_ décrit notre politique d'enseignement supérieur au niveau national. 
+
+## Méthodologie 
+
+Cet travail s'appuie d'une part sur l'analyse des méthodologie de InserSup (@siesInserSupNoteMethodologique2023) et de l'enquête IP, et d'autre part sur la publication en données ouvertes de leurs résultats^[https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-insersup]. 
+
+Il s'inscrit donc à la croisée entre la sociologie des instruments et la science des données. 
+
+Les traitements sont effectués avec R [@rcoreteamLanguageEnvironmentStatistical2013] et les visualisations
+avec ggplot [@wickhamGgplot2ElegantGraphics2016], en respectant les principes fondamentaux 
+établis dans [@wilkeFundamentalsDataVisualization2019b] et les procédures de production et publication 
+RMarkdown [@xieMarkdownDefinitiveGuide2019]. 
+
+L'analyse se concentre sur les diplômés de Master de la session 2020, à 30 mois, hors Master d'enseignement.
+Des informations additionnelles sont issues du projet kpiESR^[https://github.com/cpesr/kpiESR] qui compile plusieurs jeux de données ouvertes.
+
+## Principaux résultats
+
+Notre analyse montre que les méthodes de production sont radicalement différentes : enquête auprès des étudiants pour IP ; et croisement de fichiers administratifs pour InserSup. Ces méthodes de production présentent des limites très différentes : taux de réponse, imprécisions et suspicion de chanstique d'un côté ; aveuglement aux informations non quantifiées dans les fichiers de l'autre.
+
+Au final, on dispose de trois indicateurs : 
+
+- taux d’insertion (IP) : diplômés en emploi / diplômés sur le marché du travail (emploi + chômage, ou taux d’emploi net) ;
+- taux d’emploi (IP) : diplômés en emploi / diplômés ;
+- taux d’emploi salarié en France (InserSup) : diplômés en emploi seulement salarié en France / diplômés.
+
+Leur définition dépend essentiellement de contingences techniques mais aboutissent à des considérations très différentes : satisfaction des étudiants d'un côté, satisfaction des besoins de l'emploi français de l'autre. La comparaison de ces trois indicateurs permet de faire plusieurs observations.
+
+Premièrement, la vision rapportée par InserSup est globalement 10 points en dessous de IP, mais s'effondre en Lettres-Langues-Arts (LLA). 
+
+```{r tdx.dom}
+load("insertion-pro.RData")
+ipmn %>%
+  filter(str_detect(Secteur.disciplinaire,"Ensemble")) %>% 
+  mutate(Ensemble=str_detect(Domaine,"Ensemble")) %>%
+  mutate(diff=Taux.d.emploi.salarié.en.France-Taux.d.insertion) %>%
+  pivot_taux() %>%
+  ggplot(aes(x=Code.du.domaine,y=Valeur,fill=Domaine, color=Ensemble)) +
+  geom_col(alpha=0.8) +
+  scale_x_discrete(name="") +
+  scale_y_continuous(labels = ~ scales::percent(.x/100), name="Taux") +
+  scale_color_manual(values=c("white","black")) +
+  facet_grid(.~Indicateur) +
+  expand_limits(y=100) +
+  theme(legend.position = "None") +
+  ggtitle("Comparaison des trois taux des diplômés de Master","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+```
+
+Mais cette différence s'explique essentiellement par la nature des emplois dans ces disciplines : il n'y a rien d'étonnant à ce que Français-langue étrangère passe de 85% de taux d'insertion à moins de 50% de taux d'emploi salariré en France, car cette filière conduit à des emplois en dehors du territoire. L'indicateur peut donc être perçu en opposition avec la mission de l'ESR « promotion et à diffusion de la francophonie dans le monde ».
+
+
+```{r tdx.disc}
+df <- ipmn %>%
+  mutate(Ensemble=str_detect(Secteur.disciplinaire,"Ensemble")) %>%
+  filter(!is.na(Taux.d.insertion)) %>%
+  arrange(desc(Taux.d.emploi.salarié.en.France))
+
+  bind_rows(
+    slice_head(df,n=5),
+    slice_tail(df,n=5),
+  ) %>%
+  group_by(Secteur.disciplinaire) %>%
+  pivot_taux() %>%
+  ungroup() %>%
+  ggplot(aes(x=Valeur,y=reorder(Secteur.disciplinaire,-Valeur, FUN=max),color=Indicateur)) +
+  geom_line(color="grey",size=2) + geom_point(aes(shape=Indicateur),size=4) +
+  scale_x_continuous(name="Taux",label=~scales::percent(.x/100)) +
+  scale_y_discrete(name="",limits=rev) +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
+  ggtitle("Comparaison des trois taux des diplômés de Master pas discipline","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+
+```
+
+
+Deuxièmemement, l'analyse des indicateurs montre de bien plus grandes différences entre les établissements, y compris avec des chutes spectaculaires. L'université de Lorraine passe ainsi d'un taux global de 92% d'insertion professionnelle à à peine plus de 50%. 
+
+```{r tds.vs.tip3}
+df <- ipm %>%
+  filter(!is.na(Taux.de.chômage.régional), !is.na(Taux.d.insertion)) %>%
+  filter(str_detect(Discipline,"Ensemble")) %>%
+  arrange(desc(Taux.d.emploi.salarié.en.France))
+
+  bind_rows(
+    slice_head(df,n=5),
+    slice_tail(df,n=5),
+  ) %>%
+  group_by(Établissement) %>%
+  summarise_taux() %>%
+  ggplot(aes(x=Valeur,y=reorder(Établissement,Valeur,FUN = min),color=Indicateur)) +
+  geom_line(color="grey",size=2) + geom_point(aes(shape=Indicateur),size=4) +
+  scale_x_continuous(name="Taux",label=~scales::percent(.x/100)) +
+  ylab("") +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
+  ggtitle("Comparaison des trois taux des diplômés de Master par établissement","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+```
+
+Cette piètre performance ne s'explique pas par des raisons pédagogiques, mais plutôt par des particularités du bassin d'emplois : Lorraine est frontalière avec le Luxembourg, qui embauche une grande partie des diplômés en Droit et en Informatique, notamment. 
+
+
+```{r lorraine2}
+ipm %>%
+  filter(Établissement == "Lorraine") %>%
+  mutate(Ensemble = str_detect(Discipline,"Ensemble")) %>%
+  filter(!is.na(Taux.d.insertion)) %>%
+  group_by(Discipline) %>%
+  summarise_taux() %>%
+  ggplot(aes(x=Valeur,y=reorder(Discipline,Valeur,FUN = min),color=Indicateur)) +
+  geom_line(color="grey",size=2) + geom_point(aes(shape=Indicateur),size=4) +
+  scale_x_continuous(name="Taux",label=~scales::percent(.x/100)) +
+  ylab("") +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
+  ggtitle("Comparaison des trois taux des diplômés de Master à l'Université de Lorraine","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement")
+```
+
+Ainsi, nous voyons que ces indicateurs ne mesurent pas tant les performances intrinsèques des établissements, que des particularités des secteurs d'emplois, sur lesquelles les universités n'ont aucune prise. L'utilisation des indicateurs pour piloter leur offre de formation est beaucoup moins technique qu'elle ne soulève des questions hautement politiques, telles que la francophonie ou la formation d'étudiants pour l'international.
+
+En croisant le taux d'emploi salarié en France avec d'autres indicateurs, d'autres questions se soulèvent systématiquement. Par exemple, une utilisation directe du taux d'emplois salarié en France pour moduler les capacités d'acceuil des établissements peut conduire à une réduction du nombre de places dans les filières les plus féminisées.
+
+```{r}
+load("ipmn_taux.RData")
+ipmn.taux %>%
+  ggplot(aes(x=Taux.Féminité,y=Taux.d.emploi.salarié.en.France)) + 
+  geom_smooth(method = "lm", size=0.1) + geom_point(aes(color=Code.du.domaine),size=2) +
+  ggrepel::geom_text_repel(aes(label=Secteur.disciplinaire), size=2, segment.size=0.1) +
+  scale_x_continuous(labels = scales::percent, name = "Taux de féminité") +
+  scale_y_continuous(labels = ~ scales::percent(.x,scale=1), name= "Taux d'emploi salarié en France")
+```
+
+
+Un croisement avec le budget par étudiant et le périmètre d'excellence conduit également à devoir interroger la pertinence des « politiques d'excellence » et des « dialogues stratégiques et de gestion » (qui aboutissent à l'allocation des moyens aux établissements) en terme d'insertion professionnelle.
+
+```{r}
+ipm %>%
+  filter(!is.na(Taux.de.chômage.régional), !is.na(Taux.d.insertion)) %>%
+  filter(str_detect(Discipline,"Ensemble")) %>%
+  group_by(Établissement, pid=Id_Paysage) %>%
+  summarise_taux() %>%
+  left_join(kpiESR::esr %>% filter(Rentrée == 2021)) %>%
+  left_join(kpiESR::esr.etab) %>% mutate(PerimEx = ifelse(PerimEx %in% c("ISITE","IDEx"), PerimEx, "NINI")) %>%
+  filter(Indicateur == "Taux d'emploi salarié en France") %>%
+  ggplot(aes(y=Valeur,x=kpi.K.resPetu)) +
+  geom_smooth(method = "lm", size=0.1) + 
+  ggrepel::geom_text_repel(aes(label=Établissement), size=2, segment.size=0.1) +
+  geom_point(aes(color=PerimEx),size=4) +
+  scale_x_continuous(name="Budget par étudiant", labels = ~ paste(.x/1e3,"k€")) +
+  scale_y_continuous(name="Taux d'emploi salarié en France", labels= ~ scales::percent(.x, scale = 1)) +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE))  
+```
+
+Il faut ici noter que toutes les différences que nous venons de voir trouvent facilement des explications légitimes. Or, ces explications neutralisent l'information portée par la donnée dès lors qu'on veut s'en servir pour du pilotage : même si on estime souhaitable de réduire la dépense publique dans les filières « qui ne mènent pas à l'emploi », il sera difficile d'assumer d'affaiblir la francophonie ou les poursuite d'étude des femmes, et il sera impossible d'empêcher les diplômés d'aller travailler à l'étranger si les conditions d'embauche y sont meilleures.
+
+Il y a donc ici une forme de démesure dans l'ambition prêtée à ces mesures de l'insertion professionnelle : si elles sont extrêmement intéressantes pour comprendre le système et suivre son évolution, elles deviennent extrêmement médiocres dès lors qu'on s'en sert pour prendre des décisions de pilotage de l'offre de formation. C'est une parfaite illustration de la « Loi de Goodhart » : « lorsqu'une mesure devient un objectif, elle cesse d'être une bonne mesure » (@strathernImprovingRatingsAudit1997).
+
+En conclusion, la mesure de l'insertion professionnelle se confronte donc à des limites qui menacent leur utilisabilité en terme de pilotage de l'offre de formation. Ces limites sont d'abord méthologiques, mais se révèlent ensuite être plus fondamentales, questionnant l'idée même de les utiliser à des fins de pilotage. Même si l'enquête InserSup devrait rapidement s'améliorer, d'abord en tenant compte des critiques qui lui sont adressées, ensuite en augmentant son périmètre, rien n'indique à ce stade que ses données seront un jour utilisables pour adapter l'offre de formation.
+
+# Eléments de discussion
+
+Cette proposition présente plusieurs éléments de discussion, dont notamment :
+
+- Si une utilisation directe des indicateurs est impossible, est-ce qu'une utilisation indirecte reste envisageable pour un pilotage de l'offre de formation ?
+- Quelles sont les autres utilisations possibles ? 
+- Est-ce que tous les objectifs de l'ESR peuvent être réductibles à des indicateurs de pilotage ?
+- Est-ce que les observatoires effectuant les enquêtes IP sont destinés à disparaitre ou à redefinir leurs missions ?
+- Est-ce que la bascule d'une production de données locales par enquête à une production de données nationales par croisement de fichiers présente des dangers ?
+
+
+# Principales références bibliographiques
+
