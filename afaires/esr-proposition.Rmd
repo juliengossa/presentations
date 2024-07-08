@@ -1,0 +1,214 @@
+---
+title: "kpiESR : des indicateurs clés de performance pour les établissements de l'ESR, des données ouvertes aux représentations graphiques"
+author: "Pauline Boyer et Julien Gossa, Laboratoire SAGE, Université de Strasbourg, CPESR"
+date: "`r Sys.Date()`"
+output: 
+  pdf_document: 
+    latex_engine: xelatex
+  github_document: default
+# header-includes:
+urlcolor: blue
+linkcolor: blue
+fontsize: 11pt
+lang: "fr-FR"
+geometry: margin=1.5cm
+bibliography: 20240628-ESR-TDB.bib
+#documentclass: report
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+options(dplyr.summarise.inform = FALSE)
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.align = "center", out.width="100%")
+
+knitr::opts_chunk$set(pdf.options(encoding = "CP1250"))
+knitr::opts_chunk$set(dev = "cairo_pdf")
+
+
+library(tidyverse)
+library(ggcpesrthemes)
+
+library(kpiESR)
+library(cowplot)
+
+theme_set(theme_cpesr())
+theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/RFC/")
+```
+
+```{r wc}
+wordcountaddin::text_stats()
+```
+
+## Enjeu et contexte
+
+De profonds changements sont en cours dans l'enseignement supérieur et la recherche (ESR) en France, en accélération depuis le début du XXIe siècle (@musselinLongueMarcheUniversites2022). Plusieurs réformes ont modifié la manière dont les établissements d'enseignement supérieur sont gérés et évalués. La création de l'Agence Nationale de la Recherche (ANR) en 2005 a modifié la manière dont les moyens sont alloués aux établissements, tandis que la Loi libertés et responsabilités des universités (LRU) en 2007 a amorcé un mouvement d'autonomisation des universités, les invitant à développer leur propre politique d'emploi. En 2013, l'Agence d'évaluation de la recherche et de l'enseignement supérieur (AÉRES) a été remplacée par le Haut Conseil de l'évaluation de la recherche et de l'enseignement supérieur (Hcéres), modifiant la manière dont les établissements sont évalués.
+
+L'Initiative d'excellence (IDEX) a également été lancée, sélectionnant onze universités pour un projet de gouvernance différenciant dans le cadre du Plan d'investissement d'avenir (PIA) (@austSeMettreIDEX2018). De plus, un grand nombre de fusions et de regroupements d'établissements d'enseignement supérieur ont eu lieu, tels que les Pôles de recherche et d'enseignement supérieur (PRES) et les Communautés d'universités et d'établissements (COMUE), et plus récemment les Etablissement publics expérimentaux (EPE).
+
+Ces changements ont entraîné des évolutions structurelles locales, visant la différenciation des établissements de l'ESR. Cela a créé un besoin croissant d'outils de suivi et d'analyse pour comprendre les caractéristiques et les politiques des établissements de l'ESR. Dans le même temps, le ministère de l'ESR puis l'Etat ont développé une politique d'ouverture des données administratives, dans la lignée de la Loi pour une république numérique.
+
+## Problématique de recherche
+
+Un pan important de la recherche sur les politiques publiques de l’ESR repose sur des analyses quantitatives à partir de données institutionnelles. Cependant, les données utilisées sont des données à l'accès régulé par la signature de conventions de recherche, directement auprès de l'organisation fournissant les données (composante, établissement, Ministère, agence) ou via le CASD ou Progedo. Si des travaux utilisent des données administratives scrappées (par exemple (@clement_parcoursup_2019,@couto_parcoursup_2021), à notre connaissance, aucun travail n’exploite les données ouvertes.
+
+Pourtant, le Ministère de l’ESR alimente depuis 2014 une plateforme d’open data de nombreux jeux de données structurés (196 disponibles en juillet 2024). Cette non-utilisation des données ouvertes est d’autant plus étonnante que, dans la communication ministérielle, la provision de données pour la recherche figure parmi les objectifs revendiqués de l’open data. Il semble donc légitime de questionner la pertinence de la réutilisation de données ouvertes pour la recherche. 
+
+En effet, leur réutilisation expose les chercheurs à de nombreuses contraintes liées à leurs conditions de production et d’ouverture. Tout d’abord, la structure des jeux de données est déterminée par les usages (@BitGar67) avant tout gestionnaires de ces données, tels que l’allocation de moyens aux universités, tout en étant contrainte par l’impératif de protection de l’anonymat. Par ailleurs, les travaux séminaux de Desrosières nous ont appris que les données ne reflètent pas le monde social mais le « reconfigurent et [le] transforment » (@desrosieres_pour_2008), la mesure étant précédée d’une étape techno-politique de définition des conventions d’équivalence à appliquer. Enfin, tandis que la Loi pour une République numérique faisant de l’ouverture des données un principe par défaut demeure très vague, un soupçon plane encore sur la transparence réalisée lors de l’ouverture des données, une transparence qualifiée de « stratégiquement opaque » (@ruijer_politics_2020): il n’est pas dans l’intérêt d’une organisation de rendre accessibles des données permettant de critiquer son action. 
+
+Ces obstacles nous renvoient à une question centrale en sociologie (@kitsuse_note_1963) : si les données institutionnelles ne sont pas des enregistrements neutres d’actes ou d’effectifs mais le produit de déterminations sociales complexes, dans quelle mesure peut-on les utiliser pour évaluer l’action publique ? Autrement dit, peut-on dépasser la porosité de la double fonction des statistiques, à la fois outils de preuve et outils de gouvernement (@desrosieres_pour_2008) ?
+
+Cette proposition de communication prend le parti de la perspective réformiste du statactivisme,  en acceptant « de se placer dans un cadre préétabli, mais y trouv[er] les marges de liberté suffisantes pour le modifier » (@bruno_introduction_2014).
+
+## Méthodologie
+
+L'approche développée au sein de la Conférence des praticien⋅ne⋅s de l'ESR (CPESR) consiste à exploiter les données administratives ouvertes par le ministère pour élaborer des indicateurs clés de performances (kpi) 
+à la fois exhaustifs et synthétiques. Ce travail a représenté un double défi : en sciences des données, avec l’agrégation et la représentation des informations ; et en sciences de l'action publique, avec la sélection d'un sous-ensemble d'indicateur prioritairement pertinents, et la conception d'indicateurs clés composites.
+
+Notre objectif est de construire des tableaux de bord permettant de percevoir les politiques publiques de l'ESR, en se confrontant à plusieurs objectifs contradictoires :
+- lisibilité vs. exhaustivité : la lisibilité demande de limiter au maximum le nombre d'indicateurs, alors que l’exhaustivité invite à les démultiplier ;
+- robustesse vs. finesse : agréger les données permet de gommer leurs imperfections, mais réduit la finesse des analyses permises ; 
+- localité vs. globalité : agréger les données au niveau des établissements permet de percevoir les différenciations locales, mais agréger au niveau national est indispensable pour percevoir les transformations globales ;
+- contextualisation vs. compétition : les différenciations locales ne se comprennent qu'avec une contextualisation dans le temps et par rapport aux autres établissements, mais ces comparaisons portent le risque d'une mise en compétition^[On retrouve habituellement cette mise en compétition dans les classements, qui s'appuient toujours sur des indicateurs de performance.].
+
+Les traitements sont effectués avec R [@rcoreteamLanguageEnvironmentStatistical2013] et les visualisations
+avec ggplot [@wickhamGgplot2ElegantGraphics2016], en respectant les principes fondamentaux 
+établis dans [@wilkeFundamentalsDataVisualization2019b] et les procédures de production et publication 
+RMarkdown [@xieMarkdownDefinitiveGuide2019]. 
+
+
+## Principaux résultats
+
+Les données ouvertes sont mises à disposition par le  SIES^[https://www.enseignementsup-recherche.gouv.fr/fr/statistiques-et-analyses-50213], et nous exploitons pour ces travaux les jeux suivants :
+
+- [fr-esr-statistiques-sur-les-effectifs-d-etudiants-inscrits-par-etablissement](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-statistiques-sur-les-effectifs-d-etudiants-inscrits-par-etablissement)
+- [fr-esr-personnels-biatss-etablissements-publics](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-personnels-biatss-etablissements-publics)
+- [fr-esr-enseignants-titulaires-esr-public](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-enseignants-titulaires-esr-public/)
+- [fr-esr-enseignants-nonpermanents-esr-public](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-enseignants-nonpermanents-esr-public/information/)
+- [fr-esr-operateurs-indicateurs-financiers](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-operateurs-indicateurs-financiers/information/)
+- [fr-esr-principaux-etablissements-enseignement-superieur](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-principaux-etablissements-enseignement-superieur/information/?disjunctive.type_d_etablissement)
+
+
+Le projet kpiESR^[https://github.com/cpesr/kpiESR] assemble les données à trois granularités différentes : MESR, groupes d'établissements, et établissement. Les indicateurs retenus sont de quatre ordres\ : effectifs étudiants, effectifs BIATSS, effectifs enseignants et données financières.
+
+Ces indicateurs sont déclinés en deux types :
+
+- __Les indicateurs primaires et secondaires__ : au plus proche des jeux de données ouvertes, ils présentent les effectifs étudiants et personnels, ainsi que les finances. 
+- __Les indicateurs clés de performance__ : combinaisons des précédents, plus représentatives des missions.
+
+
+Trois représentations sont ensuite utilisées :
+
+- __Valeurs absolues__\ : permettant de connaitre les valeurs à la dernière année ;
+- __Evolutions normalisées__\ : permettant de percevoir l'évolution dans le temps,
+en valeur 100 pour une année de référence ;
+- __Valeurs normalisées__\ : permettant connaitre un rapport et de le comparer aux
+autres établissements.
+
+
+Ces représentations permettent de produire des tableaux de bord pour tous les établissements dans un document unique^[https://cpesr.fr/tableau-de-bord-esr/] mais aussi accessibles par une interface web interactive^[https://data.cpesr.fr/tdbesr/]. Elles permettent aussi de visualiser des séries, et de comparer les établissements, dans l'espace et le temps.
+
+### Tableaux de bord
+
+```{r setup.manual, include = FALSE}
+source("tdbesr-plots.R")
+
+k_style <- kpiesr_style(
+  point_size = 16,
+  line_size = 1,
+  text_size = 4,
+  yaxis_position = "left")
+
+o_style <- kpiesr_style(
+  point_size = 12,
+  line_size = 0.7,
+  text_size = 3,
+  primaire_margin = 1.25,
+  strip_labeller = lfc_dont_labeller,
+  yaxis_position = "left")
+
+lfc_pc_labeller_custom <- function(labels) {
+  return(
+    stringr::str_replace(lfc_pc_labeller(labels),"\\(","\n (")
+  )
+}
+onorm_style <- kpiesr_style(
+  point_size = 12,
+  line_size = 0.7,
+  text_size = 3,
+  primaire_margin = 1.25,
+  strip_labeller = lfc_pc_labeller_custom,
+  label_wrap = 12
+)
+
+
+theme_set(ggcpesrthemes::theme_cpesr() + 
+            theme(plot.title = element_text(hjust=1),
+                  panel.spacing = unit(2,"lines"), 
+                  plot.margin = margin(0,0,0,0),
+                  axis.title.x = element_blank(),
+                  axis.title.y = element_blank(),
+                  strip.text = element_text(size=rel(0.7), 
+                                            margin=margin(c(2,0,2,0)))))
+
+
+grp <- "Ensemble"
+pid <- "Universités et assimilés"
+pid <- "Ensemble"
+
+
+plots <- kpiesr_plot_all(rentrée, pid, grp, style.k=k_style, style.o=o_style, style.o.norm = onorm_style)
+```
+
+Les différentes représentations mises ensemble constituent un tableau de bord en deux volets, 
+d'abord les indicateurs clés de performance, et ensuite les données primaires. 
+Par exemple, voici les tableaux de bord pour l'ensemble du MESR :
+
+```{r tdb.kpi, fig.width = 12, fig.asp = 9/16, out.width="100%", out.height=NULL}
+combine_plots_groupe(plots)
+```
+
+```{r tdb.series, fig.width = 12, fig.asp = 11/16, out.width="100%", out.height=NULL}
+combine_plots_series(plots)
+```
+
+### Séries temporelles
+
+Les séries temporelles permettent de percevoir des évolutions. Par exemple, voilà la représentation, en valeur 100 pour 2013 et dans le périmètre MESR, des effectifs enseignants et étudiants, ainsi que du taux d'encadrement. Cette représentation est déclinable par établissement. 
+
+```{r serie, fig.asp=9/16}
+kpiesr_plot_line("Ensemble", c("kpi.ETU.P.effectif","kpi.ENS.S.titulaires","kpi.K.ensPetu"), val = "evolution") 
+```
+
+\newpage
+
+### Représentations spatiales
+
+Les représentations spatiales permettent de comparer les établissements entre eux, selon tous les indicateurs du projet. C'est un outil qui peut s'avérer utile au _benchmarking_, comme à l'identifier de corrélations. Par exemple, voici les universités en fonction des taux d'encadrement pédagogique et des budgets par étudiant, selon le périmètre d'excellence, en 2020.
+
+```{r plan, eval=FALSE}
+  kpiesr_plot_map(rentrée = 2020, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.ETU.P.effectif", yvar="kpi.ENS.P.effectif") +
+  xlab("Effectifs étudiants") + ylab("Effectifs enseignants")
+```
+
+```{r}
+  kpiesr_plot_map(rentrée = 2020, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.K.ensPetu", yvar="kpi.K.resPetu") + 
+  xlab("Taux d'encadrement pédagogique (titulaire / 100 étudiants)") + ylab("Budget par étudiant (€)")
+```
+
+## Limites de l'approche et éléments de discussion
+
+Bien qu'étant le projet public le plus avancé en matière d'agrégation des données de l'ESR, kpiESR présente plusieurs limites, d'abord dûes à l'utilisation des données ouvertes : 
+- disponibilité : les séries temporelles sont courtes (la plus ancienne débute en 2006), varient en fonction du jeu de données, et on généralement 18 mois de retard par rapport à l'année courante ;
+- limitation : en partant des données disponibles plutôt que des besoins, on limite le nombre et le type d'indicateurs calculables ;
+- qualité : de nombreux établissements présentent des données partielles ou de mauvaises qualité, ainsi que des ruptures de séries à l'occasion des réformes et transformations telles que les regroupements (fusions, COMUEs, EPE). 
+
+Le projet est aussi totalement dépendant de la mise à jour régulière des données ouvertes, ce qui peut poser problème si l’État ralentit ou cesse leur publication. Le projet est donc tributaire de ce que l'Etat souhaite et peut montrer, en quantité comme dans la définition de chaque variable.
+
+Mais le projet est également tributaire de ce que les établissements peuvent et souhaitent montrer. Nous avons ainsi identifié plusieurs cas de chanstique (@brunoBenchmarkingEtatSous2013), c'est-à-dire de manipulation des indicateurs, ainsi que plusieurs techniques d'échappement à la connaissance de l’État, notamment pour les informations financières.
+
+Enfin, le projet pouvant servir au _benchmarking_, se pose la question de la mise en compétition des établissements, qui se matérialise notamment par la possibilité de fabriquer des classements. Cela interroge immédiatement les choix de définition des indicateurs, qui peuvent tous être retournés. Par exemple, le budget par étudiant reflète l'investissement de l’État, quand le nombre d'étudiants formés pour un budget donné reflète la productivité des établissements. Il s'agit donc de choix éminament techno-politiques.
+
+Si elle est retenue, la communication décrira la définition des indicateurs sélectionnés et les choix qui les sous-tendent, expliquera en détail les représentations graphiques, puis présentera quelques enseignements sur les politiques publiques de l'ESR, ainsi que des illustrations concrètes des limites de l'approche.
+
+## Références
+
