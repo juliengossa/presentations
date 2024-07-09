@@ -7,7 +7,7 @@ output:
    dev: cairo_pdf
  github_document: default
 bibliography: 20240628-ESR.bib
-csl: iso690-author-date-fr-no-abstract.csl
+#csl: iso690-author-date-fr-no-abstract.csl
 ---
 
 ```{r setup, include=FALSE}
@@ -25,7 +25,7 @@ theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/R
 
 
 ```{r wc}
-wordcountaddin::text_stats()
+#wordcountaddin::text_stats()
 ```
 
 
@@ -41,12 +41,12 @@ Ce pilotage a pris une ampleur inédite ces dernières années, avec un intérê
 
 - des modifications fréquentes de la partie « Objectifs et missions de l'enseignement supérieur » du code de l'éducation^[ https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071191/LEGISCTA000006166563/#LEGISCTA000006166563] : en 2004, 2005, 2006, 2007 (ajout de la mission d'insertion professionnelle), 2008, 2013 (ajout de la mission de réussite), 2014, 2019, 2020 et 2022 ;
 - des réformes donnant plus de contrôle et de visibilité à l'Etat : à l'articulation -3/+3, ORE/Parcoursup (2018) transfère le contrôle des capacités d'accueil et des quotas aux rectorats, et MonMaster (2017-2023) donne de la visibilité à l'articulation +3/+5 ;
-- des discours clairement orientés vers la seule insertion professionnelle, à tous les niveaux : par exemple, à propos du Lycée Professionnel « _L’objectif est de transformer le quart de ces formations dont ces taux sont les plus faibles pour qu’elles ne soient plus proposées aux élèves à la rentrée 2026_ »^[https://www.liberation.fr/societe/education/reforme-du-lycee-professionnel-carole-grandjean-detaille-lannee-de-terminale-20231122_ATPXLTUVJJCUBKDBS66IKTI7GQ/], et à propos de l'université « _C'est exactement comme on fait pour le Lycée pro.. Vous avez deux critères. 1. Est-ce que les étudiants ont un diplôme ? 2. Est-ce qu'après le diplôme, ils ont des emplois ?_ », et de conclure « _On doit réallouer les choses_ »^[https://www.youtube.com/watch?v=3Z6HnUJ3hcw].
+- des discours clairement orientés vers la seule insertion professionnelle, à tous les niveaux : par exemple, à propos du Lycée Professionnel « _L’objectif est de transformer le quart de ces formations dont ces taux sont les plus faibles pour qu’elles ne soient plus proposées aux élèves à la rentrée 2026_ »^[Carole Grandjean, ministre déléguée chargée de l'Enseignement et de la Formation professionnels, pour Libération https://www.liberation.fr/societe/education/reforme-du-lycee-professionnel-carole-grandjean-detaille-lannee-de-terminale-20231122_ATPXLTUVJJCUBKDBS66IKTI7GQ/], et à propos de l'université « _C'est exactement comme on fait pour le Lycée pro.. Vous avez deux critères. 1. Est-ce que les étudiants ont un diplôme ? 2. Est-ce qu'après le diplôme, ils ont des emplois ?_ », et de conclure « _On doit réallouer les choses_ »^[Emmanuel Macron, Président de la République, face à Hugo Decrypte https://www.youtube.com/watch?v=3Z6HnUJ3hcw].
 
 
 Ainsi, depuis la loi LRU, « _Le pilotage ministériel de l’insertion professionnelle s’est traduit par une intense action normative_ » (@ericpiozinMissionInsertionProfessionnelle2020). Récemment, le premier des quatre « _objectifs de politique publique_ » des contrats d'objectifs, de moyens et de performances (COMP), dont l'ambition est de moduler les dotations des établissements, est « _la mobilisation de l'enseignement supérieur et de la recherche en faveur de formations préparant les étudiants à exercer des_ ___métiers d'avenir, en tension ou en évolution,___ _et prenant en compte les nécessités de leur territoire_ »(gras d'origine) (@dgesipLancementContratsObjectifs2023).
 
-L'ajout de l'insertion professionnelle comme mission de l'enseignement supérieur est donc en réalité très récente, et s'inscrit à une période très particulière de ciseau entre les effectifs de Licence et de Master, qui s'explique notamment car « _L’enjeu est de préserver le taux d’insertion professionnelle_ »^[https://www.lefigaro.fr/actualite-france/frederique-vidal-l-enjeu-est-de-preserver-le-taux-d-insertion-professionnelle-20210921].
+L'ajout de l'insertion professionnelle comme mission de l'enseignement supérieur est donc en réalité très récente, et s'inscrit à une période très particulière de ciseau entre les effectifs de Licence et de Master, qui s'explique notamment car « _L’enjeu est de préserver le taux d’insertion professionnelle_ »^[Frédérique Vidal, Ministre de l'ESR, https://www.lefigaro.fr/actualite-france/frederique-vidal-l-enjeu-est-de-preserver-le-taux-d-insertion-professionnelle-20210921].
 
 
 ```{r l3m1.decal, out.height="60%"}
@@ -69,15 +69,15 @@ sise %>%
 
 L’État cherche donc à développer une politique de « gestion prévisionnelle des emplois et des compétences (GPEC) de la nation »^[https://education.newstank.fr/article/view/306378/rencontre-emmanuel-macron-etablissements-themes-discutes-elysee-14-11-2023.html], et pour cela développe plusieurs outils de pilotage, sans forcément en faire la publicité, tels que FRESQ (Formations Reconnues de l’Enseignement Supérieur de Qualité)^[https://choisirleservicepublic.gouv.fr/offre-emploi/c-esr-a2-3---cheffe-de-projet-informatique---domaine--formations--hf-reference-2024-1477164/] et Quadrant (positionnement des mentions en fonction du taux de réussite et du taux d'insertion professionnelle). 
 
-Pour fonctionner, ces outils ont besoin d'être alimentés en données précises et exhaustives sur l'insertion professionnelle des diplômés. C'est l'objet du dispositif InserSup (@siesInserSupNoteMethodologique2023) porté par le MESR et développé par le SIES. Ce projet à vocation à remplacer, au niveau central, les enquêtes d'insertion professionnelle (IP), traditionnellement menées dans les établissements par les observations de la vie étudiante (OVE).
+Pour fonctionner, ces outils ont besoin d'être alimentés en données précises et exhaustives sur l'insertion professionnelle des diplômés. C'est l'objet du dispositif InserSup (@siesInserSupNoteMethodologique2023) porté par le MESR et développé par le SIES. Ce projet à vocation à remplacer, au niveau central, les enquêtes d'insertion professionnelle (IP), traditionnellement menées dans les établissements par les observations de la vie étudiante (OVE). Insersup incarne ainsi la double fonction des statistiques, à la fois outils de preuve et outils de gouvernement (@desrosieres_pour_2008)
 
 Cette communication propose de décrire comment sont produites ces données, et d'identifier les différences entre les deux dispositifs de production et leurs résultats. Cette analyse permet d'étudier la mise en place du pilotage de l'offre de formation, qui _in fine_ décrit notre politique d'enseignement supérieur au niveau national. 
 
 ## Méthodologie 
 
-Cet travail s'appuie d'une part sur l'analyse des méthodologie de InserSup (@siesInserSupNoteMethodologique2023) et de l'enquête IP, et d'autre part sur la publication en données ouvertes de leurs résultats^[https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-insersup]. 
+Ce travail prend appui sur les travaux séminaux de Desrosières, qui nous ont appris que les données ne reflètent pas le monde social mais le « reconfigurent et [le] transforment » (@desrosieres_pour_2008), la mesure étant précédée d’une étape techno-politique de définition des conventions d’équivalence à appliquer. 
 
-Il s'inscrit donc à la croisée entre la sociologie des instruments et la science des données. 
+Pour identifier les conséquences de cette étape techno-politique, nous analysons la méthodologie de InserSup (@siesInserSupNoteMethodologique2023) et de l'enquête IP, puis nous exploitons les données ouvertes de leurs résultats^[https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-insersup]. 
 
 Les traitements sont effectués avec R [@rcoreteamLanguageEnvironmentStatistical2013] et les visualisations
 avec ggplot [@wickhamGgplot2ElegantGraphics2016], en respectant les principes fondamentaux 
@@ -89,7 +89,7 @@ Des informations additionnelles sont issues du projet kpiESR^[https://github.com
 
 ## Principaux résultats
 
-Notre analyse montre que les méthodes de production sont radicalement différentes : enquête auprès des étudiants pour IP ; et croisement de fichiers administratifs pour InserSup. Ces méthodes de production présentent des limites très différentes : taux de réponse, imprécisions et suspicion de chanstique d'un côté ; céssité aux informations non quantifiées dans les fichiers de l'autre.
+Notre analyse montre que les méthodes de production sont radicalement différentes : enquête auprès des étudiants pour IP ; et croisement de fichiers administratifs pour InserSup. Ces méthodes de production présentent des limites très différentes : taux de réponse, imprécisions et suspicion de chanstique^[La _chanstique_ réfère à la manipulation des indicateurs.] (@brunoBenchmarkingEtatSous2013) d'un côté ; cécité aux informations non quantifiées dans les fichiers de l'autre.
 
 Au final, on dispose de trois indicateurs : 
 
@@ -97,9 +97,9 @@ Au final, on dispose de trois indicateurs :
 - taux d’emploi (IP) : diplômés en emploi / diplômés ;
 - taux d’emploi salarié en France (InserSup) : diplômés en emploi seulement salarié en France / diplômés.
 
-Leur définition dépend essentiellement de contingences techniques mais aboutissent à des considérations très différentes : satisfaction des étudiants d'un côté, satisfaction des besoins de l'emploi français de l'autre. 
+Leur définition dépend essentiellement de contingences techniques mais aboutissent à des considérations politiques très différentes : satisfaction des étudiants d'un côté, satisfaction des besoins de l'emploi français de l'autre. 
 
-Dans le cadre du pilotage de l'offre de formation, la valeur absolue des indicateurs compte moins que les comparaisons qui peuvent être faites : si on souhaite par exemple transformer 15% l'offre de formation, il est essentiel d'identifier les 15% de formations qui sont *moins performantes que les autres*. Le choix de l'indicateur peut donc conduire à des décisions de pilotage différentes, si l'ordre entre les formations est différent.
+Dans le cadre du pilotage de l'offre de formation, la valeur absolue des indicateurs compte moins que les comparaisons qui peuvent être faites : si on souhaite par exemple « transformer le quart [des] formations », le choix de l'indicateur peut donc conduire à des décisions de pilotage différentes, si l'ordre entre les formations est différent.
 
 La comparaison de ces trois indicateurs permet de faire plusieurs observations.
 
@@ -194,6 +194,8 @@ ipm %>%
 
 Ainsi, nous voyons que ces indicateurs ne mesurent pas tant les performances intrinsèques des établissements, que des particularités des secteurs d'emplois, sur lesquelles les universités n'ont aucune prise. L'utilisation des indicateurs pour piloter leur offre de formation est beaucoup moins technique qu'elle ne soulève des questions hautement politiques, telles que la francophonie ou la formation d'étudiants pour l'international.
 
+\newpage
+
 En croisant le taux d'emploi salarié en France avec d'autres indicateurs, d'autres questions se soulèvent systématiquement. Par exemple, une utilisation directe du taux d'emplois salarié en France pour moduler les capacités d'acceuil des établissements peut conduire à une réduction du nombre de places dans les filières les plus féminisées.
 
 ```{r}
@@ -228,7 +230,9 @@ ipm %>%
   scale_shape_discrete(guide = guide_legend(reverse = TRUE))  
 ```
 
-Il faut ici noter que toutes les différences que nous venons de voir trouvent facilement des explications légitimes. Or, ces explications neutralisent l'information portée par la donnée dès lors qu'on veut s'en servir pour du pilotage : même si on estime souhaitable de réduire la dépense publique dans les filières « qui ne mènent pas à l'emploi », il sera difficile d'assumer d'affaiblir la francophonie ou les poursuite d'étude des femmes, et il sera impossible d'empêcher les diplômés d'aller travailler à l'étranger si les conditions d'embauche y sont meilleures.
+\newpage
+
+Il faut ici noter que toutes les différences que nous venons de voir trouvent facilement des explications légitimes, souvent sans rapport avec les politiques académiques de réussite. Or, ces explications neutralisent l'information portée par la donnée dès lors qu'on veut s'en servir pour du pilotage : même si on estime souhaitable de réduire la dépense publique dans les filières « qui ne mènent pas à l'emploi », il sera difficile d'assumer d'affaiblir la francophonie ou les poursuite d'étude des femmes, et il sera impossible d'empêcher les diplômés d'aller travailler à l'étranger si les conditions d'embauche y sont meilleures.
 
 Il y a donc ici une forme de démesure dans l'ambition prêtée à ces mesures de l'insertion professionnelle : si elles sont intéressantes pour comprendre le système et suivre son évolution, elles deviennent médiocres dès lors qu'on s'en sert pour prendre des décisions de pilotage de l'offre de formation. C'est une parfaite illustration de la « Loi de Goodhart » : « lorsqu'une mesure devient un objectif, elle cesse d'être une bonne mesure » (@strathernImprovingRatingsAudit1997).
 
@@ -236,10 +240,11 @@ En conclusion, la mesure de l'insertion professionnelle se confronte donc à des
 
 # Eléments de discussion
 
-Cette proposition amène plusieurs éléments de discussion, dont notamment :
+Cette proposition amène plusieurs éléments de discussion, qui pourront être développées dans la communication si elle est retenue, dont notamment :
 
 - Si une utilisation directe des indicateurs est impossible, est-ce qu'une utilisation indirecte reste envisageable pour un pilotage de l'offre de formation ?
 - Quelles sont les autres utilisations possibles ? 
+- Quelles pourraient être les conséquences d'une extension d'InserSup au secteur privé ?
 - Est-ce que tous les objectifs de l'ESR peuvent être réductibles à des indicateurs de pilotage ?
 - Est-ce que les observatoires effectuant les enquêtes IP sont destinés à disparaitre ou à redefinir leurs missions ?
 - Est-ce que la bascule d'une production de données locales par enquête à une production de données nationales par croisement de fichiers présente des dangers ?
