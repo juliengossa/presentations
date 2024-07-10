@@ -3,9 +3,9 @@ title: "kpiESR : des indicateurs clés de performance pour les établissements d
 author: "Pauline Boyer et Julien Gossa, Laboratoire SAGE, Université de Strasbourg, CPESR"
 date: "`r Sys.Date()`"
 output: 
+  github_document: default
   pdf_document: 
     latex_engine: xelatex
-  github_document: default
 # header-includes:
 urlcolor: blue
 linkcolor: blue
@@ -62,9 +62,10 @@ Cette proposition de communication prend le parti de la perspective réformiste 
 ## Méthodologie
 
 L'approche développée au sein de la Conférence des praticien⋅ne⋅s de l'ESR (CPESR) consiste à exploiter les données administratives ouvertes par le ministère pour élaborer des indicateurs clés de performances (kpi) 
-à la fois exhaustifs et synthétiques. Ce travail a représenté un double défi : en sciences des données, avec l’agrégation et la représentation des informations ; et en sciences de l'action publique, avec la sélection d'un sous-ensemble d'indicateur prioritairement pertinents, et la conception d'indicateurs clés composites.
+à la fois exhaustifs et synthétiques. Ce travail s'inscrit à la croisée des sciences des données, avec l’agrégation et la représentation des informations ; et des sciences de l'action publique, avec la sélection d'un sous-ensemble d'indicateur prioritairement pertinents, et la conception d'indicateurs clés composites.
 
 Notre objectif est de construire des tableaux de bord permettant de percevoir les politiques publiques de l'ESR, en se confrontant à plusieurs objectifs contradictoires :
+
 - lisibilité vs. exhaustivité : la lisibilité demande de limiter au maximum le nombre d'indicateurs, alors que l’exhaustivité invite à les démultiplier ;
 - robustesse vs. finesse : agréger les données permet de gommer leurs imperfections, mais réduit la finesse des analyses permises ; 
 - localité vs. globalité : agréger les données au niveau des établissements permet de percevoir les différenciations locales, mais agréger au niveau national est indispensable pour percevoir les transformations globales ;
@@ -94,6 +95,13 @@ Ces indicateurs sont déclinés en deux types :
 
 - __Les indicateurs primaires et secondaires__ : au plus proche des jeux de données ouvertes, ils présentent les effectifs étudiants et personnels, ainsi que les finances. 
 - __Les indicateurs clés de performance__ : combinaisons des précédents, plus représentatives des missions.
+  - __Taux de titularité__ : effectifs titulaires / total des effectifs
+  - __Taux de SCSP__ : subvention pour charge de service public / total des ressources
+  - __Taux d'encadrement pédagogique__ : nombre d'enseignants titulaires pour 100 étudiants
+  - __Taux d'encadrement administratif__ : effectifs administratifs / total des effectifs
+  - __Ressources par étudiant__ : total des ressources / effectifs étudiant en Licence et Master
+  - __Recettes formation par étudiant__ : total des recettes formation (droits d'inscription, alternance, VAE, etc.) / effectifs étudiants 
+  - __Recette recherche par EC__ : total des recettes recherche (ANR, contrat, IDEx) / effectifs enseignant-chercheur
 
 
 Trois représentations sont ensuite utilisées :
@@ -105,7 +113,7 @@ en valeur 100 pour une année de référence ;
 autres établissements.
 
 
-Ces représentations permettent de produire des tableaux de bord pour tous les établissements dans un document unique^[https://cpesr.fr/tableau-de-bord-esr/] mais aussi accessibles par une interface web interactive^[https://data.cpesr.fr/tdbesr/]. Elles permettent aussi de visualiser des séries, et de comparer les établissements, dans l'espace et le temps.
+Ces représentations permettent de produire des tableaux de bord pour tous les établissements, avec des informations contextualisées dans le temps et dans l'espace ESR. Ces tableaux de bord sont réunis dans un document unique^[https://cpesr.fr/tableau-de-bord-esr/] mais aussi accessibles par une interface web interactive^[https://data.cpesr.fr/tdbesr/]. 
 
 ### Tableaux de bord
 
@@ -171,6 +179,8 @@ combine_plots_groupe(plots)
 combine_plots_series(plots)
 ```
 
+\newpage
+
 ### Séries temporelles
 
 Les séries temporelles permettent de percevoir des évolutions. Par exemple, voilà la représentation, en valeur 100 pour 2013 et dans le périmètre MESR, des effectifs enseignants et étudiants, ainsi que du taux d'encadrement. Cette représentation est déclinable par établissement. 
@@ -179,7 +189,6 @@ Les séries temporelles permettent de percevoir des évolutions. Par exemple, vo
 kpiesr_plot_line("Ensemble", c("kpi.ETU.P.effectif","kpi.ENS.S.titulaires","kpi.K.ensPetu"), val = "evolution") 
 ```
 
-\newpage
 
 ### Représentations spatiales
 
@@ -198,15 +207,16 @@ Les représentations spatiales permettent de comparer les établissements entre 
 ## Limites de l'approche et éléments de discussion
 
 Bien qu'étant le projet public le plus avancé en matière d'agrégation des données de l'ESR, kpiESR présente plusieurs limites, d'abord dûes à l'utilisation des données ouvertes : 
+
 - disponibilité : les séries temporelles sont courtes (la plus ancienne débute en 2006), varient en fonction du jeu de données, et on généralement 18 mois de retard par rapport à l'année courante ;
 - limitation : en partant des données disponibles plutôt que des besoins, on limite le nombre et le type d'indicateurs calculables ;
 - qualité : de nombreux établissements présentent des données partielles ou de mauvaises qualité, ainsi que des ruptures de séries à l'occasion des réformes et transformations telles que les regroupements (fusions, COMUEs, EPE). 
 
 Le projet est aussi totalement dépendant de la mise à jour régulière des données ouvertes, ce qui peut poser problème si l’État ralentit ou cesse leur publication. Le projet est donc tributaire de ce que l'Etat souhaite et peut montrer, en quantité comme dans la définition de chaque variable.
 
-Mais le projet est également tributaire de ce que les établissements peuvent et souhaitent montrer. Nous avons ainsi identifié plusieurs cas de chanstique (@brunoBenchmarkingEtatSous2013), c'est-à-dire de manipulation des indicateurs, ainsi que plusieurs techniques d'échappement à la connaissance de l’État, notamment pour les informations financières.
+Mais le projet est également tributaire de ce que les établissements peuvent et souhaitent montrer. Nous avons ainsi identifié plusieurs cas de chanstique (@brunoBenchmarkingEtatSous2013), c'est-à-dire de manipulation des indicateurs, ainsi que plusieurs techniques de « transparence stratégiquement opaque », notamment pour les informations financières.
 
-Enfin, le projet pouvant servir au _benchmarking_, se pose la question de la mise en compétition des établissements, qui se matérialise notamment par la possibilité de fabriquer des classements. Cela interroge immédiatement les choix de définition des indicateurs, qui peuvent tous être retournés. Par exemple, le budget par étudiant reflète l'investissement de l’État, quand le nombre d'étudiants formés pour un budget donné reflète la productivité des établissements. Il s'agit donc de choix éminament techno-politiques.
+Enfin, le projet pouvant servir au _benchmarking_, se pose la question de la mise en compétition des établissements, qui se matérialise notamment par la possibilité de fabriquer des classements. Cela interroge directement les choix de définition des indicateurs, qui peuvent tous être retournés. Par exemple, le budget par étudiant reflète l'investissement de l’État, quand son inverse, le nombre d'étudiants formés pour un budget donné, reflète la productivité des établissements. Il s'agit donc de choix éminemment techno-politiques, qui conduisent à des classements totalement inversés, à partir des mêmes données.
 
 Si elle est retenue, la communication décrira la définition des indicateurs sélectionnés et les choix qui les sous-tendent, expliquera en détail les représentations graphiques, puis présentera quelques enseignements sur les politiques publiques de l'ESR, ainsi que des illustrations concrètes des limites de l'approche.
 
