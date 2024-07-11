@@ -3,9 +3,9 @@ title: "kpiESR : des indicateurs clés de performance pour les établissements d
 author: "Pauline Boyer et Julien Gossa, Laboratoire SAGE, Université de Strasbourg, CPESR"
 date: "`r Sys.Date()`"
 output: 
-  github_document: default
   pdf_document: 
     latex_engine: xelatex
+  github_document: default
 # header-includes:
 urlcolor: blue
 linkcolor: blue
@@ -36,7 +36,7 @@ theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/R
 ```
 
 ```{r wc}
-wordcountaddin::text_stats()
+# wordcountaddin::text_stats()
 ```
 
 ## Enjeu et contexte

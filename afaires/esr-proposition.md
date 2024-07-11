@@ -3,14 +3,7 @@ l’ESR, des données ouvertes aux représentations graphiques
 ================
 Pauline Boyer et Julien Gossa, Laboratoire SAGE, Université de
 Strasbourg, CPESR
-2024-07-10
-
-| Method          | koRpus      | stringi       |
-|:----------------|:------------|:--------------|
-| Word count      | 1759        | 1796          |
-| Character count | 11968       | 12635         |
-| Sentence count  | 87          | Not available |
-| Reading time    | 8.8 minutes | 9 minutes     |
+2024-07-11
 
 ## Enjeu et contexte
 
