@@ -1,6 +1,8 @@
 ---
 title: "Mesures et démesure de l'insertion professionnelle pour le pilotage de l'offre de formation"
-author: "Julien Gossa, Laboratoire SAGE, Université de Strasbourg"
+author: 
+ - Marie Lapeyronnie, ResoSup - RESeau des Observatoires de l’enseignement SUPérieur 
+ - Julien Gossa, Laboratoire SAGE, Université de Strasbourg
 date: "`r Sys.Date()`"
 output: 
  pdf_document:
@@ -233,6 +235,8 @@ ipm %>%
 \newpage
 
 Il faut ici noter que toutes les différences que nous venons de voir trouvent facilement des explications légitimes, souvent sans rapport avec les politiques académiques de réussite. Or, ces explications neutralisent l'information portée par la donnée dès lors qu'on veut s'en servir pour du pilotage : même si on estime souhaitable de réduire la dépense publique dans les filières « qui ne mènent pas à l'emploi », il sera difficile d'assumer d'affaiblir la francophonie ou les poursuite d'étude des femmes, et il sera impossible d'empêcher les diplômés d'aller travailler à l'étranger si les conditions d'embauche y sont meilleures.
+
+Le pilotage de l'offre de formation qui prend forme croise difficilement les grands enjeux portés par les universités et leur obligation d'informer les étudiants et d'accompagner leur choix d'orientation. La publication des indicateurs de pilotage issus d'insersup sur la plateforme MonMaster et les interrogations qu'ils ont engendrées auprès de la communauté universitaire en sont une des illustrations. 
 
 Il y a donc ici une forme de démesure dans l'ambition prêtée à ces mesures de l'insertion professionnelle : si elles sont intéressantes pour comprendre le système et suivre son évolution, elles deviennent médiocres dès lors qu'on s'en sert pour prendre des décisions de pilotage de l'offre de formation. C'est une parfaite illustration de la « Loi de Goodhart » : « lorsqu'une mesure devient un objectif, elle cesse d'être une bonne mesure » (@strathernImprovingRatingsAudit1997).
 
