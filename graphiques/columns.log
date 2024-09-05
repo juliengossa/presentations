@@ -1,0 +1,78 @@
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.10.1)  1 MAY 2023 21:31
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**columns.tex
+(./columns.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21>
+! Undefined control sequence.
+l.24 \addtobeamertemplate
+                         {frametitle}{}{%
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.24 \addtobeamertemplate{f
+                           rametitle}{}{%
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no f ("66) in font nullfont!
+Missing character: There is no r ("72) in font nullfont!
+Missing character: There is no a ("61) in font nullfont!
+Missing character: There is no m ("6D) in font nullfont!
+Missing character: There is no e ("65) in font nullfont!
+Missing character: There is no t ("74) in font nullfont!
+Missing character: There is no i ("69) in font nullfont!
+Missing character: There is no t ("74) in font nullfont!
+Missing character: There is no l ("6C) in font nullfont!
+Missing character: There is no e ("65) in font nullfont!
+Runaway argument?
+{\protect \makebox [2em][l]{\protect \usebeamercolor [fg]{structure}\insertfram
+enumber \ETC.
+! Paragraph ended before \addcontentsline was complete.
+<to be read again> 
+                   \par 
+l.27   \insertframetitle\par
+                            }%
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 24--27
+[] 
+ []
+
+! Too many }'s.
+l.28 }
+      
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+)
+! Emergency stop.
+<*> columns.tex
+               
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 26 strings out of 478163
+ 428 string characters out of 5853706
+ 290038 words of memory out of 5000000
+ 20744 multiletter control sequences out of 15000+600000
+ 469259 words of font info for 28 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 12i,0n,12p,82b,18s stack positions out of 5000i,500n,10000p,200000b,80000s
+No pages of output.

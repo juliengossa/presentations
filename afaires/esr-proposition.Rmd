@@ -181,6 +181,7 @@ combine_plots_series(plots)
 
 \newpage
 
+
 ### Séries temporelles
 
 Les séries temporelles permettent de percevoir des évolutions. Par exemple, voilà la représentation, en valeur 100 pour 2013 et dans le périmètre MESR, des effectifs enseignants et étudiants, ainsi que du taux d'encadrement. Cette représentation est déclinable par établissement. 
