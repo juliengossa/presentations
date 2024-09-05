@@ -1,0 +1,53 @@
+---
+title: "Mesures et démesures de l'insertion professionnelle pour le pilotage de l'offre de formation"
+author: "Julien Gossa"
+format: pdf
+---
+
+```{r wc}
+wordcountaddin::text_stats()
+```
+
+# Enjeu et problématique de recherche
+
+Cette proposition de communication prend pour problématique la mesure de l'insertion professionnelle des diplômés de l'enseignement supérieur, en l'inscrivant dans la question du pilotage de l'offre de formation.
+
+Le « pilotage de l'offre de formation » désigne la gestion et l'ajustement des programmes éducatifs proposés par les établissements d'enseignement en fonction des besoins économiques, sociaux et professionnels. Cela implique la planification, la régulation et l'évaluation des formations pour aligner les compétences des diplômés avec les attentes du marché du travail et les priorités nationales, tout en tenant compte des capacités des institutions éducatives et des aspirations des étudiants. 
+
+Ce pilotage a pris une ampleur inédite ces dernières années, d'une 
+
+    Réallocation des Ressources : Rediriger les moyens vers des formations offrant de meilleures perspectives d'emploi.
+    Indicateurs d'Insertion : Utilisation d'indicateurs tels que le taux d'insertion professionnelle et le taux d'emploi salarié en France pour évaluer et réformer les formations.
+    Équité et Diversité : Assurer que la focalisation sur l'employabilité ne nuise pas à la diversité des disciplines et aux opportunités internationales.
+    Gestion Prévisionnelle des Emplois et des Compétences (GPEC) : Adapter l'offre de formation aux besoins du marché du travail, tout en évitant des décisions arbitraires basées sur des indicateurs potentiellement manipulables.
+
+Les problématiques incluent la difficulté de choisir les indicateurs appropriés, le risque de réformes contre-productives, et la complexité d'équilibrer les objectifs d'employabilité avec la qualité et la diversité de l'enseignement supérieur.
+
+- la méthodologie ;
+
+- les principaux résultats ;
+
+- des éléments de discussion ;
+
+- les principales références bibliographiques.
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this 
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
