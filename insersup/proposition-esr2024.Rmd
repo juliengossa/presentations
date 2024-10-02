@@ -5,9 +5,9 @@ author:
  - Julien Gossa, Laboratoire SAGE, Université de Strasbourg
 date: "`r Sys.Date()`"
 output: 
+ github_document: default
  pdf_document:
    dev: cairo_pdf
- github_document: default
 bibliography: 20240628-ESR.bib
 #csl: iso690-author-date-fr-no-abstract.csl
 ---
@@ -107,13 +107,13 @@ La comparaison de ces trois indicateurs permet de faire plusieurs observations.
 
 Premièrement, la vision rapportée par InserSup est globalement 10 points en dessous de IP, mais s'effondre en Lettres-Langues-Arts (LLA). 
 
-```{r tdx.dom}
+```{r tdx.dom, results='asis'}
 load("insertion-pro.RData")
 ipmn %>%
   filter(str_detect(Secteur.disciplinaire,"Ensemble")) %>% 
   mutate(Ensemble=str_detect(Domaine,"Ensemble")) %>%
   mutate(diff=Taux.d.emploi.salarié.en.France-Taux.d.insertion) %>%
-  pivot_taux() %>%
+  pivot_taux() %>% 
   ggplot(aes(x=Code.du.domaine,y=Valeur,fill=Domaine, color=Ensemble)) +
   geom_col(alpha=0.8) +
   scale_x_discrete(name="") +
@@ -139,15 +139,15 @@ df <- ipmn %>%
     slice_tail(df,n=5),
   ) %>%
   group_by(Secteur.disciplinaire) %>%
-  pivot_taux() %>%
-  ungroup() %>%
+  pivot_taux() %>% 
+  ungroup() %>% 
   ggplot(aes(x=Valeur,y=reorder(Secteur.disciplinaire,-Valeur, FUN=max),color=Indicateur)) +
   geom_line(color="grey",size=2) + geom_point(aes(shape=Indicateur),size=4) +
   scale_x_continuous(name="Taux",label=~scales::percent(.x/100)) +
   scale_y_discrete(name="",limits=rev) +
   scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
   scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
-  ggtitle("Comparaison des trois taux des diplômés de Master pas discipline","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+  ggtitle("Comparaison des trois taux des diplômés de Master par discipline","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
 
 ```
 
@@ -191,7 +191,7 @@ ipm %>%
   ylab("") +
   scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
   scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
-  ggtitle("Comparaison des trois taux des diplômés de Master à l'Université de Lorraine","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement")
+  ggtitle("Comparaison des trois taux des diplômés de Master\nà l'Université de Lorraine","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement")
 ```
 
 Ainsi, nous voyons que ces indicateurs ne mesurent pas tant les performances intrinsèques des établissements, que des particularités des secteurs d'emplois, sur lesquelles les universités n'ont aucune prise. L'utilisation des indicateurs pour piloter leur offre de formation est beaucoup moins technique qu'elle ne soulève des questions hautement politiques, telles que la francophonie ou la formation d'étudiants pour l'international.
@@ -207,7 +207,8 @@ ipmn.taux %>%
   geom_smooth(method = "lm", size=0.1) + geom_point(aes(color=Code.du.domaine),size=2) +
   ggrepel::geom_text_repel(aes(label=Secteur.disciplinaire), size=2, segment.size=0.1) +
   scale_x_continuous(labels = scales::percent, name = "Taux de féminité") +
-  scale_y_continuous(labels = ~ scales::percent(.x,scale=1), name= "Taux d'emploi salarié en France")
+  scale_y_continuous(labels = ~ scales::percent(.x,scale=1), name= "Taux d'emploi salarié en France") +
+  ggtitle("Taux d'emploi salarié en France et taux de féminité des diplômés de Master","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement")
 ```
 
 
@@ -229,7 +230,8 @@ ipm %>%
   scale_x_continuous(name="Budget par étudiant", labels = ~ paste(.x/1e3,"k€")) +
   scale_y_continuous(name="Taux d'emploi salarié en France", labels= ~ scales::percent(.x, scale = 1)) +
   scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
-  scale_shape_discrete(guide = guide_legend(reverse = TRUE))  
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
+  ggtitle("Taux d'emploi salarié en France et budget par étudiant","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement")
 ```
 
 \newpage

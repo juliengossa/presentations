@@ -278,7 +278,7 @@ plot_categorie_ponctuel <- function(categorie="Activite", agemin = 15, agemax = 
     { if (!keep_na) na.omit(.) else . } %>%
     { if (fill) group_by(.,Annee) %>% mutate(Population = Population / sum(Population)) else . } %>%
     ungroup() %>%
-    complete(Annee, Categorie, fill = list(Population = 0)) %>%
+    complete(Annee, Categorie, fill = list(Population = 0)) %>% 
     mutate(Population = ifelse(Sexe == "H",-Population,Population)) %>%
     ggplot(aes(y=Categorie,x=Population,fill=Sexe, group=Sexe)) +
     geom_col(alpha=0.8, color="white",width = 1) + 

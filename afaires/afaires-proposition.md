@@ -3,7 +3,7 @@ l’ESR, des données ouvertes aux représentations graphiques
 ================
 Pauline Boyer et Julien Gossa Laboratoire SAGE, Université de
 Strasbourg, CPESR
-2023-05-04
+2024-10-02
 
 De profonds changements sont en cours dans l’enseignement supérieur et
 la recherche (ESR) en France depuis le début du XXIe siècle. Plusieurs
@@ -95,9 +95,9 @@ bord en deux volets, d’abord les indicateurs clés de performance, et
 ensuite les données primaires. Par exemple, voici les tableaux de bord
 pour l’ensemble du MESRI :
 
-<img src="afaires-proposition_files/figure-gfm/tdb.kpi-1.png" width="100%" />
+<img src="afaires-proposition_files/figure-gfm/tdb.kpi-1.png" width="100%" style="display: block; margin: auto;" />
 
-<img src="afaires-proposition_files/figure-gfm/tdb.series-1.png" width="100%" />
+<img src="afaires-proposition_files/figure-gfm/tdb.series-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Séries temporelles
 
@@ -107,7 +107,7 @@ représentation, en valeur 100 pour 2013 et dans le périmètre MESRI, des
 effectifs enseignants et étudiants, ainsi que du taux d’encadrement.
 Cette représentation peut être facilement déclinée par établissement.
 
-<img src="afaires-proposition_files/figure-gfm/serie-1.png" width="672" />
+<img src="afaires-proposition_files/figure-gfm/serie-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Représentations spatiales
 
@@ -117,10 +117,7 @@ s’avérer utile au *benchmarking*. Par exemple, voici les universités en
 fonction des effectifs étudiants et enseignants, selon le périmètre
 d’excellence, en 2020 :
 
-    ## Joining, by = c("Groupe", "pid", "Etablissement", "Groupe.détaillé",
-    ## "Comparable")
-
-<img src="afaires-proposition_files/figure-gfm/plan-1.png" width="672" />
+<img src="afaires-proposition_files/figure-gfm/plan-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Limites de l’approche et proposition de communication
 
