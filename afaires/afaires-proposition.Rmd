@@ -21,7 +21,7 @@ options(dplyr.summarise.inform = FALSE)
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.align = "center", out.width="100%")
 
 knitr::opts_chunk$set(pdf.options(encoding = "CP1250"))
-knitr::opts_chunk$set(dev = "cairo_pdf")
+#knitr::opts_chunk$set(dev = "cairo_pdf")
 
 
 library(tidyverse)
@@ -123,7 +123,6 @@ theme_set(ggcpesrthemes::theme_cpesr() +
 grp <- "Ensemble"
 pid <- "Universités et assimilés"
 pid <- "Ensemble"
-
 
 plots <- kpiesr_plot_all(rentrée, pid, grp, style.k=k_style, style.o=o_style, style.o.norm = onorm_style)
 ```

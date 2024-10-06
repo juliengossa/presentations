@@ -3,7 +3,7 @@ l’ESR, des données ouvertes aux représentations graphiques
 ================
 Pauline Boyer et Julien Gossa, Laboratoire SAGE, Université de
 Strasbourg, CPESR
-2024-07-11
+2024-10-03
 
 ## Enjeu et contexte
 
@@ -184,8 +184,10 @@ bord en deux volets, d’abord les indicateurs clés de performance, et
 ensuite les données primaires. Par exemple, voici les tableaux de bord
 pour l’ensemble du MESR :
 
-<embed src="esr-proposition_files/figure-gfm/tdb.kpi-1.pdf" width="100%" style="display: block; margin: auto;" type="application/pdf" />
-<embed src="esr-proposition_files/figure-gfm/tdb.series-1.pdf" width="100%" style="display: block; margin: auto;" type="application/pdf" />
+<img src="esr-proposition_files/figure-gfm/tdb.kpi-1.png" width="100%" style="display: block; margin: auto;" />
+
+<img src="esr-proposition_files/figure-gfm/tdb.series-1.png" width="100%" style="display: block; margin: auto;" />
+
 ### Séries temporelles
 
 Les séries temporelles permettent de percevoir des évolutions. Par
@@ -194,7 +196,7 @@ périmètre MESR, des effectifs enseignants et étudiants, ainsi que du
 taux d’encadrement. Cette représentation est déclinable par
 établissement.
 
-<embed src="esr-proposition_files/figure-gfm/serie-1.pdf" width="100%" style="display: block; margin: auto;" type="application/pdf" />
+<img src="esr-proposition_files/figure-gfm/serie-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Représentations spatiales
 
@@ -205,7 +207,11 @@ Par exemple, voici les universités en fonction des taux d’encadrement
 pédagogique et des budgets par étudiant, selon le périmètre
 d’excellence, en 2020.
 
-<embed src="esr-proposition_files/figure-gfm/unnamed-chunk-1-1.pdf" width="100%" style="display: block; margin: auto;" type="application/pdf" />
+<img src="esr-proposition_files/figure-gfm/unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" />
+
+<img src="esr-proposition_files/figure-gfm/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
+
+<img src="esr-proposition_files/figure-gfm/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Limites de l’approche et éléments de discussion
 
@@ -253,7 +259,8 @@ illustrations concrètes des limites de l’approche.
 
 ## Références
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-austSeMettreIDEX2018" class="csl-entry">
 

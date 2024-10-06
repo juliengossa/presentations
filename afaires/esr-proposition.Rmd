@@ -3,9 +3,9 @@ title: "kpiESR : des indicateurs clés de performance pour les établissements d
 author: "Pauline Boyer et Julien Gossa, Laboratoire SAGE, Université de Strasbourg, CPESR"
 date: "`r Sys.Date()`"
 output: 
+  github_document: default
   pdf_document: 
     latex_engine: xelatex
-  github_document: default
 # header-includes:
 urlcolor: blue
 linkcolor: blue
@@ -19,10 +19,10 @@ bibliography: 20240628-ESR-TDB.bib
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 options(dplyr.summarise.inform = FALSE)
-knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.align = "center", out.width="100%")
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.align = "center", out.width="100%", fig.retina = 2)
 
 knitr::opts_chunk$set(pdf.options(encoding = "CP1250"))
-knitr::opts_chunk$set(dev = "cairo_pdf")
+#knitr::opts_chunk$set(dev = "cairo_pdf")
 
 
 library(tidyverse)
@@ -163,6 +163,9 @@ grp <- "Ensemble"
 pid <- "Universités et assimilés"
 pid <- "Ensemble"
 
+# grp <- "Universités et assimilés"
+# pid <- "hlX1r"
+
 
 plots <- kpiesr_plot_all(rentrée, pid, grp, style.k=k_style, style.o=o_style, style.o.norm = onorm_style)
 ```
@@ -187,7 +190,7 @@ combine_plots_series(plots)
 Les séries temporelles permettent de percevoir des évolutions. Par exemple, voilà la représentation, en valeur 100 pour 2013 et dans le périmètre MESR, des effectifs enseignants et étudiants, ainsi que du taux d'encadrement. Cette représentation est déclinable par établissement. 
 
 ```{r serie, fig.asp=9/16}
-kpiesr_plot_line("Ensemble", c("kpi.ETU.P.effectif","kpi.ENS.S.titulaires","kpi.K.ensPetu"), val = "evolution") 
+kpiesr_plot_line("Ensemble", c("kpi.ETU.P.effectif","kpi.ENS.S.titulaires","kpi.K.ensPetu"), val = "evolution") + scale_x_continuous(breaks = seq(2013, 2021, 2), limits = c(2013, 2021))
 ```
 
 
@@ -196,14 +199,25 @@ kpiesr_plot_line("Ensemble", c("kpi.ETU.P.effectif","kpi.ENS.S.titulaires","kpi.
 Les représentations spatiales permettent de comparer les établissements entre eux, selon tous les indicateurs du projet. C'est un outil qui peut s'avérer utile au _benchmarking_, comme à l'identifier de corrélations. Par exemple, voici les universités en fonction des taux d'encadrement pédagogique et des budgets par étudiant, selon le périmètre d'excellence, en 2020.
 
 ```{r plan, eval=FALSE}
-  kpiesr_plot_map(rentrée = 2020, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.ETU.P.effectif", yvar="kpi.ENS.P.effectif") +
-  xlab("Effectifs étudiants") + ylab("Effectifs enseignants")
+  kpiesr_plot_map(rentrée = 2021, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.ETU.P.effectif", yvar="kpi.ENS.P.effectif") +
+  xlab("Effectifs étudiants") + ylab("Effectifs enseignants") + theme_cpesr()
 ```
 
 ```{r}
-  kpiesr_plot_map(rentrée = 2020, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.K.ensPetu", yvar="kpi.K.resPetu") + 
-  xlab("Taux d'encadrement pédagogique (titulaire / 100 étudiants)") + ylab("Budget par étudiant (€)")
+  kpiesr_plot_map(rentrée = 2021, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.K.ensPetu", yvar="kpi.K.resPetu") + 
+  xlab("Taux d'encadrement pédagogique (titulaires / 100 étudiants)") + ylab("Budget par étudiant (€)") + theme_cpesr()
 ```
+
+```{r}
+  kpiesr_plot_map(rentrée = 2021, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.K.resPetu", yvar="kpi.K.forPetu") + 
+  xlab("Budget par étudiant") + ylab("Recettes formation par étudiant") + theme_cpesr()
+```
+
+```{r}
+  kpiesr_plot_map(rentrée = 2021, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.K.dotPres", yvar="kpi.K.titPper") + 
+  xlab("Taux de SCSP") + ylab("Taux de titularité") + theme_cpesr()
+```
+
 
 ## Limites de l'approche et éléments de discussion
 
