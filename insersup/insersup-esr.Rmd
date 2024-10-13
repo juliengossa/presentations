@@ -1,0 +1,283 @@
+---
+title: "Mesures et démesure de l'insertion professionnelle pour le pilotage de l'offre de formation"
+subtitle: "Enquête IP vs. Insersup vs. Goodhart"
+author: 
+- Marie Lapeyronnie - Université de Bordeaux - ResoSup \newline
+- Julien Gossa - Laboratoire SAGE - Université de Strasbourg
+
+date: "Colloque ESR - Poitiers - 15-10-2024"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    dev: cairo_pdf
+    #includes:
+    #  in_header: columns.tex
+    #keep_tex: True
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+options(dplyr.summarise.inform = FALSE)
+knitr::opts_chunk$set(fig.asp=9/16, fig.width = 7, fig.align = "center", out.height = "85%")
+  
+library(tidyverse)
+library(ggcpesrthemes)
+theme_set(theme_cpesr() + theme(plot.title = element_text(hjust=1),plot.subtitle = element_text(hjust=1),
+                                legend.title = element_blank(), legend.text = element_text(size=6)))
+theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/RFC/")
+
+
+```
+
+## Contexte : « GPEC de la nation » et « Acte II de l'autonomie »
+
+« _Est-ce que cette formation permet de former des jeunes et de leur fournir un emploi ? [...] Donc on doit réallouer les choses_ » - E. Macron
+
+- Besoin de connaitre les taux d'insertion professionnelle pour piloter l'offre de formation
+
+- Une histoire longue et courte 
+  - 1970 : ONISEP/Céreq 
+  - 1989 : Observatoire de la vie étudiante (OVE) + essaimage en Observatoires locaux
+  - 2007 : (LRU) Ajout de la mission + bureaux d’aide à l’insertion professionnelle (BAIP) 
+  - 2009 : Coordination nationale des enquêtes IP par le SIES
+  - 2013 : (Fioraso) Obligation de publication des taux d'insertion
+  - 2018 : (ORE) Observatoire national de l’IP des diplômés de l’ES (ONIP)
+  - 2023 : Dispositif InserSup, développé par le SIES
+
+## Deux outils de mesure : Enquête IP et InserSup
+
+### Enquête IP
+
+- Menée par les Observatoires locaux auprès de tous les diplômés
+- Standardisée par le SIES, avec modules obligatoires et optionnels
+- Défauts propres aux enquêtes déclaratives :
+  - Taux/biais de réponse ; Qualité des réponses ; soupçon de Chanstique
+  
+### InserSup
+
+- Centralisé par le SIES
+- Croisement de données administratives
+  - SISE (Système d’Information de Suivi des Étudiants - inscriptions par les établissements)
+  - DSN (Déclaration Sociale Nominative - fiches de payes par les employeurs)
+- Défauts propres aux données administratives :
+  - Aveugle à des pans entiers du problème
+  - Individus hors des fichiers ; variables hors des fichiers ; l'humain
+
+
+## Trois indicateurs
+ 
+### Taux d'insertion (Enquête IP)
+
+Part des diplômés occupant un emploi, quel qu'il soit, sur l'ensemble des diplômés présents sur le marché du travail. Il est calculé sur les diplômés de nationalité française, issus de la formation initiale, entrés immédiatement et durablement sur le marché du travail après l'obtention de leur diplôme. 
+
+### Taux d'emploi (Enquête IP)
+
+Part des diplômés occupant un emploi, quel qu’il soit, parmi l'ensemble des diplômés actifs (en emploi ou en recherche) **ou inactifs**. 
+
+### Taux d'emploi salarié en France (InserSup)
+
+Part des diplômés en emploi **salarié en France** parmi l'ensemble des diplômés actifs (en emploi ou en recherche) **ou inactifs**.
+
+## Concrètement : par grand secteur disciplinaire
+
+```{r tdx.dom}
+load("insertion-pro.RData")
+ipmn %>%
+  filter(str_detect(Secteur.disciplinaire,"Ensemble")) %>% 
+  mutate(Ensemble=str_detect(Domaine,"Ensemble")) %>%
+  mutate(diff=Taux.d.emploi.salarié.en.France-Taux.d.insertion) %>%
+  pivot_taux() %>%
+  ggplot(aes(x=Code.du.domaine,y=Valeur,fill=Domaine, color=Ensemble)) +
+  geom_col(alpha=0.8) +
+  scale_x_discrete(name="") +
+  scale_y_continuous(labels = ~ scales::percent(.x/100), name="Taux") +
+  scale_color_manual(values=c("white","black")) +
+  facet_grid(.~Indicateur) +
+  expand_limits(y=100) +
+  theme(legend.position = "None") +
+  ggtitle("Comparaison des trois taux des diplômés de Master","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+```
+
+## Concrètement : par disciplines
+
+```{r tdx.disc}
+df <- ipmn %>%
+  mutate(Ensemble=str_detect(Secteur.disciplinaire,"Ensemble")) %>%
+  filter(!is.na(Taux.d.insertion)) %>%
+  arrange(desc(Taux.d.emploi.salarié.en.France))
+
+  bind_rows(
+    slice_head(df,n=5),
+    slice_tail(df,n=5),
+  ) %>%
+  group_by(Secteur.disciplinaire) %>%
+  pivot_taux() %>%
+  ungroup() %>%
+  ggplot(aes(x=Valeur,y=reorder(Secteur.disciplinaire,-Valeur, FUN=max),color=Indicateur)) +
+  geom_line(color="grey",size=2) + geom_point(aes(shape=Indicateur),size=4) +
+  scale_x_continuous(name="Taux",label=~scales::percent(.x/100)) +
+  scale_y_discrete(name="",limits=rev) +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
+  ggtitle("Comparaison des trois taux des diplômés de Master pas discipline","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+
+```
+
+
+## Concrètement : par établissement
+
+```{r tds.vs.tip3}
+df <- ipm %>%
+  filter(!is.na(Taux.de.chômage.régional), !is.na(Taux.d.insertion)) %>%
+  filter(str_detect(Discipline,"Ensemble")) %>%
+  arrange(desc(Taux.d.emploi.salarié.en.France))
+
+  bind_rows(
+    slice_head(df,n=5),
+    slice_tail(df,n=5),
+  ) %>%
+  group_by(Établissement) %>%
+  summarise_taux() %>%
+  ggplot(aes(x=Valeur,y=reorder(Établissement,Valeur,FUN = min),color=Indicateur)) +
+  geom_line(color="grey",size=2) + geom_point(aes(shape=Indicateur),size=4) +
+  scale_x_continuous(name="Taux",label=~scales::percent(.x/100)) +
+  ylab("") +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
+  ggtitle("Comparaison des trois taux des diplômés de Master par établissement","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+```
+
+## Concrètement : en Lorraine
+
+```{r lorraine2}
+ipm %>%
+  filter(Établissement == "Lorraine") %>%
+  mutate(Ensemble = str_detect(Discipline,"Ensemble")) %>%
+  filter(!is.na(Taux.d.insertion)) %>%
+  group_by(Discipline) %>%
+  summarise_taux() %>%
+  ggplot(aes(x=Valeur,y=reorder(Discipline,Valeur,FUN = min),color=Indicateur)) +
+  geom_line(color="grey",size=2) + geom_point(aes(shape=Indicateur),size=4) +
+  scale_x_continuous(name="Taux",label=~scales::percent(.x/100)) +
+  ylab("") +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
+  ggtitle("Comparaison des trois taux des diplômés de Master à l'Université de Lorraine","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement")
+```
+
+## Concrètement : en Lorraine
+
+![De l'UL à Luxembourg](ul-l.png)
+
+
+## Conclusion
+
+- Les indicateurs mesurent des choses différentes :
+  - Enquête IP : devenir/satisfaction des étudiants
+  - InserSup : satisfaction des employeurs sur le sol français
+
+- Les méthodes présentent des avantages/inconvénients différents
+  - Enquête IP : imprécisions et coût
+  - InserSup : cecité structurelle à l'humain, aux disciplines et aux territoires
+
+### Enquête IP et Insersup : complémentaires ou concurrents ?
+
+- Rendent en apparence le même service
+- Mais InserSup précise les données de l'Enquête IP
+- Et l'Enquête IP est indispensable pour comprendre et contrôler les données d'InserSup
+
+
+### Conclusion : Loi de Goodhart
+
+\centering 
+« _lorsqu'une mesure devient un objectif, elle cesse d'être une bonne mesure_ »
+
+
+
+## Concrètement : Taux de féminité
+
+```{r}
+load("ipmn_taux.RData")
+ipmn.taux %>%
+  ggplot(aes(x=Taux.Féminité,y=Taux.d.emploi.salarié.en.France)) + 
+  geom_smooth(method = "lm", size=0.1) + geom_point(aes(color=Code.du.domaine),size=2) +
+  ggrepel::geom_text_repel(aes(label=Secteur.disciplinaire), size=2, segment.size=0.1) +
+  scale_x_continuous(labels = scales::percent, name = "Taux de féminité") +
+  scale_y_continuous(labels = ~ scales::percent(.x,scale=1), name= "Taux d'emploi salarié en France")
+```
+
+
+## Concrètement : Taux de bacheliers non-généraux
+
+```{r}
+ipmn.taux %>%
+  mutate(Taux.NonBacGénéral = 1 - Taux.BacGénéral) %>%
+  ggplot(aes(x=Taux.NonBacGénéral,y=Taux.d.emploi.salarié.en.France)) + 
+  geom_smooth(method = "lm", size=0.1) + geom_point(aes(color=Code.du.domaine),size=2) +
+  ggrepel::geom_text_repel(aes(label=Secteur.disciplinaire), size=2, segment.size=0.1) +
+  scale_x_continuous(labels = scales::percent, name = "Taux de bacheliers non généraux") +
+  scale_y_continuous(labels = ~ scales::percent(.x,scale=1), name= "Taux d'emploi salarié en France")
+```
+
+## Concrètement : Etablissements parisiens
+
+```{r}
+ipm %>%
+  filter(!is.na(Taux.de.chômage.régional), !is.na(Taux.d.insertion)) %>%
+  filter(str_detect(Discipline,"Ensemble")) %>%
+  filter(Académie %in% c("Paris","Créteil","Versailles")) %>%
+  group_by(Établissement) %>%
+  summarise_taux() %>%
+  ggplot(aes(x=Valeur,y=reorder(Établissement,Valeur,FUN = median),color=Indicateur)) +
+  geom_line(color="grey",size=2) + geom_point(aes(shape=Indicateur),size=4) +
+  scale_x_continuous(name="Taux",label=~scales::percent(.x/100)) +
+  ylab("") +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE)) +
+  ggtitle("Taux des diplômés de Master des établissements Paris-Créteil-Versailles","Diplômés de la session 2020, à 30 mois, hors Master d'enseignement") 
+```
+
+## Concrètement Taux d'emploi salarié en France Vs. Budget par étudiant
+
+```{r}
+ipm %>%
+  filter(!is.na(Taux.de.chômage.régional), !is.na(Taux.d.insertion)) %>%
+  filter(str_detect(Discipline,"Ensemble")) %>%
+  group_by(Établissement, pid=Id_Paysage) %>%
+  summarise_taux() %>%
+  left_join(kpiESR::esr %>% filter(Rentrée == 2021)) %>%
+  left_join(kpiESR::esr.etab) %>% mutate(PerimEx = ifelse(PerimEx %in% c("ISITE","IDEx"), PerimEx, "NINI")) %>%
+  filter(Indicateur == "Taux d'emploi salarié en France") %>%
+  ggplot(aes(y=Valeur,x=kpi.K.resPetu)) +
+  geom_smooth(method = "lm", size=0.1) + 
+  ggrepel::geom_text_repel(aes(label=Établissement), size=2, segment.size=0.1) +
+  geom_point(aes(color=PerimEx),size=4) +
+  scale_x_continuous(name="Budget par étudiant", labels = ~ paste(.x/1e3,"k€")) +
+  scale_y_continuous(name="Taux d'emploi salarié en France", labels= ~ scales::percent(.x, scale = 1)) +
+  scale_color_discrete(guide = guide_legend(reverse = TRUE)) +
+  scale_shape_discrete(guide = guide_legend(reverse = TRUE))  
+```
+
+
+
+## Contexte : « GPEC de la nation » et « Acte II de l'autonomie »
+
+« _Est-ce que cette formation permet de former des jeunes et de leur fournir un emploi ? [...] Donc on doit réallouer les choses_ » - E. Macron
+
+« _L’enjeu est de préserver le taux d’insertion professionnelle_ » - F. Vidal
+
+```{r l3m1.decal, out.height="60%"}
+load("sise.RData")
+sise %>%
+  group_by(Rentrée,Niveau = paste(LMD, substr(NIVEAU,2,2), sep="")) %>%
+  summarise(Etudiants = sum(Etudiants)) %>%
+  filter(Niveau %in% c("L3","M1")) %>%
+  mutate(Rentrée = ifelse(Niveau == "L3", Rentrée+1,Rentrée)) %>%
+  filter(Rentrée != 2012, Rentrée != 2023) %>%
+  ggplot(aes(x=Rentrée, y= Etudiants, color=Niveau)) +
+  geom_line(linewidth = 1.5) + geom_point(shape = 21, stroke = 2, size = 2, fill="white") + 
+  scale_x_continuous(labels = ~ paste0("L3 ", .x-1,"\nM1 ",.x), breaks = seq(2011,2030,2), name="Cohorte") +
+  scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "Inscriptions étudiantes") +
+  ggtitle("Etudiant⋅e⋅s  inscrit⋅e⋅s en L3 à l'année N et M1 à l'année N+1" )
+```

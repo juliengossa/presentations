@@ -38,7 +38,7 @@ theme_set(theme_cpesr())
 theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/RFC/")
 ```
 
-## Deux modèles d'établissements
+## Contexte : Deux modèles d'établissements
 
 - Modèle Universitaire
   - Toutes les disciplines au même endroit
@@ -58,7 +58,7 @@ theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/R
 :::
 ::::::
 
-## Trois modèles d'organisation
+## Contexte : Trois modèles d'organisation
 
 :::::: {.cols data-latex=""}
 ::: {.col data-latex="{0.60\textwidth}"}
@@ -76,7 +76,7 @@ theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/R
 :::
 ::::::
 
-## Trois modèles de carrière
+## Contexte : Trois modèles de carrière
 
 - Modèle du survivant
   - Beaucoup de précaires, accès tardif et rare à la titularisation
@@ -89,7 +89,7 @@ theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/R
 knitr::include_graphics("img/Tenure.png")
 ```
 
-## Historiquement en France
+## Contexte : Historiquement en France
 
 - Modèle facultaire 
 - Troupeau de chats
@@ -280,7 +280,7 @@ Le financement de la recherche publique dans la lutte contre la pandémie de Cov
   - Etablissement : IDEx, etc.
 
 - Réduction des outils disponibles
-  - Opérateurs de recherche vs. agences de moyens vs. agences de programme (LPR)
+  - ONR : Opérateurs de recherche vs. agences de moyens vs. agences de programme (LPR)
 
 - Défiance nouvelle envers la « bureaucratie » (de la part des bureaucrates)
   - PEPR : 3 Md€ pour 36 programmes
@@ -318,7 +318,7 @@ https://www.economie.gouv.fr/files/files/ESPACE-EVENEMENTIEL/Pacte_Productif/Pac
 ## Conclusion
 
 - La recherche par mission coute très cher
-- Son efficité est fabile __en termes de recherches__ (y compris pour le coeur de cible)
+- Son efficité est faible __en termes de recherche__ (y compris pour le coeur de cible)
 - __Mais__
   - Facilite le contrôle des activités de recherche par la bureaucratie
   - Permet l'émergence d'un néo-mandarinat
@@ -366,4 +366,31 @@ jeu de société. Certains sujets seraient considérés comme intéressants,
 d’autres non. Il y aurait des modes. Ceux qui suivraient la mode recevraient 
 des subventions, les autres, non. Et, ils apprendraient tous bien vite 
 à suivre la mode.
+```
+
+## Un exemple de mode
+
+```{r, out.height="85%"}
+anr <- read.csv2("anr-dos-depuis-2010-projets-finances-20240402-projets.csv", dec='.') 
+
+anrkw <- function(kw) {
+  anr %>%
+  mutate(iskw = str_detect(str_to_lower(Projet.Resume.Anglais), kw)) %>%
+  summarise(Nombre = n(), .by = c(AAP.Edition,iskw)) %>%
+  filter(iskw == TRUE) %>%
+  mutate(keyword = kw)
+}
+
+bind_rows(
+  anrkw("artificial intelligence"),
+  #anrkw("big data"),
+  #anrkw("blockchain")
+  #anrkw("virtual reality")
+  ) %>%
+  filter(AAP.Edition < 2024) %>%
+  ggplot(aes(x=AAP.Edition,y=Nombre, color=keyword)) + 
+  geom_vline(xintercept = 2015) +
+  geom_line(linewidth=1) + geom_point(shape=21, stroke = 1.5, size=2, fill="white") +
+  scale_x_continuous(breaks = seq(2010,2023,2)) +
+  ggtitle("Nombre de projets financés par l'ANR contenant des mots clés") 
 ```
