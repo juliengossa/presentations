@@ -1,0 +1,227 @@
+---
+title: "kpiESR : des indicateurs clés de performance pour les établissements de l’ESR"
+subtitle: "Des données ouvertes aux représentations graphiques"
+author: 
+- Pauline Boyer et Julien Gossa \newline
+- Laboratoire SAGE - Université de Strasbourg - CNRS - CPESR
+
+date: "Colloque ESR - Poitiers - 15-10-2024"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    dev: cairo_pdf
+    #includes:
+    #  in_header: columns.tex
+    #keep_tex: True
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+options(dplyr.summarise.inform = FALSE)
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.align = "center", out.width="100%", fig.retina = 2)
+
+knitr::opts_chunk$set(pdf.options(encoding = "CP1250"))
+#knitr::opts_chunk$set(dev = "cairo_pdf")
+
+
+library(tidyverse)
+library(ggcpesrthemes)
+
+library(kpiESR)
+library(cowplot)
+
+theme_set(theme_cpesr())
+theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/RFC/")
+```
+
+```{r, cache=TRUE}
+source("tdbesr-plots.R")
+
+k_style <- kpiesr_style(
+  point_size = 16,
+  line_size = 1,
+  text_size = 4,
+  yaxis_position = "left")
+
+o_style <- kpiesr_style(
+  point_size = 12,
+  line_size = 0.7,
+  text_size = 3,
+  primaire_margin = 1.25,
+  strip_labeller = lfc_dont_labeller,
+  yaxis_position = "left")
+
+lfc_pc_labeller_custom <- function(labels) {
+  return(
+    stringr::str_replace(lfc_pc_labeller(labels),"\\(","\n (")
+  )
+}
+onorm_style <- kpiesr_style(
+  point_size = 12,
+  line_size = 0.7,
+  text_size = 3,
+  primaire_margin = 1.25,
+  strip_labeller = lfc_pc_labeller_custom,
+  label_wrap = 12
+)
+
+
+theme_set(ggcpesrthemes::theme_cpesr() + 
+            theme(plot.title = element_text(hjust=1),
+                  panel.spacing = unit(2,"lines"), 
+                  plot.margin = margin(0,0,0,0),
+                  axis.title.x = element_blank(),
+                  axis.title.y = element_blank(),
+                  strip.text = element_text(size=rel(1.2), 
+                                            margin=margin(c(2,0,2,0)))))
+
+
+grp <- "Ensemble"
+pid <- "Universités et assimilés"
+pid <- "Ensemble"
+
+plots.ensemble <- kpiesr_plot_all(rentrée, pid, grp, style.k=k_style, style.o=o_style, style.o.norm = onorm_style)
+
+grp <- "Universités et assimilés"
+pid <- "hlX1r"
+
+plots.poitiers <- kpiesr_plot_all(rentrée, pid, grp, style.k=k_style, style.o=o_style, style.o.norm = onorm_style)
+```
+
+## Contexte
+
+- 1988 : Politique de contractualisation
+  - Allocation des moyens en fonction d'informations chiffrées
+  - Prise de conscience de la pauvreté des données
+- 1998 : InfoSup (accès protégé)
+  - population étudiante, ressources humaines, patrimoine et moyens financiers
+- 2001 : LOLF
+  - Développement des indicateurs de performance (RAP/PAP)
+- 2006- : Train de réformes (LRU, ESR, ORE, LPPR) + Besoin de suivi
+  - Renforcement de l'autonomie des établissements 
+  - Transformation et différenciation des établissements 
+- 2012 : papESR (portail d'aide au pilotage)
+  - Et développement d'outils locaux
+- 2014 : #DataESR https://data.enseignementsup-recherche.gouv.fr/ 
+  - Ouverture des données de l'ESR par le SIES
+- 2024 : ~200 jeux de données ouvertes
+- ... Et puis rien.
+
+## #DataESR
+
+6 jeux de données ouvertes publiés par le SIES :
+
+- [fr-esr-statistiques-sur-les-effectifs-d-etudiants-inscrits-par-etablissement](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-statistiques-sur-les-effectifs-d-etudiants-inscrits-par-etablissement)
+- [fr-esr-personnels-biatss-etablissements-publics](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-personnels-biatss-etablissements-publics)
+- [fr-esr-enseignants-titulaires-esr-public](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-enseignants-titulaires-esr-public/)
+- [fr-esr-enseignants-nonpermanents-esr-public](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-enseignants-nonpermanents-esr-public/information/)
+- [fr-esr-operateurs-indicateurs-financiers](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-operateurs-indicateurs-financiers/information/)
+- [fr-esr-principaux-etablissements-enseignement-superieur](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-principaux-etablissements-enseignement-superieur/information/?disjunctive.type_d_etablissement)
+
+
+### Projet kpiESR 
+
+Assemble les données :
+
+- sur les effectifs étudiants, effectifs BIATSS, effectifs enseignants et données financières ;
+- à trois granularités différentes : MESR, groupes d'établissements, et établissement ;
+- pour calculer des indicateurs clés de performance (KPI) et construire des tableaux de bord.
+ 
+
+## Tableau de bord : MESR
+
+```{r, fig.width = 12, fig.asp = 8/16, out.width="100%", out.height=NULL}
+combine_plots_groupe(plots.ensemble)
+```
+
+## Tableau de bord : Université de Poitiers (indicateurs clés)
+
+```{r, fig.width = 12, fig.asp = 8/16, out.width="100%", out.height=NULL}
+combine_plots_groupe(plots.poitiers)
+```
+
+## Tableau de bord : Université de Poitiers (primaires et secondaires)
+
+```{r, fig.width = 12, fig.asp = 8/16, out.width="100%", out.height=NULL}
+combine_plots_series(plots.poitiers, ens = FALSE, bia = FALSE)
+```
+
+
+## Tableau de bord : Université de Poitiers (primaires et secondaires)
+
+```{r, fig.width = 12, fig.asp = 8/16, out.width="100%", out.height=NULL}
+combine_plots_series(plots.poitiers, etu = FALSE, fin = FALSE)
+```
+
+
+## Séries temporelles : MESR
+
+```{r, fig.asp=8/16}
+kpiesr_plot_line("Ensemble", c("kpi.ETU.P.effectif","kpi.ENS.S.titulaires","kpi.K.ensPetu"), val = "evolution") + scale_x_continuous(breaks = seq(2013, 2021, 2), limits = c(2013, 2021))
+```
+
+## Séries temporelles : Université de Poitiers
+
+```{r, fig.asp=8/16}
+kpiesr_plot_line(pid, c("kpi.ETU.P.effectif","kpi.ENS.S.titulaires","kpi.K.ensPetu"), val = "evolution") + scale_x_continuous(breaks = seq(2013, 2021, 2), limits = c(2013, 2021))
+```
+
+
+## Représentations spatiales : Taux d'encadrement vs. budget par étudiant
+
+```{r, fig.asp=8/16}
+  kpiesr_plot_map(rentrée = 2021, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.K.ensPetu", yvar="kpi.K.resPetu") + 
+  xlab("Taux d'encadrement pédagogique (titulaires / 100 étudiants)") + ylab("Budget par étudiant (€)") + theme_cpesr()
+```
+
+## Représentations spatiales : Taux de SCSP vs. Taux de titularité
+
+```{r, fig.asp=8/16}
+  kpiesr_plot_map(rentrée = 2021, groupe = "Universités et assimilés", id = "Université de Strasbourg", xvar="kpi.K.dotPres", yvar="kpi.K.titPper") + 
+  xlab("Taux de SCSP") + ylab("Taux de titularité") + theme_cpesr()
+```
+
+## Détection de politiques nationales : SCSP vs. masse salariale
+
+```{r, fig.asp=8/16}
+kpiESR::esr %>%
+  filter(pid=="Ensemble", Rentrée > 2008) %>%
+  #filter(pid=="Ensemble", Rentrée > 2008) %>%
+  mutate(diff = kpi.FIN.S.SCSP-kpi.FIN.S.masseSalariale) %>% 
+  mutate(Exercice = Rentrée + 1) %>%
+  ggplot(aes(x=Exercice,y=diff, color=diff)) +
+  geom_hline(yintercept = 1) +
+  geom_line(size=1) + geom_point(shape = 21, stroke=2,size=2,fill="white") +
+  scale_x_continuous(breaks = seq(2009,2024)) +
+  scale_y_continuous(labels = ~ paste(.x/1e6,"M€"), name = "SCSP-MS") +
+  scale_color_distiller(palette="Reds") +
+  theme(legend.position = "None", panel.grid.minor.x = element_blank())
+```
+
+
+## Limites et conclusion
+
+- Limites liées au matériau de recherche 
+  - Contraint par les choix de l'administration
+  - Tributaire des publications : disponibilité inégale et mise à jour instable
+  - « transparence stratégiquement opaque » et chanstique des établissements
+
+- Des risques de mise en compétition des établissements
+  - Les données « reconfigurent et transforment » le monde social (Desrosière)
+  - Classements et comparaisons aux effets pervers
+  - Sensibilité à la définition des indicateurs (tous réversibles)
+  
+
+::: {.block}
+### Loi de Goodhart
+
+\centering
+
+  « Quand une mesure devient une cible, elle cesse d'être une bonne mesure »
+:::
+
+- https://github.com/cpesr/kpiESR
+- https://cpesr.fr/tableau-de-bord-esr/
+- https://data.cpesr.fr/tdbesr/
+  

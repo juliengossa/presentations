@@ -191,6 +191,9 @@ ipm %>%
 ### Conclusion : Loi de Goodhart
 
 \centering 
+
+Les questions soulevées pour le pilotage ne sont pas techniques mais politiques.
+
 « _lorsqu'une mesure devient un objectif, elle cesse d'être une bonne mesure_ »
 
 
