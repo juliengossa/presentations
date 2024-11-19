@@ -209,7 +209,7 @@ knitr::include_graphics("img/Isomorphisme-MIT.png")
 knitr::include_graphics("img/ARWU-Unistra-2012.png")
 ```
 
-## ARWU vs. Unistra (2013 : 97)
+## ARWU vs. Unistra (2013 : 97, top 100)
 
 ```{r out.height="70%", fig.align='center'}
 knitr::include_graphics("img/ARWU-Unistra-2013.png")
@@ -239,7 +239,7 @@ knitr::include_graphics("img/ARWU-Unistra-2017bis.png")
 knitr::include_graphics("img/ARWU-Unistra-2024.png")
 ```
 
-## ARWU vs. Unistra (2024)
+## ARWU vs. Unistra (2024 : 102-150)
 
 ```{r out.height="70%", fig.align="center"}
 knitr::include_graphics("img/ARWU-Unistra-2024bis.png")
@@ -297,6 +297,7 @@ knitr::include_graphics("img/ARWU-CampusFrance.png")
 knitr::include_graphics("img/MDPI.jpg")
 ```
 
+\tiny
 https://predatory-publishing.com/an-analysis-of-the-number-of-special-issues-from-mdpi/
 
 
