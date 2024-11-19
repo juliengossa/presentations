@@ -2,7 +2,7 @@
 title: "Mesures et démesure de l'insertion professionnelle pour le pilotage de l'offre de formation"
 subtitle: "Enquête IP vs. Insersup vs. Goodhart"
 author: 
-- Marie Lapeyronnie - Université de Bordeaux - ResoSup \newline
+- Marie Lapeyronie - Université de Bordeaux - ResoSup \newline
 - Julien Gossa - Laboratoire SAGE - Université de Strasbourg
 
 date: "Colloque ESR - Poitiers - 15-10-2024"

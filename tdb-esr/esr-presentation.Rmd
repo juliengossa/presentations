@@ -101,12 +101,12 @@ plots.poitiers <- kpiesr_plot_all(rentrée, pid, grp, style.k=k_style, style.o=o
 - 2006- : Train de réformes (LRU, ESR, ORE, LPPR) + Besoin de suivi
   - Renforcement de l'autonomie des établissements 
   - Transformation et différenciation des établissements 
+  - Gestion locale des personnels
 - 2012 : papESR (portail d'aide au pilotage)
   - Et développement d'outils locaux
 - 2014 : #DataESR https://data.enseignementsup-recherche.gouv.fr/ 
   - Ouverture des données de l'ESR par le SIES
-- 2024 : ~200 jeux de données ouvertes
-- ... Et puis rien.
+- 2024 : ~200 jeux de données ouvertes... Et puis rien.
 
 ## #DataESR
 

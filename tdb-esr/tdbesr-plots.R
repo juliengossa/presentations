@@ -36,14 +36,6 @@ onorm_style <- kpiesr_style(
 )
 
 
-theme_set(ggcpesrthemes::theme_cpesr() + 
-            theme(plot.title = element_text(hjust=1),
-                  panel.spacing = unit(2,"lines"), 
-                  plot.margin = margin(0,0,0,0),
-                  strip.text = element_text(size=rel(0.7), 
-                                            margin=margin(c(2,0,2,0)))))
-
-
 
 axis_text_size_rel <- 0.8
 
