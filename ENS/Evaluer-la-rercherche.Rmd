@@ -309,7 +309,7 @@ Albert Einstein (300 publications)
 
 ![image](img/GoogleScholar-ae.png)\
 :::
-::: {.col data-latex="{0.30\textwidth}"}
+::: {.col data-latex="{0.3\textwidth}"}
 \ 
 :::
 ::: {.col data-latex="{0.35\textwidth}"}
