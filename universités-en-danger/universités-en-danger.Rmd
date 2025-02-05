@@ -1,0 +1,345 @@
+---
+title: "Universités en danger"
+subtitle: "Une vue par les données"
+author: 
+- Julien Gossa \newline 
+- Université de Strasbourg et CPESR  \newline \hspace{3cm} \newline
+- '[@JulienGossa.cpesr.fr](https://bsky.app/profile/juliengossa.cpesr.fr) gossa@unistra.fr'
+date: "06-02-2025"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    dev: cairo_pdf
+    includes:
+      in_header: columns.tex
+    keep_tex: False
+    #toc: true
+    slide_level: 3
+  github_document: default
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+options(dplyr.summarise.inform = FALSE)
+
+knitr::opts_chunk$set(fig.asp=7.5/16, fig.width = 8)
+
+library(tidyverse)
+library(ggcpesrthemes)
+library(kpiESR)
+library(cowplot)
+
+theme_set(theme_cpesr() + theme(legend.position = "right", plot.title = element_text(hjust = 0.5)))
+
+#source("tdbesr-plots.R")
+source("BL/BLViz-map.R",chdir = TRUE)
+```
+
+
+### Budget : Dotation vs. dépenses de personnel
+
+```{r, fig.asp=7.5/16, out.width="100%"}
+kpiESR::esr %>%
+  filter(Etablissement == "Universités et assimilés", Rentrée > 2008) %>%
+  mutate(diff = kpi.FIN.S.SCSP-kpi.FIN.S.masseSalariale) %>% 
+  ggplot(aes(x=Rentrée+1,y=diff, color=diff)) +
+  geom_hline(yintercept = 1) +
+  geom_line(size=1) + geom_point(shape = 21, stroke=2,size=2,fill="white") +
+  scale_x_continuous(breaks = scales::pretty_breaks(12)) +
+  scale_y_continuous(labels = ~ paste(.x/1e6,"M€"), name = "SCSP-MS") +
+  scale_color_distiller(palette="Reds") +
+  theme(legend.position = "None", panel.grid.minor.x = element_blank()) +
+  labs(
+    title="Différence entre SCSP et masse salariale des universités",
+    x="Année") 
+```
+
+### Budget : L'hypothèse de la pénurie de moyens
+
+```{r, out.width="65%", fig.align="center"}
+knitr::include_graphics("img/OFCE-apprentissage.png")
+```
+
+\tiny
+
+Source : OFCE, Apprentissage : quatre leviers pour reprendre le contrôle 
+https://www.ofce.sciences-po.fr/pdf/pbrief/2024/OFCEpbrief135.pdf
+
+
+
+
+
+### Objectifs de la nation : Massification
+
+- 80% d'une classe d'âge au Bac
+- 50% d'une classe d'âge diplômée du supérieur
+
+#### Taux d'accès au Bac
+
+```{r, out.width="90%", fig.align="center"}
+knitr::include_graphics("img/PAP-ES-2025-bac.png")
+```
+
+\tiny
+
+Source : Projet annuel de performances PLF 2025 https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2025/projet-loi-finances-les/budget-general-plf-13
+
+
+### Objectifs de la nation : Massification
+
+#### Pourcentage diplômé du supérieur
+
+
+```{r, out.width="75%", fig.align="center"}
+knitr::include_graphics("img/PAP-150-2025-diplomes.png")
+```
+
+\tiny
+
+Source : Projet annuel de performances PLF 2025 https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2025/projet-loi-finances-les/budget-general-plf-13
+
+```{r, out.width="75%", fig.align="center"}
+knitr::include_graphics("img/PAP-150-2024-diplomes.png")
+```
+
+\tiny
+
+Source : Projet annuel de performances PLF 2024 https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024
+
+
+
+### Objectifs de la nation : Massification
+
+
+#### Parcoursup
+
+```{r, out.width="90%", fig.align="center"}
+knitr::include_graphics("img/PAP-150-2025-parcoursup.png")
+```
+
+\tiny
+
+Source : Projet annuel de performances PLF 2025 https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2025/projet-loi-finances-les/budget-general-plf-13
+
+
+### Objectifs de la nation : Excellence scientifique
+
+#### Production scientifique (2024)
+
+```{r, out.width="90%", fig.align="center", fig.show='hold'}
+  knitr::include_graphics("img/PAP-172-2024.jpeg")
+```
+
+\tiny
+Source : Projet annuel de performances PLF 2024 https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2024
+
+
+### Objectifs de la nation : Excellence scientifique
+
+#### Production scientifique (2025)
+
+```{r, out.width="90%", fig.align="center", fig.show='hold'}
+  knitr::include_graphics("img/PAP-172-2025.jpeg")
+```
+
+\tiny
+Source : Projet annuel de performances PLF 2025 https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2025
+
+
+### Le mystère de l'investissement dans l'ESR : investissement
+
+```{r, out.width="60%", fig.align="center"}
+knitr::include_graphics("img/budgetparetu.jpeg")
+```
+
+### Le mystère de l'investissement dans l'ESR : productivité
+
+```{r, out.width="60%", fig.align="center"}
+knitr::include_graphics("img/budgetparetu-flip.jpeg")
+```
+
+
+## Les dangers pour les universités 
+
+### 1. Recherche : Déclin de la production scientifique
+
+Taux d'engagement dans l'enseignement supérieur (1950)
+
+```{r bl.1950}
+bl.map.plot(1950)
+```
+
+### 1. Recherche : Déclin de la production scientifique
+
+Taux d'engagement dans l'enseignement supérieur (2015)
+
+```{r bl.2015}
+bl.map.plot(2015)
+```
+
+### 1. Recherche : Déclin de la production scientifique
+
+Population engagée dans l'enseignement supérieur (2015)
+
+```{r bl.2015.abs}
+bl.map.plot(2015, abs = TRUE)
+```
+
+### 1. Recherche : Déclin de la production scientifique
+
+Constats :
+
+- La compétition quantitative est inévitablement perdue.
+- La compétition qualitative n'a pas encore commencé.
+- s'il y a compétition/course, c'est probablement pour une sortie de la compétition.
+
+#### Elément de réponse : sortir de la compétition quantitative
+
+Problème assez "simple" à résoudre (peu de contraintes matérielles)
+
+- Objectif : réduction massive du nombre de publications scientifiques
+- Moyen : suppression de toutes les incitations à publication + mot d'ordre
+
+
+### 2. Stagnation éducative / Déclin éducatif
+
+```{r}
+read.csv("data/kh-sl_eleves_sup.csv") %>%
+  filter(champ_geo!="") %>%
+  filter(annee > 2000) %>%
+  mutate(champ_geo = factor(champ_geo,levels=unique(champ_geo))) %>%
+  ggplot(aes(x=annee,y=disc_total, color = champ_geo)) +
+  geom_line(size = 1) +
+  scale_y_continuous(labels = ~ paste(.x/1e6,"M"), name = "Effectif") +
+  scale_color_discrete(name = "Périmètre") +
+  ggtitle("Evolution des effectifs étudiants du MESR") +
+  theme(legend.position = "bottom") + 
+  guides(color=guide_legend(nrow = 2)) +
+  cpesr_cap(author = "Julien Gossa et Kévin Hédé", source="Données collectées par Kevin Hédé") 
+```
+
+
+### 2. Stagnation éducative / Déclin éducatif
+
+```{r}
+read.csv("data/kh-sl_eleves_sup.csv") %>%
+  filter(champ_geo!="") %>%
+  mutate(champ_geo = factor(champ_geo,levels=rev(unique(champ_geo)))) %>%
+  ggplot(aes(x=annee,y=disc_total, color = champ_geo)) +
+  geom_line(size = 1) +
+  scale_y_continuous(labels = ~ paste(.x/1e6,"M"), name = "Effectif") +
+  scale_color_discrete(name = "Périmètre") +
+  ggtitle("Evolution des effectifs étudiants du MESR") +
+  theme(legend.position = "bottom") + 
+  guides(color=guide_legend(nrow = 2)) +
+  cpesr_cap(author = "Julien Gossa et Kévin Hédé", source="Données collectées par Kevin Hédé") 
+```
+
+### 2. Stagnation éducative / Déclin éducatif
+
+```{r, out.width="40%", fig.align="center"}
+knitr::include_graphics("img/INSEE-naissances.png")
+```
+
+Source : INSEE https://www.insee.fr/fr/statistiques/2381380
+
+### 2. Stagnation éducative / Déclin éducatif
+
+```{r, fig.align="center"}
+load("data/predictions.RData")
+predictions
+```
+
+### 2. Stagnation éducative / Déclin éducatif
+
+```{r, out.width="80%", fig.align="center"}
+knitr::include_graphics("img/EESR-effectifs.png")
+```
+
+\tiny
+Source : EERS 
+https://publication.enseignementsup-recherche.gouv.fr/eesr/FR/EESR17_ES_10/les_etudiants_dans_les_filieres_de_formation_depuis_1960_croissance_et_diversification/
+
+### 2. Stagnation éducative / Déclin éducatif
+
+La valeur des diplômes en question.
+
+```{r, fig.asp=7/16, fig.width=7, out.width="100%", fig.align='center'}
+load(file="data/sise.RData")
+
+sise %>%
+  group_by(Rentrée,Niveau = paste(LMD, substr(NIVEAU,2,2), sep="")) %>%
+  summarise(Etudiants = sum(Etudiants)) %>%
+  filter(Niveau %in% c("L3","M1")) %>%
+  mutate(Rentrée = ifelse(Niveau == "L3", Rentrée+1,Rentrée)) %>%
+  filter(Rentrée != 2012, Rentrée != 2023) %>%
+  ggplot(aes(x=Rentrée, y= Etudiants, color=Niveau)) +
+  geom_line(linewidth = 1.5) + geom_point(shape = 21, stroke = 2, size = 2, fill="white") + 
+  scale_x_continuous(labels = ~ paste0("L3 ", .x-1,"\nM1 ",.x), breaks = seq(2011,2030,2), name="Cohorte") +
+  scale_y_continuous(labels = ~ paste0(.x/1e3,"k"), name = "Inscriptions étudiantes") +
+  ggtitle("Etudiant⋅e⋅s  inscrit⋅e⋅s en L3 à l'année N et M1 à l'année N+1" )
+```
+
+
+### 2. Stagnation éducative / Déclin éducatif
+
+Constats :
+
+- L'insertion professionnelle est devenue l'objectif principal (unique).
+  - La formation citoyenne fait défaut (grandes crises).
+  - L'IA va bouleverser le marché du travail (en plus des pratiques pédagogiques).
+- Le marché éducatif est hors de contrôle.
+- La démographie a toujours raison.
+- Des formations vont fermer, on ne sait pas encore lesquelles (ex. UK).
+
+#### Elément de réponse : ?
+
+- Besoin urgent de redéfinir le rôle des universités.
+- L'abandon de l'insertion professionnelle doit être discuté.
+
+### Conclusion générale
+
+- La crise budgétaire cache une crise de vocation de l'Université.
+- Le rôle historique définit après-guerre (massification + production scientifique) est révolu.
+- Le rôle définit au tournant du XXIe (insertion pro + Excellence) peine à faire sens.
+
+#### Besoin urgent d'une refondation
+
+- En sortant des postures et défenses d'intérêts particuliers.
+- Remise à plat et hiérarchisation des rôles, avec mise en question de :
+  - la production scientifique ;
+  - l'insertion professionnelle.
+
+#### Possible question centrale
+
+Comment centrer la production et la diffusion des connaissances universitaires sur les grandes crises, notamment écologiques ?
+
+
+### Réussite vs. Exigence : Le discours
+
+```{r, out.width = "100%"}
+knitr::include_graphics("img/AEF-LM.png")
+``` 
+
+- Anne-Sophie Barthez, DGESIP en 2019.
+
+Dépêche AEF « La distinction entre undergraduate et graduate doit conduire à réinterroger tout le système de formation »
+
+https://www.aefinfo.fr/depeche/616359
+
+
+### Rémunérations vs. dotation : Le discours
+
+```{r, out.width = "60%", fig.align='center'}
+knitr::include_graphics("img/SR-SCSPMS.png")
+``` 
+
+- Sylvie Retailleau, Ministre ESR en 2023
+
+Question orale n°0915S « Situation budgétaire des universités et particulièrement de Le Mans Université »
+
+https://www.senat.fr/questions/base/2023/qSEQ23110915S.html
+
+
+
