@@ -427,15 +427,34 @@ Comment centrer la production et la diffusion des connaissances universitaires s
 
 ### Réussite vs. Exigence : Le discours
 
+
+:::::: {.cols data-latex=""}
+
+::: {.col data-latex="{0.60\textwidth}"}
+
 ```{r, out.width = "100%"}
-knitr::include_graphics("../ressources/img/AEF-LM.png")
+knitr::include_graphics("../ressources/img/Presse-LM-ASBarthez.png")
 ``` 
 
-- Anne-Sophie Barthez, DGESIP en 2019.
+- Anne-Sophie Bartez, DGESIP, 2019
+- Frédérique Vidal, MESR, 2021
+\vfill
 
-Dépêche AEF « La distinction entre undergraduate et graduate doit conduire à réinterroger tout le système de formation »
-
+\tiny
 https://www.aefinfo.fr/depeche/616359
+
+https://www.lefigaro.fr/actualite-france/frederique-vidal-l-enjeu-est-de-preserver-le-taux-d-insertion-professionnelle-20210921
+
+:::
+::: {.col data-latex="{0.40\textwidth}"}
+
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/Presse-LM-FVidal.png")
+``` 
+
+:::
+::::::
+
 
 
 ### Rémunérations vs. dotation : Le discours
