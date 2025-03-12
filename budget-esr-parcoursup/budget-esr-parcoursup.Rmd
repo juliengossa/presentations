@@ -36,7 +36,37 @@ theme_set(theme_cpesr() + theme(legend.position = "right", plot.title = element_
 source("../ressources/data/BL/BLViz-map.R",chdir = TRUE)
 ```
 
-### Budget : Dépense publique par étudiant
+### Contexte : Rythme des réformes
+
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/data/waffles-bac-1.pdf")
+``` 
+
+### Contexte : Rythme des réformes
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/data/waffles-bac-2.pdf")
+``` 
+
+### Contexte : Rythme des réformes
+
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/data/waffles-bac-3.pdf")
+``` 
+
+### Contexte : Rythme des réformes
+
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/data/waffles-bac-4.pdf")
+``` 
+
+### Contexte : Rythme des réformes
+
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/data/waffles-bac-5.pdf")
+``` 
+
+
+### Contexte : Budget - Dépense publique par étudiant
 
 ```{r, out.width="65%", fig.align="center"}
 knitr::include_graphics("../ressources/img/budgetparetu.png")
@@ -46,7 +76,7 @@ knitr::include_graphics("../ressources/img/budgetparetu.png")
 Source : https://lucaschancel.com/etudiants/
 
 
-### Budget : Dotation vs. dépenses de personnel
+### Contexte : Budget - Dotation vs. dépenses de personnel
 
 ```{r, fig.asp=7.5/16, out.width="100%"}
 kpiESR::esr %>%
@@ -243,6 +273,24 @@ load("../ressources/data/plot-predictions.RData")
 predictions
 ```
 
+
+### Contexte : Budget - Investissement
+
+```{r, out.width="65%", fig.align="center"}
+knitr::include_graphics("../ressources/img/budgetparetu.png")
+```
+
+\tiny
+Source : https://lucaschancel.com/etudiants/
+
+### Contexte : Budget - Productivité
+
+```{r, out.width="65%", fig.align="center"}
+knitr::include_graphics("../ressources/img/budgetparetu-flip.png")
+```
+
+\tiny
+Source : https://lucaschancel.com/etudiants/
 
 
 ### Conclusion générale
