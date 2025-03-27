@@ -7,6 +7,7 @@ author:
 - '[@JulienGossa.cpesr.fr](https://bsky.app/profile/juliengossa.cpesr.fr) gossa@unistra.fr'
 date: "12-03-2025"
 output: 
+  github_document: default
   beamer_presentation:
     theme: "Madrid"
     dev: cairo_pdf
@@ -15,7 +16,6 @@ output:
     keep_tex: False
     #toc: true
     slide_level: 3
-  github_document: default
 classoption: "aspectratio=169"
 ---
 
@@ -413,10 +413,11 @@ emplois.ec %>%
   filter(Périmètre.ID %in% c("Ensemble","ST","LLASHS","DEG","27")) %>%
   mutate(Périmètre.label=factor(Périmètre.label, 
         levels=c("Ensemble","Sciences et techniques","Lettres et sciences humaines","Droit éco gestion","Informatique"))) %>%
-  ggplot(aes(x=Année, y=kpi.MCF.TauxPostesNonPourvus, color=Périmètre.label)) +
-  geom_line(linewidth = 1) + geom_point(shape = 21, stroke = 1.5, size = 1.5, fill="white") +
+  ggplot(aes(x=Année, y=kpi.MCF.TauxPostesNonPourvus, color=Périmètre.label, linewidth=Périmètre)) +
+  geom_line() + geom_point(shape = 21, stroke = 1.5, size = 1.5, fill="white") +
   scale_x_continuous(breaks = scales::pretty_breaks(12)) +
   scale_y_continuous(labels = scales::percent) +
+  scale_linewidth_manual(values=c(2,1,0.5)) +
   labs(title="Concours MCF : Taux de postes non pourvus", 
        y = "Taux de postes non pourvus") 
 ```
