@@ -144,7 +144,7 @@ https://www.elysee.fr/front/pdf/elysee-module-22053-fr.pdf
   - Nécessite une réforme statutaire d'ampleur, énorme risque pour l'attractivité
 - Conditionner y compris les performances cœur de métier 
   - Réussite, Insertion professionnelle (et production scientifique ?) 
-  - Calculée par des outils administratifs : InserSup, Fresq, Quadrant, (HAL, OpenAlex), ...
+  - Calculées par des outils administratifs : InserSup, Fresq, Quadrant, (HAL, OpenAlex), ...
   - __Voué à l'échec : Loi de Goodhart__
   
 ### Loi de Goodhart
@@ -176,9 +176,9 @@ Tout dépend des ambitions que l'on a pour l'enseignement supérieur, dans un mo
 
 - Familles (fortunées ou endettées) : Frais d'inscription 
 - Sphère économique : Fondations/filliales
-- Etat : Agences/Collectivité territoriales
+- Etat : Agences/Collectivités territoriales
 - Exécutif : COMP
-- Autonomie : SCSP
+- Universitaires/Scientifiques/Autonomie : SCSP
 
 
 
