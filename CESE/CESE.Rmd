@@ -137,14 +137,14 @@ https://www.elysee.fr/front/pdf/elysee-module-22053-fr.pdf
 ## COMP100% : pour augmenter la performance ?
 
 - Principe : conditionner 100% de la SCSP à la « performance »
-  - __Notion de « performance » non consensuelle, polymorphe et changeable__
+  - __Notion de « performance » non consensuelle, polymorphe et mutable__
   - Extrêmement risqué dans des mains extrêmes.
 - Conditionner y compris le traitement des fonctionnaires 
-  - __Pas de réduction stratégique du volume sans licenciements économiques__
-  - Nécessite une réforme statutaire d'ampleur 
+  - __Pas de transformation stratégique sans licenciements économiques__
+  - Nécessite une réforme statutaire d'ampleur, énorme risque pour l'attractivité
 - Conditionner y compris les performances cœur de métier 
   - Réussite, Insertion professionnelle (et production scientifique ?) 
-  - Calculée par des outils administratifs : InserSup, Fresq, Quadrants, (HAL, OpenAlex), ...
+  - Calculée par des outils administratifs : InserSup, Fresq, Quadrant, (HAL, OpenAlex), ...
   - __Voué à l'échec : Loi de Goodhart__
   
 ### Loi de Goodhart
@@ -159,10 +159,12 @@ __« Quand une mesure devient un objectif, elle cesse d'être une bonne mesure �
 
 \footnotesize
 
-Tout dépend des ambitions que l'on donnent à l'enseignement supérieur, dans un monde 
+Tout dépend des ambitions que l'on a pour l'enseignement supérieur, dans un monde 
 
 - Post-massification, post-croissance économique, post-croissance démographique...
 - Crises démocratique, diplomatique, économique, informationnelle, écologique...
+
+
 
 ### Angle missions
   
@@ -172,11 +174,11 @@ Tout dépend des ambitions que l'on donnent à l'enseignement supérieur, dans u
 
 ### Angle contrôle/autonomie aux différents pouvoirs
 
-- (vrais) Frais d'inscription : accroissement du contrôle des familles (fortunées ou endettées)
-- Fondations/filliales : accroissement du contrôle des entreprises 
-- Agences : accroissement du contrôle de l'Etat
-- COMP : accroissement du contrôle de l'exécutif
-- SCSP : accroissement de l'autonomie à tous ces pouvoirs 
+- Familles (fortunées ou endettées) : Frais d'inscription 
+- Sphère économique : Fondations/filliales
+- Etat : Agences/Collectivité territoriales
+- Exécutif : COMP
+- Autonomie : SCSP
 
 
 
