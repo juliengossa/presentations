@@ -161,10 +161,10 @@ plot_postesMCFvsCandidats <- emplois.ec %>%
 plot_postesMCFvsCandidats
 ```
 
-## ploy_postesMCFnonPourvus
+## plot_postesMCFnonPourvus
 
 ```{r, out.width="90%", fig.align="center"}
-ploy_postesMCFnonPourvus <- emplois.ec %>% 
+plot_postesMCFnonPourvus <- emplois.ec %>% 
     filter(Année > 2014, Année < 2024) %>%
   filter(Périmètre.ID %in% c("Ensemble","ST","LLASHS","DEG","27")) %>%
   mutate(Périmètre.label=factor(Périmètre.label, 
@@ -175,7 +175,130 @@ ploy_postesMCFnonPourvus <- emplois.ec %>%
   scale_y_continuous(labels = scales::percent) +
   labs(title="Concours MCF : Taux de postes non pourvus", 
        y = "Taux de postes non pourvus") 
+plot_postesMCFnonPourvus
 ```
+
+
+## plot_BMO
+
+```{r}
+bmo <- read.csv2("Besoins en Main-d’Œuvre_Top 10 en nombre de projets de recrutement non saisonniers en 2024 par Métie.csv", skip = 3) %>%
+  mutate(Projets.de.recrutement.non.saisonniers = as.numeric(gsub(" ","",Projets.de.recrutement.non.saisonniers))) %>%
+  mutate(Voie = factor(case_when(
+    startsWith(Métier,"Inf") ~ "Formation supérieure de santé",
+    TRUE ~ "Formation professionnelle"
+  ),
+  levels = c("Formation professionnelle","Formation supérieure de santé","Formation universitaire","Formation d'ingénieur"),
+  labels = c("Formation professionnelle","Formation supérieure de santé","Formation universitaire","Formation d'ingénieur")))
+  
+
+plot_bmo <- bmo  %>%
+  ggplot(aes(x=Projets.de.recrutement.non.saisonniers,
+             y=reorder(str_wrap(Métier,40),Projets.de.recrutement.non.saisonniers),
+             fill = Voie)) +
+  geom_col(show.legend = TRUE) +
+  scale_x_continuous(labels = scales::number) +
+  scale_fill_brewer(palette = "Dark2", drop=FALSE,guide = guide_legend(nrow = 2)) +
+  labs(title = "Top 10 des métiers les plus demandés en 2024",
+       x = "Nombre de projets de recrutement non saisonniers",
+       y = NULL) +
+  theme(legend.position = "top")
+
+plot_bmo
+```
+
+### Massification (1960-2000) : Investissements massifs dans l'éducation
+
+```{r diplome, cache = TRUE}
+load("emploi.RData")
+
+#Graphique pour connaître le niveau de diplome des jeunes selon l'année civile 
+plot_diplome <- function(agemin = 15, agemax = 30, anneemin = 1971, anneemax = 2020) {
+  emploi %>%
+    filter(Age > agemin, Age < agemax, Annee >= anneemin, Annee <= anneemax) %>%
+    mutate(Diplome = factor(Diplome,
+                            levels=c("Bac+5","Bac+3","Bac+2","Bac","CAP-BEP","DNB","Aucun"))) %>%
+    mutate(Diplome = fct_recode(Diplome,
+                                Tertiaire = "Bac+5",
+                                Tertiaire = "Bac+3",
+                                Tertiaire = "Bac+2",
+                                Secondaire = "Bac",
+                                Secondaire = "CAP-BEP",
+                                Secondaire = "DNB",
+                                Primaire = "Aucun") ) %>% 
+    group_by(Annee,Diplome) %>%
+    summarise(Population = sum(Population)/1e6) %>%
+    ungroup() %>%
+    na.omit() %>%
+    filter(Annee != 1973) %>%
+    complete(Annee,Diplome,fill=list(Population = 0)) %>%
+    ggplot(aes(x=Annee,y=Population,fill=Diplome,group=Diplome)) +
+    geom_area(color="white", alpha=0.6, position = "fill") + 
+    #geom_vline(xintercept = c(1994,2007)) +
+    xlab("Année")
+}
+
+plot_stratification_continu <- plot_diplome(agemin = 25, agemax = 30) +
+  scale_y_continuous(labels = scales::percent, name = "Part des jeunes de 25 à 30 ans") +
+  cpesr_cap(authors = "Camille Schumacher et Julien Gossa", source = "Enquête emploi INSEE")
+
+plot_stratification_continu
+```
+
+
+### Massification (1960-2000) : Investissements massifs dans l'éducation
+
+
+```{r diplome.2, cache = TRUE}
+#Graphique pour connaître le niveau de diplome des jeunes selon l'année civile 
+plot_categorie_ponctuel <- function(categorie="Activite", agemin = 15, agemax = 30, anneemin = 1971, anneemax = 2020, fill=TRUE, keep_na=FALSE) {
+  if(fill) {
+    position_geom <- "fill"
+    label_scale <- ~ scales::percent(abs(.x))
+    title_y <- "Pourcentage de la population 25-30"
+  } else {
+    position_geom <- "stack"
+    label_scale <- function(x) x/1e6
+    title_y <- "Effectif (millions)"
+  }
+  
+  emploi %>%
+    filter(Age >= agemin, Age <= agemax, Annee %in% c(anneemin,anneemax)) %>%
+        mutate(Diplome = factor(Diplome,
+                            levels=c("Bac+5","Bac+3","Bac+2","Bac","CAP-BEP","DNB","Aucun"))) %>%
+    mutate(Diplome = fct_recode(Diplome,
+                                Tertiaire = "Bac+5",
+                                Tertiaire = "Bac+3",
+                                Tertiaire = "Bac+2",
+                                Secondaire = "Bac",
+                                Secondaire = "CAP-BEP",
+                                Secondaire = "DNB",
+                                Primaire = "Aucun") ) %>% 
+    mutate(Diplome = fct_rev(Diplome)) %>%
+    group_by(Annee, Sexe, Categorie=!!as.name(categorie)) %>%
+    summarise(Population = sum(Population, na.rm=TRUE)) %>%
+    { if (!keep_na) na.omit(.) else . } %>%
+    { if (fill) group_by(.,Annee) %>% mutate(Population = Population / sum(Population)) else . } %>%
+    ungroup() %>%
+    complete(Annee, Categorie, fill = list(Population = 0)) %>% 
+    mutate(Population = ifelse(Sexe == "H",-Population,Population)) %>%
+    ggplot(aes(y=Categorie,x=Population,fill=Sexe, group=Sexe)) +
+    geom_col(alpha=0.8, color="white",width = 1) + 
+    expand_limits(x=c(-0.28,0.28)) +
+    facet_grid(.~Annee) +
+    scale_x_continuous(labels = label_scale) +
+    scale_fill_brewer(palette = "Set2") +
+    labs (y = "Diplôme", x = title_y, caption = "Source :Enquête Emploi (1971 - 2020)")
+}
+
+
+plot_stratification_ponctuel <- plot_categorie_ponctuel(categorie="Diplome", agemin = 25, agemax = 30) +
+  #scale_y_continuous(labels = scales::percent, name = "Part des jeunes de 25 à 30 ans") +
+  cpesr_cap(authors = "Camille Schumacher et Julien Gossa", source = "Enquête emploi INSEE")
+
+plot_stratification_ponctuel
+```
+
 
 ## Save
 
@@ -188,6 +311,9 @@ save(plot_RecettesFormation,
      plot_LvsM,
      plot_postesMCF,
      plot_postesMCFvsCandidats,
-     ploy_postesMCFnonPourvus,
+     plot_postesMCFnonPourvus,
+     plot_bmo,
+     plot_stratification_continu,
+     plot_stratification_ponctuel,
      file = "plots.RData")
 ```
