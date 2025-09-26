@@ -1,39 +1,57 @@
 CPESR
 ================
 CPESR
-2025-05-17
+2025-09-26
 
 ## plot_RecettesFormation
 
     ## Warning: remplacement de l'importation précédente 'ggthemes::theme_map' par
     ## 'cowplot::theme_map' lors du chargement de 'kpiESR'
 
+    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ## ℹ Please use `linewidth` instead.
+    ## ℹ The deprecated feature was likely used in the kpiESR package.
+    ##   Please report the issue to the authors.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
+
 <img src="plots_files/figure-gfm/unnamed-chunk-1-1.png" width="672" />
 <details>
+
 <summary>
+
 RecettesFormation ( 18 lignes)
 </summary>
+
+    ## Warning in attr(x, "align"): 'xfun::attr()' est obsolète.
+    ## Utilisez plutôt ‘xfun::attr2()’.
+    ## Voir help("Deprecated")
+
+    ## Warning in attr(x, "format"): 'xfun::attr()' est obsolète.
+    ## Utilisez plutôt ‘xfun::attr2()’.
+    ## Voir help("Deprecated")
 
 | Rentrée | Groupe   | kpi.FIN.S.recettesFormation | kpi.K.forPetu |
 |--------:|:---------|----------------------------:|--------------:|
 |    2006 | Ensemble |                          NA |            NA |
 |    2007 | Ensemble |                          NA |            NA |
 |    2008 | Ensemble |                          NA |            NA |
-|    2009 | Ensemble |                   392011544 |      257.7436 |
-|    2010 | Ensemble |                   503252984 |      332.0748 |
-|    2011 | Ensemble |                   618575129 |      404.9809 |
-|    2012 | Ensemble |                   612211414 |      396.7325 |
-|    2013 | Ensemble |                   581119495 |      367.3821 |
-|    2014 | Ensemble |                   485880945 |      300.5871 |
+|    2009 | Ensemble |                   474812256 |      213.9954 |
+|    2010 | Ensemble |                   469863933 |      211.9164 |
+|    2011 | Ensemble |                   693291688 |      309.9570 |
+|    2012 | Ensemble |                   703168794 |      311.2886 |
+|    2013 | Ensemble |                   604603946 |      260.5609 |
+|    2014 | Ensemble |                   504289996 |      212.8816 |
 |    2015 | Ensemble |                          NA |            NA |
 |    2016 | Ensemble |                          NA |            NA |
-|    2017 | Ensemble |                   904344796 |      532.8800 |
-|    2018 | Ensemble |                   901532642 |      521.9465 |
-|    2019 | Ensemble |                   829077063 |      470.7557 |
-|    2020 | Ensemble |                  1089319927 |      610.8238 |
-|    2021 | Ensemble |                  1212679498 |      674.8247 |
-|    2022 | Ensemble |                  1266241841 |      727.9963 |
-|    2023 | Ensemble |                  1333497501 |            NA |
+|    2017 | Ensemble |                  1058620629 |      423.0778 |
+|    2018 | Ensemble |                  1165023369 |      458.7826 |
+|    2019 | Ensemble |                  1011594659 |      388.5563 |
+|    2020 | Ensemble |                  1475662495 |      561.7732 |
+|    2021 | Ensemble |                  1687331498 |      634.2362 |
+|    2022 | Ensemble |                  1808470773 |      697.7916 |
+|    2023 | Ensemble |                  1936734477 |            NA |
 
 </details>
 
@@ -41,40 +59,44 @@ RecettesFormation ( 18 lignes)
 
 <img src="plots_files/figure-gfm/unnamed-chunk-2-1.png" width="672" />
 <details>
+
 <summary>
+
 RecettesFormation ( 18 lignes)
 </summary>
+
+    ## Warning in attr(x, "align"): 'xfun::attr()' est obsolète.
+    ## Utilisez plutôt ‘xfun::attr2()’.
+    ## Voir help("Deprecated")
+
+    ## Warning in attr(x, "format"): 'xfun::attr()' est obsolète.
+    ## Utilisez plutôt ‘xfun::attr2()’.
+    ## Voir help("Deprecated")
 
 | Rentrée | Groupe | kpi.FIN.S.recettesFormation | kpi.K.forPetu | kpi.FIN.S.recettesRecherche | kpi.K.recPect |
 |---:|:---|---:|---:|---:|---:|
 | 2006 | Ensemble | NA | NA | NA | NA |
 | 2007 | Ensemble | NA | NA | NA | NA |
 | 2008 | Ensemble | NA | NA | NA | NA |
-| 2009 | Ensemble | 392011544 | 257.7436 | 190953825 | NA |
-| 2010 | Ensemble | 503252984 | 332.0748 | 187313691 | NA |
-| 2011 | Ensemble | 618575129 | 404.9809 | 208217135 | NA |
-| 2012 | Ensemble | 612211414 | 396.7325 | 267461556 | 4319.260 |
-| 2013 | Ensemble | 581119495 | 367.3821 | 361283727 | 5819.366 |
-| 2014 | Ensemble | 485880945 | 300.5871 | 308079763 | 4995.456 |
+| 2009 | Ensemble | 474812256 | 213.9954 | 233527074 | NA |
+| 2010 | Ensemble | 469863933 | 211.9164 | 225618514 | NA |
+| 2011 | Ensemble | 693291688 | 309.9570 | 314593954 | NA |
+| 2012 | Ensemble | 703168794 | 311.2886 | 467088046 | 4906.902 |
+| 2013 | Ensemble | 604603946 | 260.5609 | 379865932 | 3979.029 |
+| 2014 | Ensemble | 504289996 | 212.8816 | 288663382 | 3052.636 |
 | 2015 | Ensemble | NA | NA | NA | NA |
 | 2016 | Ensemble | NA | NA | NA | NA |
-| 2017 | Ensemble | 904344796 | 532.8800 | 779748422 | 13656.557 |
-| 2018 | Ensemble | 901532642 | 521.9465 | 822054735 | 13529.093 |
-| 2019 | Ensemble | 829077063 | 470.7557 | 857827343 | 14131.781 |
-| 2020 | Ensemble | 1089319927 | 610.8238 | 1020214117 | 16869.735 |
-| 2021 | Ensemble | 1212679498 | 674.8247 | 1227104285 | 20123.391 |
-| 2022 | Ensemble | 1266241841 | 727.9963 | 1237630338 | NA |
-| 2023 | Ensemble | 1333497501 | NA | 1303008483 | NA |
+| 2017 | Ensemble | 1058620629 | 423.0778 | 1166388306 | 13285.059 |
+| 2018 | Ensemble | 1165023369 | 458.7826 | 1172551027 | 12583.720 |
+| 2019 | Ensemble | 1011594659 | 388.5563 | 1211330445 | 12995.853 |
+| 2020 | Ensemble | 1475662495 | 561.7732 | 1756184798 | 18912.381 |
+| 2021 | Ensemble | 1687331498 | 634.2362 | 2201853958 | 23460.417 |
+| 2022 | Ensemble | 1808470773 | 697.7916 | 2000631201 | 21065.706 |
+| 2023 | Ensemble | 1936734477 | NA | 2050118152 | NA |
 
 </details>
 
 ## plot_SCSPvsMS
-
-    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-    ## ℹ Please use `linewidth` instead.
-    ## This warning is displayed once every 8 hours.
-    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-    ## generated.
 
 <img src="plots_files/figure-gfm/unnamed-chunk-3-1.png" width="672" />
 
