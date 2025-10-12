@@ -109,7 +109,7 @@ Finances : Produit de financement encaissable et Taux de ressources propres
 knitr::include_graphics("../ressources/img/tdbfin-Montpellier.png")
 ``` 
 
-## Trois scenarios de gouvernement d'établissement
+## Trois scénarios de gouvernement d'établissement
 
 Trois « signatures » (théoriques) d'établissement
 
@@ -191,7 +191,7 @@ plot_RessourcesPropres
 
 Plus les filliales (fondations, filiales commerciales, écosystème start-ups, etc.).
 
-## Conclusion
+## Conclusion : Des missions en conflits, pas d'avenir sans débat
 
 - Démultiplication des missions de l'enseignement supérieur et de la recherche.
 - Le conflit de mission est tranché par une action publique techno-bureaucratique.
@@ -201,8 +201,9 @@ Plus les filliales (fondations, filiales commerciales, écosystème start-ups, e
 
 ### Risques (en plus du risque existentiel)
 
-- Démoralisation des personnels d'enseignement et de recherche / Quiet-quitting
-- Perte de l'identité universitaire (donc fin de l'Université)
+- Opposition des enjeux collectifs et individuels 
+  - Démoralisation des personnels d'enseignement et de recherche / Quiet-quitting
+  - Perte de l'identité universitaire (donc fin de l'Université)
 
 ### Porte de sortie
 

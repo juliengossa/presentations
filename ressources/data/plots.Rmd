@@ -12,14 +12,22 @@ knitr::opts_chunk$set(fig.asp = 9/16, fig.retina = 2)
 
 library(tidyverse)
 library(ggcpesrthemes)
+library(kpiESR)
 theme_set(theme_cpesr())
 theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/RFC/")
+```
+
+## plot_SCSPvsEtu
+
+```{r, results='asis'}
+plot_SCSPvsEtu <- kpiesr_plot_line("Universités et assimilés", c("kpi.ETU.P.effectif","kpi.FIN.S.SCSP"), val="evolution") +
+  ggtitle("Evolution du nombre d'étudiants et de la SCSP", subtitle="Subvention pour charge de service public - Périmètre Universités")
+plot_SCSPvsEtu
 ```
 
 ## plot_RecettesFormation
 
 ```{r, results='asis'}
-library(kpiESR)
 plot_RecettesFormation <- kpiesr_plot_line("Ensemble",c("kpi.ETU.P.effectif","kpi.FIN.S.recettesFormation","kpi.FIN.S.SCSP"), val="evolution") +
   ggtitle("Evolution des recettes formation vs. SCSP et nombre d'étudiants", subtitle="Droits d'inscription, DU, VAE, formation continue, taxe d'apprentissage")
 plot_RecettesFormation
@@ -303,7 +311,8 @@ plot_stratification_ponctuel
 ## Save
 
 ```{r}
-save(plot_RecettesFormation, 
+save(plot_SCSPvsEtu,
+     plot_RecettesFormation, 
      plot_RessourcesPropres,
      plot_SCSPvsMS,
      plot_MassificationRecent,

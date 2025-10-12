@@ -1,12 +1,9 @@
 CPESR
 ================
 CPESR
-2025-09-26
+2025-10-11
 
-## plot_RecettesFormation
-
-    ## Warning: remplacement de l'importation précédente 'ggthemes::theme_map' par
-    ## 'cowplot::theme_map' lors du chargement de 'kpiESR'
+## plot_SCSPvsEtu
 
     ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
     ## ℹ Please use `linewidth` instead.
@@ -17,20 +14,16 @@ CPESR
     ## generated.
 
 <img src="plots_files/figure-gfm/unnamed-chunk-1-1.png" width="672" />
+
+## plot_RecettesFormation
+
+<img src="plots_files/figure-gfm/unnamed-chunk-2-1.png" width="672" />
 <details>
 
 <summary>
 
 RecettesFormation ( 18 lignes)
 </summary>
-
-    ## Warning in attr(x, "align"): 'xfun::attr()' est obsolète.
-    ## Utilisez plutôt ‘xfun::attr2()’.
-    ## Voir help("Deprecated")
-
-    ## Warning in attr(x, "format"): 'xfun::attr()' est obsolète.
-    ## Utilisez plutôt ‘xfun::attr2()’.
-    ## Voir help("Deprecated")
 
 | Rentrée | Groupe   | kpi.FIN.S.recettesFormation | kpi.K.forPetu |
 |--------:|:---------|----------------------------:|--------------:|
@@ -57,21 +50,13 @@ RecettesFormation ( 18 lignes)
 
 ## plot_RessourcesPropres
 
-<img src="plots_files/figure-gfm/unnamed-chunk-2-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-3-1.png" width="672" />
 <details>
 
 <summary>
 
 RecettesFormation ( 18 lignes)
 </summary>
-
-    ## Warning in attr(x, "align"): 'xfun::attr()' est obsolète.
-    ## Utilisez plutôt ‘xfun::attr2()’.
-    ## Voir help("Deprecated")
-
-    ## Warning in attr(x, "format"): 'xfun::attr()' est obsolète.
-    ## Utilisez plutôt ‘xfun::attr2()’.
-    ## Voir help("Deprecated")
 
 | Rentrée | Groupe | kpi.FIN.S.recettesFormation | kpi.K.forPetu | kpi.FIN.S.recettesRecherche | kpi.K.recPect |
 |---:|:---|---:|---:|---:|---:|
@@ -98,35 +83,35 @@ RecettesFormation ( 18 lignes)
 
 ## plot_SCSPvsMS
 
-<img src="plots_files/figure-gfm/unnamed-chunk-3-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-4-1.png" width="672" />
 
 ## plot_MassificationRecent
 
-<img src="plots_files/figure-gfm/unnamed-chunk-4-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-5-1.png" width="672" />
 
 ## plot_MassificationLong
 
-<img src="plots_files/figure-gfm/unnamed-chunk-5-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-6-1.png" width="672" />
 
 ## plot_LvsM
 
-<img src="plots_files/figure-gfm/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="plots_files/figure-gfm/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## plot_postesMCF
 
-<img src="plots_files/figure-gfm/unnamed-chunk-7-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="plots_files/figure-gfm/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## plot_postesMCFvsCandidats
 
-<img src="plots_files/figure-gfm/unnamed-chunk-8-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="plots_files/figure-gfm/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## plot_postesMCFnonPourvus
 
-<img src="plots_files/figure-gfm/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="plots_files/figure-gfm/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## plot_BMO
 
-<img src="plots_files/figure-gfm/unnamed-chunk-10-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-11-1.png" width="672" />
 
 ### Massification (1960-2000) : Investissements massifs dans l’éducation
 
