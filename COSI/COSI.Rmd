@@ -4,7 +4,7 @@ subtitle: |
     | COSI - Café Ouvert Sciences et Ingénierie - Sorbonne Université
 author: 
 - Julien Gossa \newline 
-- Université de Strasbourg, Laboratoire SAGE, NSP, et CPESR  \newline \hspace{3cm} \newline
+- Université de Strasbourg, NSP, Laboratoire SAGE et CPESR  \newline \hspace{3cm} \newline
 - https://nosservicespublics.fr/rapport-etat-services-publics-2024 \newline \newline
 - '[@JulienGossa.cpesr.fr](https://bsky.app/profile/juliengossa.cpesr.fr) gossa@unistra.fr'
 date: "14-10-2025"
@@ -38,7 +38,7 @@ load("../ressources/data/plots.RData")
 
 ```
 
-## Cinq constats Nos Services Publics
+## Six constats Nos Services Publics
 
 ### Constat 1 : Les besoins évoluent plus vite que les moyens 
 
@@ -51,7 +51,7 @@ Source : Lucas Chancel, Sciences Po, https://lucaschancel.com/etudiants/
 
 ### Constat 2 : Un développement du privé sans cahier des charges ni contrôle
 
-```{r, out.width = "75%", fig.align='center'}
+```{r, out.width = "77%", fig.align='center'}
 knitr::include_graphics("../ressources/img/EESR-effectifs.png")
 ``` 
 
@@ -60,7 +60,7 @@ Source : EESR, SIES, https://publication.enseignementsup-recherche.gouv.fr/eesr/
 
 ### Constat 2 : Un développement du privé sans cahier des charges ni contrôle
 
-```{r, out.width = "65%", fig.align='center'}
+```{r, out.width = "62%", fig.align='center'}
 knitr::include_graphics("../ressources/img/OFCE-apprentissage.png")
 ``` 
 
@@ -74,26 +74,35 @@ Source : Bruno COQUET, OFCE, https://www.ofce.sciences-po.fr/pdf/pbrief/2024/OFC
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
-
 \centering 2000
 
 ```{r, out.width = "100%"}
 knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2000.png")
 ``` 
-
 :::
 ::: {.column width="50%"}
-
 \centering 2025
 
 ```{r, out.width = "100%"}
 knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2025.png")
 ``` 
-
 :::
 :::::::::::::: 
 
-### Constat 5 : Une territorialisation à l'abandon, et un manque d'intersectionnalité dans les politiques publiques.
+\footnotesize
+Source: L123-2 du Code de l'éducation https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042815070/
+
+### Constat 5 : Une inégalité par les deux bouts, complexe à mesurer.
+
+```{r, out.width = "60%", fig.align='center'}
+knitr::include_graphics("../ressources/img/CAE-coutsdiplomes.png")
+``` 
+
+\footnotesize
+Source: CAE, https://cae-eco.fr/les-couts-des-formations-dans-lenseignement-superieur-francais-determinants-et-disparites
+
+
+### Constat 6 : Une territorialisation à l'abandon, et un manque d'intersectionnalité dans les politiques publiques.
 
 ```{r, out.width = "60%", fig.align='center'}
 knitr::include_graphics("../ressources/img/NSP-campus.png")
@@ -134,26 +143,27 @@ predictions
 
 ### Triple moment 
 
-- Fin de la massification / début de stngnation éducative
-- Chute impresionnante et durable de la démographie
+- Fin de la massification / début de stagnation éducative
+- Chute impressionnante et durable de la démographie
 - Développement rapide de l'édu-scepticisme
 
 Probablement un moment-pivot civilisationnel
 
-#### Soit vers une phase obscurantiste
+#### Soit vers la fin du service public d'ES(R)
 
   - Individualisation et pure professionalisation des études
   - COMP100% + Modèle économique basé sur les frais d'inscription
   - De nombreuses fermetures (régulation d'un marché dysfonctionnel)
   - Contractualisation des universitaires (adapter l'offre à la demande)
 
-#### Soit vers une redéfinition du rôle de l'éducation, du savoir et de l'Université
+#### Soit vers une redéfinition du rôle du service public d'ES(R)
   - Notion de progrès collectif ?
+  - Séparation nette et horizontale entre études supérieures et professionalisation 
 
 
 ### Taux d'engagement dans l'enseignement supérieur
 
-```{r, out.width="90%", fig.align="center"}
+```{r, out.width="80%", fig.align="center"}
 knitr::include_graphics("../ressources/img/OWD-tertiary.png")
 ```
 
