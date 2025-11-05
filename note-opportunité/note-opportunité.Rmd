@@ -1,0 +1,258 @@
+---
+title: "La transformation du modèle économique des universités à l'aune du contexte éducatif"
+subtitle: "Note d'opportunité stratégique"
+output:
+  pdf_document:
+    citation_package: biblatex
+    number_sections: true
+    toc: true
+    dev: cairo_pdf
+header-includes:
+  - \usepackage[T1]{fontenc}
+  - \usepackage[default]{raleway}
+  - \usepackage[french]{babel}
+bibliography: 2025-10-29-NoteOpportunitéStratégique.bib
+biblio-style: verbose
+date: "2025-10-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+options(dplyr.summarise.inform = FALSE)
+
+knitr::opts_chunk$set(fig.asp=7.5/16, fig.width = 8)
+
+library(tidyverse)
+library(ggcpesrthemes)
+library(kpiESR)
+library(cowplot)
+
+theme_set(theme_cpesr() + theme(legend.position = "right", plot.title = element_text(hjust = 0.5)))
+
+load("../ressources/data/plots.RData")
+```
+
+« A bout de souffle » est une expression fréquente [@micheldenekenModeleEconomiqueFrancais2017] pour qualifier le modèle économique de l'enseignement supérieur et des universités, qui s'enlisent actuellement dans de très sérieuses difficultés économiques. Ces difficultés ravivent les vieux débats, dont notamment celui à propos de la hausse des frais d'inscription.
+
+Cette note tente d'analyser l'opportunité d'un changement de modèle économique des universités françaises, en mettant de côté les questions idéologiques, et au prisme d'un triple constat : la possible stagnation éducative, le développement de l'édu-scepticisme, et l'état prévisible de l'offre et de la demande.
+
+# Le modèle économique de l'enseignement supérieur est une question fréquente, abordée en débat sous l'angle politique, mais traitée sur le terrain en termes techniques.
+
+## Le débat est polarisé entre les promoteurs et les détracteurs du financement par les frais d'inscription.
+
+La question de l'augmentation des frais d'inscription dans l'enseignement supérieur est régulière. Elle se pose parfois pour des raisons surtout budgétaires, visant à compenser un sous-investissement de l'Etat [@sauvageProjetFoiFinances1983]. D'autres fois, elle se pose pour des raisons politiques[@crouilleboisLoiDevaquetRaisons2020], visant à modifier le modèle économique, et en particulier l'équilibre entre le financement direct par des dotations d'Etat (donc la solidarité nationale) et le financement par les étudiants, éventuellement au travers de bourses ou de prêts bancaires garantis (donc toujours avec une part de solidarité natione, mais indirecte).
+
+D'après ses promoteurs [@gary-boboFautilAugmenterDroits2005] [@alaintrannoyFaireAccepterCommunaute2018], la vertu principale du modèle de financement basé sur les frais d'inscription est un « tournant du système vers la qualité »[@thierrycoulhonWikiLeaksMacronCampaign2017] : en agents rationnels et informés, les jeunes investissent en fonction de leurs capacités à réussir et dans les meilleures formations. Cette double concurrence, entre étudiants et entre formations, entraînerait tout le système vers le haut grâce à une sélection naturelle des "meilleurs", c'est-à-dire la fermeture des formations et l'éviction des étudiants en fonction de leurs performances.
+
+D'après ses détracteurs [@flacherFautilVraimentAugmenter2012] [@davidflacherEnseignementSuperieurLaugmentation2025], l'organisation en marché de l'enseignement supérieur[@louisetourretQuandLeducationDevient2023] aurait pour conséquence l'augmentation de la ségrégation économique et sociales des étudiants comme des établissements, la modification des choix d'orientation et l'endettement étudiant.
+
+Les choses ne semblent pas figées, puisqu'on a pu observer quelques changements de position, comme par exemple le CAE, qui a édité un rapport favorable aux droits d'inscription en 2016[@garcia-penalosaPreparerFranceMobilite2016], mais un rapport pronant plutôt l'investissement public en 2021[@gabriellefackEnseignementSuperieurPour2021], ou encore Philippe Aghion, qui a changé d'avis entre 2004 [@philippeaghionEducationCroissance2004] et 2018 [@philippeaghionCeQueRapporte2018]. 
+
+L'objet de cette note n'est pas de se positionner dans ce débat, mais d'apporter une éclairage sur l'opportunité d'une modification du modèle économique dans le contexte actuel.
+
+
+## La vivacité du débat est en augmentation croissante depuis 2023, mais les transformations sont en apparence techniques
+
+En 2023, M. Macron déclarait « On ne pourra pas rester durablement dans un système où l’enseignement supérieur n’a aucun prix pour les étudiants » [@hugodecrypte-grandsformatsLinterviewDEmmanuelMacron2023], 
+Début 2025, Le CESE a été chargé d'une saisine sur « Quel modèle de financement pour répondre aux ambitions de l'enseignement supérieur ? »[@kenzaoccanseyQuelModeleFinancement2025]. La lettre de mission d'un récent rapport IGF-IGESR est très explicite : « identifier les leviers de développement de ces ressources propres, en formulant en particulier des pistes d’évolution relatives aux droits d’inscription en formation initiale » [@camillecordonnierRessourcesPropresDroits2025]. Ce rapport est tenu secret. 
+
+Si augmenter les frais d'inscription est sans doute perçu par les établissements d'abord comme une manière d'éviter la faillite, symbolisée par la la mise sous tutelle rectorale, la menace de de cette mise sous tuelle peut servir de levier politique pour encourager une transformation technique du modèle économique. Ces règles viennent d'être révisée[@DecretNdeg202411082024].
+
+Après une réduction de ses subventions, le directeur des Mines Saint-Etienne déclare « Les crises sont aussi des moments qui permettent de faire évoluer les systèmes »[@annemascretMinesSaintEtienneCrises2025]. Il défend un modèle de financement public-privé « plus affirmé »[@julielaniqueMinesSaintEtienneDefend2025] et une « mutation profonde du modèle économique », c'est-à-dire à « faire payer les familles » comme dans les écoles Centrales[@perroudEcolesDingenieursPubliques2025]. Pour les mêmes raisons, les ENS[@julietteburnelLENSPSLDecideSon2025] ont augmenté leurs frais d'inscription et le réseau INSA-Polytech s'apprête faire de même[@julielaniqueDroitsDinscriptionEcoles]. Pratiquement toutes les formations d'ingénrieur sont concernées, au moins par le questionnement[@davidflacherFraisDinscriptionPrivatisation2025]. 
+
+Ainsi, de nombreuses formations transforment leur modèle économique, mais le plus souvent en réaction à une pression budgétaire technique. Ces raisons techniques se retrouvent dans les rapports édités par l'Etat.
+
+
+## La défaillance de l'Etat stratège et gestionnaire se confirme, alors que les efforts des universités sont largement ignorés
+
+En 2013, un rapport d'information du Sénat « Financement des universités : l'équité au service de la réussite de tous » [@gillotdominiqueFinancementUniversitesLequite2013] décrivait les défaillances du modèle d'allocation des moyens SYMPA, l'incapacité de l'Etat à établir une juste allocation des moyens et à arbitrer entre service public et performance. Il estimait que « _dans un contexte de stagnation des financements publics, et d'impossibilité d'accroître fortement les prélèvements obligatoires, porter les droits de scolarité au niveau moyen en Europe est une piste qui mérite d'être explorée_ ». Douze ans plus tard, en 2025, la mission d'information sur « la stratégie universitaire de l’État »[@laurencegarnierRelationsStrategiquesEntre2025] formule exactement les mêmes constats, et recommande d'« ouvrir la réflexion sur les conditions d'un rehaussement national des droits d'inscription ». 
+
+La France est désormais, avec le Luxembourg (qui n'a qu'une université), le seul pays européen sans modèle d'allocation des moyens [@pruvotAllocatingCorePublic2022]. Dans ce contexte, les efforts de transformation des universités sont souvent ignorés. Le rapport de la Commission des finances du sénat « Améliorer la performance de l’enseignement supérieur : un contrat qui reste à honorer »[@paoli-gaginAmeliorerPerformanceLenseignement2025] estime que « les ressources propres augmentent en réalité suivant un rythme proche de celui de la SCSP » et que « les droits d’inscription demeurent extrêmement minoritaires dans les ressources des établissements d’enseignement supérieur », et en tire en conclusion que « la progressivité des droits d’inscription irait dans le sens d’une plus grande justice sociale ».
+
+Il s'agit vraissemblalement d'une mauvaise interprétation des données , puisqu'au contraire on observe les résultats d'une politique volontariste de développement des recettes propres formation, qui proviennent certes des droits d'inscription figés par les gouvernement, mais aussi des DU, de la VAE et de la formation continue : entre 2013-2014 et 2023-2024, alors que la SCSP augmentait d'environ 20 % (sans prise en compte de l'inflation), les recette propres formation des établissements du MESR ont été multipliées par plus de trois, passant de 604 M€ à 1 936 M€.
+
+```{r}
+plot_RecettesFormation
+```
+
+Pour résumer, on constate que le débat est particulièrement vif sur le changement de modèle économiques des formations supérieures, et que la transformation est déjà en cours dans les écoles, directement par l'augmentation des frais d'inscription de base, mais aussi dans les universités, indirectement par le développement d'autres sources de financement de la formation (DU, FC, VAE et alternance).
+
+C'est donc bien une transformation, mais progressive et fragmentée, faites d'initiatives locales, impulsées par des contraintes nationales mais sans orientation stratégique assumée par la nation. Cette transformation arrive cependant dans un contexte très particulier, marqué notamment par une possible stagnation éducative.
+
+
+
+# L'hypothèse d'une stagnation éducative questionne le rôle des universités.
+
+La stagnation éducative désigne un régime où le niveau de qualification de la population cesse de progresser. Après une massification éducative, dans un système borné en 3/5/8, la stagnation est une étape inévitable : son maximum théorique est de 100% d'une classe d'âge atteignant le niveau ultime de formation. Cette limite théorique est difficile à atteindre en réalité, et le niveau de stagnation reste une inconnue civilisationnelle.
+
+## L'illusion démographique peut masquer le régime de stagnation éducative
+
+Les évolutions récente de la population étudiante peuvent entretenir l'illusion d'une progression continue du niveau de qualification de la population.
+
+```{r}
+plot_MassificationRecent
+```
+
+Mais une vision à plus long terme fait apparaitre clairement les trois régimes : pré-massification, massification à partir des années 1950, et post-massification / stagnation à partir des années 2000.
+
+```{r}
+plot_MassificationLong
+```
+
+Cette situation est connue depuis longtemps. En 1994, le Ministre de l'éducation, François Bayrou, déclarait « _Passer du siècle de la quantité au siècle de la qualité. Passer de la massification à la démocratisation et du même mouvement rendre à notre société les conditions d'une adhésion à l'école sans laquelle il n'y a pas de succès possible._ » [@francoisbayrouDeclarationFrancoisBayrou1994]. 
+
+## Depuis 30 ans, notre système éducatif est optimisé, sans réelle progression de la durée des études.
+
+Ainsi, depuis 30 ans, on opère une optimisation du système éducatif : le niveau d'étude moyen augmente, mais plus l'âge de fin des études[@allegreFauxProcesEtudes2025]. 
+
+```{r, out.width="80%", fig.align = "center"}
+knitr::include_graphics("../ressources/img/GA-agefinétudes.png")
+```
+
+
+Cette optimisation s'appuie notamment sur la réforme du bac professionnel en 2010, et la réduction des redoublements. Les redoublements étant désormais presque totalement éliminés, il est possible qu'il n'existe plus de marge d'optimisation dans le secondaire^[RERS 2025. https://rers.depp.education.fr/2025/tableau/04_EL2D/10_FORMGTFLUX]. 
+
+```{r, out.width="80%", fig.align = "center"}
+knitr::include_graphics("../ressources/img/RERS-redoublements.png")
+```
+
+## Les marges d'optimisation sont sans doute désormais consommées.
+
+Cela peut expliquer la concentration du discours de « réussite » sur « l'échec en Licence », seule marge d'optimisation encore disponible. Néanmoins, cette marge est probablement inexploitable, puisque les places en Masters restent limitées, et que les Masters restent encore les débouchés principaux des Licences.
+
+```{r}
+plot_LvsM
+```
+
+On peut également noter que le développement de l'alternance, malgré son coût sans précédent et sans comparaison avec d'autres dépenses éducatives[@coquetApprentissageQuatreLeviers2024], ne s'est pas fait en augmentant la part des jeunes faisant des études supérieures, mais par une substitution des places existantes. Cela représente un indice que le système est arrivé à saturation.
+
+```{r, out.width="80%", fig.align = "center"}
+knitr::include_graphics("../ressources/img/OFCE-apprentissage.png")
+```
+
+Au final, l'hypothèse d'une stagnation éducative doit être sérieusement envisagée. Cette situation ravive des questions idéologiques et stratégiques anciennes, ce qui invite à des transformations, qui peuvent tout à fait conduire à des régressions éducatives. C'est peut-être ce que nous sommes en train d'observer aux USA, pays dont la massification est la plus avancée^[Gross enrolment ratio in tertiary education. Our world in data. https://ourworldindata.org/grapher/gross-enrollment-ratio-in-tertiary-education?tab=chart].
+
+```{r, out.width="80%", fig.align = "center"}
+knitr::include_graphics("../ressources/img/OWD-tertiary.png")
+```
+
+De cette situation aboutit naturellement un questionnement sur le rôle des études supérieures, et en particulier le rôle des universités, car ces dernières ont été conçues pour porter la massification : si cette massification est achevée, quel doit être le nouveau rôle des universités ?
+
+# Le développement de l'éduscepticisme questionne le rôle de l'éducation et de l'enseignement supérieur.
+
+## L'inversion des strates éducatives questionne l'investissement national dans l'éducation.
+
+La massification éducative s'accompagne mécaniquement d'une inversion de la pyramide des strates éducatives. Ainsi, en 50 ans, la France a totalement renversé sa hiérarchie scolaire : alors que la moitié des jeunes n'avaient qu'une éducation primaire au début des années 1970, plus de la moitié a désormais un niveau d'éducation tertiaire/supérieure. 
+
+```{r}
+plot_stratification_ponctuel
+```
+
+Cette nouvelle situation questionne « la valeur des diplômes ». Pour certains, il s'agit d'une banalisation tout à fait positive [@hugreeLuniversiteQuiVient2022], pour d'autres une inflation scolaire qui menace la mérioticratie [@duru-bellatLinflationScolaireDesillusions2006]. La réaction des pouvoirs publics est, pour l'instant, de freiner cette évolution, et peut-être de tenter de la renverser. Ainsi, notre nation a pour objectif de diminuer la part des néo-bacheliers recevant une proposition dans Parcoursup^[Indicateur 1.5 : Admission dans l'enseignement supérieur. Projet annuel de performances du programme 150 annexé au Projet de loi des finances 2026. https://www.budget.gouv.fr/documentation/documents-budgetaires-lois/exercice-2026]. L'explication officielle est que « «L’enjeu est de préserver le taux d’insertion professionnelle » [@beyerFrederiqueVidalLenjeu2021]. La collision entre la politique de réussite en Licence et la politique d'insertion profesionnelle explique l'évolution des effectifs de L3 et M1. Le renversement de la dynamique éducative est désormais explicitement assumé dans le programme du parti présidentiel, qui comporte une section « réduire la durée des études initiales » [@renaissanceChocSavoirsPour2025].
+
+C'est aussi sans doute une clé d'explication du défaut d'investissement public dans l'enseignement supérieur : il n'est peut-être plus vu comme un investissement d'avenir, mais seulement comme un coût actuel, en partie dispensable ou privatisable. Cela peut expliquer le choix de réduire le nombre d'enseignants dans l’Éducation nationale plutôt que de réduire la taille des classes, quand bien même ce choix serait économiquement discutable [@paulinecharoussetTailleClassesInegalites2025]. Dans le supérieur, on peut effectivement constater que l'investissement par étudiant a baissé de 20% depuis 2017 [@lucaschancelJeuDonneesDepense2025].
+
+```{r, out.width="80%", fig.align = "center"}
+knitr::include_graphics("../ressources/img/budgetparetu.png")
+```
+
+Cependant, une perspective plus positive est que la productivité de l'enseignement supérieur public a dans le même temps été améliorée de 20%, puisque nous formons 20% d'étudiants en plus par euro dépensé. On retrouve là l'idée de l'optimisation de la dépense.
+
+```{r, out.width="80%", fig.align = "center"}
+knitr::include_graphics("../ressources/img/budgetparetu-flip.png")
+```
+
+Il ne faut pas sous-estimer cette situation, car elle est tout à fait nouvelle : aucune civilisation ne s'est encore confrontée à une stagnation éducative avec une stratification éducative inversée. Il n'y a plus de modèle sur lequel s'appuyer pour faire des choix politiques. Cette situation est aussi propice à un renouveau du discours édusceptique.
+
+## Le développement d'un discours édusceptique, défavorable à l'investissement privé dans l'éducation
+
+C'est dans cette situation que se développe désormais un discours édusceptique. L’éduscepticisme est une position politique et idéologique hostile à la démocratisation éducative, c’est-à-dire à l’accès du plus grand nombre de jeunes aux études les plus longues possible. Elle se traduit généralement pas un discours utilitariste, hostile aux savoirs désintéressés et favorable à l’adéquationnisme, c’est-à-dire l’ouverture de places de formation conditionnées à l’existence d’emplois en adéquation.
+
+L’édu-scepticisme est généralement la position réactionnaire dans tous les débats sur les massifications éducatives depuis qu’ils existent. Dès 1688, on trouve « Le commerce des lettres [i.e. les études non professionalisantes] bannirait absolument celui de la marchandise, qui comble les états de richesses », mais aussi « il remplirait la France de chicaneurs plus propres à ruiner les familles particulières et à troubler l'ordre public qu'à procurer aucun bien aux états » [Richelieu]. Les deux arguments sont ainsi que les savoirs désintéressés détourneraient la jeunesse de la production économique, mais en plus seraient facteur d'instabilité politique et sociale. Ce discours n'est pas différent de celui qu'on peut entendre aujourd'hui sur les études en sciences sociales. 
+
+Portés notamment par l’engouement pour les IA, les éditoriaux édusceptiques sont de plus en plus fréquents : « doit-on en finir avec le bac+5 ? »[@NiveauEstChute2025], « Arrêtons d’enseigner un milliard de conneries aux gamins »[@serraNatachaPolonyArretons2025], « Il ne faut plus cirer trop longtemps les bancs des universités »[@juliendamontReduireLenseignementSuperieur2025], « Ne faites plus d’études »[@alexandreNeFaitesDetudes2025]...
+
+Ce mouvement n'est pas spécifique à la France, mais se retrouve notamment aux États-Unis, où l’éduscepticisme de l’administration Trump est particulièrement vif[@johnoliverTrumpVsHigher2025], et a sans doute participé à sa victoire électorale, en désignant les universités comme l'ennemi de la nation : « _The universities are the ennemy_ »[@laurenlassabeshepherdUniversitiesAreEnemy2025]. Aux USA comme en Angleterre, on affirme qu'« Il est temps de réaliser que l’Université est une arnaque »[@bootleItsTimeBritain2025], position relayée en France sans distance dans Le FigaroVox[@emmabeckerJaimaisBeaucoupCharlie2025]. La question est prise suffisamment au sérieux pour qu’on produise des rapports sur la question : « Les universités en valent-elles le coût ? »[@willettsAreUniversitiesWorth2025]. Ce rapport conclue qu'aucune preuve ne supporte l'éduscepticisme. 
+
+De fait, une approche purement utilitariste des études supérieures oblige à questionner le retour sur investissement des études face aux révolutions du marché du travail : en ce moment, il faut prédire les secteurs impactés par l'IA pour savoir quelles sont les filières encore rentables[@murrayAIsRapidEvolution2025]. Ainsi, la perturbation du marché de l'emploi, alliée au discours public de dénigrement des études supérieures, risquent de réduire l'intérêt que les familles portent à la poursuite d'étude, et donc réduire l'investissement privé dans l'éducation.
+
+# Des conditions d'offre et de demande dangereuses
+
+Si l'investissement public est contesté et qu'un discours édusceptique se développe et menace l'investissement privé, il convient de se demander si l'état de l'offre (les formations) et de la demande (les étudiants) est favorable à un changement de modèle économique vers plus de financement privé. 
+
+## La situation internationale montre un marché entre vacillement et écroulement
+
+L'Angleterre a procédé à une mise en quasi-marché[@niklassonQuasimarketsHigherEducationa1996] progressive de son enseignement supérieur dès la fin des années 1990. Depuis, son système a développer une fragilité systémique aux crises (COVID[@boltonCoronavirusFinancialImpact2025], Brexit[@fazackerleyBrexitCausesCollapse2023] ou économique[@hayleyclarkeThousandsMoreUniversity2025]). Malgré le développement des frais d'inscription, la situation financière des établissements n'y semble pas meilleure qu'en France : un quart des départements de physiques sont par exemple menacés de fermeture[@adamsQuarterUKUniversity2025]. Une partie de la classe politique estime que l'écroulement des universités serait souhaitable[@deaconCollapseOurUniversities2024], situation qui inquiète les familles : « Sept Britanniques sur dix seraient inquiets en cas de fermetures massives d’universités, et attribueraient la responsabilité au gouvernement »[@thepolicyinstituteMassUniversityClosures]. La fragilité est telle qu’on se pose la question : « Le pari du libre marché : la Covid a-t-elle brisé les universités britanniques ? »[@mooreFreemarketGambleHas2021]. Une réforme s’apprête à figer les frais d’inscription, donc le marché, afin de protéger les contribuables du risque d'inflation des frais d'inscription, dont seulement 56% sont intégralement remboursés [@StudentLoanForecasts2025] et que le gouvernement perd de l’argent y compris sur les prêts remboursés[@wealeGovernmentLoseMoney2024].
+
+A minima, il faut constater que le changement de modèle économique n'a pas permis d'éviter les difficultés financières aux universités anglaises. L’Australie traverse également une crise sans précédent[@fordeAustraliasUniversitySystem2025], caractérisée par un taux inquiétant d’abandon et une chute de l'engagement dans les études supérieures, que les pouvoirs publics n'arrivent pas à enrayer[@johnrossEconomicChangesSlowing2024]. Aux USA, en plus des atteintes portées par l'administration Trump, y compris sur les plus prestigieuses universités[@americanassociationofcollegesanduniversitiesCallConstructiveEngagement2025], les frais d'inscription sont en réalité en baisse depuis une décennies[@benunglesbeeStickerShockLook2024a], ce qui témoigne d'un marché vacillant. 
+
+Les pays s'en tenant à la quasi-gratuité sont sans doute dans une situation moins périlleuse, sans pour autant être à l'abri des coupes budgétaires, comme en Allemagne[@universityofmannheimHigherEducationBudget2024] ou en Suède[@anne-francoisehivertSuedeUniversitesDifficulte2024].
+
+A cette situation difficile va rapidement s'ajouter des modifications dans les flux d'étudiants internationaux, en raison de la démographie, notamment chinoise[@tashmosheimCollapseChineseStudent2025], et des politiques d'accueil[@nathanm.greenfieldInternationalEnrolmentPlummets2025], mais aussi de la massification éducative en cours dans les pays africains, qui ont de moins en moins besoin des universités européennes pour former leur propre population[@le360afriqueNigeriaSupprimeBourses2025].
+
+Ainsi, si on n'a pas encore observé de réel écroulement avec des fermetures d'établissements publics renommés, le marché vacille et s'apprête sans doute à connaitre des bouleversements. Si les investisseurs s'en retirent, la situation peut rapidement dégénérer. 
+
+## En France, une inflation de l'offre, une déflation de la demande, et une bulle qui explose déjà
+
+En France, la situation du marché de l'enseignement supérieur est dans une phase particulière, sans doute historiquement. 
+
+### D'une part, l'offre de formation privée connait un décollage sans précédent, modifiant l'équilibre public-privé historique.
+
+```{r, out.width="80%", fig.align = "center"}
+knitr::include_graphics("../ressources/img/EESR-effectifs.png")
+```
+
+Cette modification a été impulsé par les politiques gouvernementales [@murielpenicaudLoi5Septembre2018] et le financement de l'alternance. Les premières enquêtes sur l'enseignement supérieur privé exposent de graves problèmes de qualité [@marchalCubeRevelationsDerives2025][@maylenvillaverdeEnqueteIlsOnt2025] et de légalité [@beatricedescampsConclusionTravauxMission2024]. La réputation du secteur privé, bien qu'encore soutenue par des éditorialistes[@judithwaintraubDopeeParDeclin2025], risque de subir rapidement un baisse aux yeux des familles. Le futur de l'équilibrage public-privé est donc complètement incertain.
+
+Or, la saturation des places d'alternance et la contraction de leur financement nous met déjà dans une situation de possible éclatement d'une bulle[@herveestampesEnseignementSuperieurPrive2025], et cela avant même que les premières données sur l'insertion professionnelle des alternants post-réforme ne soient disponibles. 
+
+### D'autre part, nous sommes actuellement dans un pic démographique, qui précède un effondrement sans précédent des natalités et bientôt du nombre de bacheliers.
+
+Dans 5 ans, nous amorcerons une chute mécanique du nombre d'étudiants, dont on ne connait pas encore l'ampleur ni la durée. Cette durée sera sans doute supérieure à celle des carrières des universitaires actuels.
+
+```{r, out.width="80%", fig.align = "center"}
+knitr::include_graphics("../ressources/img/INSEE-naissances.png")
+```
+
+
+__Nous sommes donc dans une situation où l'offre augmente, mais où la demande ne va pouvoir que baisser__, ce qui est la recette de l'éclatement d'une bulle. Les secteurs sur lesquels cette demande va baisser sont tout à fait incertains, mais, dans la logique actuelle, des formations et sans doute des établissements vont devoir fermer. Les établissements les plus dépendants aux frais d'inscription seront mécaniquement les plus exposés. 
+
+Les premières stratégies d'adaptation commencent à être établies[@malikabutzbachBaisseDemographiqueComment2025]. On peut les classer en trois catégories :
+
+* Faire une transformation préventive de l'offre de formation, en fermant par avance les filières jugées les moins « rentables », dans l'espoir de pouvoir préserver les autres.
+* Prendre le plus rapidement possible des parts de marché aux autres établissements publics, dans l'espoir de pouvoir préserver son établissement au détriment des autres.
+* Investir d'autres marchés que le marché français. 
+
+Ce constat aboutit à cette question : **n'est-il pas trop tard pour basculer sur un modèle économique basé sur les frais d'inscription ?**
+
+## Un contexte éducatif qui invite à une réflexion plus large
+
+Au final, il est tout à fait possible que la France, au même titre que toutes les nations ayant procédé à leur massification éducative, soit désormais face à un nouveau choix, de l'ampleur de celui qui a été fait après-guerre, concernant le rôle que doit jouer son enseignement supérieur et plus particulièrement son Université.
+
+Posée de plus en plus fréquemment, la question du rôle des universités se pose en particulier au vu de l'inflation sans priorité des missions officielle de l'enseignement supérieur[@kenzaoccanseyInvestirDansLavenir2025] [@laurencegarnierRelationsStrategiquesEntre2025] [@brunobouchardEstTempsSe2025], comme le montre l'évolution du L123.2 du code de l'éducation^[Article L123.2 du Code de l'éducation entre 2000 et 2025. www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042815070]. Tôt ou tard, il arrivera le moment où on ne pourra plus faire l'économie d'y apporter une réponse.
+
+```{r, out.width = "100%", fig.show='hold',fig.align='center'}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-2-20xx.png")
+``` 
+
+Depuis 20 ans, l'équilibre entre formation professionnalisante et formation désintéressée a nettement dérivé en faveur de la professionalisation [@glaymannProfessionnalisationFormationsScolaires2021] [@maillardTempsLongDiplomes2025]. Elle nécessite sans doute aujourd'hui d'être rediscuté, surtout si on considère que la formation désintéressée est plus que jamais utile pour faire face aux crises actuelles, et en particulier la crise informationnelle et la crise écologique. Même opérée pour des raisons budgétaires, l'augmentation des frais d'inscription est une réponse à cette discussion : la formation qui augmente ses frais d'inscription entérine qu'elle est avant tout au bénéfice individuel du diplômé, et non plus au bénéfice collectif de toute la société. 
+
+Ce type de choix relève d'un choix de société, civilisationnel, et ne devrait pas reposer sur une multitude de décisions techniques non coordonnées. Il est donc sans doute plus que nécessaire d'organiser une troisième colloque de Caen, consacré à la redéfinition des missions de l'enseignement supérieur public, à leur priorisation et à leur répartition entre les différents types d'établissements. C'est sans doute à cette seule condition, la clarification de nos missions, que l'on pourra rebâtir un modèle économique qui ne soit plus « à bout de souffle ».
+
+# Quelques points d'attention s'il était décidé de procéder à une augmentation des frais d'inscription
+
+* La hausse des frais d'inscriptions à l'université est indissociable de la contractualisation des universitaires. Si le financement par les familles implique une adaptation dynamique des effectifs et de l'orientation des étudiants, alors il faut être en mesure d'adapter dynamiquement les effectifs et les disciplines des enseignants. Cela ne pourra pas se faire avec des recrutements ayant eu lieu 10, 20 ou 30 ans plus tôt. Séparer les deux questions porte le risque d'arriver à une situation dangereuse, « au milieu de guet », où il serait impossible d'adapter le service à la demande, et donc impossible de justifier le tarif demandé aux familles. 
+* Une augmentation des frais d'inscription à la discrétion de leur direction pour les écoles, mais à la discrétion de l’État pour les universités représenterait un profond faussement de concurrence, si on prend au sérieux la théorie du signal-prix et la nécessité d'une saine concurrence entre les établissements. 
+* Une augmentation homogène des frais d'inscription, par niveau, dans toutes les universités et toutes les disciplines serait incohérente avec toutes les théories qui supportent les frais d'inscription, et pourrait mener à une situation de mécontentement généralisé : selon la théorie de l'investissement, les étudiants des filières peu couteuses (lettres) pourraient ne pas accepter financer les formations plus couteuses (sciences expérimentales) ; selon la théorie du signal, les étudiants des filières les plus rentables (informatique, santé) pourraient ne pas accepter que leur formation soit présentée à la même valeur que les formations les moins rentables.
+* Une augmentation à la discrétion des universités et différenciée par formation impliquerait le développement de nouvelles fonctions (stratégie marketing, études de marché, publicité commerciale, recouvrement, etc.), dont le coût ne doit pas être négligés car il pourrait très facilement dépasser les bénéfices. A cela, il faut ajouter la nécessité de développer ces compétences (alors que celles nécessitées par la LRU ne sont toujours pas stabilisées), et anticiper une augmentation des tensions internes, en particulier dans les CFVU qui devront fixer les tarifs.
+* L'obligation de transparence des administrations devrait conduire à une publication en données ouvertes des frais d'inscription des formations publiques. Cela faciliterait le travail marketing des écoles privées, mais, sans réciproque, cela représenterait un handicap massif pour les établissements publics, tenus aveugles des tarifs pratiqués par leurs concurrents.
+* De même, si les choix d'orientation se font en fonction de la rentabilité des formations, le contrôle strict des performances des formations publiques (Fresq, InserSup) représente un handicap massif face aux établissement privés, qui peuvent afficher librement n'importe quelle information sans aucun contrôle. 
+* Les grandes universités de recherche fusionnées pourraient être désavantagées par leur taille, rendant plus difficile l'établissement d'une stratégie globale, ou au moins équitable, de gestion des droits d'inscription. Elles doivent aussi se préparer au soupçon de faire financer leur recherche par leurs étudiants.
+* Les universités de territoire pourraient être désavantagées par leur bassin, généralement constitué de familles moins fortunées et d'industries moins nombreuses que celles autour des grands centres universitaires.
+* Les modèles économiques généralement mis en avant (Sciences Po et Dauphine) concernent des établissements absolument pas représentatifs de la majorité des universités, et ne sauraient servir sérieusement de modèle généralisable. En particulier, la non compensation par l’État des tarifs sociaux pourraient peser bien plus fort sur les universités normales que dans ces établissements.
+* Si l’État établit un principe de responsabilité, en refusant par avance de renflouer les établissements basculant en frais d'inscription qui rencontreraient ensuite des difficultés, alors cette bascule est particulièrement risquée. Mais si l’État n'établit pas de principe de responsabilité, alors des établissements peuvent être tentés de prendre de trop grands risques, comptant sur la solidarité pour surmonter les conséquences d'un échec, ce qui représente sans doute un encore plus grand danger. En conséquence, l’État doit, au préalable à tout décision de bascule, contractualiser clairement les conditions d'un renflouement en cas d'échec de la transition du modèle économique. 
+
+
+
