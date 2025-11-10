@@ -33,10 +33,14 @@ library(cowplot)
 theme_set(theme_cpesr() + theme(legend.position = "right", plot.title = element_text(hjust = 0.5)))
 
 load("../ressources/data/plots.RData")
+
+# familles -> ménages
+# IPP taille des classes + le monde
+# 4 options IG
+
 ```
 
-familles -> ménages
-IPP taille des classes
+
 
 « A bout de souffle » est une expression fréquente [@micheldenekenModeleEconomiqueFrancais2017] pour qualifier le modèle économique de l'enseignement supérieur et des universités, qui s'enlisent actuellement dans de très sérieuses difficultés économiques. Ces difficultés ravivent les vieux débats, dont notamment celui à propos de la hausse des frais d'inscription.
 
@@ -46,7 +50,7 @@ Cette note tente d'analyser l'opportunité d'un changement de modèle économiqu
 
 ## Le débat est polarisé depuis toujours entre les promoteurs et les détracteurs du financement par les frais d'inscription.
 
-La question de l'augmentation des frais d'inscription dans l'enseignement supérieur est régulière. Dans certains cas, elle se pose pour des raisons avant tout budgétaires, visant à compenser un sous-investissement de l'Etat [@sauvageProjetFoiFinances1983]. Dans d'autres cas, elle se pose pour des raisons politiques[@crouilleboisLoiDevaquetRaisons2020], visant à modifier le modèle économique, et en particulier l'équilibre entre le financement direct par des dotations d'Etat (donc la solidarité nationale) et le financement par les étudiants, éventuellement au travers de bourses ou de prêts bancaires garantis (donc toujours avec une part de solidarité natione, mais indirecte).
+La question de l'augmentation des frais d'inscription dans l'enseignement supérieur est régulière. Dans certains cas, elle se pose pour des raisons avant tout budgétaires, visant à compenser un sous-investissement de l'État [@sauvageProjetFoiFinances1983]. Dans d'autres cas, elle se pose pour des raisons politiques[@crouilleboisLoiDevaquetRaisons2020], visant à modifier le modèle économique, et en particulier l'équilibre entre le financement direct par des dotations d'État (donc la solidarité nationale) et le financement par les étudiants, éventuellement au travers de bourses ou de prêts bancaires garantis (donc toujours avec une part de solidarité natione, mais indirecte).
 
 D'après ses promoteurs [@gary-boboFautilAugmenterDroits2005] [@alaintrannoyFaireAccepterCommunaute2018], la vertu principale du modèle de financement basé sur les frais d'inscription est un « tournant du système vers la qualité »[@thierrycoulhonWikiLeaksMacronCampaign2017] : en agents rationnels et informés, les jeunes investissent en fonction de leurs capacités à réussir et dans les meilleures formations. Cette double concurrence, entre étudiants pour intégrer les meilleures formations et entre formations pour attirer les meilleurs étudiants, entraînerait tout le système vers le haut grâce à une sélection naturelle des "meilleurs", c'est-à-dire la fermeture des formations et l'éviction des étudiants en fonction de leurs performances.
 
@@ -70,9 +74,9 @@ Après une réduction de ses subventions, le directeur des Mines Saint-Etienne d
 Ainsi, sans décision ni concertation globale, de nombreuses formations transforment leur modèle économique, donc se positionnent sur une question politique, mais le plus souvent en réaction à une pression budgétaire, donc en apparence technique. 
 
 
-## La défaillance de l'Etat gestionnaire et stratège se confirme, alors que les efforts des universités sont largement ignorés
+## La défaillance de l'État gestionnaire et stratège se confirme, alors que les efforts des universités sont largement ignorés
 
-En 2013, un rapport d'information du Sénat « Financement des universités : l'équité au service de la réussite de tous » [@gillotdominiqueFinancementUniversitesLequite2013] décrivait les défaillances du modèle d'allocation des moyens SYMPA, l'incapacité de l'Etat à établir une juste allocation des moyens et à arbitrer entre service public et performance. Il estimait que « _dans un contexte de stagnation des financements publics, et d'impossibilité d'accroître fortement les prélèvements obligatoires, porter les droits de scolarité au niveau moyen en Europe est une piste qui mérite d'être explorée_ ». Douze ans plus tard, en 2025, la mission d'information sur « la stratégie universitaire de l’État »[@laurencegarnierRelationsStrategiquesEntre2025] formule exactement les mêmes constats, et recommande d'« ouvrir la réflexion sur les conditions d'un rehaussement national des droits d'inscription ». 
+En 2013, un rapport d'information du Sénat « Financement des universités : l'équité au service de la réussite de tous » [@gillotdominiqueFinancementUniversitesLequite2013] décrivait les défaillances du modèle d'allocation des moyens SYMPA, l'incapacité de l'État à établir une juste allocation des moyens et à arbitrer entre service public et performance. Il estimait que « _dans un contexte de stagnation des financements publics, et d'impossibilité d'accroître fortement les prélèvements obligatoires, porter les droits de scolarité au niveau moyen en Europe est une piste qui mérite d'être explorée_ ». Douze ans plus tard, en 2025, la mission d'information sur « la stratégie universitaire de l’État »[@laurencegarnierRelationsStrategiquesEntre2025] formule exactement les mêmes constats, et recommande d'« ouvrir la réflexion sur les conditions d'un rehaussement national des droits d'inscription ». 
 
 La France est désormais, avec le Luxembourg (qui n'a qu'une université), le seul pays européen sans modèle d'allocation des moyens [@pruvotAllocatingCorePublic2022]. Dans ce contexte, les efforts de transformation des universités sont souvent ignorés. Le rapport de la Commission des finances du sénat « Améliorer la performance de l’enseignement supérieur : un contrat qui reste à honorer »[@paoli-gaginAmeliorerPerformanceLenseignement2025] estime que « les ressources propres augmentent en réalité suivant un rythme proche de celui de la SCSP » et que « les droits d’inscription demeurent extrêmement minoritaires dans les ressources des établissements d’enseignement supérieur », et en tire en conclusion que « la progressivité des droits d’inscription irait dans le sens d’une plus grande justice sociale ».
 
@@ -205,7 +209,7 @@ Les pays s'en tenant à la quasi-gratuité sont sans doute dans une situation mo
 
 A ces situations nationales difficiles s'ajoutent la situation internationale, et la possibilité de renversements géo-politiques venant durablement perturber les flux d'étudiants internationaux. Au delà du cas des USA, par exemple, le Canada est en train de réduire drastiquement ses visas étudiants[@nathanm.greenfieldInternationalEnrolmentPlummets2025], la démographie chinoise fait craindre un écroulement de la mobilité asiatique[@tashmosheimCollapseChineseStudent2025], et le Nigéria a annoncé supprimer ses bourses pour étudier à l'étranger, considérant que son système universitaire est désormais suffisant pour former sa propre population[@le360afriqueNigeriaSupprimeBourses2025].
 
-Ainsi, si on n'a pas encore observé de réel écroulement avec des fermetures complètes d'établissements publics, le marché vacille et s'apprête sans doute à connaitre des bouleversements. Si les investisseurs -Etat, ménages, mais aussi groupes financiers- s'en retirent, la situation peut rapidement dégénérer. 
+Ainsi, si on n'a pas encore observé de réel écroulement avec des fermetures complètes d'établissements publics, le marché vacille et s'apprête sans doute à connaitre des bouleversements. Si les investisseurs -État, ménages, mais aussi groupes financiers- s'en retirent, la situation peut rapidement dégénérer. 
 
 ## En France, une inflation de l'offre, une déflation de la demande, et une bulle qui explose déjà
 
@@ -217,28 +221,28 @@ En France, la situation du marché de l'enseignement supérieur est dans une pha
 knitr::include_graphics("../ressources/img/EESR-effectifs.png")
 ```
 
-Cette modification a été impulsé par les politiques gouvernementales [@murielpenicaudLoi5Septembre2018] et le financement de l'alternance. Les premières enquêtes sur l'enseignement supérieur privé exposent de graves problèmes de qualité [@marchalCubeRevelationsDerives2025][@maylenvillaverdeEnqueteIlsOnt2025] et de légalité [@beatricedescampsConclusionTravauxMission2024]. La réputation du secteur privé, bien qu'encore soutenue par des éditorialistes[@judithwaintraubDopeeParDeclin2025], risque de subir rapidement un baisse aux yeux des familles. Le futur de l'équilibrage public-privé est donc complètement incertain.
+Cette modification a été impulsé par les politiques gouvernementales [@murielpenicaudLoi5Septembre2018] et le financement de l'alternance. Les premières enquêtes sur l'enseignement supérieur privé exposent de graves problèmes de qualité [@marchalCubeRevelationsDerives2025] [@maylenvillaverdeEnqueteIlsOnt2025] et de légalité [@beatricedescampsConclusionTravauxMission2024]. La réputation du secteur privé, bien qu'encore soutenue par des éditorialistes[@judithwaintraubDopeeParDeclin2025], risque de subir rapidement un baisse aux yeux des familles. Le futur de l'équilibrage public-privé est donc complètement incertain.
 
-Or, la saturation des places d'alternance et la contraction de leur financement nous met déjà dans une situation de possible éclatement d'une bulle[@herveestampesEnseignementSuperieurPrive2025], et cela avant même que les premières données sur l'insertion professionnelle des alternants post-réforme ne soient disponibles. 
+Or, avec la prédiction de « 65 000 postes d’alternants détruits en six mois »[@inseePasConfiancePeu2025] et la contraction des financements de l'apprentissage[@michelabhervePLF2026Recul2014], l'éclatement d'une bulle est déjà possible[@herveestampesEnseignementSuperieurPrive2025], et cela avant même que les premières données sur l'insertion professionnelle des formations conçues grâce à la réforme ne soient disponibles. 
 
-### D'autre part, nous sommes actuellement dans un pic démographique, qui précède un effondrement sans précédent des natalités et bientôt du nombre de bacheliers.
+### D'autre part, nous sommes actuellement dans un maximum démographique, qui précède un effondrement sans précédent des natalités et bientôt du nombre de bacheliers.
 
-Dans 5 ans, nous amorcerons une chute mécanique du nombre d'étudiants, dont on ne connait pas encore l'ampleur ni la durée. Cette durée sera sans doute supérieure à celle des carrières des universitaires actuels.
+Dans 5 ans, nous amorcerons une chute mécanique du nombre d'étudiants, dont on ne connait pas encore l'ampleur ni la durée puisque la natalité continue de baisser en 2025. Cette durée sera sans doute supérieure à celle des carrières des universitaires actuels.
 
-```{r, out.width="80%", fig.align = "center"}
+```{r, out.width="50%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/INSEE-naissances.png")
 ```
 
 
-__Nous sommes donc dans une situation où l'offre augmente, mais où la demande ne va pouvoir que baisser__, ce qui est la recette de l'éclatement d'une bulle. Les secteurs sur lesquels cette demande va baisser sont tout à fait incertains, mais, dans la logique actuelle, des formations et sans doute des établissements vont devoir fermer. Les établissements les plus dépendants aux frais d'inscription seront mécaniquement les plus exposés. 
+__Le décollage du secteur privé et la baisse démographie nous plongent donc dans une situation où l'offre augmente mais la demande ne va pouvoir que baisser__, ce qui est la recette de l'éclatement d'une bulle. Les secteurs sur lesquels cette demande va baisser sont tout à fait incertains, mais, dans la logique actuelle, des formations et sans doute des établissements vont devoir fermer. __Les établissements les plus dépendants aux frais d'inscription seront mécaniquement les plus exposés.__ 
 
 Les premières stratégies d'adaptation commencent à être établies[@malikabutzbachBaisseDemographiqueComment2025]. On peut les classer en trois catégories :
 
-* Faire une transformation préventive de l'offre de formation, en fermant par avance les filières jugées les moins « rentables », dans l'espoir de pouvoir préserver les autres.
-* Prendre le plus rapidement possible des parts de marché aux autres établissements publics, dans l'espoir de pouvoir préserver son établissement au détriment des autres.
+* Faire une transformation préventive de l'offre de formation, en fermant par avance les filières jugées les moins « rentables/attractives », dans l'espoir de pouvoir préserver les autres.
+* Prendre le plus rapidement possible des parts de marché, c'est-à-dire des étudiants, aux autres établissements publics, dans l'espoir de pouvoir préserver son établissement au détriment des autres.
 * Investir d'autres marchés que le marché français. 
 
-Ce constat aboutit à cette question : **n'est-il pas trop tard pour basculer sur un modèle économique basé sur les frais d'inscription ?**
+Ce constat aboutit à cette affirmation : **il est sans doute trop tard pour basculer sur un modèle économique basé sur les frais d'inscription.**
 
 ## Un contexte éducatif qui invite à une réflexion plus large
 
@@ -250,24 +254,68 @@ Pour l'instant, ce débat est mené de façon condifentielle et sectorielle, par
 knitr::include_graphics("../ressources/img/CodeEduc-L123-2-20xx.png")
 ``` 
 
-Depuis 20 ans, l'équilibre entre formation professionnalisante et formation désintéressée a nettement dérivé en faveur de la professionalisation [@glaymannProfessionnalisationFormationsScolaires2021] [@maillardTempsLongDiplomes2025]. Elle nécessite sans doute aujourd'hui d'être rediscuté, surtout si on considère que la formation désintéressée est plus que jamais utile pour faire face aux crises actuelles, et en particulier la crise informationnelle et la crise écologique. Même opérée pour des raisons budgétaires, l'augmentation des frais d'inscription est une réponse à cette discussion : la formation qui augmente ses frais d'inscription entérine qu'elle est avant tout au bénéfice individuel du diplômé, et non plus au bénéfice collectif de toute la société. 
+Depuis 20 ans, l'équilibre entre formation professionnalisante et formation désintéressée a nettement dérivé en faveur de la professionalisation [@glaymannProfessionnalisationFormationsScolaires2021] [@maillardTempsLongDiplomes2025]. La formation désintéressée, aujourd'hui, n'est pratiquement plus que perçue en négatif de la formation professionnalisante, parfois même abusivement réduite aux seules sciences sociales, supposée ne pas conduire à l'emploi et donc condamner au chômage. 
+
+Cet équilibre nécessite sans doute aujourd'hui d'être rediscuté. Faire face aux crises actuelles, et en particulier la crise informationnelle et la crise écologique, nécessiste une population formée le plus largement possible à la méthode scientifique. Ceci justifie de concevoir une formation supérieure qui va au dela des besoins de l'emploi, pour un bénéfice collectif non marchand.
+
+Même opérée pour des raisons budgétaires, l'augmentation des frais d'inscription est une réponse à cette discussion : la formation qui augmente ses frais d'inscription entérine qu'elle est avant tout au bénéfice individuel du diplômé, et non plus au bénéfice collectif de toute la société. 
 
 Témoin d'un glissement idéologique, les inspections générales adoptent une position explicite sur la question : « ___contrairement à l’éducation primaire ou secondaire, l’enseignement supérieur public ne peut être considéré comme un service public bénéficiant effectivement à l’ensemble de la population et devant dès lors être gratuit___ »[@christian-lucienmartinRapportIGFIgesr].  
 
-Pourtant, ce type de choix relève d'un choix de société, civilisationnel, et ne devrait pas reposer sur une multitude de décisions techniques non coordonnées. Il est donc sans doute plus que nécessaire d'organiser une troisième colloque de Caen [@QuinzePointsCaen1966], consacré à la redéfinition des missions de l'enseignement supérieur scientifique public, à leur priorisation et à leur répartition entre les différents types d'établissements. C'est sans doute à cette seule condition, la clarification de nos missions, que l'on pourra rebâtir un modèle économique qui ne soit plus « à bout de souffle ».
-
-# Quelques points d'attention s'il était décidé de procéder à une augmentation des frais d'inscription
-
-* La hausse des frais d'inscriptions à l'université est indissociable de la contractualisation des universitaires. Si le financement par les familles implique une adaptation dynamique des effectifs et de l'orientation des étudiants, alors il faut être en mesure d'adapter dynamiquement les effectifs et les disciplines des enseignants. Cela ne pourra pas se faire avec des recrutements ayant eu lieu 10, 20 ou 30 ans plus tôt. Séparer les deux questions porte le risque d'arriver à une situation dangereuse, « au milieu de guet », où il serait impossible d'adapter le service à la demande, et donc impossible de justifier le tarif demandé aux familles. 
-* Une augmentation des frais d'inscription à la discrétion de leur direction pour les écoles, mais à la discrétion de l’État pour les universités représenterait un profond faussement de concurrence, si on prend au sérieux la théorie du signal-prix et la nécessité d'une saine concurrence entre les établissements. 
-* Une augmentation homogène des frais d'inscription, par niveau, dans toutes les universités et toutes les disciplines serait incohérente avec toutes les théories qui supportent les frais d'inscription, et pourrait mener à une situation de mécontentement généralisé : selon la théorie de l'investissement, les étudiants des filières peu couteuses (lettres) pourraient ne pas accepter financer les formations plus couteuses (sciences expérimentales) ; selon la théorie du signal, les étudiants des filières les plus rentables (informatique, santé) pourraient ne pas accepter que leur formation soit présentée à la même valeur que les formations les moins rentables.
-* Une augmentation à la discrétion des universités et différenciée par formation impliquerait le développement de nouvelles fonctions (stratégie marketing, études de marché, publicité commerciale, recouvrement, etc.), dont le coût ne doit pas être négligés car il pourrait très facilement dépasser les bénéfices. A cela, il faut ajouter la nécessité de développer ces compétences (alors que celles nécessitées par la LRU ne sont toujours pas stabilisées), et anticiper une augmentation des tensions internes, en particulier dans les CFVU qui devront fixer les tarifs.
-* L'obligation de transparence des administrations devrait conduire à une publication en données ouvertes des frais d'inscription des formations publiques. Cela faciliterait le travail marketing des écoles privées, mais, sans réciproque, cela représenterait un handicap massif pour les établissements publics, tenus aveugles des tarifs pratiqués par leurs concurrents.
-* De même, si les choix d'orientation se font en fonction de la rentabilité des formations, le contrôle strict des performances des formations publiques (Fresq, InserSup) représente un handicap massif face aux établissement privés, qui peuvent afficher librement n'importe quelle information sans aucun contrôle. 
-* Les grandes universités de recherche fusionnées pourraient être désavantagées par leur taille, rendant plus difficile l'établissement d'une stratégie globale, ou au moins équitable, de gestion des droits d'inscription. Elles doivent aussi se préparer au soupçon de faire financer leur recherche par leurs étudiants.
-* Les universités de territoire pourraient être désavantagées par leur bassin, généralement constitué de familles moins fortunées et d'industries moins nombreuses que celles autour des grands centres universitaires.
-* Les modèles économiques généralement mis en avant (Sciences Po et Dauphine) concernent des établissements absolument pas représentatifs de la majorité des universités, et ne sauraient servir sérieusement de modèle généralisable. En particulier, la non compensation par l’État des tarifs sociaux pourraient peser bien plus fort sur les universités normales que dans ces établissements.
-* Si l’État établit un principe de responsabilité, en refusant par avance de renflouer les établissements basculant en frais d'inscription qui rencontreraient ensuite des difficultés, alors cette bascule est particulièrement risquée. Mais si l’État n'établit pas de principe de responsabilité, alors des établissements peuvent être tentés de prendre de trop grands risques, comptant sur la solidarité pour surmonter les conséquences d'un échec, ce qui représente sans doute un encore plus grand danger. En conséquence, l’État doit, au préalable à tout décision de bascule, contractualiser clairement les conditions d'un renflouement en cas d'échec de la transition du modèle économique. 
+Pourtant, ce type de choix relève d'un choix de société, qui ne devrait pas reposer sur une multitude de décisions techniques non coordonnées. Il est donc sans doute plus que nécessaire d'organiser un troisième colloque de Caen [@QuinzePointsCaen1966], consacré à la redéfinition des missions de l'enseignement supérieur scientifique public, à leur priorisation et à leur répartition entre les différents types d'établissements. C'est sans doute à cette seule condition, la clarification de nos missions, que l'on pourra rebâtir un modèle économique qui ne soit plus « à bout de souffle ».
 
 
+# Annexe : Quelques points d'attention s'il était décidé de procéder à une augmentation des frais d'inscription
 
+## La hausse des frais d'inscriptions à l'université est indissociable de la contractualisation des universitaires. 
+
+Si le financement par les familles implique une adaptation dynamique des effectifs et de l'orientation des étudiants, alors il faut être en mesure d'adapter dynamiquement les effectifs et les disciplines des enseignants. Séparer les deux questions porte le risque d'arriver à une situation dangereuse, « au milieu de guet », où il serait impossible d'adapter l'offre à la demande, et donc impossible de justifier le tarif demandé aux familles. 
+
+Or, la baisse des effectifs étudiants va probablement être beaucoup plus rapide que la hausse des départs à la retraite des enseignants. L'adaptation du potentiel enseignant ne pourra donc pas se faire seulement par des redéploiements, une montée en charge des contrats LRU, ou une mise en exctinction. A missions et services d'enseignements constants, une partie des recrutements de fonctionnaires ayant eu lieu 10, 20 ou 30 ans plus tôt vont subitement devenir superflus. La substitution des statuts universitaires nationaux par des contrats locaux résout ce problème, mais en soulève d'autres qui dépassent le cadre de cette note.
+
+## Le périmètre et l'homogénite de la hausse des frais d'inscription est une question hautement stratégique.
+
+D'abord, celui qui contrôle les frais d'inscription contrôle en partie le marché. Une augmentation des frais d'inscription à la discrétion de leur direction pour les écoles, mais à la discrétion de l’État pour les universités représenterait un profond faussement de concurrence, si on prend au sérieux la théorie du signal-prix et la nécessité d'une saine concurrence entre les établissements. 
+
+Ensuite, une augmentation homogène des frais d'inscription, par niveau, dans toutes les universités et toutes les disciplines serait incohérente avec toutes les théories qui supportent les frais d'inscription, et pourrait mener à une situation de mécontentement généralisé : selon la théorie de l'investissement, les étudiants des filières peu couteuses (lettres) pourraient ne pas accepter financer les formations plus couteuses (sciences expérimentales) ; selon la théorie du signal-prix, les étudiants des filières les plus rentables (informatique, santé) pourraient ne pas accepter que leur formation soit présentée à la même valeur que les formations les moins rentables.
+
+Enfin, Une augmentation à la discrétion des universités et différenciée par formation impliquerait le développement de nouvelles fonctions (stratégie marketing, études de marché, publicité commerciale, recouvrement, etc.), dont le coût ne doit pas être négligés car il pourrait très facilement dépasser les bénéfices. A cela, il faut ajouter la nécessité de développer ces compétences (alors que celles nécessitées par la LRU ne sont toujours pas stabilisées), et anticiper une augmentation des tensions internes, en particulier entre composantes et dans les CFVU qui devront fixer les tarifs.
+
+
+## La transparence des tarifs et performances peut représenter une profonde distortion de concurrence.
+
+L'obligation de transparence des administrations devrait conduire à une publication en données ouvertes des frais d'inscription des formations publiques. Cela faciliterait le travail marketing des écoles privées, mais, sans réciproque, cela représenterait un handicap massif pour les établissements publics, tenus aveugles des tarifs pratiqués par leurs concurrents.
+
+De même, si les choix d'orientation se font en fonction de la rentabilité des formations, le contrôle strict des performances des formations publiques (Fresq, Quadrant, InserSup) représente un handicap massif face aux établissement privés, qui peuvent afficher librement n'importe quelle information sans aucun contrôle. 
+
+Il conviendrait, avant toute mise en marché, de revoir les conditions de transparence, soit pour étendre le secret des affaires aux tarifs, taux de réussite et d'insertion professionnelle des formations publiques, soit pour étendre l'obligation de transparence et la normalisation des données aux formations du secteur privé. 
+
+
+## Il existe des incertitudes quant aux avantages procurés par la typologie d'établissement.
+
+Pour fixer des tarifs, les grandes universités de recherche (GUR) fusionnées, généralement pluri-disciplinaire avec santé, pourraient être désavantagées par leur taille, rendant plus difficile l'établissement d'une stratégie globale, ou au moins équitable, de gestion des droits d'inscription. Elles doivent surtout se préparer au soupçon de faire financer leur recherche par leurs étudiants.
+
+Les universités de territoire pourraient être désavantagées par leur bassin, généralement constitué de familles moins fortunées et d'industries moins nombreuses que celles autour des grands centres universitaires. Elles pourraient aussi avoir des difficultés à imposer une marque visible face aux GUR.
+
+
+## Les exemples actuels ne sont pas représentatifs et ne passent pas à l'échelle. 
+
+Les modèles économiques généralement mis en avant (Sciences Po et Dauphine), parfois appelés « tarification sociale », concernent des établissements qui ne sont absolument pas représentatifs de la majorité des universités. Ils ne sauraient servir sérieusement de modèle généralisable. En particulier, la non compensation par l’État de l'exonération des boursiers pourrait peser bien plus lourdement sur les universités normales que sur ces établissements. 
+
+Souvent présentée comme une mesure de justice, cette tarification pourrait pourtant pénaliser les budgets des établissements qui reçoivent le plus de boursiers, et ainsi différencier les conditions d'étude.
+
+De plus, cette tarification pourrait ne pas présenter de réels bénéfices budgétaires. Parmis les quatre options présentées dans le rapport IGESR-IGF, les droits d’inscription modulés selon les revenus du foyer auraient le plus faible rendement, avec seulement 500 M€. Ce montant se situe dans la marge d'incertitude habituelle des PLF du programme 150. Les options les plus rentables s'appuient sur l'endettement des ménages.
+
+Si on retient cette hypothèse, alors la vertu principale de la « tarification sociale » serait de faire accepter les principes de différenciation et de hausse des frais d'inscription, mais n'auraient une réelle efficacité budgétaire seulement dans la perspective de hausses plus substantielles et moins sociales. 
+
+
+## L'État doit clarifier sa politique de garantie des prêts étudiants et des modèles économiques.
+
+Si une hausse des frais d'inscription ne peut se faire sans endettement étudiant, alors l'État doit d'abord clarifier ses garanties auprès des ménages, et sa stratégie pour éviter les travers constatés dans le système anglais : surcoût dû à la gestion des emprunts, protection contre les non-remboursements frauduleux et protection contre les emprunts frauduleux.
+
+Concernant les établissements qui décident de basculer sur un modèle économique basé sur les frais d'inscription : 
+
+- si l’État établit un principe de responsabilité, en refusant par avance de renflouer les établissements qui rencontreraient ensuite des difficultés, alors cette bascule est particulièrement risquée ; 
+- mais si l’État n'établit pas de principe de responsabilité, alors des établissements peuvent être tentés de prendre de trop grands risques, comptant sur la solidarité pour surmonter les conséquences d'un échec, ce qui représente sans doute un encore plus grand danger. 
+
+En conséquence, l’État doit, au préalable à tout décision de bascule, contractualiser clairement les conditions d'un renflouement en cas d'échec de la transition du modèle économique. 
