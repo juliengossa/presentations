@@ -16,7 +16,7 @@ header-includes:
   - \usepackage[default]{raleway}
   - \usepackage[french]{babel}
   - \usepackage{draftwatermark}
-bibliography: 2025-10-29-NoteOpportunitéStratégique.bib
+bibliography: Opportunité stratégique - Modèle économique.bib
 biblio-style: verbose
 date: "2025-10-29"
 ---
@@ -38,8 +38,7 @@ theme_set(theme_cpesr() + theme(legend.position = "right", plot.title = element_
 
 load("../ressources/data/plots.RData")
 
-# FTTL / opportunité de tournant vers la qualité
-# Ministre frais et engagement
+# Initiative
 ```
 
 
@@ -96,7 +95,7 @@ La France est désormais, avec le Luxembourg (qui n'a qu'une université), le se
 
 Il s'agit vraisemblalement d'une mauvaise interprétation des données, puisqu'au contraire on observe les résultats d'une politique volontariste de développement des recettes propres formation, qui proviennent certes des droits d'inscription figés par les gouvernements, mais aussi des DU, de la formation continue, de la taxe d'apprentissage et de la VAE: __entre 2013-2014 et 2023-2024, alors que la SCSP augmentait d'environ 20 % (sans prise en compte de l'inflation), les recettes propres formation des établissements du MESR ont été multipliées par plus de trois, passant de 604 M€ à 1 936 M€__ (voir figure ci-après).
 
-Le Ministre de l'enseignement supérieur confirme cette situation : « _Il y a énormément d'autres diplômes, qui sont des diplômes universitaires, des diplômes d'ingénieurs, des diplômes divers et variés, où il y a une forme de liberté, plus ou moins contrôlée. Plus ou moins légalement, les tarifs ne sont pas les tarifs du LMD et le tarif de licence que vous avez mentionné ne concerne_ in fine _qu'une petite part des étudiants._ »[_Op. cit._ à 01:29:04].
+Le Ministre de l'enseignement supérieur confirme cette situation : « _Il y a énormément d'autres diplômes, qui sont des diplômes universitaires, des diplômes d'ingénieurs, des diplômes divers et variés, où il y a une forme de liberté, plus ou moins contrôlée. Plus ou moins légalement, les tarifs ne sont pas les tarifs du LMD et le tarif de licence que vous avez mentionné ne concerne_ in fine _qu'une petite part des étudiants._ »^[_Op. cit._ à 01:29:04].
 
 
 ```{r}
@@ -109,7 +108,7 @@ Pour résumer, on constate que le débat est particulièrement vif sur le change
 __On constate donc bien une transformation, mais progressive et fragmentée, faite d'initiatives locales, impulsées par des incitations nationales mais sans orientation stratégique assumée par le gouvernement ou débattue par la représentation nationale. Cette transformation arrive cependant dans un contexte très particulier, marqué notamment par une possible stagnation éducative.__
 
  
-
+\newpage
 # L'hypothèse d'une stagnation éducative questionne le rôle des universités.
 
 La stagnation éducative désigne un régime où le niveau de qualification de la population cesse de progresser. Après une massification éducative, dans un système où la durée des études est bornée en 3/5/8 par le LMD, la stagnation est une étape inévitable : son maximum théorique est de 100% d'une classe d'âge atteignant le niveau ultime de formation. Cette limite théorique est difficile à atteindre en réalité, et le niveau de stagnation reste une inconnue, bien qu'on constate à l'international des taux stabilisés autour de 80 % d'une classe d'âge au bac et 55 % diplômée du supérieur.
@@ -118,13 +117,13 @@ La stagnation éducative désigne un régime où le niveau de qualification de l
 
 Les évolutions récentes de la population étudiante (voir figure ci-après) peuvent entretenir l'illusion d'une progression continue du niveau de qualification de la population.
 
-```{r}
+```{r, out.width="75%", fig.align='center'}
 plot_MassificationRecent
 ```
 
 Mais une vision à plus long terme (voir figure ci-après) fait apparaître clairement les trois régimes : pré-massification, massification à partir des années 1950, et post-massification / stagnation à partir des années 2000.
 
-```{r}
+```{r, out.width="75%", fig.align='center'}
 plot_MassificationLong
 ```
 
@@ -134,13 +133,13 @@ Cette situation est connue depuis longtemps. En 1994, le Ministre de l'éducatio
 
 Ainsi, depuis 30 ans, on opère une optimisation du système éducatif : la réforme du bac professionnel en 2010 et la réduction des redoublements ont permis d'augmenter le niveau d'étude moyen sans augmenter l'âge de fin des études. Les jeunes vont ainsi plus loin dans le système éducatif, mais sans y passer plus de temps : l'âge de fin d'étude stagne depuis la génération née au milieu des années 1970[@allegreFauxProcesEtudes2025] (voir figure ci-après). 
 
-```{r, out.width="80%", fig.align = "center"}
+```{r, out.width="70%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/GA-agefinétudes.png")
 ```
 
 __Mais, tout comme l'augmentation du niveau d'étude, cette politique d'optimisation est également bornée. Les redoublements étant désormais presque totalement éliminés, il est possible qu'il n'existe plus de marge d'optimisation dans le secondaire__^[RERS 2025. https://rers.depp.education.fr/2025/tableau/04_EL2D/10_FORMGTFLUX] (voir figure ci-après). 
 
-```{r, out.width="80%", fig.align = "center"}
+```{r, out.width="70%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/RERS-redoublements.png")
 ```
 
@@ -208,14 +207,16 @@ L’édu-scepticisme est généralement la position conservatrice dans les déba
 
 __Portés notamment par l’engouement pour les IA, les éditoriaux édusceptiques ne s'arrêtent plus aux seules sciences sociales, et sont de plus en plus fréquents : « _doit-on en finir avec le bac+5 ?_ »[@NiveauEstChute2025], « _Arrêtons d’enseigner un milliard de conneries aux gamins_ »[@serraNatachaPolonyArretons2025], « _Il ne faut plus cirer trop longtemps les bancs des universités_ »[@juliendamontReduireLenseignementSuperieur2025], « _Ne faites plus d’études_ »[@alexandreNeFaitesDetudes2025]...__
 
-Ce mouvement n'est pas spécifique à la France, mais se retrouve notamment aux États-Unis, où l’éduscepticisme de l’administration Trump est particulièrement vif[@johnoliverTrumpVsHigher2025], et a sans doute participé à sa victoire électorale, en désignant les universités comme l'ennemi de la nation : « _The universities are the enemy_ »[@laurenlassabeshepherdUniversitiesAreEnemy2025]. Aux USA comme en Angleterre, on affirme qu'« _Il est temps de réaliser que l’Université est une arnaque_ »[@bootleItsTimeBritain2025], position relayée en France sans distance dans Le FigaroVox[@emmabeckerJaimaisBeaucoupCharlie2025]. La question est prise suffisamment au sérieux pour qu’on produise des rapports sur la question : « _Les universités en valent-elles le coût ?_ »[@willettsAreUniversitiesWorth2025]. 
+Ce mouvement n'est pas spécifique à la France, mais se retrouve notamment aux États-Unis, où l’éduscepticisme de l’administration Trump est particulièrement vif[@johnoliverTrumpVsHigher2025], et a sans doute participé à sa victoire électorale, en désignant les universités comme l'ennemi de la nation : « _The universities are the enemy_ »[@laurenlassabeshepherdUniversitiesAreEnemy2025]. Aux USA comme en Angleterre, on affirme qu'« _Il est temps de réaliser que l’Université est une arnaque_ »[@bootleItsTimeBritain2025], position relayée en France sans distance dans Le FigaroVox[@emmabeckerJaimaisBeaucoupCharlie2025]. 
+
+La question est prise suffisamment au sérieux pour qu’on produise des rapports sur la question : par exemple, « _Les universités en valent-elles le coût ?_ »[@willettsAreUniversitiesWorth2025], ou très récemment une étude d'impact de l'Initiative[@yannicklhortyLimpactEconomiqueMajeur2025]. L'approche de ces rapports est toujours économique, peinant à aborder la question des bénéfices non marchands des études supérieures : « _Par cette étude, l’objectif est de montrer que nos universités sont à la fois un investissement dans l’avenir, à travers la jeunesse ou les futures innovations, mais aussi un investissement à court terme, rentable et qui permet d’injecter dans les territoires une vraie activité économique_ ».
 
 De fait, une approche purement utilitariste des études supérieures oblige à questionner le retour sur investissement des études face aux révolutions du marché du travail : en ce moment, il faut prédire les secteurs qui seront impactés par l'IA demain pour savoir quelles sont les filières encore rentables aujourd'hui[@murrayAIsRapidEvolution2025]. 
 
 __Ainsi, la perturbation du marché de l'emploi, alliée au discours public de dénigrement des études supérieures, risque de réduire l'intérêt que les familles portent à la poursuite d'études, et donc réduire l'investissement privé des ménages dans l'éducation, ce qui inclut les frais d'inscription.__
 
 
-
+\newpage
 # Des conditions d'offre et de demande dangereuses
 
 Si l'investissement public est contesté et qu'un discours édusceptique se développe et menace l'investissement privé, il convient de se demander si l'état de l'offre (les formations) et de la demande (les étudiants) est favorable à un changement de modèle économique vers plus de financement privé, grâce à une hausse des frais d'inscription. 
@@ -269,9 +270,9 @@ Face à la baisse programmée du nombre d'étudiants, les premières stratégies
 * Prendre le plus rapidement possible des parts de marché, c'est-à-dire des étudiants, aux autres établissements publics, dans l'espoir de pouvoir préserver son établissement au détriment des autres.
 * Déplacer l'investissement vers d'autres marchés que le marché français. 
 
-Ces stratégies d'adaptation sont invidualistes et basées sur une réduction des effectifs, soit de soi-même, soit des autres établissements. __Aucune stratégie collective n'a encore été proposée pour conserver ou augmenter les effectifs étudiants, par exemple par un accroissement de la formation tout au long de la vie.__ 
+Ces stratégies d'adaptation sont invidualistes et basées sur une réduction des effectifs, soit de soi-même, soit des autres établissements. __Aucune stratégie collective n'a encore été proposée pour bénéficier de la baisse du nombre de jeunes, par exemple par une réduction assumée des filières à faible effectifs, pour pour conserver ou augmenter les effectifs étudiants, par exemple par un accroissement de la formation tout au long de la vie.__ 
 
-Nous ne sommes plus ni dans le contexte des années 1990 avec des politiques massification, ni dans le contexte des années 2010 avec une démographie croissante. À ces époques, un basculement sur un modèle basé sur les frais d'inscription permettait de prévoir un accroissement des ressources. Aujourd'hui, il faut prévoir une décroissance des ressources issues des frais d'inscription, tout simplement en raison de la décroissance du nombre d'étudiants. 
+Nous ne sommes plus ni dans le contexte des années 1990 avec des politiques massification, ni dans le contexte des années 2010 avec une démographie croissante. À ces époques, un basculement sur un modèle basé sur les frais d'inscription permettait de prévoir un accroissement des ressources. Aujourd'hui, il faut prévoir une décroissance des ressources issues des frais d'inscription, tout simplement en raison de la décroissance du nombre d'étudiants. Cette décroissance est imminente, alors que l'augmentation des frais d'inscription est un processus long : par exemple, une clause du grand-père (exonération des étudiants déjà inscrits) retarderait de 5 ans leur monté en charge. 
 
 Dans ce contexte, augmenter la part des frais d'inscription dans les ressources ne permettra pas d'augmenter durablement les budgets. Ce basculement pourrait alors seulement devenir un moyen de sélectionner, par le marché, les formations qui devront fermer, faute de l'effectif étudiants suffisant pour assurer leur soutenabilité financière. Cette situation pourrait avoir les conséquences suivantes :
 
@@ -284,7 +285,7 @@ __Tout l'enseignement supérieur, public comme privé, serait aussi en risque d'
 
 __En conclusion, sauf si on souhaite réduire de façon incontrôlée notre offre de formation, il est sans doute trop tard pour basculer sur un modèle économique basé sur les frais d'inscription.__
 
-
+\newpage
 # Un contexte éducatif qui invite à une réflexion plus large
 
 Au final, il est tout à fait possible que la France, au même titre que toutes les nations ayant procédé à leur massification éducative, soit désormais face à un nouveau choix, de l'ampleur de celui qui a été fait après-guerre, concernant le rôle que doit jouer son enseignement supérieur et plus particulièrement son Université. L'idée s'impose progressivement : « _le débat, compliqué et sensible politiquement, sur le périmètre du service public de l’enseignement supérieur en tant que bien collectif ne peut être éludé_ »[@christian-lucienmartinRapportIGFIgesr].
@@ -305,7 +306,9 @@ __Cet équilibre nécessite sans doute aujourd'hui d'être rediscuté. Faire fac
 
 __Même opérée pour des raisons budgétaires, l'augmentation des frais d'inscription est une réponse à cette discussion : la formation qui augmente ses frais d'inscription entérine qu'elle est avant tout au bénéfice individuel du diplômé, et non plus au bénéfice collectif de toute la société.__
 
-__Pourtant, ce type de choix ne devrait pas reposer sur une multitude de décisions techniques non coordonnées, car c'est un choix politique et de société. Il est donc sans doute plus que nécessaire d'organiser un troisième colloque de Caen [@QuinzePointsCaen1966], consacré à la redéfinition des missions de l'enseignement supérieur scientifique public, à leur priorisation et à leur répartition entre les différents acteurs de l'enseignement supérieur. C'est sans doute à cette seule condition, la clarification de nos missions, que l'on pourra rebâtir un modèle économique qui ne soit plus « _à bout de souffle_ ».__
+__Concernant l'augmentation des frais dans les universités, le Ministre de l'ESR affirme « _il me semble que les conditions politiques ne sont pas pleinement réunies pour ouvrir cette question_ », évitant ainsi de se positionner sur le fond. Mais il ajoute « _voilà mon opinion personnelle mais qui ne m'engage pas en tant que ministre_ », laissant entendre qu'une décision différente pourrait venir de Bercy ou de l'Élysée. Surtout, il ajoute que « _c'est un sujetpour la prochaine présidentielle_ »[@commissiondelaculturedeleducationdelacommunicationetdusportAuditionPhilippeBaptiste2025].__
+
+__En effet, ce type de choix ne devrait pas reposer sur une multitude de décisions techniques non coordonnées, car c'est un choix politique et de société. Il est donc sans doute plus que nécessaire d'organiser un troisième colloque de Caen [@QuinzePointsCaen1966], consacré à la redéfinition des missions de l'enseignement supérieur scientifique public, à leur priorisation et à leur répartition entre les différents acteurs de l'enseignement supérieur. C'est sans doute à cette seule condition, la clarification de nos missions, que l'on pourra rebâtir un modèle économique qui ne soit plus « _à bout de souffle_ ».__
 
 \newpage
 
@@ -374,7 +377,9 @@ Concernant les établissements qui décident de basculer sur un modèle économi
 - si l’État établit un principe de responsabilité, en refusant par avance de renflouer les établissements qui rencontreraient ensuite des difficultés, alors ce basculement est particulièrement risquée ; 
 - mais si l’État n'établit pas de principe de responsabilité, alors des établissements peuvent être tentés de prendre de trop grands risques, comptant sur la solidarité pour surmonter les conséquences d'un échec, ce qui représente sans doute un danger encore plus grand. 
 
-__Au préalable à toute décision de hausse des frais d'inscription, les établissements devraient contractualiser avec l’État les conditions d'un renflouement en cas d'échec de la transition du modèle économique. Cette contractualisation doit être transparente, afin d'assurer qu'aucun établissement ne fasse porter de risques à l'ensemble des établissements publics.__
+De plus, l'État pourrait décider que les frais d'inscription se substituent aux subventions, et donc d'accélérer la réduction de la SCSP par étudiant. Cela ruinerait les avantages budgétaires du changement de modèle économique.
+
+__Au préalable à toute décision de hausse des frais d'inscription, les établissements devraient contractualiser avec l’État les conditions de maintien de la SCSP et les conditions d'un renflouement en cas d'échec de la transition du modèle économique. Cette contractualisation doit être transparente, afin d'assurer qu'aucun établissement ne fasse porter de risques à l'ensemble des établissements publics.__
 
 
 ## Les raisons des difficultés financières justifient mal l'augmentation des frais d'inscription.
