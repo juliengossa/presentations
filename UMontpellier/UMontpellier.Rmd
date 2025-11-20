@@ -65,7 +65,7 @@ knitr::include_graphics("../ressources/img/OFCE-apprentissage.png")
 Source : Bruno COQUET, OFCE, https://www.ofce.sciences-po.fr/pdf/pbrief/2024/OFCEpbrief135.pdf
 
 
-### Constat 3
+### Constat 3 : un développement des missions sans orientation ni priorités
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -116,6 +116,35 @@ load("../ressources/data/predictions.RData")
 predictions
 ```
 
+### Stagnation éducative / Déclin éducatif : Taux d'engagement dans l'enseignement supérieur
+
+```{r, out.width="80%", fig.align="center"}
+knitr::include_graphics("../ressources/img/OWD-tertiary.png")
+```
+
+\footnotesize
+Source : OurWordInData, https://ourworldindata.org/grapher/gross-enrollment-ratio-in-tertiary-education?tab=line
+
+
+### Stagnation éducative / Déclin éducatif : Taux d'engagement dans l'enseignement supérieur
+
+```{r, out.width="90%", fig.align="center"}
+knitr::include_graphics("../ressources/img/PAP-150-2025-parcoursup.png")
+```
+
+```{r, out.width="40%", fig.align="center"}
+knitr::include_graphics("../ressources/img/SIES-Parcoursup2025.png")
+```
+
+```{r, out.width="65%", fig.align="center"}
+knitr::include_graphics("../ressources/img/eduscepticisme-renaissance.png")
+```
+
+
+\tiny
+https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2025
+https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2025-11/nf-sies-2025-28-38282.pdf
+
 
 ### Triple moment 
 
@@ -137,34 +166,6 @@ Probablement un moment-pivot civilisationnel
   - Séparation nette et horizontale entre études supérieures et professionalisation 
 
 
-### Taux d'engagement dans l'enseignement supérieur
-
-```{r, out.width="80%", fig.align="center"}
-knitr::include_graphics("../ressources/img/OWD-tertiary.png")
-```
-
-\footnotesize
-Source : OurWordInData, https://ourworldindata.org/grapher/gross-enrollment-ratio-in-tertiary-education?tab=line
-
-
-### Taux d'engagement dans l'enseignement supérieur
-
-```{r, out.width="90%", fig.align="center"}
-knitr::include_graphics("../ressources/img/PAP-150-2025-parcoursup.png")
-```
-
-```{r, out.width="40%", fig.align="center"}
-knitr::include_graphics("../ressources/img/SIES-Parcoursup2025.png")
-```
-
-```{r, out.width="65%", fig.align="center"}
-knitr::include_graphics("../ressources/img/eduscepticisme-renaissance.png")
-```
-
-
-\tiny
-https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2025
-https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2025-11/nf-sies-2025-28-38282.pdf
 
 
 
