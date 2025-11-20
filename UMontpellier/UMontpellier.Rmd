@@ -116,7 +116,7 @@ load("../ressources/data/predictions.RData")
 predictions
 ```
 
-### Stagnation éducative / Déclin éducatif : Taux d'engagement dans l'enseignement supérieur
+### Stagnation éducative / Déclin éducatif : Taux d'engagement
 
 ```{r, out.width="80%", fig.align="center"}
 knitr::include_graphics("../ressources/img/OWD-tertiary.png")
@@ -126,7 +126,7 @@ knitr::include_graphics("../ressources/img/OWD-tertiary.png")
 Source : OurWordInData, https://ourworldindata.org/grapher/gross-enrollment-ratio-in-tertiary-education?tab=line
 
 
-### Stagnation éducative / Déclin éducatif : Taux d'engagement dans l'enseignement supérieur
+### Stagnation éducative / Déclin éducatif : Taux d'engagement
 
 ```{r, out.width="90%", fig.align="center"}
 knitr::include_graphics("../ressources/img/PAP-150-2025-parcoursup.png")
