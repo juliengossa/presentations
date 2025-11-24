@@ -18,7 +18,7 @@ header-includes:
   #- \usepackage{draftwatermark}
 bibliography: Opportunité stratégique - Modèle économique.bib
 biblio-style: verbose
-date: "`r Sys.Date()` (v1.0)"
+date: "`r Sys.Date()` (v1.1)"
 ---
 
 ```{r setup, include=FALSE}
@@ -223,9 +223,9 @@ Si l'investissement public est contesté et qu'un discours édusceptique se dév
 
 L'Angleterre a procédé à une mise en quasi-marché[@niklassonQuasimarketsHigherEducationa1996] progressive de son enseignement supérieur dès la fin des années 1990[[@joellaillierFailliteMarchandisationEtudes2025]. Progressivement, les frais pour les étudiants britaniques ont été élevé jusqu'au plafond d'environ 11 k€ avant d'être figés. Les frais sont cependant beaucoup plus élevés pour les étudiants étrangers, de 11 k€ à 43 k€, générant une dépence budgétaire des universités à ce public. Le système britannique est ainsi financé par un facteur extérieur et incertain.
 
-Depuis, une fragilité systémique aux crises a été développée (Covid[@boltonCoronavirusFinancialImpact2025], Brexit[@fazackerleyBrexitCausesCollapse2023] ou économiques[@hayleyclarkeThousandsMoreUniversity2025]). Malgré le développement des frais d'inscription, la situation financière des établissements n'y semble pas meilleure qu'en France : un quart des départements de physique sont par exemple menacés de fermeture[@adamsQuarterUKUniversity2025]. Une partie de la classe politique estime que l'écroulement des universités serait souhaitable[@deaconCollapseOurUniversities2024], situation qui inquiète les familles : « _Sept Britanniques sur dix seraient inquiets en cas de fermetures massives d’universités, et attribueraient la responsabilité au gouvernement_ »[@thepolicyinstituteMassUniversityClosures2024]. Alors que les universités s'apprêtent à supprimer entre 5000 et 10000 postes, la fragilité est telle qu’on se pose la question : « _Le pari du libre marché : la Covid a-t-elle brisé les universités britanniques ?_ »[@mooreFreemarketGambleHas2021].
+Depuis, une fragilité systémique aux crises a été développée (Covid[@boltonCoronavirusFinancialImpact2025], Brexit[@fazackerleyBrexitCausesCollapse2023] ou économiques[@hayleyclarkeThousandsMoreUniversity2025]). Malgré le développement des frais d'inscription, la situation financière des établissements n'y semble pas meilleure qu'en France : alors que le gouvernement s'apprête à créer un taxe de 680M€ sur les frais d'inscription des étudiants étrangers[@wealeLevyInternationalStudents2025], les universités estiment que le budget par étudiant à fondu d'un tier en 10 ans[@adamsUniversityStudentsEngland2025]. Les conséquences sont concrètes, comme des coupes budgétaires équivalent à 15 000 postes l'an dernier, 4 000 fermetures de formations[@ucuNewAnalysisShows2025], ou encore un quart des départements de physique menacés de fermeture[@adamsQuarterUKUniversity2025]. Une partie de la classe politique estime que l'écroulement des universités serait souhaitable[@deaconCollapseOurUniversities2024], situation qui inquiète les familles : « _Sept Britanniques sur dix seraient inquiets en cas de fermetures massives d’universités, et attribueraient la responsabilité au gouvernement_ »[@thepolicyinstituteMassUniversityClosures2024]. La fragilité est telle qu’on se pose la question : « _Le pari du libre marché : la Covid a-t-elle brisé les universités britanniques ?_ »[@mooreFreemarketGambleHas2021].
 
-Du côté de la dépense publique, la Student Loans Company (SLC) est intégralement financée par les contribuables. Comme seulement 56% des prêts sont intégralement remboursés par les étudiants [@StudentLoanForecasts2025], la SLC doit combler le reste. Mais en raison de l'inflation, la SLC perd de l'argent même sur les prêts qui sont remboursés[@wealeGovernmentLoseMoney2024]. Face à une situation qui risque de devenir incontrôlable, une réforme s’apprête à figer les frais d'inscription, donc le marché, afin de protéger les contribuables du risque de dérapage de la dépense publique dans la SLC, critiquée par ailleurs pour ses difficultés à se faire rembourser[@kirbyIveNotRepaid2024], des trop-perçus non remboursés [@patrickjackGraduatesNotClaiming2023], l'efficacité et le coût de ses outils de gestion[@clarkCapgeminiScoresPS150m2021], son coût de fonctionnement de 335 M€[@ukgovernmentSLCAnnualReport2025], et le financement de formations frauduleuses[@andrerhoden-paulFraudExpertsBrought2025].
+Du côté de la dépense publique, la Student Loans Company (SLC) est intégralement financée par les contribuables. Comme seulement 56% des prêts sont intégralement remboursés par les étudiants [@StudentLoanForecasts2025], la SLC doit combler le reste. Mais en raison de l'inflation, la SLC perd de l'argent même sur les prêts qui sont remboursés[@wealeGovernmentLoseMoney2024]. Face à une situation qui risque de devenir incontrôlable, une réforme s’apprête à figer les frais d'inscription, donc le marché, afin de protéger les contribuables du risque de dérapage de la dépense publique dans la SLC, critiquée par ailleurs pour ses difficultés à se faire rembourser[@kirbyIveNotRepaid2024], des trop-perçus non remboursés [@patrickjackGraduatesNotClaiming2023], l'efficacité et le coût de ses outils de gestion[@clarkCapgeminiScoresPS150m2021], son coût de fonctionnement de 335 M€[@ukgovernmentSLCAnnualReport2025], et le financement de formations frauduleuses[@andrerhoden-paulFraudExpertsBrought2025]. 
 
 À minima, il faut constater que le changement de modèle économique n'a pas permis d'éviter les difficultés financières des universités anglaises. L’Australie traverse également une crise sans précédent[@fordeAustraliasUniversitySystem2025], caractérisée par un taux inquiétant d’abandon et une chute de l'engagement dans les études supérieures, que les pouvoirs publics n'arrivent pas à enrayer[@johnrossEconomicChangesSlowing2024]. Aux USA, en plus des atteintes portées par l'administration Trump, y compris sur les plus prestigieuses universités[@americanassociationofcollegesanduniversitiesCallConstructiveEngagement2025], les frais d'inscription sont en réalité en baisse depuis une décennie[@benunglesbeeStickerShockLook2024], ce qui témoigne d'un marché vacillant. 
 
@@ -241,7 +241,7 @@ En France, la situation du marché de l'enseignement supérieur est dans une pha
 
 ### D'une part, l'offre de formation privée connaît un décollage sans précédent, modifiant l'équilibre public-privé historique.
 
-```{r, out.width="70%", fig.align = "center"}
+```{r, out.width="85%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/EESR-effectifs.png")
 ```
 
@@ -253,14 +253,14 @@ Or, avec la prédiction de « _65 000 postes d’alternants détruits en six mo
 
 Dans cinq ans, nous amorcerons une chute mécanique du nombre d'étudiants, dont on ne connaît pas encore l'ampleur ni la durée puisque la natalité continue de baisser en 2025. Les universitaires actuels pourraient bien terminer leur carrière en ne connaissant plus qu'une baisse des effectifs étudiants.
 
-```{r, out.width="50%", fig.align = "center"}
+```{r, out.width="55%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/INSEE-naissances.png")
 ```
 
 
 __Le décollage du secteur privé et la baisse démographique nous plongent donc dans une situation où l'offre augmente mais la demande ne va pouvoir que baisser__, ce qui est la recette de l'éclatement d'une bulle. Face à une baisse démographique, on peut soit augmenter la qualité en diminuant la taille des classes, soit diminuer la dépense en fermant des classes[@paulinecharoussetTailleClassesInegalites2025]. Pour l'instant, l'option choisie est celle de la fermeture, qui se constate déjà dans le primaire, commence à atteindre le secondaire et occupe une place dans les débats seulement sous l'angle budgétaires[@eleapommiersFautilSupprimerPostes2025].
 
-__Les secteurs sur lesquels la demande étudiante va baisser sont tout à fait incertains, mais l'attractivité des formations va globalement baisser, et donc leur capacité à sélectionner les étudiants et à assurer leur soutenabilité budgétaire. Dans la logique actuelle, des formations et sans doute des établissements vont devoir fermer. Les établissements les plus dépendants des frais d'inscription seront mécaniquement les plus exposés.__ 
+__Les secteurs sur lesquels la demande étudiante va le plus baisser sont tout à fait incertains, mais, globalement, l'attractivité des formations ne va que pouvoir baisser, perturbant leur capacité à sélectionner les étudiants et à assurer leur soutenabilité budgétaire. Dans la logique actuelle, des formations et sans doute des établissements vont devoir fermer. Les établissements les plus dépendants des frais d'inscription seront mécaniquement les plus exposés.__ 
 
 ## Les stratégies d'adaptation sont individualistes et la temporalité n'est pas propice à un refinancement par les frais d'inscription.
 
