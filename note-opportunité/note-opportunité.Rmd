@@ -424,7 +424,7 @@ Or, il est possible que la baisse des effectifs étudiants soit beaucoup plus ra
 __Il conviendrait de concevoir des scénarios prospectifs des taux d'encadrement, en regard de la démographie étudiante et enseignante, pour envisager la soutenabilité financière et pédagogique selon différents scénarios (iso-missions ou non, iso-service ou non, iso-statuts ou non), non seulement par établissement mais aussi par discipline. Pour les scénarios déséquilibrés, un plan de reclassement ou de reconversion des enseignants considérés comme sur-numéraire doit être élaboré.__
 
 
-# Remerciements et liens utiles {-}
+# Remerciements et liens utiles {.unlisted .unnumbered}
 
 L'auteur tient à remercier chaleureusement les relecteurs de cette note pour leur aide précieuse.
 
