@@ -227,7 +227,7 @@ Depuis, une fragilité systémique aux crises a été développée (Covid[@bolto
 
 Du côté de la dépense publique, la Student Loans Company (SLC) est intégralement financée par les contribuables. Comme seulement 56% des prêts sont intégralement remboursés par les étudiants [@StudentLoanForecasts2025], la SLC doit combler le reste. Mais en raison de l'inflation, la SLC perd de l'argent même sur les prêts qui sont remboursés[@wealeGovernmentLoseMoney2024]. Face à une situation qui risque de devenir incontrôlable, une réforme s’apprête à figer les frais d'inscription, donc le marché, afin de protéger les contribuables du risque de dérapage de la dépense publique dans la SLC, critiquée par ailleurs pour ses difficultés à se faire rembourser[@kirbyIveNotRepaid2024], des trop-perçus non remboursés [@patrickjackGraduatesNotClaiming2023], l'efficacité et le coût de ses outils de gestion[@clarkCapgeminiScoresPS150m2021], son coût de fonctionnement de 335 M€[@ukgovernmentSLCAnnualReport2025], et le financement de formations frauduleuses[@andrerhoden-paulFraudExpertsBrought2025]. 
 
-À minima, il faut constater que le changement de modèle économique n'a pas permis d'éviter les difficultés financières des universités anglaises. L’Australie traverse également une crise sans précédent[@fordeAustraliasUniversitySystem2025], caractérisée par un taux inquiétant d’abandon et une chute de l'engagement dans les études supérieures, que les pouvoirs publics n'arrivent pas à enrayer[@johnrossEconomicChangesSlowing2024]. Aux USA, en plus des atteintes portées par l'administration Trump, y compris sur les plus prestigieuses universités[@americanassociationofcollegesanduniversitiesCallConstructiveEngagement2025], les frais d'inscription sont en réalité en baisse depuis une décennie[@benunglesbeeStickerShockLook2024], ce qui témoigne d'un marché vacillant. 
+À minima, il faut constater que le changement de modèle économique n'a pas permis d'éviter les difficultés financières des universités anglaises. L’Australie traverse également une crise sans précédent[@fordeAustraliasUniversitySystem2025], caractérisée par un taux inquiétant d’abandon et une chute de l'engagement dans les études supérieures, que les pouvoirs publics n'arrivent pas à enrayer[@johnrossEconomicChangesSlowing2024]. Aux USA, en plus des atteintes portées par l'administration Trump, y compris sur les plus prestigieuses universités[@americanassociationofcollegesanduniversitiesCallConstructiveEngagement2025], les frais d'inscription sont en réalité en baisse depuis une décennie[@benunglesbeeStickerShockLook2024], ce qui témoigne d'un marché vacillant. Très récemment, et pour des raisons radicalement différentes, les universités américaines Johns Hopkins[@johnshopkinsuniversityJohnsHopkinsBecomes2025] et d'Austin[@universityofaustinUATXEndingTuition2025] ont affiché un tournant vers la gratuité.
 
 Les pays s'en tenant à la quasi-gratuité sont sans doute dans une situation moins périlleuse, sans pour autant être à l'abri des coupes budgétaires, comme en Allemagne[@universityofmannheimHigherEducationBudget2024] ou en Suède[@anne-francoisehivertSuedeUniversitesDifficulte2024]. 
 
@@ -241,7 +241,7 @@ En France, la situation du marché de l'enseignement supérieur est dans une pha
 
 ### D'une part, l'offre de formation privée connaît un décollage sans précédent, modifiant l'équilibre public-privé historique.
 
-```{r, out.width="85%", fig.align = "center"}
+```{r, out.width="75%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/EESR-effectifs.png")
 ```
 
