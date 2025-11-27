@@ -18,7 +18,7 @@ header-includes:
   #- \usepackage{draftwatermark}
 bibliography: Opportunité stratégique - Modèle économique.bib
 biblio-style: verbose
-date: "`r Sys.Date()` (v1.3)"
+date: "`r Sys.Date()` (v1.4)"
 ---
 
 ```{r setup, include=FALSE}
@@ -37,6 +37,7 @@ library(cowplot)
 theme_set(theme_cpesr() + theme(legend.position = "right", plot.title = element_text(hjust = 0.5)))
 
 load("../ressources/data/plots.RData")
+load("../ressources/data/predictions.RData")
 ```
 
 
@@ -241,7 +242,7 @@ En France, la situation du marché de l'enseignement supérieur est dans une pha
 
 ### D'une part, l'offre de formation privée connaît un décollage sans précédent, modifiant l'équilibre public-privé historique.
 
-```{r, out.width="100%", fig.align = "center"}
+```{r, out.width="80%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/EESR-effectifs.png")
 ```
 
@@ -257,6 +258,11 @@ Dans cinq ans, nous amorcerons une chute mécanique du nombre d'étudiants, dont
 knitr::include_graphics("../ressources/img/INSEE-naissances.png")
 ```
 
+Des projections très naïves, considérant que les taux de poursuite d'études dans les différents secteurs restent stables, montrent qu'on pourrait passer d'environ 267 000 néobacheliers poursuivant à l'université en 2024, à environ 213 000 en 2042, soit une baisse de 20 %. L'éduscepticisme et la croissance du secteur privé pourraient augmenter ce chiffre.
+
+```{r, out.width="100%", fig.align = "center"}
+predictions
+```
 
 __Le décollage du secteur privé et la baisse démographique nous plongent donc dans une situation où l'offre augmente mais la demande ne va pouvoir que baisser__, ce qui est la recette de l'éclatement d'une bulle. Face à une baisse démographique, on peut soit augmenter la qualité en diminuant la taille des classes, soit diminuer la dépense en fermant des classes[@paulinecharoussetTailleClassesInegalites2025]. Pour l'instant, l'option choisie est celle de la fermeture, qui se constate déjà dans le primaire, commence à atteindre le secondaire et occupe une place dans les débats seulement sous l'angle budgétaires[@eleapommiersFautilSupprimerPostes2025].
 
