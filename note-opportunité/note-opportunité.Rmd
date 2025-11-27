@@ -18,7 +18,7 @@ header-includes:
   #- \usepackage{draftwatermark}
 bibliography: Opportunité stratégique - Modèle économique.bib
 biblio-style: verbose
-date: "`r Sys.Date()` (v1.2)"
+date: "`r Sys.Date()` (v1.3)"
 ---
 
 ```{r setup, include=FALSE}
@@ -241,7 +241,7 @@ En France, la situation du marché de l'enseignement supérieur est dans une pha
 
 ### D'une part, l'offre de formation privée connaît un décollage sans précédent, modifiant l'équilibre public-privé historique.
 
-```{r, out.width="75%", fig.align = "center"}
+```{r, out.width="100%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/EESR-effectifs.png")
 ```
 
@@ -253,7 +253,7 @@ Or, avec la prédiction de « _65 000 postes d’alternants détruits en six mo
 
 Dans cinq ans, nous amorcerons une chute mécanique du nombre d'étudiants, dont on ne connaît pas encore l'ampleur ni la durée puisque la natalité continue de baisser en 2025. Les universitaires actuels pourraient bien terminer leur carrière en ne connaissant plus qu'une baisse des effectifs étudiants.
 
-```{r, out.width="55%", fig.align = "center"}
+```{r, out.width="50%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/INSEE-naissances.png")
 ```
 
@@ -264,13 +264,15 @@ __Les secteurs sur lesquels la demande étudiante va le plus baisser sont tout �
 
 ## Les stratégies d'adaptation sont individualistes et la temporalité n'est pas propice à un refinancement par les frais d'inscription.
 
-Face à la baisse programmée du nombre d'étudiants, les premières stratégies d'adaptation commencent à être établies[@malikabutzbachBaisseDemographiqueComment2025]. On peut les classer en trois catégories :
+Le rapport OCDE de 2008 « L'enseignement supérieur à l'horizon 2030 »[@ocdeLenseignementSuperieurLhorizon2008] souligne que « _la contraction des systèmes est un phénomène nouveau, qui correspond à  une saturation ou à une stagnation des taux d’entrée combinée à une décroissance des jeunes cohortes_ ». Les USA semblent entrer dans cette phase de contraction, avec la fermeture de 2% des établissements[@moodyReportFindsHigher2024], mais qui inquiète moins que les fermetures de filières[@dickstartzAreCollegesReally2024]. Sans immigration, la population étudiante américaine pourrait baisser de 30 % à 40 %, ce qui serait « catastrophique pour de nombreuses universités »[@zavodnyImportanceImmigrantsInternational2025]. La Corée du sud a déjà fait face à la rencontre entre une massification éducative et une réduction démographique, « _un problème sérieux pour les institutions, les communautés locales et l'économie_ »[@jungWhenMassifiedHigher2024]. Maintenir le nombre d'institutions et de programmes a été impossible et la diversité du système s'est apauvrie, malgré différentes politiques de restructuration élaborées par l'État coréen pour éviter un écroulement. 
+
+En France, face à la baisse programmée du nombre d'étudiants, les premières stratégies d'adaptation commencent à être établies[@malikabutzbachBaisseDemographiqueComment2025] [@ameliepetitdemangeLISCMiseLinnovation2025]. On peut les classer en trois catégories :
 
 * Faire une transformation préventive de l'offre de formation, en fermant par avance les filières jugées les moins « rentables » ou attractives, dans l'espoir de pouvoir préserver les autres.
 * Prendre le plus rapidement possible des parts de marché, c'est-à-dire des étudiants, aux autres établissements publics, dans l'espoir de pouvoir préserver son établissement au détriment des autres.
 * Déplacer l'investissement vers d'autres marchés que le marché français. 
 
-Ces stratégies d'adaptation sont invidualistes et basées sur une réduction des effectifs, soit de soi-même, soit des autres établissements. __Aucune stratégie collective n'a encore été proposée pour bénéficier de la baisse du nombre de jeunes, par exemple par une réduction assumée des filières à faible effectifs, pour pour conserver ou augmenter les effectifs étudiants, par exemple par un accroissement de la formation tout au long de la vie.__ 
+Ces stratégies d'adaptation sont invidualistes et basées sur une réduction des effectifs, soit de soi-même, soit des autres établissements. __Aucune stratégie collective n'a encore été proposée soit pour profiter de la baisse du nombre de jeunes, par exemple par une augmentation assumée des filières à faible effectifs, soit pour conserver ou augmenter les effectifs étudiants, par exemple par un accroissement de la formation tout au long de la vie.__ 
 
 Nous ne sommes plus ni dans le contexte des années 1990 avec des politiques massification, ni dans le contexte des années 2010 avec une démographie croissante. À ces époques, un basculement sur un modèle basé sur les frais d'inscription permettait de prévoir un accroissement des ressources. Aujourd'hui, il faut prévoir une décroissance des ressources issues des frais d'inscription, tout simplement en raison de la décroissance du nombre d'étudiants. Cette décroissance est imminente, alors que l'augmentation des frais d'inscription est un processus long : par exemple, une clause du grand-père (exonération des étudiants déjà inscrits) retarderait de 5 ans leur monté en charge. 
 
