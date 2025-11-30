@@ -152,9 +152,9 @@ Cela peut expliquer pourquoi le discours de « réussite » se concentre déso
 plot_LvsM
 ```
 
-On peut également noter que le développement de l'alternance, malgré un coût pour la nation sans précédent et sans comparaison avec d'autres dépenses éducatives[@coquetApprentissageQuatreLeviers2024] (voir graphique ci-après), ne s'est pas fait en augmentant le nombre de jeunes faisant des études supérieures, mais par une substitution des places existantes : entre 2019 et 2024, le nombre d'apprentis du supérieur a augmenté d'environ 450 000 [@Fiche607Lapprentissage2025], quand le nombre d'étudiants n'a augmenté que de 200 000[@Fiche701Effectifs2025] (augmentation qui s'explique notamment par la démographie). Cela représente un indice que le système est arrivé à saturation.
+On peut également noter que le développement de l'alternance, malgré un coût pour la nation sans précédent et sans comparaison avec d'autres dépenses éducatives[@coquetApprentissageQuatreLeviers2024] (voir graphique ci-après), ne s'est pas fait en augmentant le nombre de jeunes faisant des études supérieures, mais par une substitution des places existantes : entre 2019 et 2024, le nombre d'apprentis du supérieur a augmenté d'environ 450 000 [@Fiche607Lapprentissage2025], quand le nombre d'étudiants n'a augmenté que de 200 000[@Fiche701Effectifs2025] (augmentation qui s'explique notamment par la démographie), et que le taux de néo-bacheliers ayant reçu une proposition dans Parcoursup est en baisse[@bricemoiteauxParcoursup2025Propositions2025]. Cela représente un indice que le système est arrivé à saturation.
 
-```{r, out.width="65%", fig.align = "center"}
+```{r, out.width="55%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/OFCE-apprentissage.png")
 ```
 
