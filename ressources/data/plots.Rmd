@@ -29,7 +29,9 @@ plot_SCSPvsEtu
 
 ```{r, results='asis'}
 plot_RecettesFormation <- kpiesr_plot_line("Ensemble",c("kpi.ETU.P.effectif","kpi.FIN.S.recettesFormation","kpi.FIN.S.SCSP"), val="evolution") +
-  ggtitle("Evolution des recettes formation vs. SCSP et nombre d'étudiants", subtitle="Droits d'inscription, DU, VAE, formation continue, taxe d'apprentissage")
+  ggtitle("Evolution des recettes formation vs. SCSP et nombre d'étudiants", subtitle="Droits d'inscription, DU, VAE, formation continue, taxe d'apprentissage") +
+  guides(linetype="none",alpha="none",size="none")
+
 plot_RecettesFormation
 
 esr %>% 
@@ -42,7 +44,9 @@ esr %>%
 
 ```{r, results='asis'}
 plot_RessourcesPropres <- kpiesr_plot_line("Ensemble",c("kpi.ETU.P.effectif","kpi.FIN.S.recettesFormation","kpi.FIN.S.recettesRecherche","kpi.FIN.S.SCSP"), val="evolution") +
-  ggtitle("Evolution des recettes propres vs. SCSP et nombre d'étudiants", subtitle="Droits d'inscription, DU, VAE, formation continue, taxe d'apprentissage / ANR, ERC, contrats de recherche")
+  ggtitle("Evolution des recettes propres vs. SCSP et nombre d'étudiants", subtitle="Droits d'inscription, DU, VAE, formation continue, taxe d'apprentissage / ANR, ERC, contrats de recherche") +
+  guides(linetype="none",alpha="none",size="none")
+
 plot_RessourcesPropres
 
 esr %>% 
