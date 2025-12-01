@@ -19,8 +19,8 @@ header-includes:
 bibliography: Opportunité stratégique - Modèle économique.bib
 biblio-style: verbose
 date: |
-  | `r Sys.Date()` (v1.5)
-  | Lien vers la dernière version : [note-opportunité.pdf](https://github.com/juliengossa/presentations/blob/main/note-opportunit%C3%A9/note-opportunit%C3%A9.pdf) 
+  | `r Sys.Date()` (v1.5.1)
+  | [ [Télécharger la version la plus récente](https://github.com/juliengossa/presentations/blob/main/note-opportunit%C3%A9/note-opportunit%C3%A9.pdf) ]
 ---
 
 ```{r setup, include=FALSE}
@@ -83,7 +83,7 @@ Début 2025, le Conseil économique social et environnemental (CESE) a été cha
 
 Augmenter les frais d'inscription est sans doute perçu par les établissements d'abord comme une manière d'éviter la faillite, symbolisée par la mise sous tutelle rectorale. Les règles de cette mise sous tutelle viennent d'être révisées[@DecretNdeg202411082024]. Dans une récente audition[@commissiondelaculturedeleducationdelacommunicationetdusportAuditionPhilippeBaptiste2025], le ministre de l'enseignement supérieur explique que la mise sous tutelle, ou sa menace, permettent de « _remettre un peu les choses dans le bon sens, dans le bon ordre_ »^[_ibid._ à 42:06], mais aussi que les rectorats sont mobilisables pour « _mener à bien [une] transformation profonde_ »^[_ibid._ à 18:48]. Ainsi, il y a un _continuum_ du technique au politique : rechercher des ressources propres pour avoir un budget à l'équilibre est un geste technique, perçu comme gestionnaire, mais qui peut en réalité conduire à des transformations politiques, plus profondes.
 
-Après une réduction de ses subventions, le directeur des Mines Saint-Etienne déclare « _Les crises sont aussi des moments qui permettent de faire évoluer les systèmes_ »[@annemascretMinesSaintEtienneCrises2025]. Il défend un modèle de financement public-privé « _plus affirmé_ »[@julielaniqueMinesSaintEtienneDefend2025] et une « _mutation profonde du modèle économique_ », c'est-à-dire à « _faire payer les familles_ » comme dans les écoles Centrales[@perroudEcolesDingenieursPubliques2025]. Le réseau INSA-Polytech s'apprête faire de même[@julielaniqueDroitsDinscriptionEcoles2025]. Les ENS ont augmenté leurs frais d'inscription[@julietteburnelLENSPSLDecideSon2025], avec un argumentaire différent, basé sur un rattrapage de l'inflation, le fait que les étudiants sont rémunérés et l'exonération des boursiers. A l'heure actuelle, toutes les formations d'ingénieur sont concernées, au moins par le questionnement[@davidflacherFraisDinscriptionPrivatisation2025]. 
+Après une réduction de ses subventions, le directeur des Mines Saint-Etienne déclare « _Les crises sont aussi des moments qui permettent de faire évoluer les systèmes_ »[@annemascretMinesSaintEtienneCrises2025]. Il défend un modèle de financement public-privé « _plus affirmé_ »[@julielaniqueMinesSaintEtienneDefend2025] et une « _mutation profonde du modèle économique_ », c'est-à-dire à « _faire payer les familles_ » comme dans les écoles Centrales[@perroudEcolesDingenieursPubliques2025]. Le réseau INSA-Polytech s'apprête faire de même[@julielaniqueDroitsDinscriptionEcoles2025], ainsi que les IMT[@marie-christinecorbierGrandesEcolesLInstitut2024] et INP[@intersyndicaleNonHausseFrais2025]. Les ENS ont augmenté leurs frais d'inscription[@julietteburnelLENSPSLDecideSon2025], avec un argumentaire différent, basé sur un rattrapage de l'inflation, le fait que les étudiants sont rémunérés et l'exonération des boursiers. A l'heure actuelle, toutes les formations d'ingénieur sont concernées, au moins par le questionnement[@davidflacherFraisDinscriptionPrivatisation2025]. 
 
 __Ainsi, sans décision ni concertation globale, de nombreuses formations transforment leur modèle économique. Prenant des décisions en apparence technique, en réaction aux pressions budgétaires, elles se positionnent en réalité sur une question politique. L'État n'assume ni déléguer ce positionnement dans une logique de subsidiarité, ni utiliser le levier financier dans une logique de gouvernement à distance.__
 
@@ -97,8 +97,8 @@ La France est désormais, avec le Luxembourg (qui n'a qu'une université), le se
 Cette analyse se limite aux droits d'inscription de base des universités^[
 MESR. Droits d'inscription. https://www.etudiant.gouv.fr/fr/droits-d-inscription-1489], dont le volume ne dépend que du nombre d'étudiants non boursiers puisqu'ils sont figés par les gouvernements depuis plusieurs années. Cependant, l'État encourage en même temps l'accroissement des ressources propres, par exemple en formalisant un objectif dans les COMP[@camillecordonnierNouveauxCOMPSeront2025]. On peut observer le résultat d'une politique volontariste de développement des recettes propres formation, qui proviennent des droits d'inscription, mais aussi des DU, de la formation continue, de la taxe d'apprentissage et de la VAE : __entre 2013-2014 et 2023-2024, alors que la SCSP augmentait d'environ 20 % (sans prise en compte de l'inflation), les recettes propres formation des établissements du MESR ont été multipliées par plus de trois, passant de 604 M€ à 1 936 M€__ (voir figure ci-après - où on observe clairement une croissance constante hormis en 2019-2020 en raison du COVID).
 
-```{r, fig.asp=9/16}
-plot_RecettesFormation + ggtitle("Evolution des recettes formation, de la SCSP et du nombre d'étudiants") + theme(legend.position="bottom")
+```{r}
+plot_RecettesFormation + ggtitle("Evolution des recettes formation, de la SCSP et du nombre d'étudiants")
 ```
 
 Le Ministre de l'enseignement supérieur explique ce phénomène : « _Il y a énormément d'autres diplômes, qui sont des diplômes universitaires, des diplômes d'ingénieurs, des diplômes divers et variés, où il y a une forme de liberté, plus ou moins contrôlée. Plus ou moins légalement, les tarifs ne sont pas les tarifs du LMD et le tarif de licence que vous avez mentionné ne concerne_ in fine _qu'une petite part des étudiants._ »^[_Op. cit._ à 01:29:04].
