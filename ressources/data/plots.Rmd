@@ -60,6 +60,7 @@ esr %>%
 ```{r, results='asis'}
 plot_SCSPvsMS <- kpiESR::esr %>%
   filter(Etablissement == "Universités et assimilés", Rentrée > 2008) %>%
+  #filter(Etablissement == "Ensemble", Rentrée > 2008) %>%
   mutate(diff = kpi.FIN.S.SCSP-kpi.FIN.S.masseSalariale) %>% 
   ggplot(aes(x=Rentrée+1,y=diff)) +
   geom_hline(yintercept = 1) +
@@ -69,7 +70,7 @@ plot_SCSPvsMS <- kpiESR::esr %>%
   scale_color_distiller(palette="Reds") +
   theme(legend.position = "None", panel.grid.minor.x = element_blank()) +
   labs(
-    title="Différence entre SCSP et masse salariale des universités",
+    title="Différence entre SCSP et masse salariale des établissements du MESR",
     x="Année") 
 plot_SCSPvsMS
 ```

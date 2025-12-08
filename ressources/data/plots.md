@@ -1,7 +1,7 @@
 CPESR
 ================
 CPESR
-2025-11-30
+2025-12-02
 
 ## plot_SCSPvsEtu
 
@@ -22,7 +22,7 @@ CPESR
 
 <summary>
 
-RecettesFormation ( 18 lignes)
+RecettesFormation ( 19 lignes)
 </summary>
 
 | Rentrée | Groupe   | kpi.FIN.S.recettesFormation | kpi.K.forPetu |
@@ -38,13 +38,14 @@ RecettesFormation ( 18 lignes)
 |    2014 | Ensemble |                   504289996 |      212.8816 |
 |    2015 | Ensemble |                          NA |            NA |
 |    2016 | Ensemble |                          NA |            NA |
-|    2017 | Ensemble |                  1058620629 |      423.0778 |
-|    2018 | Ensemble |                  1165023369 |      458.7826 |
-|    2019 | Ensemble |                  1011594659 |      388.5563 |
-|    2020 | Ensemble |                  1475662495 |      561.7732 |
-|    2021 | Ensemble |                  1687331498 |      634.2362 |
-|    2022 | Ensemble |                  1808470773 |      697.7916 |
-|    2023 | Ensemble |                  1936734477 |            NA |
+|    2017 | Ensemble |                  1058620629 |      422.3788 |
+|    2018 | Ensemble |                  1165023369 |      458.0333 |
+|    2019 | Ensemble |                  1011594659 |      387.3657 |
+|    2020 | Ensemble |                  1475662495 |      561.3907 |
+|    2021 | Ensemble |                  1687331498 |      633.8448 |
+|    2022 | Ensemble |                  1808470773 |      697.7698 |
+|    2023 | Ensemble |                  1795953556 |      686.2333 |
+|    2024 | Ensemble |                  2200575320 |      823.2990 |
 
 </details>
 
@@ -55,7 +56,7 @@ RecettesFormation ( 18 lignes)
 
 <summary>
 
-RecettesFormation ( 18 lignes)
+RecettesFormation ( 19 lignes)
 </summary>
 
 | Rentrée | Groupe | kpi.FIN.S.recettesFormation | kpi.K.forPetu | kpi.FIN.S.recettesRecherche | kpi.K.recPect |
@@ -71,13 +72,14 @@ RecettesFormation ( 18 lignes)
 | 2014 | Ensemble | 504289996 | 212.8816 | 288663382 | 3052.636 |
 | 2015 | Ensemble | NA | NA | NA | NA |
 | 2016 | Ensemble | NA | NA | NA | NA |
-| 2017 | Ensemble | 1058620629 | 423.0778 | 1166388306 | 13285.059 |
-| 2018 | Ensemble | 1165023369 | 458.7826 | 1172551027 | 12583.720 |
-| 2019 | Ensemble | 1011594659 | 388.5563 | 1211330445 | 12995.853 |
-| 2020 | Ensemble | 1475662495 | 561.7732 | 1756184798 | 18912.381 |
-| 2021 | Ensemble | 1687331498 | 634.2362 | 2201853958 | 23460.417 |
-| 2022 | Ensemble | 1808470773 | 697.7916 | 2000631201 | 21065.706 |
-| 2023 | Ensemble | 1936734477 | NA | 2050118152 | NA |
+| 2017 | Ensemble | 1058620629 | 422.3788 | 1166388306 | 13285.059 |
+| 2018 | Ensemble | 1165023369 | 458.0333 | 1172551027 | 12583.720 |
+| 2019 | Ensemble | 1011594659 | 387.3657 | 1211330445 | 12995.853 |
+| 2020 | Ensemble | 1475662495 | 561.3907 | 1756184798 | 18912.381 |
+| 2021 | Ensemble | 1687331498 | 633.8448 | 2201853958 | 23460.417 |
+| 2022 | Ensemble | 1808470773 | 697.7698 | 2000631201 | 21065.706 |
+| 2023 | Ensemble | 1795953556 | 686.2333 | 2059698200 | 22964.380 |
+| 2024 | Ensemble | 2200575320 | 823.2990 | 2632379908 | NA |
 
 </details>
 
