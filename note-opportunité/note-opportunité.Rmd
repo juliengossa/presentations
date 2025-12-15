@@ -19,7 +19,7 @@ header-includes:
 bibliography: Opportunité stratégique - Modèle économique.bib
 biblio-style: verbose
 date: |
-  | `r Sys.Date()` (v1.6.1)
+  | `r Sys.Date()` (v1.6.2)
   | [ [Télécharger la version la plus récente](https://github.com/juliengossa/presentations/blob/main/note-opportunit%C3%A9/note-opportunit%C3%A9.pdf) ]
 ---
 
@@ -182,9 +182,9 @@ plot_stratification_ponctuel
 
 Cette situation nouvelle questionne « la valeur des diplômes ». Pour certains, il s'agit d'une banalisation tout à fait positive [@hugreeLuniversiteQuiVient2022], pour d'autres une inflation scolaire qui menace la méritocratie [@duru-bellatLinflationScolaireDesillusions2006]. La réaction des pouvoirs publics est, pour l'instant, de freiner cette évolution, et peut-être de tenter de la renverser. 
 
-Deux ministres de l'éducation nationale y travaillent. En 2024, Gabriel Attal modifie le rôle du brevet des collègues en le rendant indispensable à l'admission en lycée, tout en visant une baisse des taux de réussite [@pommiersBrevetCollegesReforme2024]. En 2025, Édouard Geffray annonce une réforme du bac pour durcir son obtention[@eliseleberreBaccalaureatEstPossible2025]. A ces baisses des taux de passage s'ajoute un objectif de baisse des poursuites.
+Deux ministres de l'éducation nationale y travaillent. En 2024, Gabriel Attal modifie le rôle du brevet des collègues en voulant le rendre indispensable à l'admission en lycée, tout en visant une baisse des taux de réussite [@pommiersBrevetCollegesReforme2024]. En 2025, Édouard Geffray annonce une réforme du bac pour durcir son obtention[@eliseleberreBaccalaureatEstPossible2025]. A ces baisses des taux de passage s'ajoute un objectif de baisse des poursuites.
 
-Le projet annuel de performance du programme 150 annexé au Projet de loi des finances (PLF) ^[https://www.budget.gouv.fr/documentation/documents-budgetaires-lois/exercice-2026] présente l'indicateur 1.5 « Admission dans l'enseignement supérieur - Part des néo-bacheliers ayant reçu au moins une proposition dans Parcoursup », dont la valeur est aujourd'hui constatée à 95 %. Ses cibles ont toujours été à l'augmentation jusqu'au PLF2024, mais sont désormais à la réduction, d'abord à 93,5 % au PLF2025, puis 93 % au PLF2026. Fait remarquable, la cible 2025 a été parfaitement atteinte[@bricemoiteauxParcoursup2025Propositions2025]. Ainsi, __la représentation nationale a pris pour objectif de diminuer la part des néo-bacheliers recevant une proposition dans Parcoursup, et cette diminution est déjà effective.__ 
+Le projet annuel de performance enseignement supérieur et recherche, annexé au Projet de loi des finances (PLF) ^[https://www.budget.gouv.fr/documentation/documents-budgetaires-lois/exercice-2026], présente l'indicateur 1.5 « Admission dans l'enseignement supérieur - Part des néo-bacheliers ayant reçu au moins une proposition dans Parcoursup », dont la valeur est aujourd'hui constatée à 95 %. Ses cibles ont toujours été à l'augmentation jusqu'au PLF2024, mais sont désormais à la réduction, d'abord à 93,5 % au PLF2025, puis 93 % au PLF2026. Fait remarquable, la cible 2025 a été parfaitement atteinte[@bricemoiteauxParcoursup2025Propositions2025]. Ainsi, __la représentation nationale a pris pour objectif de diminuer la part des néo-bacheliers recevant une proposition dans Parcoursup, et cette diminution est déjà effective.__ 
 
 La collision entre la politique de réussite en Licence et la politique de réduction du nombre de diplômés est aussi ce qui se voit dans l'évolution des effectifs de L3 et M1 (voir figure p. 9). Cette volonté de réduire le nombre de diplômés du supérieur s'explique officiellement par « _L’enjeu est de préserver le taux d’insertion professionnelle_ » [@beyerFrederiqueVidalLenjeu2021]. De fait, on constate aujourd'hui un repli brutal, peut-être temporaire, de l'emploi à bac+5[@ericnunesJaiEu152025]. __Le renversement de la dynamique éducative est désormais explicitement assumé dans le programme du parti présidentiel, qui comporte une section « réduire la durée des études initiales » [@renaissanceChocSavoirsPour2025].__
 
