@@ -19,7 +19,7 @@ header-includes:
 bibliography: Opportunité stratégique - Modèle économique.bib
 biblio-style: verbose
 date: |
-  | `r Sys.Date()` (v1.6.2)
+  | `r Sys.Date()` (v1.6.3)
   | [ [Télécharger la version la plus récente](https://github.com/juliengossa/presentations/blob/main/note-opportunit%C3%A9/note-opportunit%C3%A9.pdf) ]
 ---
 
@@ -258,7 +258,7 @@ Or, avec la prédiction de « _65 000 postes d’alternants détruits en six mo
 
 ### D'autre part, nous sommes actuellement dans un maximum démographique, qui précède un effondrement sans précédent des natalités et bientôt du nombre de bacheliers.
 
-Le rapport «Démographie et finances publiques »[@courdescomptesDemographieFinancesPubliques2025] de la Cour des comptes démontre que les effectifs étudiants sont portés par un double-effet démographie et augmentation du taux de poursuite d'étude, mais qui arrive à son terme. Dans cinq ans, nous amorcerons une chute mécanique du nombre d'étudiants, dont on ne connaît pas encore l'ampleur ni la durée puisque la natalité continue de baisser en 2025. Les universitaires actuels pourraient bien terminer leur carrière en ne connaissant plus qu'une baisse des effectifs étudiants.
+Le rapport « Démographie et finances publiques »[@courdescomptesDemographieFinancesPubliques2025] de la Cour des comptes démontre que les effectifs étudiants sont portés par un double-effet démographie et augmentation du taux de poursuite d'étude, mais qui arrive à son terme. Le rapport « Des écoles au marché du travail : la marée descendante de la dénatalité »[@maximesbaihiEcolesAuMarche2025] estime que « _La dénatalité devrait impacter les effectifs de l’enseignement supérieur à partir de 2029, avec une baisse plus prononcée à partir de 2033_ ». Nous amorçons désormais une chute mécanique du nombre d'étudiants, dont on ne connaît pas encore l'ampleur ni la durée puisque la natalité continue de baisser en 2025. Les universitaires actuels pourraient bien terminer leur carrière en ne connaissant plus qu'une baisse des effectifs étudiants.
 
 ```{r, out.width="50%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/INSEE-naissances.png")
