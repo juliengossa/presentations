@@ -11,15 +11,15 @@ output:
     number_sections: true
     toc: false
     dev: cairo_pdf
+  github_document: default
 header-includes:
   - \usepackage[T1]{fontenc}
   - \usepackage[default]{raleway}
   - \usepackage[french]{babel}
-  #- \usepackage{draftwatermark}
 bibliography: Opportunité stratégique - Modèle économique.bib
 biblio-style: verbose
 date: |
-  | `r Sys.Date()` (v1.6.3)
+  | `r Sys.Date()` (v1.6.4)
   | [ [Télécharger la version la plus récente](https://github.com/juliengossa/presentations/blob/main/note-opportunit%C3%A9/note-opportunit%C3%A9.pdf) ]
 ---
 
@@ -54,7 +54,7 @@ Depuis quelques années, un discours édusceptique se répand, contestant la val
 
 Au final, le système combine une inflation de l’offre (surtout privée) et une déflation de la demande (baisse démographique et éduscepticisme). Pour l'instant, les établissements réagissent individuellement, sans stratégie collective. __Dans ce contexte de contraction, le financement par les frais d’inscription est inadapté car il ne pourrait que décroitre, ce qui risquerait donc d’affaiblir durablement l'enseignement supérieur.__
 
-__Un contexte éducatif appelant une refondation collective.__ Si le modèle économique de l’enseignement supérieur français est effectivement « à bout de souffle », un basculement vers les frais d’inscription serait une réponse probablement trop tardive pour être productive. Une réflexion nationale sur le rôle des universités, semblable à celle d’après-guerre, est devenue indispensable. __Avant toute réforme économique, il faut une refondation concertée — un « troisième colloque de Caen » — pour repenser les missions et leur hiérarchie, condition nécessaire pour concevoir un modèle économique accepté et soutenable.__
+__Le contexte éducatif appelle à une refondation collective.__ Si le modèle économique de l’enseignement supérieur français est effectivement « à bout de souffle », un basculement vers les frais d’inscription serait une réponse probablement trop tardive pour être productive. Une réflexion nationale sur le rôle des universités, semblable à celle d’après-guerre, est devenue indispensable. __Avant toute réforme économique, il faut une refondation concertée — un « troisième colloque de Caen » — pour repenser les missions et leur hiérarchie, condition nécessaire pour concevoir un modèle économique accepté et soutenable.__
 
 \newpage
 \tableofcontents
