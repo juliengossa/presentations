@@ -1,0 +1,523 @@
+---
+title: "Downsizing science : l'université post-massification"
+subtitle: |
+    | Passerelles
+
+author: 
+- Julien Gossa \newline 
+- Université de Strasbourg, Laboratoire SAGE et CPESR  \newline \hspace{3cm} \newline
+- '[@JulienGossa.cpesr.fr](https://bsky.app/profile/juliengossa.cpesr.fr) gossa@unistra.fr'
+date: "22-01-2026"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    dev: cairo_pdf
+    keep_tex: False
+    #toc: true
+    slide_level: 2
+  github_document: default
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+options(dplyr.summarise.inform = FALSE)
+
+knitr::opts_chunk$set(fig.asp=7.5/16, fig.width = 8)
+
+library(tidyverse)
+library(ggcpesrthemes)
+library(kpiESR)
+library(cowplot)
+
+theme_set(theme_cpesr() + theme(legend.position = "right", plot.title = element_text(hjust = 0.5)))
+
+#source("tdbesr-plots.R")
+source("../ressources/data/BL/BLViz-map.R",chdir = TRUE)
+load("../ressources/data/plots.RData")
+
+```
+
+## Pourquoi investir dans la science ?
+
+:::::::::::::: {.columns}
+::: {.column width="60%"}
+- Progrès visibles 
+  - Energie, transport, confort, santé...
+  - Très visible pré-massification, peu visible post-massification
+- Croissance économique 
+  - Augmentation de la qualification -> augmentation de la productivité -> croissance
+  - Impossible post-massification (qualification déjà augmentée)
+  - Sauf innovation (Aghion)
+- Démographie
+  - Plus de jeunes donc besoin de plus d'enseignants scientifiques
+- Suprématie scientifique, technologique ou culturelle
+  - Où en sommes-nous ?
+  
+:::
+::: {.column width="40%"}
+```{r, out.width="80%", fig.align="center"}
+knitr::include_graphics("../ressources/img/china-train.jpeg")
+```
+:::
+:::::::::::::: 
+
+
+## Une vision du monde 
+
+```{r}
+bl.map.plot(2015,FALSE) + ggtitle("Taux d'engagement", subtitle="dans l'enseignement supérieur")
+```
+
+## Une autre vision du monde 
+
+```{r}
+bl.map.plot(2015,TRUE) + ggtitle("Nombre absolu d'engagés", subtitle="dans l'enseignement supérieur")
+```
+
+## Taux d'engagement dans l'enseignement supérieur
+
+```{r, out.width="80%", fig.align="center"}
+knitr::include_graphics("../ressources/img/OWD-tertiary.png")
+```
+
+\footnotesize
+Source : OurWordInData, https://ourworldindata.org/grapher/gross-enrollment-ratio-in-tertiary-education?tab=line
+
+
+## Publications vs. Chercheur.ses
+
+```{r, out.width="70%", fig.align="center"}
+knitr::include_graphics("../ressources/img/OST-publicationsVSchercheurs.png")
+```
+
+\footnotesize
+Source : OST, https://www.hceres.fr/sites/default/files/media/downloads/ost-position-scientifique-france-2024.pdf
+
+
+## Part mondiale des publications scientifiques
+
+```{r, out.width="70%", fig.align="center"}
+knitr::include_graphics("../ressources/img/OST-publications.png")
+```
+
+\footnotesize
+Source : OST, https://www.hceres.fr/sites/default/files/media/downloads/ost-position-scientifique-france-2024.pdf
+
+
+## USA : une évolution brutale.
+
+```{r, out.width="75%", fig.align="center"}
+knitr::include_graphics("../ressources/img/Presse-Trump.png")
+```
+
+\footnotesize
+Source : Nature, US science after a year of Trump, https://www.nature.com/immersive/d41586-026-00088-9/index.html
+
+
+## France : Objectifs de la nation = « Excellence scientifique »
+
+```{r, out.width="100%", fig.align="center", fig.show='hold'}
+  knitr::include_graphics("../ressources/img/PAP-172-2025.jpeg")
+```
+
+\tiny
+Source : Projet annuel de performances PLF 2025 https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2025
+
+## Démographie : dénatalité, brutale
+
+```{r, out.width="40%", fig.align="center"}
+knitr::include_graphics("../ressources/img/INSEE-naissances.png")
+```
+
+\footnotesize
+Source : INSEE https://www.insee.fr/fr/statistiques/2381380
+
+
+## Démographie : chute durable (définitive ?) du nombre d'étudiants 
+
+```{r, fig.align="center", out.width="100%"}
+load("../ressources/data/predictions.RData")
+predictions
+```
+
++ démassification éducative (DNB, Bac, Parcoursup)
+
+## ONR, Agences de moyens, DGG, Désumérisation, KeyLabs...
+
+- Comment amorcer une décroissance scientifique ?
+  - ONR, en particulier le CNRS, trop gros
+  - Transformation en « agences de moyens » (sans chercheur)
+- Où mettre les chercheurs ? 
+  - Dans les universités, pour combler les trous pédagogiques
+  - Nécessité de passer à la délégation globale de gestion (DGG)
+  - Et de désumériser (abandon des labos aux universités)
+
+- KeyLabs : agression ou protection ?
+
+- Quel status pour les C en université ?
+  - Acte 2 de l'autonomie
+  - Création d'un statut unifié C-EC, local à chaque université
+  - « territorialisation » (i.e. pilotage rectoral : COMP)
+  - Bascule sur un modèle frais d'inscription
+
+
+## Conclusion
+
+- Echec des « politiques d'excellence » à atteindre leur objectif.
+  - Couteuse concentration des moyens.
+  - Sans preuve d'efficacité.
+- La « compétition scientifique » est perdue.
+  - Echec de l'EEES. 
+  - « Techno-oligarchie » aux USA.
+  - Décollage de la Chine et de l'Inde (et peut-être bientôt de l'Afrique).
+- Les résultats de la science sont de moins en moins visibles. 
+  - Contrairement à la Chine (et dans une moindre mesure les USA).
+  - Normal dans une société en stagnation.
+- Probable phase occidentale d'édu-scepticisme, voire d'obscurantisme. 
+- Acte 2 de l'autonomie
+
+## En tous cas, pas un problème technique de budget national
+
+```{r, out.width = "62%", fig.align='center'}
+knitr::include_graphics("../ressources/img/OFCE-apprentissage.png")
+``` 
+
+\footnotesize
+Source : Bruno COQUET, OFCE, https://www.ofce.sciences-po.fr/pdf/pbrief/2024/OFCEpbrief135.pdf
+
+## Une solution : la hausse des frais d'inscription
+
+```{r, out.width = "80%", fig.align='center'}
+knitr::include_graphics("../ressources/img/Presse-FraisScolarité.png")
+``` 
+
+\footnotesize
+Source : https://www.lesechos.fr/politique-societe/education/universites-grandes-ecoles-dingenieurs-la-fin-des-tabous-sur-la-hausse-des-droits-dinscription-2189311
+
+## La hausse des frais d'inscription est déjà en cours
+
+```{r, fig.asp=7/16, fig.width=7, out.width="95%", fig.align='center'}
+plot_RecettesFormation
+```
+
+Plus les filliales (fondations, filiales commerciales, écosystème start-ups, etc.).
+
+
+## Défi 1 : Décollage du secteur privé (augmentation de l'offre)
+
+```{r, out.width = "77%", fig.align='center'}
+knitr::include_graphics("../ressources/img/EESR-effectifs.png")
+``` 
+
+\footnotesize
+Source : EESR, SIES, https://publication.enseignementsup-recherche.gouv.fr/eesr/FR/T764/les_etudiants_dans_les_filieres_de_formation_depuis_1960_croissance_et_diversification/
+
+## Défi 2 : Développement rapide de l'edu-scepticisme (baisse des tarifs)
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+```{r, out.width="60%", fig.align="center"}
+knitr::include_graphics("../ressources/img/eduscepticisme-LAOB.png")
+```
+:::
+::: {.column width="50%"}
+```{r, out.width="80%", fig.align="center"}
+knitr::include_graphics("../ressources/img/eduscepticisme-NP.jpg")
+```
+:::
+:::::::::::::: 
+
+## Défi 2 : Développement rapide de l'edu-scepticisme (baisse des tarifs)
+
+```{r, out.width="80%", fig.align="center"}
+knitr::include_graphics("../ressources/img/eduscepticisme-JDV.jpeg")
+```
+
+## Défi 2 : Développement rapide de l'edu-scepticisme (baisse des tarifs)
+
+```{r, out.width="100%", fig.align="center"}
+knitr::include_graphics("../ressources/img/eduscepticisme-FV.png")
+```
+
+## Défi 2 : Développement rapide de l'edu-scepticisme (baisse des tarifs)
+
+```{r, out.width="100%", fig.align="center"}
+knitr::include_graphics("../ressources/img/eduscepticisme-renaissance.png")
+```
+
+\footnotesize
+Source: Renaissance/LREM, « Un choc des savoirs pour l'enseignement supérieur et la formation », Pour une nouvelle donne économique et climatique, 2025
+https://doc.parti.re/Conventions-thematiques_Nouvelle-donne.pdf
+
+## Défi 2 : Développement rapide de l'edu-scepticisme (baisse des tarifs)
+
+```{r, out.width="100%", fig.align="center"}
+knitr::include_graphics("../ressources/img/PAP-RES-2026-parcoursup.png")
+```
+
+\tiny
+
+Source : Projet annuel de performances PLF 2026 https://www.budget.gouv.fr/documentation/documents-budgetaires-lois/exercice-2026?docuement_dossier%5B0%5D=mission_nomenclature%3A92269
+
+
+
+## Défi 3 : Stagnation éducative / Déclin éducatif (baisse de la demande)
+
+```{r}
+plot_MassificationRecent
+```
+
+
+## Défi 3 : Stagnation éducative / Déclin éducatif (baisse de la demande)
+
+```{r}
+plot_MassificationLong
+```
+
+
+## Défi 3 : Stagnation éducative / Déclin éducatif (baisse de la demande)
+
+```{r, out.width="40%", fig.align="center"}
+knitr::include_graphics("../ressources/img/INSEE-naissances.png")
+```
+
+\footnotesize
+Source : INSEE https://www.insee.fr/fr/statistiques/2381380
+
+
+## Défi 3 : Stagnation éducative / Déclin éducatif (baisse de la demande)
+
+```{r, fig.align="center", out.width="100%"}
+load("../ressources/data/predictions.RData")
+predictions
+```
+
+
+## Conclusion : Triple moment 
+
+- Fin de la massification / début de stagnation éducative
+- Chute impressionnante et durable de la démographie
+- Développement rapide de l'édu-scepticisme
+
+Probablement un moment-pivot civilisationnel
+
+### Soit vers la fin du service public d'ES(R)
+
+  - Individualisation et pure professionalisation des études
+  - COMP100% + Modèle économique basé sur les frais d'inscription
+  - De nombreuses fermetures (régulation d'un marché dysfonctionnel)
+  - Contractualisation des universitaires (adapter l'offre à la demande)
+
+### Soit vers une redéfinition du rôle du service public d'ES(R)
+  - Notion de progrès collectif ?
+  - Séparation nette et horizontale entre études supérieures et professionalisation 
+
+
+## Des missions en inflation et de plus en plus en conflit
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+\centering 2000
+
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2000.png")
+``` 
+:::
+::: {.column width="50%"}
+\centering 2025
+
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2025.png")
+``` 
+:::
+:::::::::::::: 
+
+\footnotesize
+Source: L123-2 du Code de l'éducation https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042815070/
+
+## Constat 5 : Une inégalité par les deux bouts, complexe à mesurer.
+
+```{r, out.width = "60%", fig.align='center'}
+knitr::include_graphics("../ressources/img/CAE-coutsdiplomes.png")
+``` 
+
+\footnotesize
+Source: CAE, https://cae-eco.fr/les-couts-des-formations-dans-lenseignement-superieur-francais-determinants-et-disparites
+
+
+## Constat 6 : Une territorialisation à l'abandon, et un manque d'intersectionnalité dans les politiques publiques.
+
+```{r, out.width = "60%", fig.align='center'}
+knitr::include_graphics("../ressources/img/NSP-campus.png")
+``` 
+
+
+
+
+
+
+
+## Etat des lieux : Investissement dans l'ESR (P150 / nombre total d'étudiants)
+
+```{r, out.width="55%", fig.align="center"}
+knitr::include_graphics("../ressources/img/budgetparetu.png")
+```
+
+Pour une année-étudiant : si 5 k€ en 2009, 4 k€ en 2025.
+
+
+## Etat des lieux : Productivité de l'ESR (nombre total d'étudiants / P150)
+
+```{r, out.width="55%", fig.align="center"}
+knitr::include_graphics("../ressources/img/budgetparetu-flip.png")
+```
+
+Pour 1 M€ : si 200 années-étudiant en 2009, 250 années-étudiant en 2025.
+
+
+## Etat des lieux : SCSP vs. Ressources propres
+
+```{r, fig.asp=7/16, fig.width=7, out.width="95%", fig.align='center'}
+plot_RessourcesPropres
+```
+
+Plus les filliales (fondations, filiales commerciales, écosystème start-ups, etc.).
+
+
+## Etat des lieux : SCSP vs. dépenses de personnel
+
+```{r, fig.asp=7.5/16, out.width="100%"}
+plot_SCSPvsMS
+```
+
+## Perspective actuelle : réduire le volume de service
+
+```{r, out.width = "70%", fig.align='center'}
+knitr::include_graphics("../ressources/img/Presse-IP-EMacron.png")
+``` 
+
+```{r, out.width = "70%", fig.align='center'}
+knitr::include_graphics("../ressources/img/Presse-Recherche-EMacron.png")
+``` 
+
+- Emmanuel Macron, Présidence de la République, 2023
+
+\tiny
+https://www.aefinfo.fr/depeche/698571-pour-etre-plus-efficace-l-universite-doit-faire-davantage-contribuer-ceux-qui-ont-le-plus-de-moyens-emmanuel-macron \newline
+https://www.elysee.fr/front/pdf/elysee-module-22053-fr.pdf
+
+## COMP100% : pour augmenter la performance ?
+
+- Principe : conditionner 100% de la SCSP à la « performance »
+  - __Notion de « performance » non consensuelle, polymorphe et mutable__
+  - Extrêmement risqué dans des mains extrêmes.
+- Conditionner y compris le traitement des fonctionnaires 
+  - __Pas de transformation stratégique sans licenciements économiques__
+  - Nécessite une réforme statutaire d'ampleur, énorme risque pour l'attractivité
+- Conditionner y compris les performances cœur de métier 
+  - Réussite, Insertion professionnelle (et production scientifique ?) 
+  - Calculées par des outils administratifs : InserSup, Fresq, Quadrant, (HAL, OpenAlex), ...
+  - __Voué à l'échec : Loi de Goodhart__
+  
+### Loi de Goodhart
+
+__« Quand une mesure devient un objectif, elle cesse d'être une bonne mesure »__
+
+- Taux de réussite : On ne va pas mieux enseigner, mais seulement mieux noter.
+- Production scientifique : On ne va pas mieux chercher, mais seulement plus publier.
+
+
+
+
+
+
+## La valeur des diplômes en question
+
+« Réussite » vs. « exigence » / Capital humain vs. Signal 
+
+```{r, fig.asp=7/16, fig.width=7, out.width="100%", fig.align='center'}
+plot_LvsM
+```
+
+
+
+
+
+## Objectifs de la nation : Massification éducative
+
+- 80% d'une classe d'âge au Bac
+- 50% d'une classe d'âge diplômée du supérieur
+
+
+```{r, out.width="100%", fig.align="center"}
+knitr::include_graphics("../ressources/img/PAP-150-2025-parcoursup.png")
+```
+
+\tiny
+
+Source : Projet annuel de performances PLF 2025 https://www.budget.gouv.fr/documentation/documents-budgetaires/exercice-2025/projet-loi-finances-les/budget-general-plf-13
+
+
+
+## Discours : Réussite vs. Exigence
+
+
+:::::::::::::: {.columns}
+::: {.column width="60%"}
+
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/Presse-LM-ASBarthez.png")
+``` 
+
+- Anne-Sophie Bartez, DGESIP, 2019
+- Frédérique Vidal, MESR, 2021
+\vfill
+
+\tiny
+https://www.aefinfo.fr/depeche/616359
+
+https://www.lefigaro.fr/actualite-france/frederique-vidal-l-enjeu-est-de-preserver-le-taux-d-insertion-professionnelle-20210921
+
+:::
+::: {.column width="40%"}
+
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/Presse-LM-FVidal.png")
+``` 
+
+:::
+:::::::::::::: 
+
+
+
+
+
+
+## Discours : Public/Privé - Qualité
+
+```{r, out.width = "70%", fig.align='center'}
+knitr::include_graphics("../ressources/img/Presse-Privé-TCoulhon.png")
+``` 
+
+- Thierry Coulhon, Hcéres et Anne-Sophie Barthez, DGESIP, 31/03/2023
+
+\tiny
+https://www.aefinfo.fr/depeche/690094-prive-lucratif-nous-n-opposons-aucune-categorie-d-etablissement-a-s-barthez-dgesip
+
+
+
+## Discours : Rémunérations vs. dotation
+
+```{r, out.width = "75%", fig.align='center'}
+knitr::include_graphics("../ressources/img/SR-SCSPMS.png")
+``` 
+
+- Sylvie Retailleau, Ministre ESR en 2023
+
+\tiny
+Question orale n°0915S « Situation budgétaire des universités et particulièrement de Le Mans Université »
+
+https://www.senat.fr/questions/base/2023/qSEQ23110915S.html
+
+
