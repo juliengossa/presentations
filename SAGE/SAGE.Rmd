@@ -4,7 +4,7 @@ subtitle: |
     | Passerelles
 
 author: 
-- Julien Gossa \newline 
+- Marie-Virginie Léon, Julien Gossa \newline 
 - Université de Strasbourg, Laboratoire SAGE et CPESR  \newline \hspace{3cm} \newline
 - '[@JulienGossa.cpesr.fr](https://bsky.app/profile/juliengossa.cpesr.fr) gossa@unistra.fr'
 date: "22-01-2026"
