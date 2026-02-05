@@ -50,6 +50,8 @@ knitr::include_graphics("../ressources/img/eduscepticisme-JDV.jpeg")
   - « _politically correctness (PC)_» et « _Cancel culture_ » dès les années 1990
 - _Gag orders_ sur certains contenus académiques
   - loi _H.B. 377_, 2021 en Idaho, _Stop WOKE Act_, 2022 en Floride
+- Suppression des données de la recherche (climat et santé), 2025
+  - « _President Donald J. Trump Eliminates Information Silos to Stop Waste, Fraud, and Abuse_ »
 - Suppression des programmes de diversité et d’inclusion 
   - _DEI_, 2023 en Floride et au Texas
   - _Students for Fair Admissions c. Harvard/UNC_, 2023 (interdiction des discriminations positives dans les admissions ; avant 2006 au Michigan)
@@ -89,6 +91,8 @@ Source : [« _US science after a year of Trump_ », Nature](https://www.nature.c
 - Suppression des financements sur les secteurs dangereux : désinformation, écologie, wokisme
 - Attaque électoraliste sur le secteur de la santé
 
+Mais bon...
+
 ```{r, out.width="50%", fig.align="center"}
 knitr::include_graphics("../ressources/img/MAHA-chatgpt.png")
 ```
@@ -124,7 +128,6 @@ bl.map.plot(2015,FALSE) + ggtitle("Taux d'engagement", subtitle="dans l'enseigne
 bl.map.plot(2015,TRUE) + ggtitle("Nombre absolu d'engagés", subtitle="dans l'enseignement supérieur")
 ```
 
-
 ## Part mondiale des publications scientifiques
 
 ```{r, out.width="70%", fig.align="center"}
@@ -134,11 +137,21 @@ knitr::include_graphics("../ressources/img/OST-publications.png")
 \footnotesize
 Source : [La position scientifique de la France, OST](https://www.hceres.fr/sites/default/files/media/downloads/ost-position-scientifique-france-2024.pdf)
 
+
 ## Une crise occidentale 
 
 ```{r, out.width="90%", fig.align="center"}
 knitr::include_graphics("../ressources/img/Presse-CriseOccidentale.png")
 ```
+
+## Une crise occidentale : « La démographie a toujours raison »
+
+```{r, out.width="70%", fig.align="center"}
+knitr::include_graphics("../ressources/img/OWD-fertility.png")
+```
+
+\footnotesize
+Source : [Our World in Data](https://ourworldindata.org/fertility-rate)
 
 
 ## Un scénario catastrophe (possible)
@@ -227,7 +240,7 @@ Source : [« Les Etats-Unis, la France et la police : l'autoritarisme en commun 
 - Chute impressionnante et durable de la démographie
 - Développement rapide de l'édu-scepticisme
 
-Probablement un moment-pivot civilisationnel.
+Probablement un moment-pivot civilisationnel. « Trumpisation » à la française possible.
 
 ### Soit vers la fin du service public d'ES(R)
 
