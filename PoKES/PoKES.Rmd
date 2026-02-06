@@ -215,16 +215,16 @@ Source : [Projet annuel de performances PLF 2026](https://www.budget.gouv.fr/doc
   - Contractualisation par objectifs apparemment neutres : OK (COMP)
 - Politique raciale : KO, mais...
   - filière du Bac + frais d'inscription
-- Statut des universitaires / bastions des ONR : KO, mais...
-  - CPJ prêtes à l'emploi
+- Statut des universitaires / CNU / bastions des ONR : KO, mais...
+  - CPJ prêtes à l'emploi + localisation des primes et promotions
   - « Acte 2 de l'autonomie » + « Agences de moyens » 
   - D'une pierre deux coups.
 
-## Peut-être...
+## USA vs. France : Peut-être...
 
 Même dynamique dans des contextes très différents (fédéral vs. central).
 
-Bascule potentiellement très rapide en 2027.
+Bascule potentiellement très rapide en 2027, mais pas (encore) la perspective actuelle.
 
 ```{r, out.width="80%", fig.align="center"}
 knitr::include_graphics("ASI.png")
@@ -240,18 +240,25 @@ Source : [« Les Etats-Unis, la France et la police : l'autoritarisme en commun 
 - Chute impressionnante et durable de la démographie
 - Développement rapide de l'édu-scepticisme
 
-Probablement un moment-pivot civilisationnel. « Trumpisation » à la française possible.
+Probable moment-pivot civilisationnel. « Trumpisation » à la française seulement possible.
 
 ### Soit vers la fin du service public d'ES(R)
 
   - Individualisation et pure professionalisation des études
   - COMP100% + Modèle économique basé sur les frais d'inscription
-  - De nombreuses fermetures (régulation d'un marché dysfonctionnel)
+  - De nombreuses fermetures imprévisibles (régulation d'un marché dysfonctionnel)
   - Contractualisation des universitaires (adapter l'offre à la demande)
 
-### Soit vers une redéfinition du rôle du service public d'ES(R)
+### Soit contre-pied idéologique / redéfinition du rôle du service public d'ES(R)
   - Notion de progrès collectif ?
   - Séparation nette et horizontale entre études supérieures et professionalisation 
+
+
+## Chine : la science visible
+
+```{r, out.width="40%", fig.align="center"}
+knitr::include_graphics("../ressources/img/china-train.jpeg")
+```
 
   
 ## De profondes transformations : SCSP vs. Ressources propres
