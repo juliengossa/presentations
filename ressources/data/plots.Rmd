@@ -59,8 +59,8 @@ esr %>%
 
 ```{r, results='asis'}
 plot_SCSPvsMS <- kpiESR::esr %>%
-  filter(Etablissement == "Universités et assimilés", Rentrée > 2008) %>%
-  #filter(Etablissement == "Ensemble", Rentrée > 2008) %>%
+  #filter(Etablissement == "Universités et assimilés", Rentrée > 2008) %>%
+  filter(Etablissement == "Ensemble", Rentrée > 2008) %>%
   mutate(diff = kpi.FIN.S.SCSP-kpi.FIN.S.masseSalariale) %>% 
   ggplot(aes(x=Rentrée+1,y=diff)) +
   geom_hline(yintercept = 1) +
