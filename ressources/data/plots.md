@@ -1,7 +1,7 @@
 CPESR
 ================
 CPESR
-2026-02-25
+2026-03-06
 
 ## plot_SCSPvsEtu
 
@@ -124,5 +124,25 @@ RecettesFormation ( 20 lignes)
 ### Massification (1960-2000) : Investissements massifs dans l’éducation
 
 <img src="plots_files/figure-gfm/diplome.2-1.png" width="672" />
+
+## Emplois
+
+    ## Warning in geom_label(aes(label = lab), size = 5 * sizemult, fontface = "bold", : Ignoring unknown parameters: `direction`
+    ## Ignoring unknown parameters: `direction`
+    ## Ignoring unknown parameters: `direction`
+    ## Ignoring unknown parameters: `direction`
+    ## Ignoring unknown parameters: `direction`
+    ## Ignoring unknown parameters: `direction`
+    ## Ignoring unknown parameters: `direction`
+    ## Ignoring unknown parameters: `direction`
+
+<img src="plots_files/figure-gfm/unnamed-chunk-12-1.png" width="672" />
+
+## R&D
+
+<img src="plots_files/figure-gfm/unnamed-chunk-13-1.png" width="672" />
+
+Source :
+<https://en.wikipedia.org/wiki/List_of_companies_by_research_and_development_spending>
 
 ## Save

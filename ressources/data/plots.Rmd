@@ -313,6 +313,44 @@ plot_stratification_ponctuel
 ```
 
 
+## Emplois
+
+```{r}
+emploiec.path <- "~/repos/cpesr/emploiESR"
+cnu.sections <- read.csv2(paste0(emploiec.path,"/data/cpesr-cnu-sections.csv"))
+emploisEC <- read.csv2(paste0(emploiec.path,"/data/cpesr-emplois-ec.csv"), stringsAsFactors = TRUE)
+source(paste0(emploiec.path,"/R/emploiEC-metriques.R"))
+source(paste0(emploiec.path,"/R/emploiEC-plot-series.R"))
+source(paste0(emploiec.path,"/R/emploiEC-plot-metrique.R"))
+source(paste0(emploiec.path,"/R/emploiEC-plot-contexte.R"))
+année.ref <- emploisEC %>% filter(Données == "Consolidées") %>% tail(n = 1) %>% pull(Année)
+
+plot_emploiMCF <- plot_emplois_long() + ggtitle("Postes ouverts pour entrer dans la carrière d'enseignant-chercheur titulaire")
+
+plot_emploiMCF
+```
+
+## R&D
+
+```{r}
+rd <- read.csv("rd_spendings.csv")
+
+plot_rd <- rd %>%
+  arrange(desc(rd_spending_usd_billion_2022)) %>%
+  head(11) %>%
+  ggplot(aes(x=rd_spending_usd_billion_2022,y=reorder(company,rd_spending_usd_billion_2022),fill=country)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Accent") +
+  labs(
+    title = "Top 10 des dépenses R&D des entreprises (2022) et MIRES (2026)",
+    x = "Dépense de R&D (Md$)",
+    y = NULL)
+
+plot_rd
+```
+
+Source : https://en.wikipedia.org/wiki/List_of_companies_by_research_and_development_spending
+
 ## Save
 
 ```{r}
@@ -329,5 +367,8 @@ save(plot_SCSPvsEtu,
      plot_bmo,
      plot_stratification_continu,
      plot_stratification_ponctuel,
+     levels_gdcnu,
+     plot_emploiMCF,
+     plot_rd,
      file = "plots.RData")
 ```
