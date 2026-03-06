@@ -69,16 +69,6 @@ knitr::include_graphics("../ressources/img/Presse-Budget-AssisesFinancement.png"
 Source : https://www.enseignementsup-recherche.gouv.fr/fr/lancement-des-assises-du-financement-des-universites-100759
 
 
-## Investissement dans l'ESR (P150 / nombre total d'étudiants)
-
-```{r, out.width="55%", fig.align="center"}
-knitr::include_graphics("../ressources/img/budgetparetu.png")
-```
-
-Pour une année-étudiant : si 5 k€ en 2009, 4 k€ en 2026.
-
-\tiny Source : https://lucaschancel.com/etudiants/
-
 
 ## Investissement dans l'ESR (P150 et P172)
 
