@@ -3,7 +3,7 @@ l’offre de formation
 ================
 Marie Lapeyronnie, ResoSup - RESeau des Observatoires de l’enseignement
 SUPérieurJulien Gossa, Laboratoire SAGE, Université de Strasbourg
-2024-09-30
+2026-03-18
 
 # Enjeu et problématique de recherche
 
