@@ -311,6 +311,15 @@ knitr::include_graphics("../ressources/img/OWD-tertiary.png")
 \footnotesize
 Source : [OurWordInData](https://ourworldindata.org/grapher/gross-enrollment-ratio-in-tertiary-education?tab=line)
 
+## Une solution de régulation : la hausse des frais d'inscription
+
+```{r, out.width = "80%", fig.align='center'}
+knitr::include_graphics("../ressources/img/Presse-FraisScolarité.png")
+``` 
+
+\footnotesize
+Source : https://www.lesechos.fr/politique-societe/education/universites-grandes-ecoles-dingenieurs-la-fin-des-tabous-sur-la-hausse-des-droits-dinscription-2189311
+
 
 ## Une crise occidentale 
 
@@ -408,14 +417,6 @@ Source : OST, https://www.hceres.fr/sites/default/files/media/downloads/ost-posi
 
 
 
-## Une solution : la hausse des frais d'inscription
-
-```{r, out.width = "80%", fig.align='center'}
-knitr::include_graphics("../ressources/img/Presse-FraisScolarité.png")
-``` 
-
-\footnotesize
-Source : https://www.lesechos.fr/politique-societe/education/universites-grandes-ecoles-dingenieurs-la-fin-des-tabous-sur-la-hausse-des-droits-dinscription-2189311
 
 ## La hausse des frais d'inscription est déjà en cours
 
