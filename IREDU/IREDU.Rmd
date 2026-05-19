@@ -291,7 +291,18 @@ Source: Renaissance/LREM, « Un choc des savoirs pour l'enseignement supérieur 
 https://doc.parti.re/Conventions-thematiques_Nouvelle-donne.pdf
 
 
-## Taux d'engagement dans l'enseignement supérieur
+## Décollage du secteur privé (augmentation de l'offre)
+
+```{r, out.width = "77%", fig.align='center'}
+knitr::include_graphics("../ressources/img/EESR-effectifs.png")
+``` 
+
+\footnotesize
+Source : EESR, SIES, https://publication.enseignementsup-recherche.gouv.fr/eesr/FR/T764/les_etudiants_dans_les_filieres_de_formation_depuis_1960_croissance_et_diversification/
+
+
+
+## Taux d'engagement (diminution de la demande)
 
 ```{r, out.width="80%", fig.align="center"}
 knitr::include_graphics("../ressources/img/OWD-tertiary.png")
@@ -415,14 +426,6 @@ plot_RecettesFormation
 Plus les filliales (fondations, filiales commerciales, écosystème start-ups, etc.).
 
 
-## Défi 1 : Décollage du secteur privé (augmentation de l'offre)
-
-```{r, out.width = "77%", fig.align='center'}
-knitr::include_graphics("../ressources/img/EESR-effectifs.png")
-``` 
-
-\footnotesize
-Source : EESR, SIES, https://publication.enseignementsup-recherche.gouv.fr/eesr/FR/T764/les_etudiants_dans_les_filieres_de_formation_depuis_1960_croissance_et_diversification/
 
 
 
