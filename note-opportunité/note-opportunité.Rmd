@@ -16,7 +16,9 @@ header-includes:
   - \usepackage[T1]{fontenc}
   - \usepackage[default]{raleway}
   - \usepackage[french]{babel}
-bibliography: Opportunité stratégique - Modèle économique.bib
+bibliography: 
+  - Opportunité stratégique - Modèle économique.bib
+  - Etudes empiques.bib
 biblio-style: verbose
 date: |
   | `r Sys.Date()` (v1.6.4)
@@ -190,13 +192,13 @@ La collision entre la politique de réussite en Licence et la politique de rédu
 
 C'est aussi sans doute une clé d'explication du défaut d'investissement public dans l'enseignement supérieur : il n'est peut-être plus vu comme un investissement d'avenir, mais seulement comme un coût actuel, en partie dispensable ou transférable à la sphère privée. Dans le supérieur, on peut effectivement constater que l'investissement par étudiant a baissé de 20% depuis 2017 [@lucaschancelJeuDonneesDepense2025] (figure ci-après).
 
-```{r, out.width="100%", fig.align = "center"}
+```{r, out.width="80%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/budgetparetu.png")
 ```
 
 Cependant, une perspective plus positive est que la productivité de l'enseignement supérieur public a dans le même temps été améliorée de 20%, puisque nous formons 20% d'étudiants en plus par euro dépensé. On retrouve là l'idée de l'optimisation de la dépense (lecture renversée ci-après).
 
-```{r, out.width="100%", fig.align = "center"}
+```{r, out.width="80%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/budgetparetu-flip.png")
 ```
 
@@ -210,11 +212,11 @@ L’édu-scepticisme est généralement la position conservatrice dans les déba
 
 __Portés notamment par l’engouement pour les IA, les éditoriaux édusceptiques ne s'arrêtent plus aux seules sciences sociales, et sont de plus en plus fréquents : « _doit-on en finir avec le bac+5 ?_ »[@NiveauEstChute2025], « _Arrêtons d’enseigner un milliard de conneries aux gamins_ »[@serraNatachaPolonyArretons2025], « _Il ne faut plus cirer trop longtemps les bancs des universités_ »[@juliendamontReduireLenseignementSuperieur2025], « _Ne faites plus d’études_ »[@alexandreNeFaitesDetudes2025]...__
 
-Ce mouvement n'est pas spécifique à la France, mais se retrouve notamment aux États-Unis, où l’éduscepticisme fait désormais partie du débat public [@minbahadurbistaHigherEducationScepticism2026]. La défiance de l’administration Trump est particulièrement vive[@johnoliverTrumpVsHigher2025], et a sans doute participé à sa victoire électorale, en désignant les universités comme l'ennemi de la nation : « _The universities are the enemy_ »[@laurenlassabeshepherdUniversitiesAreEnemy2025]. Aux USA comme en Angleterre, on affirme qu'« _Il est temps de réaliser que l’Université est une arnaque_ »[@bootleItsTimeBritain2025], position relayée en France sans distance dans Le FigaroVox[@emmabeckerJaimaisBeaucoupCharlie2025]. 
+Ce mouvement n'est pas spécifique à la France, mais se retrouve notamment aux États-Unis, où l’éduscepticisme fait désormais partie du débat public [@minbahadurbistaHigherEducationScepticism2026], et participe déjà à « _transformer l'enseignement supérieur_ »[@whiteEnrollmentCliffHow]. La défiance de l’administration Trump est particulièrement vive[@johnoliverTrumpVsHigher2025], et a sans doute participé à sa victoire électorale, en désignant les universités comme l'ennemi de la nation : « _The universities are the enemy_ »[@laurenlassabeshepherdUniversitiesAreEnemy2025]. Aux USA comme en Angleterre, on affirme qu'« _Il est temps de réaliser que l’Université est une arnaque_ »[@bootleItsTimeBritain2025], position relayée en France sans distance dans Le FigaroVox[@emmabeckerJaimaisBeaucoupCharlie2025]. 
 
 La question est prise suffisamment au sérieux pour qu’on produise des rapports sur la question : par exemple, « _Les universités en valent-elles le coût ?_ »[@willettsAreUniversitiesWorth2025], ou très récemment une étude d'impact de l'Initiative[@yannicklhortyLimpactEconomiqueMajeur2025]. L'approche de ces rapports est toujours économique, peinant à aborder la question des bénéfices non marchands des études supérieures : « _Par cette étude, l’objectif est de montrer que nos universités sont à la fois un investissement dans l’avenir, à travers la jeunesse ou les futures innovations, mais aussi un investissement à court terme, rentable et qui permet d’injecter dans les territoires une vraie activité économique_ ».
 
-De fait, une approche purement utilitariste des études supérieures oblige à questionner le retour sur investissement des études face aux révolutions du marché du travail : en ce moment, il faut prédire les secteurs qui seront impactés par l'IA demain pour savoir quelles sont les filières encore rentables aujourd'hui[@murrayAIsRapidEvolution2025] ; certains s'inquiètent même que cela pourrait représenter la fin de l'université de masse[@nicolaifossWirdKIEnde2025].
+De fait, une approche purement utilitariste des études supérieures oblige à questionner le retour sur investissement des études face aux révolutions du marché du travail : en ce moment, il faut prédire les secteurs qui seront impactés par l'IA demain pour savoir quelles sont les filières encore rentables aujourd'hui[@murrayAIsRapidEvolution2025] ; certains s'inquiètent même que cela pourrait représenter la fin de l'université de masse[@nicolaifossWirdKIEnde2025]. Plus globalement, l'intérêt d'apprendre est aujourd'hui remis en cause par l'arrivée de l'IA[@gaultWhatsPointSchool2026].
 
 __Ainsi, la perturbation du marché de l'emploi, alliée au discours public de dénigrement des études supérieures, risque de réduire l'intérêt que les familles portent à la poursuite d'études, et donc réduire l'investissement privé des ménages dans l'éducation, ce qui inclut les frais d'inscription.__
 
@@ -232,7 +234,7 @@ Depuis, une fragilité systémique aux crises a été développée (Covid[@bolto
 
 Du côté de la dépense publique, la Student Loans Company (SLC) est intégralement financée par les contribuables. Comme seulement 56% des prêts sont intégralement remboursés par les étudiants [@StudentLoanForecasts2025], la SLC doit combler le reste. Mais en raison de l'inflation, la SLC perd de l'argent même sur les prêts qui sont remboursés[@wealeGovernmentLoseMoney2024]. Face à une situation qui risque de devenir incontrôlable, une réforme s’apprête à figer les frais d'inscription, donc le marché, afin de protéger les contribuables du risque de dérapage de la dépense publique dans la SLC, critiquée par ailleurs pour ses difficultés à se faire rembourser[@kirbyIveNotRepaid2024], des trop-perçus non remboursés [@patrickjackGraduatesNotClaiming2023], l'efficacité et le coût de ses outils de gestion[@clarkCapgeminiScoresPS150m2021], son coût de fonctionnement de 335 M€[@ukgovernmentSLCAnnualReport2025], et le financement de formations frauduleuses[@andrerhoden-paulFraudExpertsBrought2025]. 
 
-À minima, il faut constater que le changement de modèle économique n'a pas permis d'éviter les difficultés financières des universités anglaises. L’Australie traverse également une crise sans précédent[@fordeAustraliasUniversitySystem2025], caractérisée par un taux inquiétant d’abandon et une chute de l'engagement dans les études supérieures, que les pouvoirs publics n'arrivent pas à enrayer[@johnrossEconomicChangesSlowing2024]. Aux USA, en plus des atteintes portées par l'administration Trump, y compris sur les plus prestigieuses universités[@americanassociationofcollegesanduniversitiesCallConstructiveEngagement2025], les frais d'inscription sont en réalité en baisse depuis une décennie[@benunglesbeeStickerShockLook2024], ce qui témoigne d'un marché vacillant. Très récemment, et pour des raisons radicalement différentes, les universités américaines Johns Hopkins[@johnshopkinsuniversityJohnsHopkinsBecomes2025] et d'Austin[@universityofaustinUATXEndingTuition2025] ont affiché un tournant vers la gratuité.
+À minima, il faut constater que le changement de modèle économique n'a pas permis d'éviter les difficultés financières des universités anglaises, qui en plus font maintenant face à un discours critique des diplômés : « _la pire décision financière que j'ai prise_ »[@hilairePireDecisionFinanciere2026]. L’Australie traverse également une crise sans précédent[@fordeAustraliasUniversitySystem2025], caractérisée par un taux inquiétant d’abandon et une chute de l'engagement dans les études supérieures, que les pouvoirs publics n'arrivent pas à enrayer[@johnrossEconomicChangesSlowing2024]. Aux USA, en plus des atteintes portées par l'administration Trump, y compris sur les plus prestigieuses universités[@americanassociationofcollegesanduniversitiesCallConstructiveEngagement2025], les frais d'inscription sont en réalité en baisse depuis une décennie[@benunglesbeeStickerShockLook2024], ce qui témoigne d'un marché vacillant. Très récemment, et pour des raisons radicalement différentes, les universités américaines Johns Hopkins[@johnshopkinsuniversityJohnsHopkinsBecomes2025] et d'Austin[@universityofaustinUATXEndingTuition2025] ont affiché un tournant vers la gratuité. 
 
 Les pays s'en tenant à la quasi-gratuité sont sans doute dans une situation moins périlleuse, sans pour autant être à l'abri des coupes budgétaires, comme en Allemagne[@universityofmannheimHigherEducationBudget2024] ou en Suède[@anne-francoisehivertSuedeUniversitesDifficulte2024]. 
 
@@ -248,7 +250,7 @@ En France, la situation du marché de l'enseignement supérieur est dans une pha
 
 Depuis 2010, la croissance du secteur privé (+76 %) se détache de celle du secteur public (+15 %). Une partie de ces chiffres 
 
-```{r, out.width="70%", fig.align = "center"}
+```{r, out.width="100%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/EESR-effectifs.png")
 ```
 
@@ -260,7 +262,7 @@ Or, avec la prédiction de « _65 000 postes d’alternants détruits en six mo
 
 Le rapport « Démographie et finances publiques »[@courdescomptesDemographieFinancesPubliques2025] de la Cour des comptes démontre que les effectifs étudiants sont portés par un double-effet démographie et augmentation du taux de poursuite d'étude, mais qui arrive à son terme. Le rapport « Des écoles au marché du travail : la marée descendante de la dénatalité »[@maximesbaihiEcolesAuMarche2025] estime que « _La dénatalité devrait impacter les effectifs de l’enseignement supérieur à partir de 2029, avec une baisse plus prononcée à partir de 2033_ ». Nous amorçons désormais une chute mécanique du nombre d'étudiants, dont on ne connaît pas encore l'ampleur ni la durée puisque la natalité continue de baisser en 2025. Les universitaires actuels pourraient bien terminer leur carrière en ne connaissant plus qu'une baisse des effectifs étudiants.
 
-```{r, out.width="50%", fig.align = "center"}
+```{r, out.width="63%", fig.align = "center"}
 knitr::include_graphics("../ressources/img/INSEE-naissances.png")
 ```
 
@@ -304,12 +306,12 @@ __En conclusion, sauf si on souhaite réduire de façon incontrôlée notre offr
 \newpage
 # Un contexte éducatif qui invite à une réflexion plus large
 
-Pour conclure, il est tout à fait possible que la France, au même titre que toutes les nations ayant procédé à leur massification éducative, soit désormais face à un nouveau choix, de l'ampleur de celui qui a été fait après-guerre, concernant le rôle que doit jouer son enseignement supérieur et plus particulièrement son Université. Le rapport « _Universities and competitiveness_ » de l'EUA[@anna-lenaclaeys-kulikUniversitiesCompetitiveness2025] estime que, face à la « _polycrise_ », il est devenu prioritaire pour chaque université repenser son rôle et ses missions.
-L'idée s'impose progressivement : « _le débat, compliqué et sensible politiquement, sur le périmètre du service public de l’enseignement supérieur en tant que bien collectif ne peut être éludé_ »[@christian-lucienmartinRapportIGFIgesr2025]. 
+Pour conclure, il est tout à fait possible que la France, au même titre que toutes les nations ayant procédé à leur massification éducative, soit désormais face à un nouveau choix, de l'ampleur de celui qui a été fait après-guerre, concernant le rôle que doit jouer son enseignement supérieur et plus particulièrement son Université. Le rapport « _Universities and competitiveness_ » de l'EUA[@anna-lenaclaeys-kulikUniversitiesCompetitiveness2025] estime que, face à la « _polycrise_ », il est devenu prioritaire pour chaque université de repenser son rôle et ses missions. 
+L'idée s'impose progressivement : « _le débat, compliqué et sensible politiquement, sur le périmètre du service public de l’enseignement supérieur en tant que bien collectif ne peut être éludé_ »[@christian-lucienmartinRapportIGFIgesr2025]. Cette question ne peut être séparée de la question plus large de la croyance en la méritocracie dans notre société, qui apparait comme de moins en moins évidente[@wiesnerEffortAdvantageVisualizing2026].
 
-Pour l'instant, ce débat est mené de façon confidentielle et sectorielle, par exemple pour les universités et la recherche[@michelebargielLancementLAsurReseau2025], par l'Initiative[@linitiativePourNouveauPacte2025] ou pour les écoles d'Art[@valentinchomienneMarseilleEcolesDart2025]. Plus globalement, l'inflation sans priorité des missions officielles de l'enseignement supérieur est de plus en plus remise en cause [@kenzaoccanseyInvestirDansLavenir2025] [@laurencegarnierRelationsStrategiquesEntre2025] [@brunobouchardEstTempsSe2025] . L'évolution du L123.2 du code de l'éducation^[Article L123-2 du Code de l'éducation entre 2000 et 2025. www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042815070] (voir ci-dessous) est effectivement parlante. Malheureusement, le cadrage des assises du financement des universités, annoncé en janvier 2026 [@philippebaptisteLancementAssisesFinancement2026], évite d'aborder cette question. __Pourtant, tôt ou tard, il arrivera le moment où on ne pourra plus faire l'économie d'une révision et d'une hiérarchisation des missions de l'enseignemetn supérieur, et d'une révision de leur ventilation parmis les acteurs existants.__
+Pour l'instant, ce débat est mené de façon confidentielle et sectorielle, par exemple pour les universités et la recherche[@michelebargielLancementLAsurReseau2025], par l'Initiative[@linitiativePourNouveauPacte2025] ou pour les écoles d'Art[@valentinchomienneMarseilleEcolesDart2025]. Le manifeste québécois « rallumer le phare »[@rallumerlephareCinqEngagements2025] montre que le débat se pose dans les mêmes termes à l'international. Plus globalement, l'inflation sans priorité des missions officielles de l'enseignement supérieur est de plus en plus remise en cause [@kenzaoccanseyInvestirDansLavenir2025] [@laurencegarnierRelationsStrategiquesEntre2025] [@brunobouchardEstTempsSe2025] . L'évolution du L123.2 du code de l'éducation^[Article L123-2 du Code de l'éducation entre 2000 et 2025. www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042815070] (voir ci-dessous) est effectivement parlante. Malheureusement, le cadrage des assises du financement des universités, annoncé en janvier 2026 [@philippebaptisteLancementAssisesFinancement2026], évite d'aborder cette question. __Pourtant, tôt ou tard, il arrivera le moment où on ne pourra plus faire l'économie d'une révision et d'une hiérarchisation des missions de l'enseignemetn supérieur, et d'une révision de leur ventilation parmis les acteurs existants.__
 
-```{r, out.width = "100%", fig.show='hold',fig.align='center'}
+```{r, out.width = "70%", fig.show='hold',fig.align='center'}
 knitr::include_graphics("../ressources/img/CodeEduc-L123-2-20xx.png")
 ``` 
 
@@ -348,6 +350,24 @@ Selon la même logique, une augmentation homogène des frais d'inscription, par 
 Seule une augmentation à la discrétion des universités et différenciée par formation permettrait une concurrence non faussée entre les universités et les écoles, publiques comme privées. On peut douter que l'État accorde cette confiance et cette autonomie aux universités. Il faut aussi anticiper une augmentation des tensions internes, en particulier entre composantes et dans les CFVU qui devront fixer ou s'accomoder des tarifs.
 
 __En cas d'augmentation des frais d'inscription, il conviendrait de porter une attention particulière au régime d'encadrement des tarifs, de veiller à ce que ce régime soit identique pour tous les acteurs de l'enseignement supérieur, et que la répartition des recettes soit équitable entre et au sein des établissements.__
+
+
+## L'influence des frais d'inscription sur le comportement des étudiants ne fait pas consensus, est hautement liée à de nombreux autres paramètres, et nécessite des enquêtes nationales avant d'être mobilisée.
+
+Deux argument sont fréquemment avancés en faveur des frais d'inscription : le signal-prix et le coût irrécupérable. En défaveur des frais d'inscription, on avance plus souvent le risque de diminuer le taux de poursuite d'études.
+
+Le signal-prix est invoqué dans le discours supposant que la gratuité contribue à une perception négative de la qualité des formations universitaires : « ce qui n'a pas de prix n'a aucune valeur ». Les études empiriques sur le sujet montrent des résultats contrastés. Au Royaume-Uni, le prix est effectivement perçu comme un indicateur de qualité, mais non-linéaire et beaucoup plus faible que d'autres facteurs tels que la réputation, le taux de sélection, ou la position géographique[@sooDoesPriceMatter2010]. Aux USA, les établissements développent des stratégies d'affichage tarifaire destinés à biaiser le marché[@cheslock2021]. Une vaste enquête menée en Allemagne en 2006 montre que seuls 2 % des bacheliers considèrent le tarif comme un indicateur de qualité[@heineStudiengebuehrenAusSicht2008], alors qu'une autre étude montre qu'une augmentation de la perception de la qualité a accompagné l'augmentation des tarifs, mais sans pouvoir l'attribuer à cette hausse en soi[@gawellek2016]. Les études sur les MOOCS, dont le marché est particulier puisque moins contraint géographiquement et plus facile à mesurer, confirment ces contrastes, avec une corrélation inexistante, voire inverse, entre le prix et l'évaluation de la qualité[@shiDecodingDynamicsKnowledge2024, @sakdavongEffectOnlineTraining2023].
+
+__Finalement, il se dégage des études empiriques que les familles considèrent le prix comme un indicateur de qualité seulement lorsque le marché éducatif est organisé de telle façon à ce que le prix soit effectivement un indicateur raisonnable de qualité [@coelen2007] (ce que ne peut pas être un tarif national homogène par niveau d'étude).__
+
+Le coût irrécupérable (_sunk cost_) est invoqué dans le discours supposant que tarifer les études augmente la motivation et la réussite des étudiants : les frais d'inscription étant irrécupérables, les étudiants travailleraient plus sérieusement dans l'objectif de rentabiliser leur investissement. Cependant, les études empiriques montrent là également des effets contrastés, positifs en Italie[@garibaldi2012] et en Espagne[@beneito2018], mais insignifiants au Pays-Bas[@ketel2016], en Suisse[@fricke2018] et au Chili[@espinoza2025]. Une étude sur les MOOCS montrent que cet effet ne dure en réalité que quelques semaines[@goli2022]. Finalement, dans les systèmes tarifés, la réussite est moins corrélée avec les tarifs qu'avec les bourses [@nguyenEffectsGrantAid2019, @lasotaDoesAidMatter2025], à condition qu'elles soient accessibles à un grand nombre plutôt que réservées aux étudiants les plus performants [@lintnerEffectsPerformancebasedFinancial2024]. 
+
+
+Concernant les taux de poursuite, les études empiriques montrent aussi des résultats contrastés, allant d'un effet nul [@havranekTuitionFeesUniversity,@bruckmeier2014], en passant par un effet légèrement positif d'une baisse des tarifs[@wardResettingPricesEstimating2023] ou un effet négatif très important d'une hausse des tarifs, en particulier en Allemagne au moment de l'introduction de ces frais[@bahrsUniversityTuitionFees2019,@hubnerTuitionFeesAffect2012]. Une étude allemande constate cependant que des frais à prix-coutants n'ont pas d'impact sur le taux global de diplômation[@bietenbeckTuitionFeesEducational2023], la diminution du taux d'engagement étant compensée par une hausse de la réussite.
+
+En France, nous manquons d'études empiriques. Les travaux de doctorat de Léonard Moulin à Paris Dauphine montrent cependant que l'introduction de frais d'inscription ont renforcé les ségrégations et les inégalités, sans augmenter la réussite[@moulinFraisDinscriptionDans2014].
+
+__En conclusion, les effets du signal-prix et du coût irrécupérable sont au mieux secondaires. Surtout, ils sont très dépendant du système dans lequel on les met en place. C'est pourquoi il conviendrait, avant de les invoquer, de mener une enquête pour quantifier la perception des lycéens et de leur famille, similaire à celle menée en Allemagne lorsqu'elle a cherché à augmenté ses frais d'inscription[@heineStudiengebuehrenAusSicht2008]. Il conviendrait également d'évaluer les conséquences d'une baisse du taux d'engagement dans un contexte de dénatalité post-massification.__
 
 
 ## La gestion des frais d'inscription implique un surcoût, largement majoré par une mise en marché, qui peut dépasser les bénéfices.
