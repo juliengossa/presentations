@@ -21,7 +21,7 @@ bibliography:
   - Etudes empiques.bib
 biblio-style: verbose
 date: |
-  | `r Sys.Date()` (v1.6.4)
+  | `r Sys.Date()` (v1.7.0)
   | [ [Télécharger la version la plus récente](https://github.com/juliengossa/presentations/blob/main/note-opportunit%C3%A9/note-opportunit%C3%A9.pdf) ]
 ---
 
