@@ -337,14 +337,20 @@ rd <- read.csv("rd_spendings.csv")
 
 plot_rd <- rd %>%
   arrange(desc(rd_spending_usd_billion_2022)) %>%
+  mutate(country = factor(country, levels = unique(country))) %>%
   head(11) %>%
   ggplot(aes(x=rd_spending_usd_billion_2022,y=reorder(company,rd_spending_usd_billion_2022),fill=country)) +
   geom_col() +
-  scale_fill_brewer(palette = "Accent") +
+  geom_text(aes(label = paste(round(rd_spending_usd_billion_2022), "Md$")), hjust = 0, nudge_x = 0.5) +
+  scale_fill_brewer(palette = "Accent", direction=-1) +
+  expand_limits(x=77) +
+  coord_cartesian(clip = "off") +
   labs(
     title = "Top 10 des dépenses R&D des entreprises (2022) et MIRES (2026)",
     x = "Dépense de R&D (Md$)",
-    y = NULL)
+    y = NULL, 
+    fill = "Pays") +
+  theme(legend.position = "inside", legend.position.inside = c(0.85, 0.3))
 
 plot_rd
 ```
