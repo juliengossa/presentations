@@ -1,0 +1,188 @@
+---
+title: "Assises pour l'Université et pour la Recherche"
+subtitle: |
+    | Colleque de lancement
+author: 
+- Julien Gossa \newline 
+- Université de Strasbourg, Laboratoire SAGE, et CPESR  \newline \hspace{3cm} \newline
+- '[@JulienGossa.cpesr.fr](https://bsky.app/profile/juliengossa.cpesr.fr) gossa@unistra.fr'
+date: "17-06-2025"
+output: 
+  beamer_presentation:
+    theme: "Madrid"
+    dev: cairo_pdf
+    keep_tex: False
+    #toc: true
+    slide_level: 2
+  github_document: default
+classoption: "aspectratio=169"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+options(dplyr.summarise.inform = FALSE)
+
+knitr::opts_chunk$set(fig.asp=7.5/16, fig.width = 8)
+
+library(tidyverse)
+library(ggcpesrthemes)
+library(kpiESR)
+library(cowplot)
+
+theme_set(theme_cpesr() + theme(legend.position = "right", plot.title = element_text(hjust = 0.5)))
+
+load("../ressources/data/plots.RData")
+
+```
+
+## La mission historique de massification éducative et scientifique est achevée
+
+```{r}
+plot_MassificationLong
+```
+
+
+
+## Contributions et missions de l'ESR (L123-2 et L123-3) - 2000
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2000.png")
+``` 
+:::
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2000.png")
+``` 
+:::
+:::::::::::::: 
+
+
+## Contributions et missions de l'ESR (L123-2 et L123-3) - 2006
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2006.png")
+``` 
+:::
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2000.png")
+``` 
+:::
+:::::::::::::: 
+
+
+## Contributions et missions de l'ESR (L123-2 et L123-3) - 2007
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2006.png")
+``` 
+:::
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2007.png")
+``` 
+:::
+:::::::::::::: 
+
+
+## Contributions et missions de l'ESR (L123-2 et L123-3) - 2013
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2013.png")
+``` 
+:::
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2013.png")
+``` 
+:::
+:::::::::::::: 
+
+
+## Contributions et missions de l'ESR (L123-2 et L123-3) - 2020
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2020.png")
+``` 
+:::
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2013.png")
+``` 
+:::
+:::::::::::::: 
+
+
+## Contributions et missions de l'ESR (L123-2 et L123-3) - 2025
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-2-2025.png")
+``` 
+:::
+::: {.column width="50%"}
+```{r, out.width = "100%"}
+knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2013.png")
+``` 
+:::
+:::::::::::::: 
+
+
+## Et alors ? - Quadrant / Pilotage de l'offre de formation
+
+```{r, out.width = "60%", fig.align='center'}
+knitr::include_graphics("../ressources/img/SIES-Quadrant.png")
+``` 
+
+## Proposition 
+
+### Première idée : Prioriser
+- On ne fait 2. que si 1. est parfaitement effectuée.
+- Mauvaise idée à mon avis : priorisation impossible et non contraignante
+
+### Deuxième idée : Simplifier - L123-3 bis
+
+___La mission du service public universitaire est la production et la diffusion de connaissances au bénéfice de toute l'humanité.___
+
+### Avantages : Recentrage
+
+- Exclusion des services individuels : réussite, insertion professionnelle...
+- Exclusion des services intéressés : innovation, pilotage politique 
+- Exclusion de la « compétition internationale » et de l'« Excellence »
+
+
+### Soulève des questions
+
+- Devenir des instances internes hors de cette mission ? (SATT, Espaces avenir, IUT...)
+- Devenir des instances externes dans cette mission ? (ONR, CNRS, Ecoles...)
+- Quel financement ?
+
+
+## Proposition 
+
+### Deuxième idée : Simplifier - L123-3 bis
+
+___La mission du service public universitaire est la production et la diffusion de connaissances au bénéfice de toute l'humanité.___
+
+### Soulève des questions
+
+- Qui décide ? Les universitaires elleux-mêmes.
+- Devenir des instances internes hors de cette mission ? (SATT, Espaces avenir, IUT...)
+- Devenir des instances externes dans cette mission ? (ONR, CNRS, Ecoles...)
+- Quel financement ?
+
+### Guide de réflexion 
+
+- Simple, mais riche et potentiellement très transformateur.
+- Opérationable pendant les réflexions des assises.

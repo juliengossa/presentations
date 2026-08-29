@@ -357,6 +357,31 @@ plot_rd
 
 Source : https://en.wikipedia.org/wiki/List_of_companies_by_research_and_development_spending
 
+```{r}
+load("RD.RData")
+
+labels <- rd %>%
+  arrange(annual_year) %>%
+  group_by(ticker) %>%
+  slice_tail(n=1)
+
+plot_rd_long <- rd %>%
+  ggplot(aes(x=annual_year, y=annual_billion, color=country, group=ticker)) + 
+  geom_line(size = 1) +
+  ggrepel::geom_text_repel(data=labels, aes(label=company_name), color="black", direction="y", nudge_x = 0.2, hjust=0) +
+  expand_limits(x=2027.5) +
+  scale_color_brewer(palette="Set1") +
+  labs(
+    title = "Dépenses R&D des GAFAMS et des administrations françaises",
+    subtitle = "DIRD = dépense intérieure de R&D en France - DIRDA = DIRD des administrations",
+    x = "Année",
+    y = "Dépense de R&D (Md$)",
+    color = NULL
+  ) +
+  theme(legend.position = "None")
+```
+
+
 ## Save
 
 ```{r}
@@ -376,5 +401,6 @@ save(plot_SCSPvsEtu,
      levels_gdcnu,
      plot_emploiMCF,
      plot_rd,
+     plot_rd_long,
      file = "plots.RData")
 ```
