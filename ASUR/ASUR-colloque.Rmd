@@ -35,7 +35,7 @@ load("../ressources/data/plots.RData")
 
 ```
 
-## La mission historique de massification éducative et scientifique est achevée
+## Un nouveau résime éducatif et scientifique, post-massification.
 
 ```{r}
 plot_MassificationLong
@@ -43,7 +43,9 @@ plot_MassificationLong
 
 
 
-## Contributions et missions de l'ESR (L123-2 et L123-3) - 2000
+## Que deviennent les missions de l'Université, sa principale mission achevée ?
+
+L123-2 et L123-3 - 2000
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -59,7 +61,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2000.png")
 :::::::::::::: 
 
 
-## Contributions et missions de l'ESR (L123-2 et L123-3) - 2006
+## Que deviennent les missions de l'Université, sa principale mission achevée ?
+
+L123-2 et L123-3 - 2006
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -75,7 +79,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2000.png")
 :::::::::::::: 
 
 
-## Contributions et missions de l'ESR (L123-2 et L123-3) - 2007
+## Que deviennent les missions de l'Université, sa principale mission achevée ?
+
+L123-2 et L123-3 - 2007
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -91,7 +97,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2007.png")
 :::::::::::::: 
 
 
-## Contributions et missions de l'ESR (L123-2 et L123-3) - 2013
+## Que deviennent les missions de l'Université, sa principale mission achevée ?
+
+L123-2 et L123-3 - 2013
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -107,7 +115,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2013.png")
 :::::::::::::: 
 
 
-## Contributions et missions de l'ESR (L123-2 et L123-3) - 2020
+## Que deviennent les missions de l'Université, sa principale mission achevée ?
+
+L123-2 et L123-3 - 2020
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -123,7 +133,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2013.png")
 :::::::::::::: 
 
 
-## Contributions et missions de l'ESR (L123-2 et L123-3) - 2025
+## Que deviennent les missions de l'Université, sa principale mission achevée ?
+
+L123-2 et L123-3 - 2025
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -139,7 +151,7 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2013.png")
 :::::::::::::: 
 
 
-## Et alors ? - Quadrant / Pilotage de l'offre de formation
+## Ces missions ne sont pas seulement symboliques : elles légitiment les initiatives et cadrent l’action publique au travers des évaluations.
 
 ```{r, out.width = "60%", fig.align='center'}
 knitr::include_graphics("../ressources/img/SIES-Quadrant.png")
@@ -148,41 +160,73 @@ knitr::include_graphics("../ressources/img/SIES-Quadrant.png")
 ## Proposition 
 
 ### Première idée : Prioriser
-- On ne fait 2. que si 1. est parfaitement effectuée.
+- On ne fait la mission 2. que si la mission 1. est parfaitement effectuée.
 - Mauvaise idée à mon avis : priorisation impossible et non contraignante
 
 ### Deuxième idée : Simplifier - L123-3 bis
 
 ___La mission du service public universitaire est la production et la diffusion de connaissances au bénéfice de toute l'humanité.___
 
-### Avantages : Recentrage
+### Avantages : Recentrage et différenciation
 
 - Exclusion des services individuels : réussite, insertion professionnelle...
-- Exclusion des services intéressés : innovation, pilotage politique 
+- Exclusion des services intéressés : innovation purement économiques, pilotage politique 
 - Exclusion de la « compétition internationale » et de l'« Excellence »
-
-
-### Soulève des questions
-
-- Devenir des instances internes hors de cette mission ? (SATT, Espaces avenir, IUT...)
-- Devenir des instances externes dans cette mission ? (ONR, CNRS, Ecoles...)
-- Quel financement ?
+- Reconfiguration de l'évaluation et du pilotage (plus de Quadrant).
 
 
 ## Proposition 
 
 ### Deuxième idée : Simplifier - L123-3 bis
 
-___La mission du service public universitaire est la production et la diffusion de connaissances au bénéfice de toute l'humanité.___
+___La mission du service public universitaire est la production et la diffusion de connaissances ayant pour objectif le progrès de toute l’humanité.___
 
-### Soulève des questions
+### Questions avec des réponses
 
 - Qui décide ? Les universitaires elleux-mêmes.
+- Quel financement ? Gratuité pour les usagers, financement par l'impôt.
+
+### Questions sans réponses
+
 - Devenir des instances internes hors de cette mission ? (SATT, Espaces avenir, IUT...)
 - Devenir des instances externes dans cette mission ? (ONR, CNRS, Ecoles...)
-- Quel financement ?
+
 
 ### Guide de réflexion 
 
 - Simple, mais riche et potentiellement très transformateur.
 - Opérationable pendant les réflexions des assises.
+
+
+## Proposition 
+
+### Deuxième idée : Simplifier - L123-3 bis
+
+___La mission du service public universitaire est la production et la diffusion de connaissances ayant pour objectif le progrès de toute l’humanité.___
+
+### Questions avec des réponses
+
+- Qui décide ? Les universitaires elleux-mêmes.
+- Quel financement ? Gratuité pour les usagers, financement par l'impôt.
+
+### Questions sans réponses
+
+- Devenir des instances internes hors de cette mission ? (SATT, Espaces avenir, IUT...)
+- Devenir des instances externes dans cette mission ? (ONR, CNRS, Ecoles...)
+- Redistribution et repérimétrage des missions dans tout l'ESR.
+
+
+## Conclusion
+
+### Deuxième idée : Simplifier - L123-3 bis
+
+___La mission du service public universitaire est la production et la diffusion de connaissances ayant pour objectif le progrès de toute l’humanité.___
+
+### Guide pour les transformations
+
+- Simple, mais riche et potentiellement très transformateur.
+
+### Guide opérationable pendant les réflexions des assises.
+
+- Est-ce bien centré seulement sur la production et la diffusion des connaissances ? 
+- Est-ce bien avec l'objectif d'un progrès pour toute l'humanité ?
