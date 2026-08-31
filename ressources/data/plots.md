@@ -154,7 +154,7 @@ Source :
 
 ## Budget RD
 
-<img src="plots_files/figure-gfm/unnamed-chunk-16-1.png" width="672" /><img src="plots_files/figure-gfm/unnamed-chunk-16-2.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-16-1.png" width="672" />
 
 <img src="plots_files/figure-gfm/unnamed-chunk-17-1.png" width="672" />
 

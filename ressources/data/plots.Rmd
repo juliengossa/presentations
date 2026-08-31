@@ -394,8 +394,6 @@ plot_rd_long
 ```{r}
 plot_dird <- oecd_plot("G") 
 plot_dird
-
-oecd_corp_plot("H", pays="FRA")
 ```
 
 ```{r}
