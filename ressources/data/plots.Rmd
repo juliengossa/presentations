@@ -15,6 +15,8 @@ library(ggcpesrthemes)
 library(kpiESR)
 theme_set(theme_cpesr())
 theme_cpesr_setup(authors = "Julien Gossa", source = "https://github.com/cpesr/RFC/")
+
+load("RD.RData")
 ```
 
 ## plot_SCSPvsEtu
@@ -74,6 +76,12 @@ plot_SCSPvsMS <- kpiESR::esr %>%
     x="Année") 
 plot_SCSPvsMS
 ```
+
+```{r}
+plot_depensereformes <- depense_plot(c("CIR","Alternance","P150"))
+plot_depensereformes
+```
+
 
 ## plot_MassificationRecent
 
@@ -333,9 +341,9 @@ plot_emploiMCF
 ## R&D
 
 ```{r}
-rd <- read.csv("rd_spendings.csv")
+rds <- read.csv("rd_spendings.csv")
 
-plot_rd <- rd %>%
+plot_rd <- rds %>%
   arrange(desc(rd_spending_usd_billion_2022)) %>%
   mutate(country = factor(country, levels = unique(country))) %>%
   head(11) %>%
@@ -358,8 +366,6 @@ plot_rd
 Source : https://en.wikipedia.org/wiki/List_of_companies_by_research_and_development_spending
 
 ```{r}
-load("RD.RData")
-
 labels <- rd %>%
   arrange(annual_year) %>%
   group_by(ticker) %>%
@@ -379,28 +385,31 @@ plot_rd_long <- rd %>%
     color = NULL
   ) +
   theme(legend.position = "None")
+
+plot_rd_long
 ```
+
+## Budget RD
+
+```{r}
+plot_dird <- oecd_plot("G") 
+plot_dird
+
+oecd_corp_plot("H", pays="FRA")
+```
+
+```{r}
+plot_gafam <- oecd_corp_plot("H", pays="FRA")
+plot_gafam
+```
+
 
 
 ## Save
 
 ```{r}
-save(plot_SCSPvsEtu,
-     plot_RecettesFormation, 
-     plot_RessourcesPropres,
-     plot_SCSPvsMS,
-     plot_MassificationRecent,
-     plot_MassificationLong,
-     plot_LvsM,
-     plot_postesMCF,
-     plot_postesMCFvsCandidats,
-     plot_postesMCFnonPourvus,
-     plot_bmo,
-     plot_stratification_continu,
-     plot_stratification_ponctuel,
-     levels_gdcnu,
-     plot_emploiMCF,
-     plot_rd,
-     plot_rd_long,
-     file = "plots.RData")
+save(list = c(
+    ls(pattern = "^plot_"),
+    "levels_gdcnu"),
+  file = "plots.RData")
 ```

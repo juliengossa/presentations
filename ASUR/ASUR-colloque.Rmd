@@ -1,12 +1,13 @@
 ---
-title: "Assises pour l'Université et pour la Recherche"
-subtitle: |
-    | Colleque de lancement
+title: "Missions des universités : après la dilution, la nécessité d’un recentrage ?"
+subtitle: | 
+    | Assises pour l'Université et pour la Recherche
+    | Colloque de lancement
 author: 
 - Julien Gossa \newline 
 - Université de Strasbourg, Laboratoire SAGE, et CPESR  \newline \hspace{3cm} \newline
 - '[@JulienGossa.cpesr.fr](https://bsky.app/profile/juliengossa.cpesr.fr) gossa@unistra.fr'
-date: "17-06-2025"
+date: "03-09-2026"
 output: 
   beamer_presentation:
     theme: "Madrid"
@@ -190,13 +191,6 @@ ___La mission du service public universitaire est la production et la diffusion 
 
 - Devenir des instances internes hors de cette mission ? (SATT, Espaces avenir, IUT...)
 - Devenir des instances externes dans cette mission ? (ONR, CNRS, Ecoles...)
-
-
-### Guide de réflexion 
-
-- Simple, mais riche et potentiellement très transformateur.
-- Opérationable pendant les réflexions des assises.
-
 
 ## Proposition 
 
