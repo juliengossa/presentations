@@ -77,10 +77,18 @@ plot_SCSPvsMS <- kpiESR::esr %>%
 plot_SCSPvsMS
 ```
 
+## plot_depensesreformes
+
 ```{r}
 plot_depensereformes <- depense_plot(c("CIR","Alternance","P150"))
 plot_depensereformes
 ```
+
+```{r}
+plot_depensereformes_mesr <- depense_plot(c("CIR","Alternance","Établissements MESR"))
+plot_depensereformes_mesr
+```
+
 
 
 ## plot_MassificationRecent
