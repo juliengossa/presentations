@@ -89,7 +89,7 @@ RecettesFormation ( 20 lignes)
 
 <img src="plots_files/figure-gfm/unnamed-chunk-4-1.png" width="672" />
 
-    ## Warning: Removed 11 rows containing missing values or values outside the scale range
+    ## Warning: Removed 8 rows containing missing values or values outside the scale range
     ## (`geom_line()`).
 
 <img src="plots_files/figure-gfm/unnamed-chunk-5-1.png" width="672" />
