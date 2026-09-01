@@ -64,7 +64,7 @@ plot_SCSPvsMS <- kpiESR::esr %>%
   #filter(Etablissement == "Universités et assimilés", Rentrée > 2008) %>%
   filter(Etablissement == "Ensemble", Rentrée > 2008) %>%
   mutate(diff = kpi.FIN.S.SCSP-kpi.FIN.S.masseSalariale) %>% 
-  ggplot(aes(x=Rentrée+1,y=diff)) +
+  ggplot_sd(aes(x=Rentrée+1,y=diff)) +
   geom_hline(yintercept = 1) +
   geom_line(size=1, color="darkorange") + geom_point(shape = 21, stroke=2,size=2,fill="white",color="darkorange") +
   scale_x_continuous(breaks = scales::pretty_breaks(12)) +
@@ -79,12 +79,12 @@ plot_SCSPvsMS
 
 ## plot_depensesreformes
 
-```{r}
+```{r, results='asis'}
 plot_depensereformes <- depense_plot(c("CIR","Alternance","P150"))
 plot_depensereformes
 ```
 
-```{r}
+```{r, results='asis'}
 plot_depensereformes_mesr <- depense_plot(c("CIR","Alternance","Établissements MESR"))
 plot_depensereformes_mesr
 ```
@@ -399,12 +399,12 @@ plot_rd_long
 
 ## Budget RD
 
-```{r}
+```{r, results='asis'}
 plot_dird <- oecd_plot("G") 
 plot_dird
 ```
 
-```{r}
+```{r, results='asis'}
 plot_gafam <- oecd_corp_plot("H", pays="FRA")
 plot_gafam
 ```

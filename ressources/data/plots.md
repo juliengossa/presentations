@@ -1,7 +1,7 @@
 CPESR
 ================
 CPESR
-2026-08-31
+2026-09-01
 
 ## plot_SCSPvsEtu
 
@@ -87,14 +87,20 @@ RecettesFormation ( 20 lignes)
 
 ## plot_SCSPvsMS
 
+[Télécharger les données](plots_files/figure-data/unnamed-chunk-4.csv)
+
 <img src="plots_files/figure-gfm/unnamed-chunk-4-1.png" width="672" />
 
 ## plot_depensesreformes
+
+[Télécharger les données](plots_files/figure-data/unnamed-chunk-5.csv)
 
     ## Warning: Removed 8 rows containing missing values or values outside the scale range
     ## (`geom_line()`).
 
 <img src="plots_files/figure-gfm/unnamed-chunk-5-1.png" width="672" />
+
+[Télécharger les données](plots_files/figure-data/unnamed-chunk-6.csv)
 
     ## Warning: Removed 11 rows containing missing values or values outside the scale range
     ## (`geom_line()`).
@@ -161,7 +167,11 @@ Source :
 
 ## Budget RD
 
+[Télécharger les données](plots_files/figure-data/unnamed-chunk-17.csv)
+
 <img src="plots_files/figure-gfm/unnamed-chunk-17-1.png" width="672" />
+
+[Télécharger les données](plots_files/figure-data/unnamed-chunk-18.csv)
 
 <img src="plots_files/figure-gfm/unnamed-chunk-18-1.png" width="672" />
 
