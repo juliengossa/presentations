@@ -1,7 +1,7 @@
 CPESR
 ================
 CPESR
-2026-09-01
+2026-09-02
 
 ## plot_SCSPvsEtu
 
@@ -91,49 +91,57 @@ RecettesFormation ( 20 lignes)
 
 <img src="plots_files/figure-gfm/unnamed-chunk-4-1.png" width="672" />
 
-## plot_depensesreformes
-
 [Télécharger les données](plots_files/figure-data/unnamed-chunk-5.csv)
-
-    ## Warning: Removed 8 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
 
 <img src="plots_files/figure-gfm/unnamed-chunk-5-1.png" width="672" />
 
 [Télécharger les données](plots_files/figure-data/unnamed-chunk-6.csv)
 
-    ## Warning: Removed 11 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-
 <img src="plots_files/figure-gfm/unnamed-chunk-6-1.png" width="672" />
 
-## plot_MassificationRecent
+## plot_depensesreformes
+
+[Télécharger les données](plots_files/figure-data/unnamed-chunk-7.csv)
+
+    ## Warning: Removed 8 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
 
 <img src="plots_files/figure-gfm/unnamed-chunk-7-1.png" width="672" />
 
-## plot_MassificationLong
+[Télécharger les données](plots_files/figure-data/unnamed-chunk-8.csv)
+
+    ## Warning: Removed 11 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
 
 <img src="plots_files/figure-gfm/unnamed-chunk-8-1.png" width="672" />
 
+## plot_MassificationRecent
+
+<img src="plots_files/figure-gfm/unnamed-chunk-9-1.png" width="672" />
+
+## plot_MassificationLong
+
+<img src="plots_files/figure-gfm/unnamed-chunk-10-1.png" width="672" />
+
 ## plot_LvsM
 
-<img src="plots_files/figure-gfm/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="plots_files/figure-gfm/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## plot_postesMCF
 
-<img src="plots_files/figure-gfm/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="plots_files/figure-gfm/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## plot_postesMCFvsCandidats
 
-<img src="plots_files/figure-gfm/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="plots_files/figure-gfm/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## plot_postesMCFnonPourvus
 
-<img src="plots_files/figure-gfm/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="plots_files/figure-gfm/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## plot_BMO
 
-<img src="plots_files/figure-gfm/unnamed-chunk-13-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-15-1.png" width="672" />
 
 ### Massification (1960-2000) : Investissements massifs dans l’éducation
 
@@ -154,25 +162,25 @@ RecettesFormation ( 20 lignes)
     ## Ignoring unknown parameters: `direction`
     ## Ignoring unknown parameters: `direction`
 
-<img src="plots_files/figure-gfm/unnamed-chunk-14-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-16-1.png" width="672" />
 
 ## R&D
 
-<img src="plots_files/figure-gfm/unnamed-chunk-15-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-17-1.png" width="672" />
 
 Source :
 <https://en.wikipedia.org/wiki/List_of_companies_by_research_and_development_spending>
 
-<img src="plots_files/figure-gfm/unnamed-chunk-16-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-18-1.png" width="672" />
 
 ## Budget RD
 
-[Télécharger les données](plots_files/figure-data/unnamed-chunk-17.csv)
+[Télécharger les données](plots_files/figure-data/unnamed-chunk-19.csv)
 
-<img src="plots_files/figure-gfm/unnamed-chunk-17-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-19-1.png" width="672" />
 
-[Télécharger les données](plots_files/figure-data/unnamed-chunk-18.csv)
+[Télécharger les données](plots_files/figure-data/unnamed-chunk-20.csv)
 
-<img src="plots_files/figure-gfm/unnamed-chunk-18-1.png" width="672" />
+<img src="plots_files/figure-gfm/unnamed-chunk-20-1.png" width="672" />
 
 ## Save
