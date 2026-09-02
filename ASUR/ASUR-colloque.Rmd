@@ -162,13 +162,21 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2013.png")
 knitr::include_graphics("../ressources/img/SIES-Quadrant.png")
 ``` 
 
-## Proposition 
 
-### Première idée : Prioriser
-- On ne fait la mission 2. que si la mission 1. est parfaitement effectuée.
-- Mauvaise idée à mon avis : priorisation impossible et non contraignante
+## Proposition : refonder des missiosn conformes aux XXIe siècle
 
-### Deuxième idée : Simplifier - L123-3 bis
+### Problèmes 
+
+- Evolution tout azimut : dillution des missions
+- Sans disctinction claire entre institutions : concurrence
+
+### Idée : Simplifier - L123-3 bis
+
+___La mission du service public universitaire est la production et la diffusion de connaissances au bénéfice de toute l'humanité.___
+
+## Proposition : refonder des missiosn conformes aux XXIe siècle
+
+### Simplifier - L123-3 bis
 
 ___La mission du service public universitaire est la production et la diffusion de connaissances au bénéfice de toute l'humanité.___
 
@@ -176,13 +184,15 @@ ___La mission du service public universitaire est la production et la diffusion 
 
 - Exclusion des services individuels : réussite, insertion professionnelle...
 - Exclusion des services intéressés : innovation purement économiques, pilotage politique 
+
+### Implique et nécessite
 - Exclusion de la « compétition internationale » et de l'« Excellence »
 - Reconfiguration de l'évaluation et du pilotage (plus de Quadrant).
 
 
-## Proposition 
+## Proposition : refonder des missiosn conformes aux XXIe siècle
 
-### Deuxième idée : Simplifier - L123-3 bis
+### Simplifier - L123-3 bis
 
 ___La mission du service public universitaire est la production et la diffusion de connaissances ayant pour objectif le progrès de toute l’humanité.___
 
@@ -198,9 +208,9 @@ ___La mission du service public universitaire est la production et la diffusion 
 - Redistribution et repérimétrage des missions dans tout l'ESR.
 
 
-## Conclusion
+## Proposition : refonder des missiosn conformes aux XXIe siècle
 
-### Deuxième idée : Simplifier - L123-3 bis
+### Simplifier - L123-3 bis
 
 ___La mission du service public universitaire est la production et la diffusion de connaissances ayant pour objectif le progrès de toute l’humanité.___
 
