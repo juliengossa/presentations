@@ -36,17 +36,21 @@ load("../ressources/data/plots.RData")
 
 ```
 
-## Un nouveau résime éducatif et scientifique, post-massification.
+## Un nouveau régime éducatif et scientifique, post-massification.
 
 ```{r}
-plot_MassificationLong
+plot_MassificationLong + theme(legend.position="None")
 ```
 
+## Un nouveau régime éducatif et scientifique, post-massification.
 
+```{r, out.width="40%", fig.align='center'}
+knitr::include_graphics("../ressources/img/INSEE-naissances.png")
+```
 
-## Que deviennent les missions de l'Université, sa principale mission achevée ?
+## Sa principale mission achevée, que deviennent les missions de l'Université ?
 
-L123-2 et L123-3 - 2000
+Code de l'éducation : L123-2 et L123-3 - 2000
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -62,9 +66,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2000.png")
 :::::::::::::: 
 
 
-## Que deviennent les missions de l'Université, sa principale mission achevée ?
+## Sa principale mission achevée, que deviennent les missions de l'Université ?
 
-L123-2 et L123-3 - 2006
+Code de l'éducation : L123-2 et L123-3 - 2006
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -80,9 +84,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2000.png")
 :::::::::::::: 
 
 
-## Que deviennent les missions de l'Université, sa principale mission achevée ?
+## Sa principale mission achevée, que deviennent les missions de l'Université ?
 
-L123-2 et L123-3 - 2007
+Code de l'éducation : L123-2 et L123-3 - 2007
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -98,9 +102,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2007.png")
 :::::::::::::: 
 
 
-## Que deviennent les missions de l'Université, sa principale mission achevée ?
+## Sa principale mission achevée, que deviennent les missions de l'Université ?
 
-L123-2 et L123-3 - 2013
+Code de l'éducation : L123-2 et L123-3 - 2013
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -116,9 +120,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2013.png")
 :::::::::::::: 
 
 
-## Que deviennent les missions de l'Université, sa principale mission achevée ?
+## Sa principale mission achevée, que deviennent les missions de l'Université ?
 
-L123-2 et L123-3 - 2020
+Code de l'éducation : L123-2 et L123-3 - 2020
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -134,9 +138,9 @@ knitr::include_graphics("../ressources/img/CodeEduc-L123-3-2013.png")
 :::::::::::::: 
 
 
-## Que deviennent les missions de l'Université, sa principale mission achevée ?
+## Sa principale mission achevée, que deviennent les missions de l'Université ?
 
-L123-2 et L123-3 - 2025
+Code de l'éducation : L123-2 et L123-3 - 2025
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -189,23 +193,7 @@ ___La mission du service public universitaire est la production et la diffusion 
 
 ### Questions sans réponses
 
-- Devenir des instances internes hors de cette mission ? (SATT, Espaces avenir, IUT...)
-- Devenir des instances externes dans cette mission ? (ONR, CNRS, Ecoles...)
-
-## Proposition 
-
-### Deuxième idée : Simplifier - L123-3 bis
-
-___La mission du service public universitaire est la production et la diffusion de connaissances ayant pour objectif le progrès de toute l’humanité.___
-
-### Questions avec des réponses
-
-- Qui décide ? Les universitaires elleux-mêmes.
-- Quel financement ? Gratuité pour les usagers, financement par l'impôt.
-
-### Questions sans réponses
-
-- Devenir des instances internes hors de cette mission ? (SATT, Espaces avenir, IUT...)
+- Devenir des instances internes hors de cette mission ? (Forums, Espaces avenir, IUT...)
 - Devenir des instances externes dans cette mission ? (ONR, CNRS, Ecoles...)
 - Redistribution et repérimétrage des missions dans tout l'ESR.
 
@@ -218,9 +206,9 @@ ___La mission du service public universitaire est la production et la diffusion 
 
 ### Guide pour les transformations
 
-- Simple, mais riche et potentiellement très transformateur.
+- Simple, mais très différenciant et potentiellement très transformateur.
 
 ### Guide opérationable pendant les réflexions des assises.
 
 - Est-ce bien centré seulement sur la production et la diffusion des connaissances ? 
-- Est-ce bien avec l'objectif d'un progrès pour toute l'humanité ?
+- Est-ce bien dans l'objectif d'un progrès pour toute l'humanité ?

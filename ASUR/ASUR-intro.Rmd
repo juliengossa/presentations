@@ -34,7 +34,7 @@ load("../ressources/data/plots.RData")
 ## Les établissements publics d’enseignement supérieur et de recherche sont volontairement mis en déficit budgétaire par l’Etat, par un transfert de charges
 
 ```{r}
-plot_SCSPvsMS
+plot_SCSPvsMS3
 ```
 
 
