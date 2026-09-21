@@ -193,7 +193,7 @@ Source :
 
     ## 
 
-    ## Data cached : /tmp/Rtmpd5xMHt/ad5ab01471828f8f7676ded90dc301ed.rds
+    ## Data cached : /tmp/RtmplMQiXz/ad5ab01471828f8f7676ded90dc301ed.rds
 
 <img src="plots_files/figure-gfm/unnamed-chunk-21-1.png" width="672" />
 
@@ -204,5 +204,19 @@ Source :
     ## Table  edat_lfse_20  read from cache file:  /tmp/RtmpVJ8SyJ/eurostat/e76552c49956644292e73d1411847a0a.rds
 
 <img src="plots_files/figure-gfm/unnamed-chunk-22-1.png" width="672" />
+
+## Naissances
+
+    ## 1/1 - Data download & Dataframe build :
+
+\| \| \| 0% \|
+\|======================================================================\|
+100%
+
+    ## 
+
+    ## Data cached : /tmp/RtmplMQiXz/34d07c3bf71a30443312c14a0d5228d3.rds
+
+<img src="plots_files/figure-gfm/unnamed-chunk-23-1.png" width="672" />
 
 ## Save

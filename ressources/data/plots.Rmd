@@ -567,6 +567,38 @@ plot_neet_eu <- neet_eu %>%
 plot_neet_eu
 ```
 
+## Naissances
+
+```{r, results='asis'}
+library(insee)
+
+naissances <- get_insee_idbank("001641590") |>
+  transmute(
+    year = as.integer(TIME_PERIOD),
+    naissances = OBS_VALUE
+  ) |>
+  arrange(year)
+
+maxyear <- max(naissances$year)
+naisbac <-  maxyear - 18
+naismin <- min(naissances$naissances)
+
+plot_naissances <- naissances %>% 
+  ggplot(aes(x=year,y=naissances)) +
+  geom_line(color="darkorchid", linewidth=1) +
+  geom_vline(xintercept = naisbac, size=0.4) +
+  annotate("text", x=naisbac, y=naismin, label=paste("Naissance des\nbachelier⋅res", maxyear),
+           vjust = 0.5, hjust = 0, angle = 90) +
+  scale_x_continuous(breaks=scales::pretty_breaks(n=20), name=NULL) +
+  scale_y_continuous(labels=~paste(.x/1e3,"k"), breaks = scales::pretty_breaks(n=10),
+                     name="Naissances vivantes") +
+  labs(
+    title = "Nombre de naissances vivantes en France",
+    caption = "Source : INSEE"
+  )
+plot_naissances
+```
+
 ## Save
 
 ```{r}
