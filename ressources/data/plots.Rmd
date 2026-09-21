@@ -491,7 +491,81 @@ plot_gafam <- oecd_corp_plot("H", pays="FRA")
 plot_gafam
 ```
 
+## NEET
 
+```{r, results='asis'}
+library(insee)
+
+neet_insee <- get_insee_idbank("010752067") |>
+  transmute(
+    date = DATE,
+    neet = OBS_VALUE
+  ) |>
+  arrange(date)
+
+
+plot_neet_insee <- neet_insee %>% ggplot(aes(x=date,y=neet)) + 
+  geom_line(color="orange", size=1) +
+  geom_vline(xintercept = as.Date("2019-09-01"), linewidth=0.4) +
+  annotate("text", x=as.Date("2019-09-01"), y=10, label="Loi Liberté de\nchoisir son avenir pro.",
+           vjust = 0.5, hjust = 0, angle = 90) +
+  scale_x_date(breaks=scales::pretty_breaks(n=20), name=NULL) +
+  scale_y_continuous(labels=~paste(.x,"%"), breaks = scales::pretty_breaks(n=5),
+                     name="Taux de NEET (15-29 ans)") +
+  labs(
+    title = "Taux de NEET trimestriel, en France, 15-29 ans",
+    subtitle = "Jeunes ni en emploi ni en formation",
+    caption = "Source : INSEE"
+  )
+plot_neet_insee  
+```
+
+
+```{r, results='asis'}
+library(eurostat)
+
+neet_eu <- get_eurostat(
+  "edat_lfse_20",
+  time_format = "num"
+) |>
+  filter(
+    freq == "A",
+    sex == "T",
+    age == "Y15-29",
+    training == "NO_FE_NO_NFE",
+    wstatus == "NEMP",
+    unit == "PC",
+    geo %in% c("FR", "EU27_2020")
+  ) |>
+  transmute(
+    year = TIME_PERIOD,
+    geo = recode(
+      geo,
+      "FR" = "France",
+      "EU27_2020" = "UE-27"
+    ),
+    neet = values
+  )
+
+plot_neet_eu <- neet_eu %>% 
+  #filter(year >= 2012) %>%
+  mutate(geo = fct_rev(geo)) %>%
+  ggplot(aes(x=year,y=neet,color=geo)) + 
+  geom_line(size=1) +
+  geom_vline(xintercept = 2019, size=0.4) +
+  annotate("text", x=2019, y=10, label="Loi Liberté de\nchoisir son\navenir pro.",
+           vjust = 0.3, hjust = 0, angle = 90) +
+  scale_x_continuous(breaks=scales::pretty_breaks(n=11), name=NULL) +
+  scale_y_continuous(labels=~paste(.x,"%"), breaks = scales::pretty_breaks(n=5),
+                     name="Taux de NEET (15-29 ans)") +
+  scale_color_manual(values=c("grey","orange"), name="Zone") +
+  labs(
+    title = "Taux de NEET annuel, en France et UE27, 15-29 ans",
+    subtitle = "Jeunes ni en emploi ni en formation",
+    caption = "Source : Eurostat"
+  )  
+plot_neet_eu
+```
 
 ## Save
 

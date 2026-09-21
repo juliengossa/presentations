@@ -1,7 +1,7 @@
 CPESR
 ================
 CPESR
-2026-09-02
+2026-09-21
 
 ## plot_SCSPvsEtu
 
@@ -182,5 +182,27 @@ Source :
 [Télécharger les données](plots_files/figure-data/unnamed-chunk-20.csv)
 
 <img src="plots_files/figure-gfm/unnamed-chunk-20-1.png" width="672" />
+
+## NEET
+
+    ## 1/1 - Data download & Dataframe build :
+
+\| \| \| 0% \|
+\|======================================================================\|
+100%
+
+    ## 
+
+    ## Data cached : /tmp/Rtmpd5xMHt/ad5ab01471828f8f7676ded90dc301ed.rds
+
+<img src="plots_files/figure-gfm/unnamed-chunk-21-1.png" width="672" />
+
+    ## Dataset query already saved in cache_list.json...
+
+    ## Reading cache file /tmp/RtmpVJ8SyJ/eurostat/e76552c49956644292e73d1411847a0a.rds
+
+    ## Table  edat_lfse_20  read from cache file:  /tmp/RtmpVJ8SyJ/eurostat/e76552c49956644292e73d1411847a0a.rds
+
+<img src="plots_files/figure-gfm/unnamed-chunk-22-1.png" width="672" />
 
 ## Save
