@@ -572,7 +572,7 @@ plot_neet_eu
 ```{r, results='asis'}
 library(insee)
 
-naissances <- get_insee_idbank("001641590") |>
+naissances <- get_insee_idbank("001641590",startPeriod = 1900) |>
   transmute(
     year = as.integer(TIME_PERIOD),
     naissances = OBS_VALUE
@@ -587,7 +587,7 @@ plot_naissances <- naissances %>%
   ggplot(aes(x=year,y=naissances)) +
   geom_line(color="darkorchid", linewidth=1) +
   geom_vline(xintercept = naisbac, size=0.4) +
-  annotate("text", x=naisbac, y=naismin, label=paste("Naissance des\nbachelier⋅res", maxyear),
+  annotate("text", x=naisbac, y=naismin, label=paste("Naissance des\nnéo-bachelier⋅res", maxyear),
            vjust = 0.5, hjust = 0, angle = 90) +
   scale_x_continuous(breaks=scales::pretty_breaks(n=20), name=NULL) +
   scale_y_continuous(labels=~paste(.x/1e3,"k"), breaks = scales::pretty_breaks(n=10),
@@ -599,11 +599,51 @@ plot_naissances <- naissances %>%
 plot_naissances
 ```
 
+```{r, results='asis'}
+refyear <- maxyear+1
+
+ages_education <- tribble(
+  ~niveau,       ~age_entree,
+  "Maternelle",           3,
+  "Primaire",             6,
+  "Collège",             11,
+  "Lycée",               15,
+  "Licence",             18,
+  "Master",              21,
+  "Doctorat",            23,
+  "Post-éducation",      26,
+  "Retraite",            64,
+  "Fin",                 refyear-1955
+) %>%
+  mutate(niveau=factor(niveau,levels=niveau)) %>%
+  mutate(xmax = refyear - age_entree) %>%
+  mutate(xmin = lead(xmax))
+
+plot_naissances_niveaux <- naissances %>% 
+  ggplot() +
+  geom_rect(data=ages_education,aes(xmin=xmin,xmax=xmax,ymin=-Inf,ymax=Inf,fill=niveau), alpha=0.4) +
+  geom_text(data=ages_education,aes(x=(xmin+xmax)/2,y=naismin-50e3,label=niveau),
+            vjust = 0.5, hjust = 0, angle = 90) +
+  geom_line(aes(x=year,y=naissances), color="darkorchid", linewidth=1) +
+  scale_x_continuous(breaks=scales::pretty_breaks(n=20), name="Année de naissance") +
+  scale_y_continuous(labels=~paste(.x/1e3,"k"), breaks = scales::pretty_breaks(n=10),
+                     name="Naissances vivantes") +
+  scale_fill_brewer(palette = "RdBu") +
+  labs(
+    title = "Nombre de naissances vivantes et niveaux éducatifs standards en 2026",
+    caption = "Source : INSEE"
+  ) +
+  theme(legend.position = "None")
+
+plot_naissances_niveaux
+```
+
 ## Save
 
 ```{r}
 save(list = c(
     ls(pattern = "^plot_"),
+    "naismin",
     "levels_gdcnu"),
   file = "plots.RData")
 ```

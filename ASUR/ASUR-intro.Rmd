@@ -60,12 +60,23 @@ plot_gafam
 
 ## En termes d’enseignement supérieur, les politiques publiques ont échoué à améliorer l’insertion professionnelle des jeunes
 
-```{r, out.width="50%", fig.align='center'}
-knitr::include_graphics("../ressources/img/INSEE-NEET.png")
+```{r}
+plot_neet_eu
 ```
 
-\footnotesize
-Source : https://www.insee.fr/fr/statistiques/serie/010752067#Graphique
+## Ces bouleversement arrivent à un moment marqué par une stagnation éducative post-massification.
+
+```{r}
+plot_MassificationLong
+```
+
+
+## Ces bouleversement arrivent à un moment marqué par la dénatalité et un édu-scepticisme pouvant conduire à une démassification.
+
+```{r}
+plot_naissances_niveaux
+```
+
 
 
 ## Conclusion

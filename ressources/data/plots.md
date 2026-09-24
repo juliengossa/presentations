@@ -1,7 +1,7 @@
 CPESR
 ================
 CPESR
-2026-09-21
+2026-09-24
 
 ## plot_SCSPvsEtu
 
@@ -193,15 +193,13 @@ Source :
 
     ## 
 
-    ## Data cached : /tmp/RtmplMQiXz/ad5ab01471828f8f7676ded90dc301ed.rds
+    ## Data cached : /tmp/RtmpusjZsq/ad5ab01471828f8f7676ded90dc301ed.rds
 
 <img src="plots_files/figure-gfm/unnamed-chunk-21-1.png" width="672" />
 
-    ## Dataset query already saved in cache_list.json...
+indexed 0B in 0s, 0B/sindexed 1.00TB in 0s, 145.90TB/s
 
-    ## Reading cache file /tmp/RtmpVJ8SyJ/eurostat/e76552c49956644292e73d1411847a0a.rds
-
-    ## Table  edat_lfse_20  read from cache file:  /tmp/RtmpVJ8SyJ/eurostat/e76552c49956644292e73d1411847a0a.rds
+    ## Table edat_lfse_20 cached at /tmp/RtmpusjZsq/eurostat/fc06894129c0367c9a5dad2460fd90b9.rds
 
 <img src="plots_files/figure-gfm/unnamed-chunk-22-1.png" width="672" />
 
@@ -215,8 +213,13 @@ Source :
 
     ## 
 
-    ## Data cached : /tmp/RtmplMQiXz/34d07c3bf71a30443312c14a0d5228d3.rds
+    ## Data cached : /tmp/RtmpusjZsq/2b721167ef5ba45205943b0c5f6cee3e.rds
 
 <img src="plots_files/figure-gfm/unnamed-chunk-23-1.png" width="672" />
+
+    ## Warning: Removed 1 row containing missing values or values outside the scale range
+    ## (`geom_text()`).
+
+<img src="plots_files/figure-gfm/unnamed-chunk-24-1.png" width="672" />
 
 ## Save
